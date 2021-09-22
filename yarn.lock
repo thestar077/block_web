@@ -9042,6 +9042,11 @@
   "resolved" "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz"
   "version" "2.3.4"
 
+"vue-i18n@^8.25.1":
+  "integrity" "sha512-UgvN6LxcANSG2O/i8draincxY3E/2bppMNN0szVinN7tuzSJdNFQdB9VDVaQcR1i8BprK9ISUAgZVZacsl+Zbw=="
+  "resolved" "https://registry.npmjs.org/vue-i18n/-/vue-i18n-8.25.1.tgz"
+  "version" "8.25.1"
+
 "vue-loader@^15.9.1":
   "integrity" "sha1-vSq489KB5R17gdFTkKWEJNFCJD4="
   "resolved" "https://registry.npm.taobao.org/vue-loader/download/vue-loader-15.9.1.tgz"

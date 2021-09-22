@@ -4,10 +4,15 @@ import VueRouter from "vue-router";
 // backLog 
 import Page404 from "../components/backlog/404.vue";
 import ManagerPage from "../components/ManagerPage.vue";
-
-// 项目管理
-// 项目管列表
-import ProjectList from "../components/backlog/projectManagement/list.vue";
+// 首页
+import Home from "../components/backlog/Home/home.vue";
+// 交易模块
+// 币币兑换
+import Exchange from "../components/backlog/Trade/exchange.vue";
+// 流水性
+import Liquidity from "../components/backlog/Trade/liquidity.vue";
+// 质押兑换
+import Farms from "../components/backlog/Farms/farms.vue";
 
 Vue.use(VueRouter);
 
@@ -33,11 +38,12 @@ const routes = [
     // ("/login");
     //   next();
     // },
-    redirect: "/projectList",
+    redirect: "/home",
     children: [
-      // 项目管理
-      { path: "/projectList", component: ProjectList },
-     
+      { path: "/home", component: Home },
+      { path: "/exchange", component: Exchange },
+      { path: "/liquidity", component: Liquidity },
+      { path: "/farms", component: Farms },
     ]
   },
   {

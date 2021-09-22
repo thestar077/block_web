@@ -26,17 +26,24 @@ import {
 import qs from 'qs';
 import axios from "axios";
 import $ from 'jquery'
-import * as echarts from 'echarts'
-Vue.prototype.$echarts = echarts
+
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+const i18n=new VueI18n({
+    locale:window.sessionStorage.getItem("language")||'cn',   //从localStorage里获取用户中英文选择，没有则默认中文
+    messages:{
+        'cn':require('./components/language/cn'),
+        'en':require('./components/language/en')
+    }
+})
 
 let Base64 = require('js-base64').Base64
 //配置请求根路径
 const UPLOAD_URL = {
         dev: "",
-        test: "http://192.168.202.128:8282",
-        prod: "https://www.mofcube.com:9382"
+        test: "",
+        prod: ""
     }
-    // axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? '' : 'https://www.mofcube.com:8850';
 axios.defaults.baseURL = UPLOAD_URL.prod;
 axios.defaults.transformResponse = [function(data) {
         // `transformResponse` 在传递给 then/catch 前，允许修改响应数据
@@ -61,7 +68,7 @@ axios.interceptors.request.use(config => {
 });
 axios.interceptors.response.use(result => {
     if (result.data && result.data.code == 401) {
-        router.push('/login').then();
+        router.push('/').then();
         // Message({
         //     message: result.data.message,
         //     type: 'error',
@@ -115,6 +122,7 @@ Vue.use(storePlugin)
 
 new Vue({
     router,
+    i18n,   //把 i18n 挂载到 vue 根实例上
     store,
     render: h => h(App)
 }).$mount("#app");

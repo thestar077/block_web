@@ -72,7 +72,15 @@ input:-webkit-autofill {
 .m0 {
     margin: 0 !important;
 }
-
+.mr0{
+  margin-right: 0;
+}
+.mr25{
+  margin-right: 25px;
+}
+.ml15{
+  margin-left: 15px;
+}
 
 
 /*固定定位*/
