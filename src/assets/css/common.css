@@ -1,0 +1,101 @@
+/*@font-face {
+  font-family: 'iconfont';  
+  src: url('//at.alicdn.com/t/font_2258762_p21ccw1n7v.eot');
+  src: url('//at.alicdn.com/t/font_2258762_p21ccw1n7v.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_2258762_p21ccw1n7v.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_2258762_p21ccw1n7v.woff') format('woff'),
+  url('//at.alicdn.com/t/font_2258762_p21ccw1n7v.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_2258762_p21ccw1n7v.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}*/
+
+.h1,
+.h2,
+.h3,
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+.mAuto {
+    margin: 0 auto;
+}
+
+.displayBlock {
+    display: block;
+}
+
+.displayTable {
+    display: table;
+}
+
+.fr {
+    float: right;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
+
+.textAlignLeft {
+    text-align: left;
+}
+
+.defaultTxtColor {
+    color: #1f1d37;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+.relative {
+    position: relative;
+}
+
+
+/*背景色*/
+
+.bgBlue {
+    background: #f5fefe;
+}
+
+
+/*margin*/
+
+.m0 {
+    margin: 0 !important;
+}
+
+
+
+/*固定定位*/
+
+.fix {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.fontWeightBold {
+    font-weight: bold;
+}
+
+
+/*鼠标上移*/
+
+.cursorPointer {
+    cursor: pointer;
+}
+
+/*margin*/
+.mr15{
+    margin-right: 15px;
+}
