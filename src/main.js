@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue"; //引入跟组件
 import router from "./router";
+import 'lib-flexible';
 import "./plugins/element.js";
 // import VueResource from 'vue-resource'
 // Vue.use(VueResource)

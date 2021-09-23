@@ -11,8 +11,8 @@ import Home from "../components/backlog/Home/home.vue";
 import Exchange from "../components/backlog/Trade/exchange.vue";
 // 流水性
 import Liquidity from "../components/backlog/Trade/liquidity.vue";
-// 质押兑换
-import Farms from "../components/backlog/Farms/farms.vue";
+// 单币和lp挖矿的质押挖矿
+import EggNests from "../components/backlog/EggNests/eggNests.vue";
 
 Vue.use(VueRouter);
 
@@ -43,7 +43,7 @@ const routes = [
       { path: "/home", component: Home },
       { path: "/exchange", component: Exchange },
       { path: "/liquidity", component: Liquidity },
-      { path: "/farms", component: Farms },
+      { path: "/eggNests", component: EggNests },
     ]
   },
   {

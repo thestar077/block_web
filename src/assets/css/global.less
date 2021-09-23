@@ -8,6 +8,10 @@ body,
   /* 阻止屏幕变小发生挤压 */
   min-width: 1349px;
 }
+body img {
+    height: auto;
+    max-width: 100%;
+}
 a {
   text-decoration: none;
 }
@@ -17,3 +21,47 @@ a {
  .el-aside{
  	overflow:hidden;
  }
+
+ /*兼容*/
+/*@media screen and (min-width: 576px) {
+  font-size: 14px;
+  line-height: 18px;
+}
+@media screen and (min-width: 768px) {
+  font-size: 16px;
+  line-height: 28px;
+}
+@media screen and (min-width: 992px) {
+  font-size: 16px;
+  line-height: 32px;
+}
+@media screen and (min-width: 1200px) {
+  font-size: 18px;
+  line-height: 64px;
+}  
+*/
+@media screen and (min-width: 968px){
+	.hsFDCH {
+	    grid-template-columns: repeat(12, 1fr);
+	    gap: 32px;
+	}
+	.cNaueE > div {
+	    grid-column: span 6 / auto;
+	}
+}
+@media screen and (min-width: 577) and (max-width: 852px){
+	.hsFDCH {
+	    grid-template-columns: repeat(12, 1fr);
+	    gap: 24px;
+	}
+}
+@media screen and (max-width: 576px){
+	.hsFDCH {
+	    grid-template-columns: repeat(8, 1fr);
+	    gap: 24px;
+	}
+	.cNaueE > div {
+	    grid-column: span 8 / auto;
+	}
+}
+

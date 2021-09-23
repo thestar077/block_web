@@ -66,7 +66,7 @@
             </div>
           </div>
         </el-aside>
-        <div class="contentBox">
+        <div class="contentBox gpBBCM">
           <router-view></router-view>
         </div>
       </el-main>
@@ -86,12 +86,12 @@ export default {
           id: "101",
           authName: "Home",
           path: "home",
-          icon:require('@/assets/picture/myicon/nav2.png'),
+          icon:require('@/assets/picture/myicon/Home.png'),
         },
         {
           id: "102",
           authName: "Trade",
-          icon:require('@/assets/picture/myicon/nav1.png'),
+          icon:require('@/assets/picture/myicon/Trade.png'),
           children: [
             { id: "01",pid: '1021', authName: "Exchange", path: "exchange" },
             { id: "02",pid: '1021', authName: "Liquidity", path: "liquidity" }
@@ -99,21 +99,11 @@ export default {
         },
         {
           id: "103",
-          authName: "Farms",
-          path: "farms",
-          icon:require('@/assets/picture/myicon/nav3.png'),
+          authName: "Egg nests",
+          path: "eggNests",
+          icon:require('@/assets/picture/myicon/Egg Nests.png'),
         },
       ],
-      //图标数据
-      iconobj: {
-        "101": "iconfont iconshouye",
-        "102": "iconfont iconrenyuanguanli",
-        "103": "iconfont iconxiangmuguanli",
-        "104": "iconfont iconjianzhengjiluguanli",
-        "105": "iconfont iconzhizaochangguanli",
-        "106": "iconfont iconxiangmubaogaoguanli",
-        "107": "iconfont iconshenheliebiaoguanli",
-      }
     };
   },
   // 渲染前获取数据
@@ -153,6 +143,20 @@ export default {
 <style lang="less" scoped>
 .page_container {
   height: 100%;
+  .contentBox{
+    padding: 16px 12px;
+    margin:0 auto;
+    max-width: 992px;
+    min-height: calc(100vh - 64px);
+    width: 100%;
+  }
+  .gpBBCM {
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      margin-top: 64px;
+      transform: translate3d(0px, 0px, 0px);
+      transition: margin-top 0.2s ease 0s;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 240px;
     min-height: 100vh;
@@ -214,6 +218,7 @@ export default {
   }
   .el-main{
     padding:0;
+    display: flex;
   }
   .el-menu--collapse{
     overflow-y: hidden !important;
