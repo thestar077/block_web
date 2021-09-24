@@ -76,6 +76,9 @@ input {
 .defaultTxtColor {
     color: #1f1d37;
 }
+.block{
+  display: block !important;
+}
 
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
@@ -90,6 +93,10 @@ input:-webkit-autofill {
 
 .bgBlue {
     background: #f5fefe;
+}
+
+.center{
+  margin:0 auto;
 }
 
 
