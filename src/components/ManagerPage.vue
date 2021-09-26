@@ -103,6 +103,12 @@ export default {
           path: "eggNests",
           icon:require('@/assets/picture/myicon/Egg Nests.png'),
         },
+        {
+          id: "107",
+          authName: "Gitbook",
+          path: "gitbook",
+          icon:require('@/assets/picture/myicon/Gitbook.png'),
+        },
       ],
     };
   },
@@ -272,7 +278,7 @@ export default {
     }
     .el-menu{
       overflow-x: hidden;
-      overflow-y: scroll;
+      /*overflow-y: scroll;*/
     }
   }
 }
