@@ -122,7 +122,7 @@ export default {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
+      console.log(key, keyPath,'111');
     },
     clickmenu(item){
       if(item.pid) this.index = item.pid;
