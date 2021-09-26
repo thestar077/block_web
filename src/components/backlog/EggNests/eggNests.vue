@@ -4,13 +4,18 @@
   <div class="sc-eHfQar hhRQON">
     <div class="sc-hzMMCg kRzfai">
       <div class="sc-citwmv ewFXGZ">
-        <input type="checkbox" class="sc-cBNfnY hrtCUK">
-        <div class="sc-gWHgXt kGCxUh"></div>
+<!--         <input type="checkbox" class="sc-cBNfnY hrtCUK">
+        <div class="sc-gWHgXt kGCxUh"></div> -->
+        <el-switch
+          v-model="isStaked"
+          active-color="#31D0AA"
+          inactive-color="#EEEAF4">
+        </el-switch>
       </div>
       <div color="text" class="sc-gsTCUz UNrzd">Staked only</div></div>
     <div class="sc-kEjbxe dnCuQj">
-      <button type="button" class="sc-dlfnbm kjBbpq">Active</button>
-      <button class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button">Inactive</button></div>
+      <button type="button" v-for="(item,index) in actList" :key="index" @click="handleActive(index)" :class="actIndex == index?'sc-dlfnbm kjBbpq':'sc-dlfnbm xiYlH sc-iqHYGH cxRybB'">{{item.name}}</button>
+    </div>
   </div>
   <div>
     <div class="sc-kYrkKh cqrcSX"></div>
@@ -917,13 +922,25 @@
   export default {
     data() {
       return {
-        
+        actIndex:0,
+        isStaked:false,
+        actList:[
+          {
+            name:'Active',
+          },
+          {
+            name:'Inactive',
+          }
+        ]
       };
     },
     created() {
       
     },
     methods: {
+      handleActive(index){
+        this.actIndex = index;
+      },
     }
   };
 </script>
@@ -1565,7 +1582,8 @@
 }
 .diwHUn {
     align-self: baseline;
-    box-shadow: rgba(25, 19, 38, 0.1) 0px 2px 12px -8px, rgba(25, 19, 38, 0.05) 0px 1px 1px;
+    /*box-shadow: rgba(25, 19, 38, 0.1) 0px 2px 12px -8px, rgba(25, 19, 38, 0.05) 0px 1px 1px;*/
+    border:1px solid #ECEBEE;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

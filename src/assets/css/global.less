@@ -46,6 +46,62 @@ button {
 a {
   text-decoration: none;
 }
+/*input[type="checkbox"] {
+    background-color: initial;
+    cursor: default;
+    -webkit-appearance: checkbox;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+}
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 0px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}*/
+.el-switch__core {
+	-webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(238, 234, 244);
+    box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
+    cursor: pointer;
+    display: inline-flex;
+    height: 40px;
+    position: relative;
+    width: 72px !important;
+    border-radius: 24px;
+    transition: background-color 200ms ease 0s;
+}
+.el-switch.is-checked .el-switch__core::after{
+	margin-left: -35px;
+}
+.el-switch__input{
+	width: 100%;
+	height: 100%;
+}
+.el-switch__core:after{
+	height: 33px;
+	width: 33px;
+}
 .el-dialog .el-dialog__body{
     width: 100% !important;
   }
