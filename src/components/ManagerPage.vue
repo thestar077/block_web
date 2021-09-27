@@ -1,12 +1,12 @@
 <template>
-  <el-container class="page_container">
+  <el-container class="page_container" id="page_container">
     <!-- 左侧菜单栏，router="ture"开启菜单路由，按照index跳转，default-active属性用于接收高亮激活的index -->
     <el-container>
       <!-- 头部 -->
       <el-header>
         <div>
-          <img width="24" class="ml15 mr25 cursorPointer" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
-          <img class="logo" width="205" height="26" src="@/assets/picture/LogoTextNewWhite.png">
+          <img width="18" class="ml15 mr25 cursorPointer" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
+          <img class="logo" width="185" height="26" src="@/assets/picture/LogoTextNewWhite.png">
         </div>
         <div class="connectBtn">Connect</div>
       </el-header>
@@ -27,7 +27,7 @@
               <!-- 二级菜单,index使跳转路由 -->
               <el-submenu v-if="item.children && item.children.length>0" :index="item.id+''" :key="item.id">
                 <template slot="title">
-                  <img width="16" class="mr15" :src="item.icon">
+                  <img width="18" height="18" class="mr15" :src="item.icon">
                   <span>{{item.authName}}</span>
                 </template>
                 <el-menu-item-group 
@@ -41,22 +41,22 @@
               </el-submenu>
               <!-- 一级菜单,index必须是字符串，作为唯一标识 -->
               <el-menu-item :index="'/'+item.path" @click="clickmenu(item)" v-else :key="item.id">
-                <img width="16" class="mr15" :src="item.icon">
+                <img width="18" height="18" class="mr15" :src="item.icon">
                 <span>{{item.authName}}</span>
               </el-menu-item>
             </template>
           </el-menu>
-          <div class="infoItem">
+          <div class="infoItem" v-if='!isCollapse'>
             <div class="info">
-              <img width="24" height="24" src="@/assets/picture/9.png">
+              <img width="18" height="18" src="@/assets/picture/9.png">
               $0.407
             </div>
             <div class="iconBox">
-              <img width="20" height="20" src="@/assets/picture/1.png">
-              <img width="20" height="20" src="@/assets/picture/2.png">
+              <img width="18" height="18" src="@/assets/picture/1.png">
+              <img width="18" height="18" src="@/assets/picture/2.png">
               <el-dropdown @command="changeLangage">
                 <span class="el-dropdown-link">
-                  <img class="mr0" width="20" height="20" src="@/assets/picture/3.png">
+                  <img class="mr0" width="18" height="18" src="@/assets/picture/3.png">
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item command="cn">简体中文</el-dropdown-item>
@@ -64,6 +64,9 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
+          </div>
+          <div class="settingIcon" v-if='isCollapse'>
+            <img width="18" height="18" src="@/assets/picture/myicon/setting.png">
           </div>
         </el-aside>
         <div class="contentBox gpBBCM">
@@ -152,7 +155,7 @@ export default {
   .contentBox{
     padding: 16px 12px;
     margin:0 auto;
-    max-width: 992px;
+    max-width: 993px;
     min-height: calc(100vh - 64px);
     width: 100%;
   }
@@ -164,7 +167,7 @@ export default {
       transition: margin-top 0.2s ease 0s;
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 240px;
+    width: 250px;
     min-height: 100vh;
   }
   ::-webkit-scrollbar {/*滚动条整体样式*/
@@ -181,12 +184,19 @@ export default {
     border-radius: 10px;
     background: #8F80BA;
   }
+  .settingIcon{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 8px 18px;
+    border-top: 2px solid rgba(133, 133, 133, 0.1);
+  }
   .infoItem{
-    width: 240px;
+    width: 250px;
     display: flex;
     justify-content:space-between;
     align-items:center;
-    padding: 8px 20px;
+    padding: 8px 18px;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -196,6 +206,11 @@ export default {
       font-size: 16px;
       font-weight: 600;
       line-height: 1.5;      
+    }
+    .iconBox{
+      display: flex;
+    justify-content:space-between;
+    align-items:center;
     }
     img{
       margin-right: 8px;
@@ -248,7 +263,7 @@ export default {
     /deep/ .el-menu-item-group__title{
       height: 48px;
       font-size: 14px;
-      background-color: rgb(250, 249, 250);
+      background-color: rgb(250, 189, 250);
       color: rgb(143, 128, 186);
       box-shadow: none;
       flex-shrink: 0;
@@ -269,7 +284,7 @@ export default {
       box-sizing: border-box;
     }
     /deep/ .el-submenu__title,/deep/ .el-menu-item:hover {
-      border-left: 3px solid rgb(239, 244, 245);
+      border-left: 3px solid rgb(239, 184, 185);
       background-color: rgb(239, 244, 245) !important;
     }
     .el-menu-item.is-active{

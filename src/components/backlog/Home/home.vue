@@ -1,5 +1,5 @@
 <template>
-  <div class="homePage">
+  <div class="homePage" id="homePage"> 
     <div class="topPart glMBCA">
       <h1 color="secondary" class="sc-gsTCUz sc-idOhPF dxmefR eyrSnX">Goose Finance</h1>
       <div color="text" class="sc-gsTCUz UNrzd">Top 3 best DEFI app on Binance Smart Chain.</div>

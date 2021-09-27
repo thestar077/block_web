@@ -6,7 +6,7 @@ body,
   margin: 0;
   padding: 0;
   /* 阻止屏幕变小发生挤压 */
-  min-width: 1349px;
+  /*min-width: 1349px;*/
 }
 body img {
     height: auto;
@@ -224,8 +224,28 @@ input {
     padding: 0px 16px;
     transition: background-color 0.2s ease 0s;
 }
-
-@media screen and (min-width: 968px){
+@media screen and (min-width: 1200px){
+	html,
+	body,
+	#app {
+	  height: 100%;
+	  margin: 0;
+	  padding: 0;
+	  /* 阻止屏幕变小发生挤压 */
+	  min-width: 1200px;
+	}
+	.hsFDCH {
+	    grid-template-columns: repeat(12, 1fr);
+	    gap: 32px;
+	}
+	.cNaueE > div {
+	    grid-column: span 6 / auto;
+	}
+	.bBhENM {
+	    display: none;
+	}
+}
+@media screen and (min-width: 968px) and (max-width: 1199px){
 	.hsFDCH {
 	    grid-template-columns: repeat(12, 1fr);
 	    gap: 32px;
@@ -244,13 +264,16 @@ input {
 	}
 }
 @media screen and (max-width: 576px){
+	#homePage{
+		.cNaueE > div {
+		    grid-column: span 8 / auto;
+		}
+	}
 	.hsFDCH {
 	    grid-template-columns: repeat(8, 1fr);
 	    gap: 24px;
 	}
-	.cNaueE > div {
-	    grid-column: span 8 / auto;
-	}
+	
 	.kNcgdb {
 	    display: none;
 	}
