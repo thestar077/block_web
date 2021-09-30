@@ -1,5 +1,5 @@
 <template>
-  <div class="sc-TmcTc sc-jHVexB kszNjt cpemDa">
+  <div class="sc-TmcTc sc-jHVexB kszNjt cpemDa" id="eggNestsPage">
   <h1 color="primary" class="sc-gsTCUz sc-idOhPF gQZLVC gOjCDZ" style="text-align: center;">Stake LP tokens to earn EGG</h1>
   <div class="sc-eHfQar hhRQON">
     <div class="sc-hzMMCg kRzfai">
