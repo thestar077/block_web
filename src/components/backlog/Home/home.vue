@@ -69,7 +69,7 @@
     <el-dialog
       title="Connect to a wallet"
       :visible.sync="dialogVisibleWallet"
-      width="30%" append-to-body>
+      width="25%" append-to-body>
       <ul>
         <li class="walletItem" v-for="(item,index) in walletList" :key="index" @click="handleWallect(item,index)">
           <span class="dpJqVk">{{item.name}}</span>
@@ -322,7 +322,7 @@
         font-size: 16px;
         font-weight: 600;
         width: 100%;
-        height: 48px;
+        height: 68px;
         line-height: 1;
         letter-spacing: 0.03em;
         -webkit-box-pack: center;
