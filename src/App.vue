@@ -10,6 +10,23 @@ export default {
   name: "app",
   mounted(){
 
+  },
+  created() {
+      
+
+      window.ethereum.on('accountChanged', () => {
+        console.log("钱包事件: accountChanged");
+      });
+
+      window.ethereum.on('chainChanged', () => {
+        console.log("钱包事件: chainChanged");
+      });
+
+      window.ethereum.on('disconnect', () => {
+        console.log("钱包事件: disconnect");
+      });
+  },
+  components: {
   }
 };
 </script>

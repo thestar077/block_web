@@ -8,7 +8,7 @@
           <img width="18" class="ml15 mr25 cursorPointer" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
           <img class="logo" width="185" height="26" src="@/assets/picture/LogoTextNewWhite.png">
         </div>
-        <div class="connectBtn">Connect</div>
+        <button class="connectBtn" @click="dialogVisibleWallet = true">Connect</button>
       </el-header>
       <!-- 内容 -->
       <el-main>
@@ -72,17 +72,21 @@
         <div class="contentBox gpBBCM">
           <router-view></router-view>
         </div>
+        <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import ComponentWallet from './backlog/Wallet/wallet.vue';
 export default {
+  
   data() {
     return {
       index:'',
       isCollapse: false,
+      dialogVisibleWallet: false,
       //左侧菜单数据
       menuslist: [
         {
@@ -114,6 +118,9 @@ export default {
         },
       ],
     };
+  },
+  components: {
+    ComponentWallet
   },
   // 渲染前获取数据
   created() {

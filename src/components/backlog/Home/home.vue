@@ -66,7 +66,8 @@
         </div>
       </div>
     <!-- Connect to a wallet -->
-    <el-dialog
+    <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
+    <!-- <el-dialog
       title="Connect to a wallet"
       :visible.sync="dialogVisibleWallet"
       width="30%" append-to-body>
@@ -76,12 +77,13 @@
           <img width="32" height="32" :src="item.pic">
         </li>
       </ul>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
 <script>
   import qs from 'qs';
+  import ComponentWallet from '../Wallet/wallet.vue'
   export default {
     data() {
       return {
@@ -115,14 +117,14 @@
         walletIndex:-1,
       };
     },
+    components: {
+      ComponentWallet
+    },
     created() {
       
     },
     methods: {
-      handleWallect(item,index){
-        this.walletIndex = index;
-        this.dialogVisibleWallet = false;
-      }
+      
     }
   };
 </script>
