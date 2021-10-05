@@ -5,8 +5,8 @@
       <!-- 头部 -->
       <el-header>
         <div>
-          <img width="18" class="ml15 mr25 cursorPointer" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
-          <img class="logo" width="185" height="26" src="@/assets/picture/LogoTextNewWhite.png">
+          <img width="34" class="ml15 mr25 cursorPointer" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
+          <img class="logo" width="200" src="@/assets/picture/LogoTextNewWhite.png">
         </div>
         <div class="connectBtn" @click="dialogVisibleWallet = true">Connect</div>
       </el-header>
@@ -17,8 +17,8 @@
             class="el-menu-vertical-demo"
             @open="handleOpen" @close="handleClose" :collapse="isCollapse"
             background-color="#fff"
-            text-color="rgb(143, 128, 186)"
-            active-text-color="rgb(143, 128, 186)"
+            text-color="#A39282"
+            active-text-color="rgb(143, 128, 486)"
             unique-opened
             router
             :collapse-transition="false"
@@ -27,7 +27,7 @@
               <!-- 二级菜单,index使跳转路由 -->
               <el-submenu v-if="item.children && item.children.length>0" :index="item.id+''" :key="item.id">
                 <template slot="title">
-                  <img width="18" height="18" class="mr15" :src="item.icon">
+                  <img class="mr15 pic" :src="item.icon">
                   <span>{{item.authName}}</span>
                 </template>
                 <el-menu-item-group 
@@ -41,22 +41,22 @@
               </el-submenu>
               <!-- 一级菜单,index必须是字符串，作为唯一标识 -->
               <el-menu-item :index="'/'+item.path" @click="clickmenu(item)" v-else :key="item.id">
-                <img width="18" height="18" class="mr15" :src="item.icon">
+                <img class="mr15 pic" :src="item.icon">
                 <span>{{item.authName}}</span>
               </el-menu-item>
             </template>
           </el-menu>
           <div class="infoItem" v-if='!isCollapse'>
             <div class="info">
-              <img width="18" height="18" src="@/assets/picture/9.png">
+              <img class="pic" src="@/assets/picture/9.png">
               $0.407
             </div>
             <div class="iconBox">
-              <img width="18" height="18" src="@/assets/picture/1.png">
-              <img width="18" height="18" src="@/assets/picture/2.png">
+              <img class="pic" src="@/assets/picture/1.png">
+              <img class="pic" src="@/assets/picture/2.png">
               <el-dropdown @command="changeLangage">
                 <span class="el-dropdown-link">
-                  <img class="mr0" width="18" height="18" src="@/assets/picture/3.png">
+                  <img class="mr0 pic" src="@/assets/picture/3.png">
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item command="cn">简体中文</el-dropdown-item>
@@ -66,7 +66,7 @@
             </div>
           </div>
           <div class="settingIcon" v-if='isCollapse'>
-            <img width="18" height="18" src="@/assets/picture/myicon/setting.png">
+            <img class="pic" src="@/assets/picture/myicon/setting.png">
           </div>
         </el-aside>
         <div class="contentBox gpBBCM">
@@ -147,6 +147,12 @@ export default {
           icon:require('@/assets/picture/myicon/Egg Nests.png'),
         },
         {
+          id: "104",
+          authName: "NTF box",
+          path: "ntfBox",
+          icon:require('@/assets/picture/myicon/NFTBox.png'),
+        },
+        {
           id: "107",
           authName: "Gitbook",
           path: "gitbook",
@@ -161,8 +167,8 @@ export default {
   methods: {
     // 切换语言
     changeLangage(lang) {
-      this.$i18n.locale=lang;  //设置中英文模式
-      localStorage.setItem('language',this.$i18n.locale);
+      this.$i48n.locale=lang;  //设置中英文模式
+      localStorage.setItem('language',this.$i48n.locale);
       window.sessionStorage.setItem("language", lang);
       let path = this.$route.path;
       location.reload();
@@ -230,16 +236,16 @@ export default {
 .page_container {
   height: 100%;
   .contentBox{
-    padding: 16px 12px;
+    /*padding: 16px 12px;*/
     margin:0 auto;
-    max-width: 993px;
+    max-width: 95%;
     min-height: calc(100vh - 64px);
     width: 100%;
   }
   .gpBBCM {
       -webkit-box-flex: 1;
       flex-grow: 1;
-      margin-top: 64px;
+      /*margin-top: 64px;*/
       transform: translate3d(0px, 0px, 0px);
       transition: margin-top 0.2s ease 0s;
   }
@@ -265,7 +271,7 @@ export default {
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 8px 18px;
+    padding: 8px 48px;
     border-top: 2px solid rgba(133, 133, 133, 0.1);
   }
   .infoItem{
@@ -273,13 +279,13 @@ export default {
     display: flex;
     justify-content:space-between;
     align-items:center;
-    padding: 8px 18px;
+    padding: 8px 48px;
     position: fixed;
     left: 0;
     bottom: 0;
     border-top: 2px solid rgba(133, 133, 133, 0.1);
     .info{
-      color: rgb(143, 128, 186);
+      color: rgb(143, 128, 486);
       font-size: 16px;
       font-weight: 600;
       line-height: 1.5;      
@@ -294,11 +300,11 @@ export default {
     }
   }
   .connectBtn{
-    font-size: 16px;
-    width: 96px;
-    height: 32px;
+    font-size: 22px;
+    width: 160px;
+    height: 48px;
     text-align: center;
-    line-height: 32px;
+    line-height: 48px;
     cursor: pointer;
     border-radius: 50px;
     color: #fff;
@@ -329,32 +335,38 @@ export default {
   .el-aside{
     height: 100vh;
     border-right: 2px solid rgba(133, 133, 133, 0.1);
-    .el-submenu__title,.el-menu-item,/deep/ .el-menu-item-group__title{
-      color: rgb(143, 128, 186) !important;
-      font-size: 16px;
+    .pic{
+      width: 42px;
+      height: 42px;
+    }
+    /deep/ .el-submenu__title,/deep/ .el-menu-item,/deep/ .el-menu-item-group__title{
+      color: #A39282 !important;
+      font-size: 24px;
       cursor: pointer;
+      height: 80px;
+      line-height: 80px;
     }
     .el-submenu .el-menu-item{
-      height: 48px;
-      line-height: 48px;
+      height: 80px;
+      line-height: 80px;
     }
     /deep/ .el-menu-item-group__title{
-      height: 48px;
-      font-size: 14px;
-      background-color: rgb(250, 189, 250);
-      color: rgb(143, 128, 186);
+      height: 80px;
+      font-size: 24px;
+      background-color: rgb(250, 489, 250);
+      color: rgb(143, 128, 486);
       box-shadow: none;
       flex-shrink: 0;
       padding: 0 !important;
-      line-height: 48px;
+      line-height: 80px;
     }
     .el-menu-item-group{
       .el-menu-item{
-        font-size: 14px;
+        font-size: 24px;
       }
     }
     /deep/ .el-submenu__title{
-      font-size: 16px;
+      font-size: 24px;
     }
     .el-menu-item{
       padding-left: 0;
@@ -362,7 +374,7 @@ export default {
       box-sizing: border-box;
     }
     /deep/ .el-submenu__title,/deep/ .el-menu-item:hover {
-      border-left: 3px solid rgb(239, 184, 185);
+      border-left: 3px solid rgb(239, 484, 485);
       background-color: rgb(239, 244, 245) !important;
     }
     .el-menu-item.is-active{

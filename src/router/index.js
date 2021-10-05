@@ -13,6 +13,8 @@ import Exchange from "../components/backlog/Trade/exchange.vue";
 import Liquidity from "../components/backlog/Trade/liquidity.vue";
 // 单币和lp挖矿的质押挖矿
 import EggNests from "../components/backlog/EggNests/eggNests.vue";
+//NtfBox
+import NtfBox from "../components/backlog/NtfBox/ntfBox.vue";
 
 Vue.use(VueRouter);
 
@@ -44,6 +46,7 @@ const routes = [
       { path: "/exchange", component: Exchange },
       { path: "/liquidity", component: Liquidity },
       { path: "/eggNests", component: EggNests },
+      { path: "/ntfBox", component: NtfBox },
     ]
   },
   {
