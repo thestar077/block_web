@@ -56,6 +56,10 @@
         </div>
       </div>
     </div>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="GameFi Description" name="GameFi">GameFi Description</el-tab-pane>
+      <el-tab-pane label="NFT Detail" name="NFT">NFT Detail</el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -282,6 +286,7 @@
             ],
           }
         ],
+        activeName: 'GameFi',
       };
     },
     created() {
@@ -291,6 +296,9 @@
       changeTag(index){
         this.roleActive = index;
       },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
     }
   };
 </script>
@@ -538,6 +546,28 @@
           }
         }
       }
+    }
+    /deep/ .el-tabs__item{
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 40px;
+      color: #A39282;
+    }
+    /deep/ .el-tabs__nav-wrap::after{
+      background-color: #E9D9C9;
+    }
+    /deep/ .el-tabs__nav{
+      padding-bottom: 20px;
+    }
+    /deep/ .el-tabs__active-bar{
+      background-color: #EEB739;
+      height: 6px;
+    }
+    /deep/ .el-tabs__header{
+      margin-bottom: 38px;
+    }
+    /deep/ .el-tabs{
+      margin-bottom: 76px;
     }
   }
 </style>

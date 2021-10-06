@@ -330,6 +330,7 @@ export default {
   .el-main{
     padding:0;
     display: flex;
+    margin-bottom: 76px;
   }
   .el-menu--collapse{
     overflow-y: hidden !important;
