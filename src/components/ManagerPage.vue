@@ -156,6 +156,12 @@ export default {
           icon:require('@/assets/picture/myicon/NFTBox.png'),
         },
         {
+          id: "105",
+          authName: "MyNTF",
+          path: "myNTF",
+          icon:require('@/assets/picture/myicon/myNtf.png'),
+        },
+        {
           id: "107",
           authName: "Gitbook",
           path: "gitbook",
