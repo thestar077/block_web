@@ -8,8 +8,17 @@
       </ul>
     </div>
     <el-row>
-      <el-col v-for="(item,index) in infoArr[roleActive].info" :key="index">
-        <img width="100%" :src="item.pic">
+      <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="index">
+        <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.pic">
+        <div class="shadow" v-if="shadowIndex == index" @mouseleave="mouseLeave(index)">
+          <div class="btn">
+            <img width="33px" src="@/assets/picture/staking.png">
+            <span>NFT Staking</span>
+          </div>
+          <div class="btn" @click="goContent(item)">
+            Check The Content
+          </div>
+        </div>
       </el-col>
     </el-row>
     <div class="line mt20"></div>
@@ -25,6 +34,7 @@
         radio:3,
         isShow:false,
         roleActive:0,
+        shadowIndex:-1,
         roleList:[
           {
             name:'所有角色',
@@ -254,6 +264,18 @@
       },
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      // 鼠标移入效果
+      mouseOver(index){
+        this.shadowIndex = index;
+      },
+      // 鼠标移出效果
+      mouseLeave(index){
+        this.shadowIndex = -1;
+      },
+      // 点击跳转详情
+      goContent(item){
+        this.$router.push({path: '/content'});
       }
     }
   };
@@ -337,6 +359,42 @@
     }
     .mt20{
       margin-top: 20px;
+    }
+    .box{
+      position: relative;
+    }
+    .shadow{
+      width: 90%;
+      height: 93%;
+      background: #000000a3;
+      position: absolute;
+      left: 20px;
+      top: 15px;
+      border-radius: 30px;
+      .btn:first-of-type{
+        margin-bottom:33px;
+        margin-top: 60%;
+      };
+      .btn{
+        margin:0 auto;
+        cursor: pointer;
+        border-radius: 20px;
+        width: 90%;
+        height: 80px;
+        background-color: #A39282;
+        display: flex;
+        justify-content:center;
+        align-items:center;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 33px;
+        color: #FFFFFF;
+        opacity: 1;
+        img{
+          width: 33px;
+          margin-right: 33px;
+        }
+      }
     }
   }
 </style>

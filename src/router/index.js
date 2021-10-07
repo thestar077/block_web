@@ -17,6 +17,7 @@ import EggNests from "../components/backlog/EggNests/eggNests.vue";
 import NtfBox from "../components/backlog/NtfBox/ntfBox.vue";
 // MyNTF
 import MyNTF from "../components/backlog/MyNTF/myNTF.vue";
+import Content from "../components/backlog/MyNTF/content.vue";
 
 Vue.use(VueRouter);
 
@@ -50,6 +51,7 @@ const routes = [
       { path: "/eggNests", component: EggNests },
       { path: "/ntfBox", component: NtfBox },
       { path: "/myNTF", component: MyNTF },
+      { path: "/content", component: Content },
     ]
   },
   {
