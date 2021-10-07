@@ -165,7 +165,7 @@ export default {
           id: "106",
           authName: "Ntf Staking",
           path: "ntfStaking",
-          icon:require('@/assets/picture/myicon/staking.png'),
+          icon:require('@/assets/picture/myicon/staking1.png'),
         },
         {
           id: "107",
