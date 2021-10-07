@@ -28,7 +28,7 @@
         盲盒
       </div>
       <div class="content">
-        <div class="box"></div>
+        <img class="box" width="465" src="@/assets/picture/box.png">
         <div class="txtBox">
           <p class="title">Code Green - Starry Troop</p>
           <p class="txtInfo">In this collection，There are 5 The Greek god character for you to unbox. Try your luck!</p>
@@ -397,8 +397,6 @@
         align-items:center;
         display: flex;
         .box{
-          width: 578px;
-          height: 578px;
           background: #A39282;
           opacity: 1;
           border-radius: 30px;
