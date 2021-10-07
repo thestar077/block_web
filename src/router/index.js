@@ -18,6 +18,8 @@ import NtfBox from "../components/backlog/NtfBox/ntfBox.vue";
 // MyNTF
 import MyNTF from "../components/backlog/MyNTF/myNTF.vue";
 import Content from "../components/backlog/MyNTF/content.vue";
+// ntfStaking
+import NtfStaking from "../components/backlog/NtfStaking/ntfStaking.vue";
 
 Vue.use(VueRouter);
 
@@ -52,6 +54,7 @@ const routes = [
       { path: "/ntfBox", component: NtfBox },
       { path: "/myNTF", component: MyNTF },
       { path: "/content", component: Content },
+      { path: "/ntfStaking", component: NtfStaking },
     ]
   },
   {

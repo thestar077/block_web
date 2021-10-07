@@ -162,6 +162,12 @@ export default {
           icon:require('@/assets/picture/myicon/myNtf.png'),
         },
         {
+          id: "106",
+          authName: "Ntf Staking",
+          path: "ntfStaking",
+          icon:require('@/assets/picture/myicon/staking.png'),
+        },
+        {
           id: "107",
           authName: "Gitbook",
           path: "gitbook",
@@ -388,7 +394,7 @@ export default {
     }
     /deep/ .el-submenu__title,/deep/ .el-menu-item:hover {
       border-left: 3px solid rgb(239, 484, 485);
-      background-color: rgb(239, 244, 245) !important;
+      background-color: #F8F2ED !important;
     }
     .el-menu-item.is-active{
       color: #409eff;
