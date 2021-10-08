@@ -259,6 +259,7 @@ export default {
     max-width: 95%;
     min-height: calc(100vh - 64px);
     width: 100%;
+    overflow-y: scroll;
   }
   .gpBBCM {
       -webkit-box-flex: 1;
@@ -272,18 +273,18 @@ export default {
     min-height: 100vh;
   }
   ::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+    width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
     height: 1px;
   }
   ::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-    background: #8F80BA;
+    -webkit-box-shadow: inset 0 0 5px #A39282;
+    background: #A39282;
   }
   ::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    -webkit-box-shadow: inset 0 0 5px #A39282;
     border-radius: 10px;
-    background: #8F80BA;
+    background: #A39282;
   }
   .settingIcon{
     position: fixed;
@@ -342,7 +343,7 @@ export default {
   .el-main{
     padding:0;
     display: flex;
-    margin-bottom: 76px;
+    /*margin-bottom: 76px;*/
   }
   .el-menu--collapse{
     overflow-y: hidden !important;
@@ -354,6 +355,7 @@ export default {
   .el-aside{
     height: 100vh;
     border-right: 2px solid rgba(133, 133, 133, 0.1);
+    /*overflow-y: scroll;*/
     .pic{
       width: 42px;
       height: 42px;

@@ -24,7 +24,7 @@
         <div class="sc-XhUPp kiNLFp"></div>
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/egg-busd.png" alt="EGG" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/1.jpg" alt="EGG" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">EGG-BUSD LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -102,7 +102,7 @@
         <div class="sc-XhUPp kiNLFp"></div>
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/egg-bnb.png" alt="EGG" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/2.jpg" alt="EGG" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">EGG-BNB LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -179,7 +179,7 @@
       <div class="sc-ikPAkQ diwHUn">
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/typh-busd.png" alt="TYPH" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/3.jpg" alt="TYPH" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">TYPH-BUSD LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -256,7 +256,7 @@
       <div class="sc-ikPAkQ diwHUn">
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/bnb-busd.png" alt="BNB" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/4.jpg" alt="BNB" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">BNB-BUSD LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -329,7 +329,7 @@
       <div class="sc-ikPAkQ diwHUn">
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/usdt-busd.png" alt="USDT" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/5.jpg" alt="USDT" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">USDT-BUSD LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -402,7 +402,7 @@
       <div class="sc-ikPAkQ diwHUn">
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/btcb-bnb.png" alt="BTCB" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/6.jpg" alt="BTCB" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">BTCB-BNB LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -475,7 +475,7 @@
       <div class="sc-ikPAkQ diwHUn">
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/eth-bnb.png" alt="ETH" class="sc-hHftDr kCQmsc"></div>
+            <img src="@/assets/picture/egg/7.jpg" alt="ETH" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">ETH-BNB LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -545,375 +545,10 @@
           </div>
         </div>
       </div>
-      <div class="sc-ikPAkQ diwHUn">
-        <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
-          <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/dai-busd.png" alt="DAI" class="sc-hHftDr kCQmsc"></div>
-          <div class="sc-eCssSg cseSbW">
-            <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">DAI-BUSD LP</h2>
-            <div class="sc-eCssSg ecyRc">
-              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">4X</div></div>
-          </div>
-        </div>
-        <div class="sc-eCssSg fAoKek">
-          <div color="text" class="sc-gsTCUz UNrzd">APR:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="display: flex; align-items: center;">
-            <button class="sc-dlfnbm eSZGEW sc-hKgILt fwjcqd" type="button">
-              <svg viewBox="0 0 25 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-                <path d="M19.2 3H5.19995C4.09995 3 3.19995 3.9 3.19995 5V19C3.19995 20.1 4.09995 21 5.19995 21H19.2C20.3 21 21.2 20.1 21.2 19V5C21.2 3.9 20.3 3 19.2 3ZM19.2 19H5.19995V5H19.2V19Z" fill="#1FC7D4"></path>
-                <path d="M11.45 7.72021H6.44995V9.22022H11.45V7.72021Z" fill="#1FC7D4"></path>
-                <path d="M18.2 15.75H13.2V17.25H18.2V15.75Z" fill="#1FC7D4"></path>
-                <path d="M18.2 13.25H13.2V14.75H18.2V13.25Z" fill="#1FC7D4"></path>
-                <path d="M8.19995 18H9.69995V16H11.7V14.5H9.69995V12.5H8.19995V14.5H6.19995V16H8.19995V18Z" fill="#1FC7D4"></path>
-                <path d="M14.29 10.95L15.7 9.54L17.11 10.95L18.17 9.89L16.76 8.47L18.17 7.06L17.11 6L15.7 7.41L14.29 6L13.23 7.06L14.64 8.47L13.23 9.89L14.29 10.95Z" fill="#1FC7D4"></path>
-              </svg>
-            </button>15.43%</div>
-        </div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">DAI-BUSD LP</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd" style="font-size: 24px;">Deposit Fee:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="font-size: 24px;">1.5%</div></div>
-        <div class="sc-euMpXR hghKoX">
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">EGG</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Earned</div></div>
-          <div class="sc-eCssSg cIpmpl">
-            <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-            <div class="sc-gInsOo grsaJH">
-              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
-          </div>
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">DAI-BUSD LP</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
-        <div class="sc-tYoTV jYOTaZ"></div>
-        <div aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
-          <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
-          <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-            <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
-          </svg>
-        </div>
-        <div class="sc-biBrSq cjrMHQ">
-          <div class="sc-kIeTtH cnxSGb">
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">DAI-BUSD LP
-                <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
-                  <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
-              </a>
-            </div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Total Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$378,934</div></div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">My Staked Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
-            <div class="sc-eCssSg FgqtZ">
-              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0x3ab77e40340ab084c3e23be8e5a6f7afed9d41dc" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on BscScan</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-ikPAkQ diwHUn">
-        <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
-          <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/usdc-busd.png" alt="USDC" class="sc-hHftDr kCQmsc"></div>
-          <div class="sc-eCssSg cseSbW">
-            <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">USDC-BUSD LP</h2>
-            <div class="sc-eCssSg ecyRc">
-              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">4X</div></div>
-          </div>
-        </div>
-        <div class="sc-eCssSg fAoKek">
-          <div color="text" class="sc-gsTCUz UNrzd">APR:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="display: flex; align-items: center;">
-            <button class="sc-dlfnbm eSZGEW sc-hKgILt fwjcqd" type="button">
-              <svg viewBox="0 0 25 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-                <path d="M19.2 3H5.19995C4.09995 3 3.19995 3.9 3.19995 5V19C3.19995 20.1 4.09995 21 5.19995 21H19.2C20.3 21 21.2 20.1 21.2 19V5C21.2 3.9 20.3 3 19.2 3ZM19.2 19H5.19995V5H19.2V19Z" fill="#1FC7D4"></path>
-                <path d="M11.45 7.72021H6.44995V9.22022H11.45V7.72021Z" fill="#1FC7D4"></path>
-                <path d="M18.2 15.75H13.2V17.25H18.2V15.75Z" fill="#1FC7D4"></path>
-                <path d="M18.2 13.25H13.2V14.75H18.2V13.25Z" fill="#1FC7D4"></path>
-                <path d="M8.19995 18H9.69995V16H11.7V14.5H9.69995V12.5H8.19995V14.5H6.19995V16H8.19995V18Z" fill="#1FC7D4"></path>
-                <path d="M14.29 10.95L15.7 9.54L17.11 10.95L18.17 9.89L16.76 8.47L18.17 7.06L17.11 6L15.7 7.41L14.29 6L13.23 7.06L14.64 8.47L13.23 9.89L14.29 10.95Z" fill="#1FC7D4"></path>
-              </svg>
-            </button>10.48%</div>
-        </div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">USDC-BUSD LP</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd" style="font-size: 24px;">Deposit Fee:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="font-size: 24px;">1.5%</div></div>
-        <div class="sc-euMpXR hghKoX">
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">EGG</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Earned</div></div>
-          <div class="sc-eCssSg cIpmpl">
-            <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-            <div class="sc-gInsOo grsaJH">
-              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
-          </div>
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">USDC-BUSD LP</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
-        <div class="sc-tYoTV jYOTaZ"></div>
-        <div aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
-          <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
-          <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-            <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
-          </svg>
-        </div>
-        <div class="sc-biBrSq cjrMHQ">
-          <div class="sc-kIeTtH cnxSGb">
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">USDC-BUSD LP
-                <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
-                  <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
-              </a>
-            </div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Total Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$558,008</div></div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">My Staked Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
-            <div class="sc-eCssSg FgqtZ">
-              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0x680dd100e4b394bda26a59dd5c119a391e747d18" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on BscScan</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-ikPAkQ diwHUn">
-        <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
-          <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/dot-bnb.png" alt="DOT" class="sc-hHftDr kCQmsc"></div>
-          <div class="sc-eCssSg cseSbW">
-            <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">DOT-BNB LP</h2>
-            <div class="sc-eCssSg ecyRc">
-              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">6X</div></div>
-          </div>
-        </div>
-        <div class="sc-eCssSg fAoKek">
-          <div color="text" class="sc-gsTCUz UNrzd">APR:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="display: flex; align-items: center;">
-            <button class="sc-dlfnbm eSZGEW sc-hKgILt fwjcqd" type="button">
-              <svg viewBox="0 0 25 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-                <path d="M19.2 3H5.19995C4.09995 3 3.19995 3.9 3.19995 5V19C3.19995 20.1 4.09995 21 5.19995 21H19.2C20.3 21 21.2 20.1 21.2 19V5C21.2 3.9 20.3 3 19.2 3ZM19.2 19H5.19995V5H19.2V19Z" fill="#1FC7D4"></path>
-                <path d="M11.45 7.72021H6.44995V9.22022H11.45V7.72021Z" fill="#1FC7D4"></path>
-                <path d="M18.2 15.75H13.2V17.25H18.2V15.75Z" fill="#1FC7D4"></path>
-                <path d="M18.2 13.25H13.2V14.75H18.2V13.25Z" fill="#1FC7D4"></path>
-                <path d="M8.19995 18H9.69995V16H11.7V14.5H9.69995V12.5H8.19995V14.5H6.19995V16H8.19995V18Z" fill="#1FC7D4"></path>
-                <path d="M14.29 10.95L15.7 9.54L17.11 10.95L18.17 9.89L16.76 8.47L18.17 7.06L17.11 6L15.7 7.41L14.29 6L13.23 7.06L14.64 8.47L13.23 9.89L14.29 10.95Z" fill="#1FC7D4"></path>
-              </svg>
-            </button>31.53%</div>
-        </div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">DOT-BNB LP</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd" style="font-size: 24px;">Deposit Fee:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="font-size: 24px;">1.5%</div></div>
-        <div class="sc-euMpXR hghKoX">
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">EGG</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Earned</div></div>
-          <div class="sc-eCssSg cIpmpl">
-            <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-            <div class="sc-gInsOo grsaJH">
-              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
-          </div>
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">DOT-BNB LP</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
-        <div class="sc-tYoTV jYOTaZ"></div>
-        <div aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
-          <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
-          <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-            <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
-          </svg>
-        </div>
-        <div class="sc-biBrSq cjrMHQ">
-          <div class="sc-kIeTtH cnxSGb">
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/ETH/0x7083609fce4d1d8dc0c979aab8c869ea2c873402" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">DOT-BNB LP
-                <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
-                  <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
-              </a>
-            </div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Total Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$278,144</div></div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">My Staked Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
-            <div class="sc-eCssSg FgqtZ">
-              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0xbcd62661a6b1ded703585d3af7d7649ef4dcdb5c" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on BscScan</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-ikPAkQ diwHUn">
-        <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
-          <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/cake-busd.png" alt="CAKE" class="sc-hHftDr kCQmsc"></div>
-          <div class="sc-eCssSg cseSbW">
-            <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">CAKE-BUSD LP</h2>
-            <div class="sc-eCssSg ecyRc">
-              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">2X</div></div>
-          </div>
-        </div>
-        <div class="sc-eCssSg fAoKek">
-          <div color="text" class="sc-gsTCUz UNrzd">APR:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="display: flex; align-items: center;">
-            <button class="sc-dlfnbm eSZGEW sc-hKgILt fwjcqd" type="button">
-              <svg viewBox="0 0 25 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-                <path d="M19.2 3H5.19995C4.09995 3 3.19995 3.9 3.19995 5V19C3.19995 20.1 4.09995 21 5.19995 21H19.2C20.3 21 21.2 20.1 21.2 19V5C21.2 3.9 20.3 3 19.2 3ZM19.2 19H5.19995V5H19.2V19Z" fill="#1FC7D4"></path>
-                <path d="M11.45 7.72021H6.44995V9.22022H11.45V7.72021Z" fill="#1FC7D4"></path>
-                <path d="M18.2 15.75H13.2V17.25H18.2V15.75Z" fill="#1FC7D4"></path>
-                <path d="M18.2 13.25H13.2V14.75H18.2V13.25Z" fill="#1FC7D4"></path>
-                <path d="M8.19995 18H9.69995V16H11.7V14.5H9.69995V12.5H8.19995V14.5H6.19995V16H8.19995V18Z" fill="#1FC7D4"></path>
-                <path d="M14.29 10.95L15.7 9.54L17.11 10.95L18.17 9.89L16.76 8.47L18.17 7.06L17.11 6L15.7 7.41L14.29 6L13.23 7.06L14.64 8.47L13.23 9.89L14.29 10.95Z" fill="#1FC7D4"></path>
-              </svg>
-            </button>73.73%</div>
-        </div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">CAKE-BUSD LP</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd" style="font-size: 24px;">Deposit Fee:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="font-size: 24px;">1.5%</div></div>
-        <div class="sc-euMpXR hghKoX">
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">EGG</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Earned</div></div>
-          <div class="sc-eCssSg cIpmpl">
-            <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-            <div class="sc-gInsOo grsaJH">
-              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
-          </div>
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">CAKE-BUSD LP</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
-        <div class="sc-tYoTV jYOTaZ"></div>
-        <div aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
-          <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
-          <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-            <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
-          </svg>
-        </div>
-        <div class="sc-biBrSq cjrMHQ">
-          <div class="sc-kIeTtH cnxSGb">
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">CAKE-BUSD LP
-                <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
-                  <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
-              </a>
-            </div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Total Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$39,652</div></div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">My Staked Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
-            <div class="sc-eCssSg FgqtZ">
-              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0x0ed8e0a2d99643e1e65cca22ed4424090b8b7458" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on BscScan</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="sc-ikPAkQ diwHUn">
-        <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
-          <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img src="@/assets/picture/cake-bnb.png" alt="CAKE" class="sc-hHftDr kCQmsc"></div>
-          <div class="sc-eCssSg cseSbW">
-            <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">CAKE-BNB LP</h2>
-            <div class="sc-eCssSg ecyRc">
-              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">2X</div></div>
-          </div>
-        </div>
-        <div class="sc-eCssSg fAoKek">
-          <div color="text" class="sc-gsTCUz UNrzd">APR:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="display: flex; align-items: center;">
-            <button class="sc-dlfnbm eSZGEW sc-hKgILt fwjcqd" type="button">
-              <svg viewBox="0 0 25 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-                <path d="M19.2 3H5.19995C4.09995 3 3.19995 3.9 3.19995 5V19C3.19995 20.1 4.09995 21 5.19995 21H19.2C20.3 21 21.2 20.1 21.2 19V5C21.2 3.9 20.3 3 19.2 3ZM19.2 19H5.19995V5H19.2V19Z" fill="#1FC7D4"></path>
-                <path d="M11.45 7.72021H6.44995V9.22022H11.45V7.72021Z" fill="#1FC7D4"></path>
-                <path d="M18.2 15.75H13.2V17.25H18.2V15.75Z" fill="#1FC7D4"></path>
-                <path d="M18.2 13.25H13.2V14.75H18.2V13.25Z" fill="#1FC7D4"></path>
-                <path d="M8.19995 18H9.69995V16H11.7V14.5H9.69995V12.5H8.19995V14.5H6.19995V16H8.19995V18Z" fill="#1FC7D4"></path>
-                <path d="M14.29 10.95L15.7 9.54L17.11 10.95L18.17 9.89L16.76 8.47L18.17 7.06L17.11 6L15.7 7.41L14.29 6L13.23 7.06L14.64 8.47L13.23 9.89L14.29 10.95Z" fill="#1FC7D4"></path>
-              </svg>
-            </button>64.96%</div>
-        </div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">CAKE-BNB LP</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
-        <div class="sc-eCssSg MoQXc">
-          <div color="text" class="sc-gsTCUz UNrzd" style="font-size: 24px;">Deposit Fee:</div>
-          <div color="text" class="sc-gsTCUz UNsmv" style="font-size: 24px;">1.5%</div></div>
-        <div class="sc-euMpXR hghKoX">
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">EGG</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Earned</div></div>
-          <div class="sc-eCssSg cIpmpl">
-            <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-            <div class="sc-gInsOo grsaJH">
-              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
-          </div>
-          <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">CAKE-BNB LP</div>
-            <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
-        <div class="sc-tYoTV jYOTaZ"></div>
-        <div aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
-          <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
-          <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
-            <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
-          </svg>
-        </div>
-        <div class="sc-biBrSq cjrMHQ">
-          <div class="sc-kIeTtH cnxSGb">
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/ETH/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">CAKE-BNB LP
-                <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
-                  <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
-              </a>
-            </div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">Total Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$44,999</div></div>
-            <div class="sc-eCssSg MoQXc">
-              <div color="text" class="sc-gsTCUz UNrzd">My Staked Value:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
-            <div class="sc-eCssSg FgqtZ">
-              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0xa527a61703d82139f8a06bc30097cc9caa2df5a6" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on BscScan</a></div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  <div width="1352" height="587" class="sc-dIUggk hULlXf">
-    <img src="@/assets/picture/8.png" alt="illustration" class="sc-hHftDr kCQmsc"></div>
+  <div width="100%" class="sc-dIUggk hULlXf">
+    <img width="100%" src="@/assets/picture/8.png" alt="illustration" class="sc-hHftDr kCQmsc"></div>
 </div>
 </template>
 
@@ -954,9 +589,8 @@
   .kszNjt {
     margin-left: auto;
     margin-right: auto;
-    max-width: 992px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 165px;
+    padding-right: 165px;
   }
   .gOjCDZ {
     font-size: 24px;
@@ -1023,7 +657,7 @@
     margin-left: 8px;
 }
 .UNrzd {
-    color: rgb(69, 42, 122);
+    color: #BBAA9B;
     font-size: 16px;
     font-weight: 400;
     line-height: 1.5;
@@ -1036,7 +670,7 @@
 .kjBbpq {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(143, 128, 186);
+    background-color: #A39282;
     box-shadow: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -1095,7 +729,7 @@
     transition: background-color 0.2s ease 0s;
 }
 .cqrcSX {
-    background-color: rgb(143, 128, 186);
+    background-color: #ECEBEE;
     height: 1px;
     width: 100%;
     margin: 0px auto 32px;
@@ -1157,33 +791,6 @@
     display: inline-flex;
     border-radius: 16px;
 }
-.kjBbpq {
-    -webkit-box-align: center;
-    align-items: center;
-    background-color: rgb(143, 128, 186);
-    box-shadow: none;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    display: inline-flex;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 600;
-    width: max-content;
-    height: 32px;
-    line-height: 1;
-    letter-spacing: 0.03em;
-    -webkit-box-pack: center;
-    justify-content: center;
-    opacity: 1;
-    border-width: 0px;
-    border-style: initial;
-    border-color: initial;
-    border-image: initial;
-    border-radius: 16px;
-    outline: 0px;
-    padding: 0px 16px;
-    transition: background-color 0.2s ease 0s;
-}
 .dnCuQj > button + button, .dnCuQj > a + a {
     margin-left: 2px;
 }
@@ -1217,12 +824,6 @@
     outline: 0px;
     padding: 0px 16px;
     transition: background-color 0.2s ease 0s;
-}
-.cqrcSX {
-    background-color: rgb(143, 128, 186);
-    height: 1px;
-    width: 100%;
-    margin: 0px auto 32px;
 }
 .ejJoEn {
     display: flex;
@@ -1291,7 +892,7 @@
     line-height: 1.1;
 }
 .dILVHG {
-    color: rgb(69, 42, 122);
+    color: #BBAA9B;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
@@ -1326,7 +927,7 @@
 .hyUuWC {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(118, 69, 217);
+    background-color: #A39282;
     color: rgb(255, 255, 255);
     display: inline-flex;
     font-size: 14px;
@@ -1336,7 +937,7 @@
     white-space: nowrap;
     border-width: 2px;
     border-style: solid;
-    border-color: rgb(118, 69, 217);
+    border-color: #A39282;
     border-image: initial;
     border-radius: 16px;
     padding: 0px 8px;
@@ -1349,7 +950,7 @@
     align-items: center;
 }
 .UNsmv {
-    color: rgb(69, 42, 122);
+    color: #BBAA9B;
     font-size: 16px;
     font-weight: 600;
     line-height: 1.5;
@@ -1401,7 +1002,7 @@
     display: flex;
 }
 .dXVGhj {
-    color: rgb(118, 69, 217);
+    color: #A39282;
     font-size: 12px;
     font-weight: 600;
     line-height: 1.5;
@@ -1409,7 +1010,7 @@
     padding-right: 3px;
 }
 .ghdcvx {
-    color: rgb(143, 128, 186);
+    color: #A39282;
     font-size: 12px;
     font-weight: 600;
     line-height: 1.5;
@@ -1479,21 +1080,6 @@
 .gqHjnk {
     display: flex;
 }
-.dXVGhj {
-    color: rgb(118, 69, 217);
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
-    text-transform: uppercase;
-    padding-right: 3px;
-}
-.ghdcvx {
-    color: rgb(143, 128, 186);
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.5;
-    text-transform: uppercase;
-}
 .hlRgJI {
     -webkit-box-align: center;
     align-items: center;
@@ -1545,7 +1131,7 @@
 }
 .hShxNi {
     font-weight: normal;
-    color: rgb(69, 42, 122);
+    color: #BBAA9B;
     display: flex;
     -webkit-box-align: center;
     align-items: center;

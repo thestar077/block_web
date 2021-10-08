@@ -186,12 +186,23 @@ html {
 }
 
 body {
-    font-family: "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
+    /*font-family: "Microsoft Yahei", "Hiragino Sans GB", sans-serif;*/
     font-size: 14px;
     line-height: 1.33333;
     color: #666;
 }
 
+@font-face{
+   font-family:'ALIBABA';
+   src:url("../fonts/ALIBABA.TTF") format('truetype');
+ }
+ @font-face{
+   font-family:'思源黑体';
+   src: url("../fonts/SourceHanSansCN.otf");
+ }
+ html, body,span,p,h1,h2,h3,h4,h5,h6,a,li,ul,div,i{
+  font-family: 'ALIBABA', '思源黑体';
+}
 button, input, select, textarea {
     font-family: inherit;
     font-size: inherit;
@@ -3144,7 +3155,7 @@ button.close {
     position: absolute;
     z-index: 1070;
     display: block;
-    font-family: "Microsoft Yahei", "Hiragino Sans GB", sans-serif;
+    /*font-family: "Microsoft Yahei", "Hiragino Sans GB", sans-serif;*/
     font-size: 12px;
     font-weight: 400;
     line-height: 1.4;

@@ -131,6 +131,7 @@
 
 <style lang="less" scoped>
   .homePage{
+    padding:147px 165px 147px 165px;
     .glMBCA {
         -webkit-box-align: center;
         align-items: center;
@@ -159,11 +160,11 @@
         font-size: 40px;
         font-weight: 600;
         line-height: 1.1;
-        color: rgb(118, 69, 217);
+        color: #897461;
         margin-bottom: 24px;
       }
       .UNrzd {
-        color: rgb(69, 42, 122);
+        color: #cdb7a2;
         font-size: 16px;
         font-weight: 600;
         line-height: 1.5;
@@ -198,7 +199,7 @@
     .eHffeS {
         background-color: rgb(255, 255, 255);
         box-shadow: rgba(25, 19, 38, 0.1) 0px 2px 12px -8px, rgba(25, 19, 38, 0.05) 0px 1px 1px;
-        color: rgb(69, 42, 122);
+        color: #cdb7a2;
         position: relative;
         border-radius: 32px;
         overflow: hidden;
@@ -212,7 +213,7 @@
         line-height: 1.1;
     }*/
     .bbSIME {
-        color: rgb(69, 42, 122);
+        color: #897461;
         /*font-size: 16px;*/
         font-weight: 600;
         line-height: 1.5;
@@ -225,21 +226,21 @@
       margin-bottom: 16px;
     }
     .imhYNd {
-        color: rgb(143, 128, 186);
+        color: #cdb7a2;
         font-size: 14px;
     }
     .dcRinF {
-        color: rgb(189, 194, 196);
+         color: #cdb7a2;
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
     }
     .imhYNd {
-        color: rgb(143, 128, 186);
+         color: #cdb7a2;
         font-size: 14px;
     }
     .dcRinF {
-        color: rgb(189, 194, 196);
+         color: #cdb7a2;
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;
@@ -288,7 +289,7 @@
       margin-bottom: 8px;
     }
     .kxDGqL {
-        color: rgb(69, 42, 122);
+        color: #cdb7a2;
         font-size: 14px;
         font-weight: 400;
         line-height: 1.5;
@@ -299,13 +300,13 @@
         line-height: 1.1;
     }
     .diGZoE {
-        color: rgb(69, 42, 122);
+        color: #897461;
         font-size: 40px;
         font-weight: 600;
         line-height: 1.5;
     }
     .eugENQ {
-        color: rgb(143, 128, 186);
+        color: #cdb7a2;
         font-size: 16px;
         font-weight: 400;
         line-height: 1.5;

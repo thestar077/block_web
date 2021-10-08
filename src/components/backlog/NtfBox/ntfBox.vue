@@ -1,7 +1,5 @@
 <template>
   <div class="myNtfPage" id="myNtfPage"> 
-    <div class="banner"></div>
-    <div class="line"></div>
     <div class="roleArr">
       <ul>
         <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
@@ -22,14 +20,16 @@
         </div>
       </el-col>
     </el-row>
-    <div class="line mt20"></div>
+    <div class="mt20"></div>
     <div class="blindBox">
       <div class="titleTxt">
         盲盒
       </div>
-      <div class="content">
-        <img class="box" width="465" src="@/assets/picture/box.png">
-        <div class="txtBox">
+      <el-row class="content">
+        <el-col :span="10">
+          <img class="box" width="90%" src="@/assets/picture/box.png">
+        </el-col>
+        <el-col :span="12" class="txtBox">
           <p class="title">Code Green - Starry Troop</p>
           <p class="txtInfo">In this collection，There are 5 The Greek god character for you to unbox. Try your luck!</p>
           <p class="price">Price</p>
@@ -53,8 +53,8 @@
               Buy
             </div>
           </div>
-        </div>
-      </div>
+        </el-col>
+      </el-row>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="GameFi Description" name="GameFi">GameFi Description</el-tab-pane>
@@ -305,23 +305,20 @@
 
 <style lang="less" scoped>
   .myNtfPage{
-    .banner{
-      width: 100%;
-      height: 460px;
-      background: #E9D9C9;
-      margin-bottom: 40px;
-    }
-    .line{
-      width: 100%;
-      height: 20px;
-      background: #E9D9C9;
-    }
+    padding:322px 168px;
+    background-color: #9898F3;
+    .el-row{
+        background-color: #fff;
+        border: 1px solid #E9D9C9;
+        border-top: none;
+      }
     .roleArr{
       width: 100%;
       display: flex;
       justify-content:space-between;
       align-items:center;
-      border-bottom: 1px solid #E9D9C9;
+      border: 1px solid #E9D9C9;
+      background-color: #fff;
       .active{
         background: #A39282;
         color: #fff;
@@ -346,6 +343,7 @@
         display: flex;
         justify-content:space-between;
         align-items:center;
+        background-color: #fff;
         li{
           font-size: 28px;
           font-weight: 500;
@@ -382,6 +380,8 @@
       margin-top: 20px;
     }
     .blindBox{
+      background-color: #fff;
+      border: 1px solid #E9D9C9;
       .titleTxt{
         padding: 20px 35px;
         font-size: 28px;
@@ -556,6 +556,10 @@
     }
     /deep/ .el-tabs__nav{
       padding-bottom: 20px;
+    }
+    /deep/ .el-tabs{
+      background-color: #fff;
+      padding:28px 0 28px 50px;
     }
     /deep/ .el-tabs__active-bar{
       background-color: #EEB739;

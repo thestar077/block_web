@@ -373,7 +373,7 @@
       border-radius: 30px;
       .btn:first-of-type{
         margin-bottom:33px;
-        margin-top: 60%;
+        margin-top: 40%;
       };
       .btn{
         margin:0 auto;

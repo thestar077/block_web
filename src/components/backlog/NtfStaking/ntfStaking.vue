@@ -32,7 +32,7 @@
     </div>
     <!-- addModel -->
     <el-dialog :visible.sync="addModelVisible" width="80%" append-to-body>
-      <el-carousel trigger="click" :interval="0" arrow="always" height="350px">
+      <el-carousel trigger="click" :interval="0" arrow="always" height="450px">
         <el-carousel-item v-for="(item, index) in newArr" :key="index">
           <ul class="cardUl">
             <li class="cardLi" v-for="(i, k) in item" :key="k">
@@ -320,7 +320,7 @@
     background: none;
     border:none;
     .btnBox{
-        width: 50%;
+        width: 45%;
         display: block;
         margin:0 auto;
       .flexBox{
