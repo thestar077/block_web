@@ -244,6 +244,14 @@ input {
 	.bBhENM {
 	    display: none;
 	}
+    #myNtfPage{
+        .phoneShow{
+            display: none;
+        }
+        .pcShow{
+            display: block;
+        }
+    }
 }
 @media screen and (min-width: 968px) and (max-width: 1199px){
 	.hsFDCH {
@@ -256,12 +264,75 @@ input {
 	.bBhENM {
 	    display: none;
 	}
+    #myNtfPage{
+        .phoneShow{
+            display: none;
+        }
+        .pcShow{
+            display: block;
+        }
+    }
 }
 @media screen and (min-width: 577) and (max-width: 852px){
 	.hsFDCH {
 	    grid-template-columns: repeat(12, 1fr);
 	    gap: 24px;
 	}
+    #myNtfPage{
+        padding:0;
+        .phoneShow{
+            display: block;
+            img,.textBox{
+                width: 50%;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        .pcShow{
+            display: none;
+        }
+        .roleArr{
+            width: 100%;
+            ul{
+                overflow-x: scroll;
+            }
+        }
+        .blindBox{
+            .content{
+                display: inline;
+                .el-col-10,.el-col-12{
+                    width: 100%;
+                    margin:0 auto;
+                    display: block;
+                }
+                .el-col-10{
+                    img{
+                        width: 40%;
+                        margin:0 auto;
+                        display: block;
+                    }
+                }
+                .el-col-12{
+                    .title,.txtInfo{
+                        text-align: center;
+                    }
+                    .price,.priceTxt,.totleNum,.checkBox{
+                        text-align: left;
+                        margin-left: 30px;
+                    }
+                    .checkBox{
+                        display: block;
+                        .flex{
+                            justify-content:flex-start;
+                        }
+                        .buyBtn{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 @media screen and (max-width: 576px){
 	#homePage{
@@ -319,5 +390,60 @@ input {
 	.ejJoEn > *{
 		max-width:80%;
 	}
+    #myNtfPage{
+        padding:0;
+        .phoneShow{
+            display: block;
+            img,.textBox{
+                width: 50%;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        .pcShow{
+            display: none;
+        }
+        .roleArr{
+            width: 100%;
+            ul{
+                overflow-x: scroll;
+            }
+        }
+        .blindBox{
+            .content{
+                display: inline;
+                .el-col-10,.el-col-12{
+                    width: 100%;
+                    margin:0 auto;
+                    display: block;
+                }
+                .el-col-10{
+                    img{
+                        width: 40%;
+                        margin:0 auto;
+                        display: block;
+                    }
+                }
+                .el-col-12{
+                    .title,.txtInfo{
+                        text-align: center;
+                    }
+                    .price,.priceTxt,.totleNum,.checkBox{
+                        text-align: left;
+                        margin-left: 30px;
+                    }
+                    .checkBox{
+                        display: block;
+                        .flex{
+                            justify-content:flex-start;
+                        }
+                        .buyBtn{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 

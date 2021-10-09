@@ -4,12 +4,26 @@
       <ul>
         <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
       </ul>
-      <div class="viewBtn" @click="isShow = !isShow">
+      <div class="viewBtn" @click="handleView">
         <span>查看</span>
         <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
       </div>
     </div>
-    <el-row>
+    <el-carousel :height="imgHeight+'px'" class="phoneShow">
+      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="index">
+        <div ref="imgBox">
+          <img width="50%" :src="item.pic">
+          <div class="textBox" v-if="isShow">
+            <h5>属性：{{item.leval}}</h5>
+            <p>{{item.name}}</p> 
+            <p>技能：{{item.text}}</p> 
+            <p>特点：{{item.name}}</p>          
+          </div>
+        </div>
+        
+      </el-carousel-item>
+    </el-carousel>
+    <el-row class="pcShow">
       <el-col v-for="(item,index) in infoArr[roleActive].info" :key="index">
         <img width="100%" :src="item.pic">
         <div class="textBox" v-if="isShow">
@@ -68,6 +82,7 @@
   export default {
     data() {
       return {
+        imgHeight:'',
         num:0,
         radio:3,
         isShow:false,
@@ -292,13 +307,27 @@
     created() {
       
     },
+    mounted(){
+      // 监听窗口变化，使得轮播图高度自适应图片高度
+      window.addEventListener("resize", () => {
+        this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+        console.log(this.imgHeight,'this.imgHeight11');
+      });
+    },
     methods: {
       changeTag(index){
         this.roleActive = index;
       },
       handleClick(tab, event) {
         console.log(tab, event);
-      }
+      },
+      handleView(){
+        this.isShow = !this.isShow;
+        this.$nextTick(function(){
+          this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+          console.log(this.imgHeight,'this.imgHeight22');
+        })
+      },
     }
   };
 </script>
@@ -312,6 +341,9 @@
         border: 1px solid #E9D9C9;
         border-top: none;
       }
+    .el-carousel__container{
+      height: auto!important;
+    }
     .roleArr{
       width: 100%;
       display: flex;
