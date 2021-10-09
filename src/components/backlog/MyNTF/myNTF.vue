@@ -7,7 +7,23 @@
         <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
       </ul>
     </div>
-    <el-row>
+    <el-carousel :height="imgHeight+'px'" class="phoneShow">
+      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="index">
+        <div ref="imgBox">
+          <img class="cursorPointer" @touchstart="gotouchstart(index)" width="80%" :src="item.pic">
+            <div class="shadow" v-if="shadowIndex == index" @touchend="gotouchend(index)">
+              <div class="btn">
+                <img width="33px" src="@/assets/picture/staking.png">
+                <span>NFT Staking</span>
+              </div>
+              <div class="btn" @click="goContent(item)">
+                Check The Content
+              </div>
+            </div>
+        </div>
+      </el-carousel-item>
+    </el-carousel>
+    <el-row class="pcShow">
       <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="index">
         <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.pic">
         <div class="shadow" v-if="shadowIndex == index" @mouseleave="mouseLeave(index)">
@@ -30,6 +46,9 @@
   export default {
     data() {
       return {
+        isLongPress:false,
+        timeOutEvent:0,
+        imgHeight:'',
         num:0,
         radio:3,
         isShow:false,
@@ -258,6 +277,12 @@
     created() {
       
     },
+     mounted(){
+      // 监听窗口变化，使得轮播图高度自适应图片高度
+      window.addEventListener("resize", () => {
+        this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+      });
+    },
     methods: {
       changeTag(index){
         this.roleActive = index;
@@ -276,7 +301,31 @@
       // 点击跳转详情
       goContent(item){
         this.$router.push({path: '/content'});
-      }
+      },
+      gotouchstart(index){
+        let that = this;
+        clearTimeout(that.timeOutEvent);//清除定时器
+        that.timeOutEvent = 0;
+        that.timeOutEvent = setTimeout(function(){
+             //执行长按要执行的内容，
+            that.shadowIndex = index;
+            that.isLongPress = true;
+           },600);//这里设置定时
+      },
+      //手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+      gotouchend(index){
+          clearTimeout(this.timeOutEvent);
+            if(this.imeOutEvent!=0){
+              this.shadowIndex = -1;
+              this.isLongPress = false;
+           }
+      },
+      //如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按 
+      gotouchmove(){
+           clearTimeout(this.timeOutEvent);//清除定时器
+           this.timeOutEvent = 0;
+           this.isLongPress = false;
+      },
     }
   };
 </script>
@@ -325,6 +374,8 @@
         display: flex;
         justify-content:space-between;
         align-items:center;
+        background-color: #fff;
+        overflow-x: scroll;
         li{
           font-size: 28px;
           font-weight: 500;

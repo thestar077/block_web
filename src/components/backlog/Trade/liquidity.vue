@@ -278,9 +278,9 @@
     margin-bottom: 40px;
 }
 .dnCuQj {
-    background-color: rgb(238, 234, 244);
+    background-color: #f0f0f0;
     display: inline-flex;
-    border-radius: 16px;
+    border-radius: 60px;
 }
 .cxRybB {
     background-color: transparent;
@@ -295,10 +295,10 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: max-content;
-    height: 32px;
+    height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
@@ -308,7 +308,7 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 60px;
     outline: 0px;
     padding: 0px 16px;
     transition: background-color 0.2s ease 0s;
@@ -319,16 +319,16 @@
 .kjBbpq {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(143, 128, 186);
+    background-color: #aa8929;
     box-shadow: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: max-content;
-    height: 32px;
+    height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
@@ -338,18 +338,18 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 60px;
     outline: 0px;
     padding: 0px 16px;
     transition: background-color 0.2s ease 0s;
 }
 .cxRybB {
     background-color: transparent;
-    color: rgb(143, 128, 186);
+    color: #aa8929;
 }
 .gdlclw {
     position: relative;
-    max-width: 436px;
+    max-width: 600px;
     width: 100%;
     z-index: 5;
 }
@@ -379,15 +379,15 @@
     line-height: 1.1;
 }
 .eEIHSi {
-    color: rgb(69, 42, 122);
-    font-size: 16px;
+    color: #aa8929;
+    font-size: 26px;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 8px;
 }
 .cHBkgC {
-    color: rgb(143, 128, 186);
-    font-size: 14px;
+    color: #aa8929;
+    font-size: 22px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -461,8 +461,8 @@
     padding: 0px 8px;
 }
 .UNrzd {
-    color: rgb(69, 42, 122);
-    font-size: 16px;
+    color: #aa8929;
+    font-size: 26px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -476,7 +476,7 @@
     -webkit-box-pack: center;
     justify-content: center;
     cursor: default;
-    color: rgb(143, 128, 186);
+    color: #aa8929;
     padding: 0.2rem;
     border-width: initial;
     border-style: none;
@@ -500,19 +500,7 @@
 }
 .dcRinF {
     color: rgb(189, 194, 196);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-}
-.kxDGqL {
-    color: rgb(69, 42, 122);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.5;
-}
-.kxDGqL {
-    color: rgb(69, 42, 122);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -544,7 +532,7 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: max-content;
     height: 48px;
@@ -686,10 +674,10 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: 100%;
-    height: 48px;
+    height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
@@ -699,13 +687,13 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 60px;
     outline: 0px;
     padding: 0px 24px;
     transition: background-color 0.2s ease 0s;
 }
 .kXfhzq {
-    background-color: rgb(238, 234, 244);
+    background-color: #ebc65a3b;
     box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
     border-radius: 16px;
 }
@@ -736,7 +724,7 @@
     margin: 0px;
 }
 .kxDGqL {
-    color: rgb(69, 42, 122);
+    color: #aa8929;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
@@ -797,12 +785,6 @@
     height: 24px;
     box-shadow: rgba(0, 0, 0, 0.075) 0px 6px 10px;
     border-radius: 24px;
-}
-.UNrzd {
-    color: rgb(69, 42, 122);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
 }
 .eZTMLz {
     -webkit-box-align: center;

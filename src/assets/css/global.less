@@ -10,7 +10,7 @@ body,
 }
 body img {
     height: auto;
-    max-width: 100%;
+    /*max-width: 100%;*/
 }
 button {
     -webkit-appearance: button;
@@ -129,7 +129,7 @@ input {
 */
 /*弹窗*/
 .v-modal{
-	background-color: rgb(69, 42, 122);
+	background-color: #140f00ba;
     opacity: 0.6;
 }
 .el-dialog{
@@ -167,7 +167,7 @@ input {
     		font-size: 20px;
     		font-weight: 600;
     		line-height: 1.1;
-    		color: rgb(69, 42, 122);
+    		color: #140f00ba;
     	}
     	.el-dialog__close{
     		font-size: 20px;
@@ -244,13 +244,34 @@ input {
 	.bBhENM {
 	    display: none;
 	}
-    #myNtfPage{
+    #myNtfPage,#myNTFPage{
         .phoneShow{
             display: none;
         }
         .pcShow{
             display: block;
         }
+    }
+    #page_container{
+        .el-aside{
+            position: fixed;
+            z-index: 999;
+            .el-menu-item,.el-submenu__title{
+                padding-left: 10px !important;
+            }
+            .el-menu-item-group{
+                .el-menu-item{
+                    padding-left: 20px !important;
+                }
+            }
+            .pic{
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+    #eggNestsPage,#homePage,#myNtfPage,#myNTFPage,#stakeNFTPage{
+        margin-left: 250px;
     }
 }
 @media screen and (min-width: 968px) and (max-width: 1199px){
@@ -264,12 +285,30 @@ input {
 	.bBhENM {
 	    display: none;
 	}
-    #myNtfPage{
+    #myNtfPage,#myNTFPage{
         .phoneShow{
             display: none;
         }
         .pcShow{
             display: block;
+        }
+    }
+    #page_container{
+        .el-aside{
+            position: fixed;
+            z-index: 999;
+            .el-menu-item,.el-submenu__title{
+                padding-left: 10px !important;
+            }
+            .el-menu-item-group{
+                .el-menu-item{
+                    padding-left: 20px !important;
+                }
+            }
+            .pic{
+                width: 30px;
+                height: 30px;
+            }
         }
     }
 }
@@ -278,18 +317,23 @@ input {
 	    grid-template-columns: repeat(12, 1fr);
 	    gap: 24px;
 	}
+    #myNtfPage,#myNTFPage{
+        .phoneShow{
+            display: block;
+        }
+        .pcShow{
+            display: none;
+        }
+    }
     #myNtfPage{
         padding:0;
         .phoneShow{
             display: block;
             img,.textBox{
-                width: 50%;
+                width: 80%;
                 margin: 0 auto;
                 display: block;
             }
-        }
-        .pcShow{
-            display: none;
         }
         .roleArr{
             width: 100%;
@@ -300,19 +344,19 @@ input {
         .blindBox{
             .content{
                 display: inline;
-                .el-col-10,.el-col-12{
+                .col10,.col12{
                     width: 100%;
                     margin:0 auto;
                     display: block;
                 }
-                .el-col-10{
+                .col10{
                     img{
                         width: 40%;
                         margin:0 auto;
                         display: block;
                     }
                 }
-                .el-col-12{
+                .col12{
                     .title,.txtInfo{
                         text-align: center;
                     }
@@ -333,6 +377,50 @@ input {
             }
         }
     }
+    #myNTFPage{
+        .phoneShow{
+            img{
+                display: block;
+                margin:0 auto;
+            }
+        }
+    }
+    #page_container{
+        .contentBox{
+            margin-left: 100px;
+        }
+        .el-aside{
+            position: fixed;
+            z-index: 999;
+            .el-menu-item,.el-submenu__title{
+                padding-left: 10px !important;
+            }
+            .el-menu-item-group{
+                .el-menu-item{
+                    padding-left: 20px !important;
+                }
+            }
+            .pic{
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .logo{
+            width: 180px !important;
+        }
+        .infoItem{
+            display: block;
+            .info{
+                margin:0 auto;
+                display: block;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    #homePage{
+        padding:0;
+    }
 }
 @media screen and (max-width: 576px){
 	#homePage{
@@ -348,14 +436,14 @@ input {
     }
     #page_container{
         .el-menu-vertical-demo:not(.el-menu--collapse) {
-            width: 40vw !important;
+            width: auto !important;
         }
         .el-menu-item,.el-submenu__title,.el-menu-item-group{
-            height: 150px;
-            line-height: 150px;
+            height: 100px;
+            line-height: 100px;
         }
         .infoItem{
-            width: 40vw !important;
+            width: auto !important;
         }
     }
     #eggNestsPage{
@@ -390,18 +478,23 @@ input {
 	.ejJoEn > *{
 		max-width:80%;
 	}
+    #myNtfPage,#myNTFPage{
+        .phoneShow{
+            display: block;
+        }
+        .pcShow{
+            display: none;
+        }
+    }
     #myNtfPage{
         padding:0;
         .phoneShow{
             display: block;
             img,.textBox{
-                width: 50%;
+                width: 80%;
                 margin: 0 auto;
                 display: block;
             }
-        }
-        .pcShow{
-            display: none;
         }
         .roleArr{
             width: 100%;
@@ -412,19 +505,19 @@ input {
         .blindBox{
             .content{
                 display: inline;
-                .el-col-10,.el-col-12{
+                .col10,.col12{
                     width: 100%;
                     margin:0 auto;
                     display: block;
                 }
-                .el-col-10{
+                .col10{
                     img{
                         width: 40%;
                         margin:0 auto;
                         display: block;
                     }
                 }
-                .el-col-12{
+                .col12{
                     .title,.txtInfo{
                         text-align: center;
                     }
@@ -443,6 +536,55 @@ input {
                     }
                 }
             }
+        }
+    }
+    #myNTFPage{
+        .phoneShow{
+            img{
+                display: block;
+                margin:0 auto;
+            }
+        }
+    }
+    #page_container{
+        .contentBox{
+            margin-left: 80px;
+        }
+        .el-aside{
+            position: fixed;
+            z-index: 999;
+            .el-menu-item,.el-submenu__title{
+                padding-left: 10px !important;
+            }
+            .el-menu-item-group{
+                .el-menu-item{
+                    padding-left: 20px !important;
+                }
+            }
+            .pic{
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .logo{
+            width: 180px !important;
+        }
+        .infoItem{
+            display: block;
+            .info{
+                margin:0 auto;
+                display: block;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    #homePage{
+        padding:0;
+    }
+    #stakeNFTPage{
+        .content{
+            padding:0;
         }
     }
 }

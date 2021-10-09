@@ -320,7 +320,7 @@
     background: none;
     border:none;
     .btnBox{
-        width: 45%;
+        width: 60%;
         display: block;
         margin:0 auto;
       .flexBox{

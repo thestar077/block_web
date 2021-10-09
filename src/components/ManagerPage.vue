@@ -5,8 +5,8 @@
       <!-- 头部 -->
       <el-header>
         <div>
-          <img width="34" class="ml15 mr25 cursorPointer" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
-          <img class="logo" width="200" src="@/assets/picture/LogoTextNewWhite.png">
+          <img class="mr25 cursorPointer pic collapseBtn" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
+          <img class="logo" width="200px" src="@/assets/picture/LogoTextNewWhite.png">
         </div>
         <button class="connectBtn" @click="dialogVisibleWallet = true">Connect</button>
       </el-header>
@@ -48,15 +48,15 @@
           </el-menu>
           <div class="infoItem" v-if='!isCollapse'>
             <div class="info">
-              <img class="pic" src="@/assets/picture/9.png">
+              <img class="picIcon" src="@/assets/picture/9.png">
               $0.407
             </div>
             <div class="iconBox">
-              <img class="pic" src="@/assets/picture/1.png">
-              <img class="pic" src="@/assets/picture/2.png">
+              <img class="picIcon" src="@/assets/picture/1.png">
+              <img class="picIcon" src="@/assets/picture/2.png">
               <el-dropdown @command="changeLangage">
                 <span class="el-dropdown-link">
-                  <img class="mr0 pic" src="@/assets/picture/3.png">
+                  <img class="mr0 picIcon" src="@/assets/picture/3.png">
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item command="cn">简体中文</el-dropdown-item>
@@ -145,26 +145,26 @@ export default {
         },
         {
           id: "103",
-          authName: "Egg nests",
+          authName: "Egg Nests",
           path: "eggNests",
           icon:require('@/assets/picture/myicon/Egg Nests.png'),
         },
         {
           id: "104",
-          authName: "NTF box",
-          path: "ntfBox",
+          authName: "NFT Box",
+          path: "NFTBox",
           icon:require('@/assets/picture/myicon/NFTBox.png'),
         },
         {
           id: "105",
-          authName: "MyNTF",
-          path: "myNTF",
+          authName: "My NFT",
+          path: "myNFT",
           icon:require('@/assets/picture/myicon/myNtf.png'),
         },
         {
           id: "106",
-          authName: "Ntf Staking",
-          path: "ntfStaking",
+          authName: "NFT Staking",
+          path: "NFTStaking",
           icon:require('@/assets/picture/myicon/staking1.png'),
         },
         {
@@ -256,7 +256,7 @@ export default {
   .contentBox{
     /*padding: 16px 12px;*/
     margin:0 auto;
-    max-width: 95%;
+    /*max-width: 95%;*/
     min-height: calc(100vh - 64px);
     width: 100%;
     overflow-y: scroll;
@@ -290,29 +290,35 @@ export default {
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 8px 48px;
+    padding: 8px 48px 8px 10px;
     border-top: 2px solid rgba(133, 133, 133, 0.1);
   }
   .infoItem{
-    width: 250px;
+    /*width: 250px;*/
     display: flex;
     justify-content:space-between;
     align-items:center;
-    padding: 8px 48px;
+    padding: 8px 20px;
     position: fixed;
     left: 0;
     bottom: 0;
     border-top: 2px solid rgba(133, 133, 133, 0.1);
     .info{
-      color: rgb(143, 128, 486);
+      color: #A39282;
       font-size: 16px;
       font-weight: 600;
-      line-height: 1.5;      
+      line-height: 1.5;   
+      margin-right: 10px; 
+      display: block;  
     }
     .iconBox{
       display: flex;
     justify-content:space-between;
     align-items:center;
+    }
+    .picIcon{
+      width: 30px;
+      height: 30px;
     }
     img{
       margin-right: 8px;
@@ -354,6 +360,7 @@ export default {
   }
   .el-aside{
     height: 100vh;
+    background-color: #fff;
     border-right: 2px solid rgba(133, 133, 133, 0.1);
     /*overflow-y: scroll;*/
     .pic{

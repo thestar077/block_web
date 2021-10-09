@@ -14,12 +14,12 @@ import Liquidity from "../components/backlog/Trade/liquidity.vue";
 // 单币和lp挖矿的质押挖矿
 import EggNests from "../components/backlog/EggNests/eggNests.vue";
 //NtfBox
-import NtfBox from "../components/backlog/NtfBox/ntfBox.vue";
-// MyNTF
-import MyNTF from "../components/backlog/MyNTF/myNTF.vue";
+import NFTBox from "../components/backlog/NtfBox/ntfBox.vue";
+// MyNFT
+import MyNFT from "../components/backlog/MyNTF/myNTF.vue";
 import Content from "../components/backlog/MyNTF/content.vue";
 // ntfStaking
-import NtfStaking from "../components/backlog/NtfStaking/ntfStaking.vue";
+import NFTStaking from "../components/backlog/NtfStaking/ntfStaking.vue";
 
 Vue.use(VueRouter);
 
@@ -51,10 +51,10 @@ const routes = [
       { path: "/exchange", component: Exchange },
       { path: "/liquidity", component: Liquidity },
       { path: "/eggNests", component: EggNests },
-      { path: "/ntfBox", component: NtfBox },
-      { path: "/myNTF", component: MyNTF },
+      { path: "/NFTBox", component: NFTBox },
+      { path: "/myNFT", component: MyNFT },
       { path: "/content", component: Content },
-      { path: "/ntfStaking", component: NtfStaking },
+      { path: "/NFTStaking", component: NFTStaking },
     ]
   },
   {

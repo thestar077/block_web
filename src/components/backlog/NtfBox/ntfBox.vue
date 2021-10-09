@@ -12,7 +12,7 @@
     <el-carousel :height="imgHeight+'px'" class="phoneShow">
       <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="index">
         <div ref="imgBox">
-          <img width="50%" :src="item.pic">
+          <img width="80%" :src="item.pic">
           <div class="textBox" v-if="isShow">
             <h5>属性：{{item.leval}}</h5>
             <p>{{item.name}}</p> 
@@ -39,18 +39,25 @@
       <div class="titleTxt">
         盲盒
       </div>
-      <el-row class="content">
-        <el-col :span="10">
-          <img class="box" width="90%" src="@/assets/picture/box.png">
-        </el-col>
-        <el-col :span="12" class="txtBox">
+      <div class="content">
+        <div class="col10">
+          <div class="box">
+            <img width="90%" src="@/assets/picture/box.png">
+            <span v-if="radio == 'usdc'">20% OFF</span>
+          </div>
+        </div>
+        <div class="col12 txtBox">
           <p class="title">Code Green - Starry Troop</p>
           <p class="txtInfo">In this collection，There are 5 The Greek god character for you to unbox. Try your luck!</p>
           <p class="price">Price</p>
-          <p class="priceTxt">
+          <p class="priceTxt" v-if="radio == 'egg'">
             <span class="num">800</span>
             <span> EGG ≈ 5690 USDC</span>
           </p>
+          <div class="priceText" v-else>
+            <p class="originalPrice">800 EGG ≈ 5690 USDC <span>原价</span></p>
+            <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
+          </div>
           <div class="totleNum">
             <span>Quantity</span>
             <el-input-number v-model="num" :min="1" :max="10" label="描述文字"></el-input-number>
@@ -59,16 +66,16 @@
             <div class="flex">
               <span>购买方式</span>
               <el-radio-group v-model="radio">
-                <el-radio :label="3">EGG</el-radio>
-                <el-radio :label="6">USDC</el-radio>
+                <el-radio label="egg">EGG</el-radio>
+                <el-radio label="usdc">USDC</el-radio>
               </el-radio-group>
             </div>
             <div class="buyBtn">
               Buy
             </div>
           </div>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="GameFi Description" name="GameFi">GameFi Description</el-tab-pane>
@@ -84,7 +91,7 @@
       return {
         imgHeight:'',
         num:0,
-        radio:3,
+        radio:'egg',
         isShow:false,
         roleActive:0,
         roleList:[
@@ -311,7 +318,6 @@
       // 监听窗口变化，使得轮播图高度自适应图片高度
       window.addEventListener("resize", () => {
         this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-        console.log(this.imgHeight,'this.imgHeight11');
       });
     },
     methods: {
@@ -325,7 +331,6 @@
         this.isShow = !this.isShow;
         this.$nextTick(function(){
           this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-          console.log(this.imgHeight,'this.imgHeight22');
         })
       },
     }
@@ -356,7 +361,7 @@
         color: #fff;
       }
       .viewBtn{
-        font-size: 24px;
+        font-size: 23px;
         font-weight: 500;
         line-height: 33px;
         color: #A39282;
@@ -377,7 +382,7 @@
         align-items:center;
         background-color: #fff;
         li{
-          font-size: 28px;
+          font-size: 24px;
           font-weight: 500;
           line-height: 40px;
           color: #A39282;
@@ -399,13 +404,17 @@
       width: 80%;
       margin:0 auto;
       display: block;
+      font-weight: 500;
+      line-height: 25px;
+      margin-bottom: 30px;
       h5{
         color: #fff;
-        font-size: 30px;
-        font-weight: normal;
+        font-size: 24px;
+        font-weight: 500;
       }
       p{
-        font-size: 24px;
+        font-size: 18px;
+        font-weight: 500;
       }
     }
     .mt20{
@@ -415,8 +424,8 @@
       background-color: #fff;
       border: 1px solid #E9D9C9;
       .titleTxt{
-        padding: 20px 35px;
-        font-size: 28px;
+        padding: 24px 27px;
+        font-size: 24px;
         font-weight: 500;
         line-height: 40px;
         color: #A39282;
@@ -426,17 +435,43 @@
       .content{
         padding:40px 35px;
         justify-content:space-between;
-        align-items:center;
         display: flex;
+        .col10{
+          float: left;
+          width: 40%;
+        }
+        .col12{
+          float: left;
+          width: 60%;
+        }
         .box{
-          background: #A39282;
-          opacity: 1;
+          position: relative;
+          height: 100%;
           border-radius: 30px;
           margin-right: 60px;
+          img{
+            position: absolute;
+            right: 0;
+            top:0;
+          }
+          span{
+            position: absolute;
+            right: 0;
+            bottom: 20%;
+            color: #fff;
+            background-color: #C91731;
+            width: 150px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 14px;
+            border-top-left-radius:100px;
+            border-bottom-left-radius:100px;
+          }
         }
         .txtBox{
           .title{
-            font-size: 56px;
+            font-size: 30px;
             margin-bottom: 6px;
             font-weight: 800;
             line-height: 78px;
@@ -447,7 +482,7 @@
             word-break: break-all;
           }
           .txtInfo{
-            font-size: 34px;
+            font-size: 26px;
             font-family: PingFang SC;
             font-weight: 400;
             line-height: 40px;
@@ -461,52 +496,94 @@
             -webkit-box-orient: vertical;
           }
           .price{
-            font-size: 42px;
+            font-size: 30px;
             font-weight: bold;
             line-height: 59px;
-            color: #000000;
-            margin:40px 0;
+            color: #A39282;
+            margin:20px 0 0 0;
           }
           .priceTxt{
-            font-size: 42px;;
+            font-size: 26px;;
             font-weight: bold;
             line-height: 59px;
             color: #333333;
             padding-bottom: 20px;
             border-bottom:1px solid #E9D9C9;
             .num{
-              font-size: 80px;
+              font-size: 64px;
               font-weight: bold;
               line-height: 112px;
               color: #EEB739;
               margin-right: 40px;
             }
           }
+          .priceText{
+            .originalPrice{
+              color: #B8B8B8;
+              font-size: 14px;
+              justify-content:flex-start;
+              align-items:center;
+              display: flex;
+              text-decoration: line-through;
+              span{
+                margin-left: 5px;
+                padding: 0 5px;
+                color: #fff;
+                font-size: 12px;
+                height: 30px;
+                line-height: 30px;
+                background-color: #B8B8B8;
+                border-radius: 50px;
+                text-decoration: line-through;
+              }
+            }
+            .presentPrice{
+              padding-bottom: 50px;
+              font-weight: bold;
+              color: #A39282;
+              justify-content:flex-start;
+              align-items:center;
+              display: flex;
+              font-size: 30px;
+              border-bottom:1px solid #E9D9C9;
+              span{
+                margin-left: 30px;
+                background-color: #C91731;
+                color:#fff;
+                height: 40px;
+                line-height: 40px;
+                width: 150px;
+                text-align: center;
+                border-radius: 100px;
+                font-size: 12px;
+              }
+            }
+          }
           .totleNum{
             padding:35px 0;
-            font-size: 30px;
+            font-size: 22px;
             font-weight: bold;
             line-height: 42px;
-            color: #000000;
+            color:  #A39282;
             span{
               margin-right: 55px;
             }
             /deep/ .el-input-number{
-              width: 237px;
-              height: 54px;
-              line-height: 54px;
+              width: 191px;
+              height: 43px;
+              line-height: 43px;
               border-radius: 100%;
               .el-input__inner{
                 background: #A39282;
                 color: #fff;
-                height: 54px;
-                line-height: 54px;
+                height: 43px;
+                line-height: 43px;
                 border-radius: 100px;
-                font-size: 40px;
+                font-size: 32px;
               }
               .el-input-number__decrease, .el-input-number__increase{
-                width: 54px;
-                height: 54px;
+                width: 43px;
+                height: 43px;
                 background: #E9D9C9;
                 color: #A39282;
                 font-weight: bold;
@@ -520,16 +597,16 @@
             display: flex;
           }
           .checkBox{
-            padding:35px 0;
-            font-size: 30px;
+            /*padding:35px 0;*/
+            font-size: 22px;
             font-weight: bold;
             line-height: 42px;
-            color: #000000;
+            color: #A39282;
             justify-content:space-between;
             align-items:center;
             display: flex;
             span{
-              margin-right: 55px;
+              margin-right: 20px;
             }
             /deep/ .el-radio-group{
               justify-content:space-between;
@@ -552,7 +629,7 @@
                 border-color:#A39282; 
               }
               .el-radio__label{
-                font-size: 30px;
+                font-size: 24px;
                 font-weight: bold;
                 line-height: 42px;
                 color: #000000 !important;
@@ -562,11 +639,11 @@
               }
             }
             .buyBtn{
-              width: 422px;
-              height: 95px;
+              width: 300px;
+              height: 75px;
               text-align: center;
-              line-height: 95px;
-              font-size: 50px;
+              line-height: 75px;
+              font-size: 40px;
               color: #fff;
               background: #C91731;
               opacity: 1;
@@ -578,7 +655,7 @@
       }
     }
     /deep/ .el-tabs__item{
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 500;
       line-height: 40px;
       color: #A39282;

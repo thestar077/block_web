@@ -235,21 +235,21 @@
 .dnCuQj {
     background-color: rgb(238, 234, 244);
     display: inline-flex;
-    border-radius: 16px;
+    border-radius: 50px;
 }
 .kjBbpq {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(143, 128, 186);
+    background-color: #aa8929;
     box-shadow: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: max-content;
-    height: 32px;
+    height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
@@ -259,7 +259,7 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 50px;
     outline: 0px;
     padding: 0px 16px;
     transition: background-color 0.2s ease 0s;
@@ -280,10 +280,10 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: max-content;
-    height: 32px;
+    height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
@@ -293,7 +293,7 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 50px;
     outline: 0px;
     padding: 0px 16px;
     transition: background-color 0.2s ease 0s;
@@ -327,15 +327,15 @@
     line-height: 1.1;
 }
 .eEIHSi {
-    color: rgb(69, 42, 122);
-    font-size: 16px;
+    color: #aa8929;
+    font-size: 26px;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 8px;
 }
 .cHBkgC {
-    color: rgb(143, 128, 186);
-    font-size: 14px;
+    color: #aa8929;
+    font-size: 22px;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -410,7 +410,7 @@
     grid-row-gap: 12px;
 }
 .kXfhzq {
-    background-color: rgb(238, 234, 244);
+    background-color: #ebc65a3b;
     box-shadow: rgba(74, 74, 104, 0.1) 0px 2px 2px -1px inset;
     border-radius: 16px;
 }
@@ -436,7 +436,7 @@
     position: relative;
     font-weight: 500;
     background-color: transparent;
-    font-size: 16px;
+    font-size: 22px;
     white-space: nowrap;
     text-overflow: ellipsis;
     -webkit-appearance: textfield;
@@ -482,10 +482,13 @@
     border-radius: 24px;
 }
 .UNrzd {
-    color: rgb(69, 42, 122);
-    font-size: 16px;
+    color: #aa8929;
+    font-size: 24px;
     font-weight: 400;
     line-height: 1.5;
+}
+.mt120{
+  margin-top: 190px !important;
 }
 .WypEE {
     display: grid;
@@ -497,7 +500,7 @@
     justify-content: center;
 }
 .fwjcqd {
-    width: 32px;
+    width: 60px;
     padding: 0px;
 }
 .dRSIFi {
@@ -539,10 +542,10 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
     width: 100%;
-    height: 48px;
+    height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
@@ -552,7 +555,7 @@
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 60px;
     outline: 0px;
     padding: 0px 24px;
     transition: background-color 0.2s ease 0s;
