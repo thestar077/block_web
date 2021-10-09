@@ -79,7 +79,46 @@
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="GameFi Description" name="GameFi">GameFi Description</el-tab-pane>
-      <el-tab-pane label="NFT Detail" name="NFT">NFT Detail</el-tab-pane>
+      <el-tab-pane label="NFT Detail" name="NFT">
+        <div class="detailBox">
+          <div class="detailTitle">
+            <span>NFT Detail：</span>
+            <span class="txt">发行者：Defender Team 数量：10000</span>
+          </div>
+          <el-table
+            :data="tableData"
+            stripe
+            style="width: 95%">
+            <el-table-column
+              prop="date"
+              label="Gods"
+              width="180">
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="Rank"
+              width="180">
+              <template slot-scope="scope">
+                <img width="80px" :src="scope.row.name?require('@/assets/picture/rank/5.png'):''">
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="address"
+              label="Issue amount">
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="Attribute"
+              width="180">
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="Probability"
+              width="180">
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -309,6 +348,23 @@
           }
         ],
         activeName: 'GameFi',
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
       };
     },
     created() {
@@ -680,5 +736,25 @@
     /deep/ .el-tabs{
       margin-bottom: 76px;
     }
+    .detailBox{
+      .detailTitle{
+        margin-bottom: 17px;
+        span{
+          font-size: 28px;
+          font-weight: bold;
+          line-height: 31px;
+          color: #A39282;
+          margin-right: 35px;
+        }
+        .txt{
+          font-size: 24px;
+          font-weight: 400;
+          line-height: 32px;
+          color: #A39282;
+          opacity: 1;
+        }
+      }
+    }
+
   }
 </style>
