@@ -316,7 +316,7 @@
     background: none;
     border:none;
   }
-  /deep/ .el-dialog__body,/deep/ .el-dialog .el-dialog__header,{
+  /deep/ .el-dialog__body,/deep/ .el-dialog .el-dialog__header{
     background: none;
     border:none;
     .btnBox{

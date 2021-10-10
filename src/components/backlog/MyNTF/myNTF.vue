@@ -279,9 +279,9 @@
     },
      mounted(){
       // 监听窗口变化，使得轮播图高度自适应图片高度
-      window.addEventListener("resize", () => {
-        this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-      });
+      // window.addEventListener("resize", () => {
+      //   this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+      // });
     },
     methods: {
       changeTag(index){

@@ -70,7 +70,7 @@
                 <el-radio label="usdc">USDC</el-radio>
               </el-radio-group>
             </div>
-            <div class="buyBtn">
+            <div class="buyBtn" @click="handleBuy">
               Buy
             </div>
           </div>
@@ -120,6 +120,33 @@
         </div>
       </el-tab-pane>
     </el-tabs>
+    <!-- buyModel -->
+    <el-dialog :visible.sync="buyModelVisible" width="80%" append-to-body>
+      <div class="buyBox">
+        <el-row :gutter="20">
+          <el-col :span="16">
+            <div class="leftBox">
+              <img src="@/assets/picture/buy/1.png">
+              <div class="txtBox">
+                <h5 class="title">属性：SSR</h5>
+                <h6 class="dec">狗庄大佬波塞冬</h6>
+                <p>技能：梭哈山赛，一夜暴富</p>
+                <p>特点：震撼大地的海之神</p>
+              </div>
+            </div>
+          </el-col>
+          <el-col :span="8">
+            <div class="rightBox">
+              <div class="title">Excellent !</div>
+              <div class="buyBoxBtn" @click="handleNFT">My NFT</div>
+              <div class="buyBoxBtn" @click="handleStaking">NFT Staking</div>
+              <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      
+    </el-dialog>
   </div>
 </template>
 
@@ -128,6 +155,7 @@
   export default {
     data() {
       return {
+        buyModelVisible:false,
         imgHeight:'',
         num:0,
         radio:'egg',
@@ -372,9 +400,10 @@
     },
     mounted(){
       // 监听窗口变化，使得轮播图高度自适应图片高度
-      window.addEventListener("resize", () => {
-        this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-      });
+      // window.addEventListener("resize", () => {
+      //   this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+      //   console.log(this.imgHeight,'this.imgHeight');
+      // });
     },
     methods: {
       changeTag(index){
@@ -389,11 +418,96 @@
           this.imgHeight = this.$refs.imgBox[0].offsetHeight;
         })
       },
+      // buy btn
+      handleBuy(){
+        this.buyModelVisible = true;
+      },
+      handleNFT(){
+        this.$router.push({path: '/myNFT'});
+      },
+      handleStaking(){
+        this.$router.push({path: '/NFTStaking'});
+      },
     }
   };
 </script>
 
 <style lang="less" scoped>
+  /deep/ .el-dialog{
+      background: none;
+      border:none;
+      box-shadow:none;
+      .el-dialog__header{
+        border: none;
+      }
+      .el-dialog__body{
+        overflow:hidden;
+      }
+    }
+    .buyBox{
+      .leftBox{
+        img{
+          width: 100%;
+        }
+        .txtBox{
+          width: 336px;
+          height: 271px;
+          background: #0000008c;
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+          padding:24px 40px;
+          border-radius: 30px;
+          margin:0 auto;
+          display: block;
+          .title{
+            font-size: 40px;
+            font-weight: bold;
+            line-height: 56px;
+            color: #FFFFFF;
+          }
+          .dec{
+            font-size: 24px;
+            margin-top: 10px;
+            font-weight: 500;
+            line-height: 33px;
+            color: #FFFFFF;
+          }
+          p{
+            font-size: 19px;
+            margin-top: 10px;
+            font-weight: 500;
+            line-height: 26px;
+            color: #FFFFFF;
+          }
+        }
+      }
+      .rightBox{
+        padding-top: 35%;
+        .title{
+          font-size: 60px;
+          font-weight: 500;
+          line-height: 84px;
+          margin-bottom: 60px;
+          color: #FFFFFF;
+        }
+        .buyBoxBtn{
+          width: 340px;
+          height: 80px;
+          background: #A39282;
+          text-align: center;
+          line-height: 80px;
+          opacity: 1;
+          border-radius: 20px;
+          color: #fff;
+          cursor: pointer;
+          font-size: 34px;
+          font-weight: bold;
+          margin-bottom: 45px;
+        }
+        .cancelBtn{
+          background: #707070;
+        }
+      }
+    }
   .myNtfPage{
     padding:322px 168px;
     background-color: #9898F3;
@@ -755,6 +869,5 @@
         }
       }
     }
-
   }
 </style>
