@@ -260,6 +260,7 @@ export default {
     min-height: calc(100vh - 64px);
     width: 100%;
     overflow-y: scroll;
+    background-color: #F8F2ED;
   }
   .gpBBCM {
       -webkit-box-flex: 1;
@@ -267,6 +268,7 @@ export default {
       /*margin-top: 64px;*/
       transform: translate3d(0px, 0px, 0px);
       transition: margin-top 0.2s ease 0s;
+      background-color: #F8F2ED;
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 250px;

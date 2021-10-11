@@ -399,13 +399,35 @@ input {
             }
         }
     }
-    #myNTFPage{
-        .phoneShow{
-            img{
-                display: block;
-                margin:0 auto;
-            }
-        }
+    #myNtfPageBuyBox{
+        .el-row{
+           .el-col{
+                float: none;
+                width: 100%;
+                .rightBox{
+                    display: flex;
+                }
+            } 
+        } 
+    }
+    #myNtfPageBuyBox{
+        .el-row{
+           .el-col{
+                float: none;
+                width: 100%;
+                .rightBox{
+                    padding-top: 20px;
+                    text-align: center;
+                    .title{
+                        margin-bottom: 30px;
+                    }
+                    .buyBoxBtn{
+                       margin:0 auto; 
+                       margin-bottom: 20px;
+                    }
+                }
+            } 
+        } 
     }
     #page_container{
         .contentBox{
@@ -447,6 +469,10 @@ input {
         .content{
             padding:0;
         }
+    }
+    #eggNestsPage{
+        margin:0;
+        padding:0;
     }
 }
 @media screen and (max-width: 576px){
@@ -497,10 +523,6 @@ input {
 	.cpemDa {
 	    padding-top: 24px;
 	    padding-bottom: 24px;
-	}
-	.kszNjt {
-	    padding-left: 24px;
-	    padding-right: 24px;
 	}
 	.ejJoEn > *{
 		max-width:80%;
@@ -567,6 +589,25 @@ input {
             }
         }
     }
+    #myNtfPageBuyBox{
+        .el-row{
+           .el-col{
+                float: none;
+                width: 100%;
+                .rightBox{
+                    padding-top: 20px;
+                    text-align: center;
+                    .title{
+                        margin-bottom: 30px;
+                    }
+                    .buyBoxBtn{
+                       margin:0 auto; 
+                       margin-bottom: 20px;
+                    }
+                }
+            } 
+        } 
+    }
     #myNTFPage{
         .phoneShow{
             img{
@@ -610,11 +651,18 @@ input {
     }
     #homePage{
         padding:0;
+        .topPart{
+            background-size: auto 85%;
+        }
     }
     #stakeNFTPage{
         .content{
             padding:0;
         }
+    }
+    #eggNestsPage{
+        margin:0;
+        padding:0;
     }
 }
 

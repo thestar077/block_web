@@ -120,7 +120,7 @@
       </el-tab-pane>
     </el-tabs>
     <el-dialog :visible.sync="buyModelVisible" width="80%" append-to-body>
-      <div class="buyBox">
+      <div class="buyBox" id="myNtfPageBuyBox">
         <el-row :gutter="20">
           <el-col :span="16">
             <div class="leftBox">
@@ -136,14 +136,16 @@
           <el-col :span="8">
             <div class="rightBox">
               <div class="title">Excellent !</div>
-              <div class="buyBoxBtn" @click="handleNFT">My NFT</div>
-              <div class="buyBoxBtn" @click="handleStaking">NFT Staking</div>
-              <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
+              <div>
+                <div class="buyBoxBtn" @click="handleNFT">My NFT</div>
+                <div class="buyBoxBtn" @click="handleStaking">NFT Staking</div>
+                <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
+              </div>
+              
             </div>
           </el-col>
         </el-row>
       </div>
-      
     </el-dialog>
   </div>
 </template>

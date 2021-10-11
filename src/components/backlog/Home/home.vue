@@ -1,7 +1,7 @@
 <template>
   <div class="homePage" id="homePage"> 
     <div class="topPart glMBCA">
-      <h1 color="secondary" class="sc-gsTCUz sc-idOhPF dxmefR eyrSnX">Goose Finance</h1>
+      <h1 color="secondary" class="sc-gsTCUz sc-idOhPF dxmefR eyrSnX">Defender Finance</h1>
       <div color="text" class="sc-gsTCUz UNrzd">Top 3 best DEFI app on Binance Smart Chain.</div>
     </div>
     <div class="sc-fKFyDc sc-gsxnyZ hsFDCH cNaueE">
@@ -132,6 +132,7 @@
 <style lang="less" scoped>
   .homePage{
     padding:147px 165px 147px 165px;
+    background: #F8F2ED;
     .glMBCA {
         -webkit-box-align: center;
         align-items: center;
@@ -157,7 +158,7 @@
           line-height: 1.1;
       }
       .dxmefR {
-        font-size: 40px;
+        font-size: 45px;
         font-weight: 600;
         line-height: 1.1;
         color: #897461;
@@ -165,13 +166,13 @@
       }
       .UNrzd {
         color: #cdb7a2;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 600;
         line-height: 1.5;
       }
     }
     .eyrSnX {
-        font-size: 40px;
+        font-size: 45px;
         font-weight: 600;
         line-height: 1.1;
     }
@@ -227,21 +228,21 @@
     }
     .imhYNd {
         color: #cdb7a2;
-        font-size: 14px;
+        font-size: 20px;
     }
     .dcRinF {
          color: #cdb7a2;
-        font-size: 16px;
+        font-size: 22px;
         font-weight: 400;
         line-height: 1.5;
     }
     .imhYNd {
          color: #cdb7a2;
-        font-size: 14px;
+        font-size: 20px;
     }
     .dcRinF {
          color: #cdb7a2;
-        font-size: 16px;
+        font-size: 22px;
         font-weight: 400;
         line-height: 1.5;
     }
@@ -257,7 +258,7 @@
         cursor: pointer;
         display: inline-flex;
         font-family: inherit;
-        font-size: 16px;
+        font-size: 22px;
         font-weight: 600;
         width: 100%;
         height: 48px;
@@ -283,14 +284,14 @@
       -webkit-box-align: center;
       align-items: center;
       display: flex;
-      font-size: 14px;
+      font-size: 20px;
       -webkit-box-pack: justify;
       justify-content: space-between;
       margin-bottom: 8px;
     }
     .kxDGqL {
         color: #cdb7a2;
-        font-size: 14px;
+        font-size: 20px;
         font-weight: 400;
         line-height: 1.5;
     }
@@ -307,7 +308,7 @@
     }
     .eugENQ {
         color: #cdb7a2;
-        font-size: 16px;
+        font-size: 22px;
         font-weight: 400;
         line-height: 1.5;
     }

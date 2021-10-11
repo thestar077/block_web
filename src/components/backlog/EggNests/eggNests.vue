@@ -24,7 +24,7 @@
         <div :class="index<2?'sc-XhUPp kiNLFp colorBg':'sc-XhUPp kiNLFp'"></div>
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img :src="item.pic" alt="EGG" class="sc-hHftDr kCQmsc"></div>
+            <img :src="item.pic" width="100" alt="EGG" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
             <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">EGG-BUSD LP</h2>
             <div class="sc-eCssSg ecyRc">
@@ -171,6 +171,9 @@
 </script>
 
 <style lang="less" scoped>
+  .eggNestsPage{
+    background-color: #F8F2ED;
+  }
   .cpemDa {
     min-height: calc(100vh - 64px);
     padding-top: 16px;
@@ -181,6 +184,7 @@
     margin-right: auto;
     padding-left: 165px;
     padding-right: 165px;
+    background-color: #F8F2ED;
   }
   .gOjCDZ {
     font-size: 24px;
@@ -189,7 +193,7 @@
 }
 .gQZLVC {
     color: rgb(170, 137, 41);
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 24px;
@@ -465,9 +469,9 @@
 .dzdjjs {
     position: relative;
     background-size: cover;
-    height: 64px;
-    max-width: 64px;
-    max-height: 64px;
+    height: 140px;
+    max-width: 140px;
+    max-height: 140px;
     width: 100%;
     padding-top: 0%;
     background-position: center center;
@@ -477,11 +481,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-}
-.lnUPhx {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.1;
 }
 .dILVHG {
     color: #BBAA9B;
@@ -501,17 +500,17 @@
     background-color: transparent;
     color: rgb(49, 208, 170);
     display: inline-flex;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
-    height: 28px;
-    line-height: 1.5;
+    height: 40px;
+    line-height: 40px;
     white-space: nowrap;
     border-width: 2px;
     border-style: solid;
     border-color: rgb(49, 208, 170);
     border-image: initial;
     border-radius: 16px;
-    padding: 0px 8px;
+    padding: 0 15px;
 }
 .fIUiIW {
     margin-left: 4px;
@@ -524,8 +523,8 @@
     display: inline-flex;
     font-size: 14px;
     font-weight: 400;
-    height: 28px;
-    line-height: 1.5;
+    height: 40px;
+    line-height: 40px;
     white-space: nowrap;
     border-width: 2px;
     border-style: solid;
@@ -543,7 +542,7 @@
 }
 .UNsmv {
     color: #BBAA9B;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     line-height: 1.5;
 }
@@ -583,6 +582,7 @@
     display: flex;
     -webkit-box-pack: justify;
     justify-content: space-between;
+    margin-bottom: 10px;
 }
 .hghKoX {
     padding-top: 16px;
@@ -614,16 +614,17 @@
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .lnUPhx {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 1.1;
 }
 .dcRjaX {
     color: rgb(189, 194, 196);
-    font-size: 16px;
+    font-size: 30px;
     font-weight: 600;
     line-height: 1.5;
 }
@@ -651,11 +652,11 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 600;
     width: max-content;
-    height: 48px;
-    line-height: 1;
+    height: 65px;
+    line-height: 65px;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
     justify-content: center;
@@ -681,21 +682,21 @@
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 600;
     width: 100%;
-    height: 48px;
-    line-height: 1;
+    height: 75px;
+    line-height: 75px;
     letter-spacing: 0.03em;
     -webkit-box-pack: center;
     justify-content: center;
     opacity: 1;
-    margin-top: 8px;
+    margin-top: 20px;
     border-width: 0px;
     border-style: initial;
     border-color: initial;
     border-image: initial;
-    border-radius: 16px;
+    border-radius: 25px;
     outline: 0px;
     padding: 0px 24px;
     transition: background-color 0.2s ease 0s;
@@ -704,7 +705,7 @@
     background-color: rgb(233, 234, 235);
     height: 1px;
     width: 100%;
-    margin: 28px auto;
+    margin: 35px auto;
 }
 .bhoBuD {
     display: flex;
@@ -737,7 +738,7 @@
 }
 .dCVmfN {
     color: rgb(170, 137, 41);
-    font-size: 16px;
+    font-size: 25px;
     font-weight: 600;
     line-height: 1.5;
 }
@@ -770,6 +771,7 @@
     background: rgb(255, 255, 255);
     border-radius: 32px;
     padding: 24px;
+    padding-bottom: 35px;
 }
 .ejJoEn > * {
     min-width: 280px;

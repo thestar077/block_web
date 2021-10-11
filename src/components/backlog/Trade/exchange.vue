@@ -233,7 +233,7 @@
     margin-bottom: 40px;
 }
 .dnCuQj {
-    background-color: rgb(238, 234, 244);
+    background-color: #eff4f5;
     display: inline-flex;
     border-radius: 50px;
 }
@@ -261,7 +261,8 @@
     border-image: initial;
     border-radius: 50px;
     outline: 0px;
-    padding: 0px 16px;
+    width: 200px;
+    text-align: center;
     transition: background-color 0.2s ease 0s;
 }
 .dnCuQj > button + button, .dnCuQj > a + a {
@@ -282,7 +283,7 @@
     font-family: inherit;
     font-size: 24px;
     font-weight: 600;
-    width: max-content;
+    width: 200px;
     height: 60px;
     line-height: 1;
     letter-spacing: 0.03em;
@@ -295,7 +296,7 @@
     border-image: initial;
     border-radius: 50px;
     outline: 0px;
-    padding: 0px 16px;
+    text-align: center;
     transition: background-color 0.2s ease 0s;
 }
 .eHffeS {
