@@ -10,8 +10,10 @@
     <el-carousel :height="imgHeight+'px'" class="phoneShow">
       <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="index">
         <div ref="imgBox">
-          <img class="cursorPointer" @touchstart="gotouchstart(index)" width="80%" :src="item.pic">
-            <div class="shadow" v-if="shadowIndex == index" @touchend="gotouchend(index)">
+           <!-- @touchstart="gotouchstart(index)" -->
+          <img class="cursorPointer" width="80%" :src="item.pic">
+          <!-- @touchend="gotouchend(index)" -->
+            <div class="shadow" v-if="shadowIndex == index" >
               <div class="btn">
                 <img width="33px" src="@/assets/picture/staking.png">
                 <span>NFT Staking</span>
@@ -321,11 +323,11 @@
            }
       },
       //如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按 
-      gotouchmove(){
-           clearTimeout(this.timeOutEvent);//清除定时器
-           this.timeOutEvent = 0;
-           this.isLongPress = false;
-      },
+      // gotouchmove(){
+      //      clearTimeout(this.timeOutEvent);//清除定时器
+      //      this.timeOutEvent = 0;
+      //      this.isLongPress = false;
+      // },
     }
   };
 </script>

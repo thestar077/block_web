@@ -414,9 +414,9 @@
       },
       handleView(){
         this.isShow = !this.isShow;
-        this.$nextTick(function(){
-          this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-        })
+        // this.$nextTick(function(){
+        //   this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+        // })
       },
       // buy btn
       handleBuy(){
