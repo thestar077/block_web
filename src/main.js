@@ -13,6 +13,7 @@ import "./assets/css/hd.css";
 import "./assets/css/global.less";
 //导入字体图标
 import "./assets/fonts/iconfont.css";
+import 'default-passive-events'
 import Router from 'vue-router'
 import store from './store'
 import { storePlugin } from './store'

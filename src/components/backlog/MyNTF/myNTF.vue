@@ -7,13 +7,11 @@
         <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
       </ul>
     </div>
-    <el-carousel :height="imgHeight+'px'" class="phoneShow">
-      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="index">
+    <el-carousel height="48vh" class="phoneShow">
+      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index">
         <div ref="imgBox">
-           <!-- @touchstart="gotouchstart(index)" -->
-          <img class="cursorPointer" width="80%" :src="item.pic">
-          <!-- @touchend="gotouchend(index)" -->
-            <div class="shadow" v-if="shadowIndex == index" >
+          <img class="cursorPointer" width="80%" :src="item.pic" @touchstart="gotouchstart(index)">
+            <div class="shadow" v-if="shadowIndex == index" @touchend="gotouchend(index)">
               <div class="btn">
                 <img width="33px" src="@/assets/picture/staking.png">
                 <span>NFT Staking</span>
@@ -26,7 +24,7 @@
       </el-carousel-item>
     </el-carousel>
     <el-row class="pcShow">
-      <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="index">
+      <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="'info2'+index">
         <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.pic">
         <div class="shadow" v-if="shadowIndex == index" @mouseleave="mouseLeave(index)">
           <div class="btn">

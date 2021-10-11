@@ -17,14 +17,14 @@
           <span>Stake NFT</span>
         </div>
         <div class="cardBoxArr">
-          <div class="cardBox" v-for="(item,index) in infoArr" :key="index">
+          <div class="cardBox" v-for="(item,index) in infoArr" :key="'info1-'+index">
             <img width="100%" :src="item.pic">
             <h5 class="title">{{item.leval}}</h5>
             <p class="txt">{{item.name}}</p>
             <div class="btnA" v-if="item.sta == 'Unstake'">{{item.sta}}</div>     
             <div class="btnA" v-else>{{item.sta}}</div>   
           </div>
-          <div class="cardBox cursorPointer" v-for="(item,index) in 5-infoArr.length" :key="index" >
+          <div class="cardBox cursorPointer" v-for="(item,index) in 5-infoArr.length" :key="'info2-'+index" >
             <img v-if="infoArr.length<5" @click="addModelVisible = true" width="95%" class="addCard" src="@/assets/picture/add.png">
           </div>
         </div>
@@ -164,7 +164,6 @@
         result.push(this.cardArr.slice(i, i + chunk)) // 每10项分成一组        
       }
       this.newArr = result;
-      console.log(result,'result');
     },
     methods: {
       handleClick(tab, event) {
@@ -176,7 +175,6 @@
                 item: arr.splice(0,5)
             }
             let newArr = [].push(obj)
-            console.log(newArr,'newArr');
             return newArr;
         }
       }

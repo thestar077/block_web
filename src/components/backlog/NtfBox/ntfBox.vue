@@ -9,8 +9,8 @@
         <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
       </div>
     </div>
-    <el-carousel :height="imgHeight+'px'" class="phoneShow">
-      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="index">
+     <el-carousel :height="imgHeight+'px'" class="phoneShow">
+      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index">
         <div ref="imgBox">
           <img width="80%" :src="item.pic">
           <div class="textBox" v-if="isShow">
@@ -20,11 +20,10 @@
             <p>特点：{{item.name}}</p>          
           </div>
         </div>
-        
-      </el-carousel-item>
+      </el-carousel-item> 
     </el-carousel>
     <el-row class="pcShow">
-      <el-col v-for="(item,index) in infoArr[roleActive].info" :key="index">
+      <el-col v-for="(item,index) in infoArr[roleActive].info" :key="'info2'+index">
         <img width="100%" :src="item.pic">
         <div class="textBox" v-if="isShow">
           <h5>属性：{{item.leval}}</h5>
@@ -120,7 +119,6 @@
         </div>
       </el-tab-pane>
     </el-tabs>
-    <!-- buyModel -->
     <el-dialog :visible.sync="buyModelVisible" width="80%" append-to-body>
       <div class="buyBox">
         <el-row :gutter="20">
@@ -156,7 +154,7 @@
     data() {
       return {
         buyModelVisible:false,
-        imgHeight:'',
+        imgHeight:'350',
         num:0,
         radio:'egg',
         isShow:false,
@@ -400,10 +398,10 @@
     },
     mounted(){
       // 监听窗口变化，使得轮播图高度自适应图片高度
-      // window.addEventListener("resize", () => {
-      //   this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-      //   console.log(this.imgHeight,'this.imgHeight');
-      // });
+      window.addEventListener("resize", () => {
+        this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+        console.log(this.imgHeight,'this.imgHeight');
+      });
     },
     methods: {
       changeTag(index){
@@ -414,9 +412,9 @@
       },
       handleView(){
         this.isShow = !this.isShow;
-        // this.$nextTick(function(){
-        //   this.imgHeight = this.$refs.imgBox[0].offsetHeight;
-        // })
+        this.$nextTick(function(){
+          this.imgHeight = this.$refs.imgBox[0].offsetHeight;
+        })
       },
       // buy btn
       handleBuy(){
