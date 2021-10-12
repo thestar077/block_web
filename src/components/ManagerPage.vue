@@ -295,7 +295,7 @@ export default {
   ::-webkit-scrollbar-track {/*滚动条里面轨道*/
     -webkit-box-shadow: inset 0 0 5px #A39282;
     border-radius: 10px;
-    background: #A39282;
+    background: #fff;
   }
   .settingIcon{
     position: fixed;

@@ -42,9 +42,9 @@
          </div>
          <div class="sc-iWFSnp bHLdTZ">
           <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
-          <button class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img src="@/assets/picture/bi/1.png" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+          <button @click="showToken" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
-             BNB
+             {{token.name}}
             </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -143,6 +143,22 @@
       <el-button class="closeBtn center block" @click="dialogVisibleTransactions = false">Close</el-button>
     </span> 
   </el-dialog>
+  <!-- Select Token -->
+  <el-dialog class="tokenDialog"
+      title="Select a token"
+      :visible.sync="dialogVisibleToken"
+      width="40%" append-to-body>
+      <el-input class="tokenInput" @input="search" v-model="input" placeholder="Search name"></el-input>
+      <p class="tokenName">Token name</p>
+      <div class="tokenBox">
+        <ul>
+          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleToken(item,index)">
+            <img :src="item.pic">
+             <span>{{item.name}}</span>
+          </li>
+        </ul>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -151,6 +167,8 @@
   export default {
     data() {
       return {
+        input:'',
+        dialogVisibleToken:false,
         dialogVisibleSetting:false,
         dialogVisibleTransactions:false,
         toleranceList:[
@@ -168,7 +186,141 @@
         formData:{
           percent:1,
           minutes:24
-        }
+        },
+        token:{
+          pic:require('@/assets/picture/bi/1.png'),
+          name:'Uniswap (UNI)',
+        },
+        tokenList:[
+          {
+            pic:require('@/assets/picture/bi/1.png'),
+            name:'Uniswap (UNI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/2.png'),
+            name:'Tether USD (USDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/3.png'),
+            name:'USD Coin (USDC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/4.png'),
+            name:'Wrapped BTC (WBTC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/5.png'),
+            name:'ChainLink Token (LINK)',
+          },
+          {
+            pic:require('@/assets/picture/bi/6.png'),
+            name:'Graph Token (GRT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/7.png'),
+            name:'SushiToken (SUSHI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/8.png'),
+            name:'Compound (COMP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/9.png'),
+            name:'Magic Internet Money (MIM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/10.png'),
+            name:'yearn.finance (YFI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/11.png'),
+            name:'Curve DAO Token (CRV)',
+          },
+          {
+            pic:require('@/assets/picture/bi/12.png'),
+            name:'CelerToken (CELR)',
+          },
+          {
+            pic:require('@/assets/picture/bi/13.png'),
+            name:'Gnosis Token (GNO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/14.png'),
+            name:'Rari Governance Token (RGT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/15.png'),
+            name:'Badger (BADGER)',
+          },
+          {
+            pic:require('@/assets/picture/bi/16.png'),
+            name:'DODO bird (DODO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/17.png'),
+            name:'Balancer (BAL)',
+          },
+          {
+            pic:require('@/assets/picture/bi/18.png'),
+            name:'Synth sUSD (sUSD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/19.png'),
+            name:'MATH Token (MATH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/20.png'),
+            name:'Cream (CREAM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/21.png'),
+            name:'MCDEX Token (MCB)',
+          },
+          {
+            pic:require('@/assets/picture/bi/22.png'),
+            name:'Stake DAO Token (SDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/23.png'),
+            name:'dForce (DF)',
+          },
+          {
+            pic:require('@/assets/picture/bi/24.png'),
+            name:'Cap (CAP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/25.png'),
+            name:'Fuse Token (FUSE)',
+          },
+          {
+            pic:require('@/assets/picture/bi/26.png'),
+            name:'Alchemy (ALCH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/27.png'),
+            name:'Wrapped Ether (WETH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/28.png'),
+            name:'ArbiNYAN (NYAN)',
+          },
+          {
+            pic:require('@/assets/picture/bi/29.png'),
+            name:'dForce EUR (EUX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/30.png'),
+            name:'dForce USD (USX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/31.png'),
+            name:'DXdao (DXD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/32.png'),
+            name:'Wootrade Network (WOO)',
+          },
+        ]
       };
     },
     created() {
@@ -181,6 +333,158 @@
       getTolerance(item,index){
         this.toleranceIndex = index;
       },
+      showToken(){
+        this.dialogVisibleToken = true;
+      },
+      handleToken(item,index){
+        this.token = item;
+        this.dialogVisibleToken = false;
+      },
+      search(){
+        if(this.input){
+          let _search = this.input.toLowerCase();
+          let newListData = []; // 用于存放搜索出来数据的新数组
+          if (_search) {
+            this.tokenList.filter(item => {
+              if (item.name.toLowerCase().indexOf(_search) !== -1) {
+                newListData.push(item);
+              }
+            }) 
+          }
+          this.tokenList = newListData;
+        }else{
+          this.tokenList = [
+          {
+            pic:require('@/assets/picture/bi/1.png'),
+            name:'Uniswap (UNI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/2.png'),
+            name:'Tether USD (USDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/3.png'),
+            name:'USD Coin (USDC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/4.png'),
+            name:'Wrapped BTC (WBTC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/5.png'),
+            name:'ChainLink Token (LINK)',
+          },
+          {
+            pic:require('@/assets/picture/bi/6.png'),
+            name:'Graph Token (GRT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/7.png'),
+            name:'SushiToken (SUSHI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/8.png'),
+            name:'Compound (COMP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/9.png'),
+            name:'Magic Internet Money (MIM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/10.png'),
+            name:'yearn.finance (YFI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/11.png'),
+            name:'Curve DAO Token (CRV)',
+          },
+          {
+            pic:require('@/assets/picture/bi/12.png'),
+            name:'CelerToken (CELR)',
+          },
+          {
+            pic:require('@/assets/picture/bi/13.png'),
+            name:'Gnosis Token (GNO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/14.png'),
+            name:'Rari Governance Token (RGT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/15.png'),
+            name:'Badger (BADGER)',
+          },
+          {
+            pic:require('@/assets/picture/bi/16.png'),
+            name:'DODO bird (DODO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/17.png'),
+            name:'Balancer (BAL)',
+          },
+          {
+            pic:require('@/assets/picture/bi/18.png'),
+            name:'Synth sUSD (sUSD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/19.png'),
+            name:'MATH Token (MATH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/20.png'),
+            name:'Cream (CREAM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/21.png'),
+            name:'MCDEX Token (MCB)',
+          },
+          {
+            pic:require('@/assets/picture/bi/22.png'),
+            name:'Stake DAO Token (SDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/23.png'),
+            name:'dForce (DF)',
+          },
+          {
+            pic:require('@/assets/picture/bi/24.png'),
+            name:'Cap (CAP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/25.png'),
+            name:'Fuse Token (FUSE)',
+          },
+          {
+            pic:require('@/assets/picture/bi/26.png'),
+            name:'Alchemy (ALCH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/27.png'),
+            name:'Wrapped Ether (WETH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/28.png'),
+            name:'ArbiNYAN (NYAN)',
+          },
+          {
+            pic:require('@/assets/picture/bi/29.png'),
+            name:'dForce EUR (EUX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/30.png'),
+            name:'dForce USD (USX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/31.png'),
+            name:'DXdao (DXD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/32.png'),
+            name:'Wootrade Network (WOO)',
+          },
+        ]
+        }
+      }, 
     }
   };
 </script>
@@ -201,6 +505,53 @@
     flex: 1 1 0%;
     background-repeat: no-repeat;
     background-position: center top;
+}
+.tokenDialog{
+  ::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 8px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+  }
+  ::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 5px #A39282;
+    background: #A39282;
+  }
+  ::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px #A39282;
+    border-radius: 10px;
+    background: #fff;
+  }
+}
+.tokenInput{
+  /deep/ .el-input__inner{
+    border:1px solid #AA8929;
+    padding:30px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+}
+.tokenName{
+  font-size: 24px;
+  padding:20px 0;
+  color: #AA8929;
+}
+.tokenBox{
+  height: 30vh;
+  overflow-y: scroll;
+  .tokenItem{
+    padding-bottom: 40px;
+    cursor: pointer;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      margin-right: 20px;
+    }
+    span{
+      font-size: 22px;
+      color: #cdb7a2;
+    }
+  }
 }
 .kNcgdb {
     position: fixed;
