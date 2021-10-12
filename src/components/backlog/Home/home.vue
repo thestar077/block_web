@@ -2,7 +2,7 @@
   <div class="homePage" id="homePage"> 
     <div class="topPart glMBCA">
       <h1 color="secondary" class="sc-gsTCUz sc-idOhPF dxmefR eyrSnX">Defender Finance</h1>
-      <div color="text" class="sc-gsTCUz UNrzd">Top 3 best DEFI app on Binance Smart Chain.</div>
+      <div color="text" class="sc-gsTCUz UNrzd">GameFi and NFT built on Arbitrum.</div>
     </div>
     <div class="sc-fKFyDc sc-gsxnyZ hsFDCH cNaueE">
       <div class="sc-crrsfI eHffeS sc-eLgOdN ejJoEn">
@@ -132,7 +132,10 @@
 <style lang="less" scoped>
   .homePage{
     padding:147px 165px 147px 165px;
-    background: #F8F2ED;
+    background-image: url('~@/assets/picture/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
     .glMBCA {
         -webkit-box-align: center;
         align-items: center;

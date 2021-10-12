@@ -5,7 +5,7 @@
         <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
       </ul>
       <div class="viewBtn" @click="handleView">
-        <span>查看</span>
+        <span>More</span>
         <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
       </div>
     </div>
@@ -14,10 +14,10 @@
         <div ref="imgBox">
           <img width="80%" :src="item.pic">
           <div class="textBox" v-if="isShow">
-            <h5>属性：{{item.leval}}</h5>
+            <h5>Attribute:{{item.leval}}</h5>
             <p>{{item.name}}</p> 
-            <p>技能：{{item.text}}</p> 
-            <p>特点：{{item.name}}</p>          
+            <p>Skills:{{item.skill}}</p> 
+            <p>Features:{{item.features}}</p>          
           </div>
         </div>
       </el-carousel-item> 
@@ -26,17 +26,17 @@
       <el-col v-for="(item,index) in infoArr[roleActive].info" :key="'info2'+index">
         <img width="100%" :src="item.pic">
         <div class="textBox" v-if="isShow">
-          <h5>属性：{{item.leval}}</h5>
+          <h5>Attribute:{{item.leval}}</h5>
           <p>{{item.name}}</p> 
-          <p>技能：{{item.text}}</p> 
-          <p>特点：{{item.name}}</p>          
+          <p>Skills:{{item.skill}}</p> 
+          <p>Features:{{item.features}}</p>          
         </div>
       </el-col>
     </el-row>
     <div class="mt20"></div>
     <div class="blindBox">
       <div class="titleTxt">
-        盲盒
+        Blind Box
       </div>
       <div class="content">
         <div class="col10">
@@ -46,15 +46,15 @@
           </div>
         </div>
         <div class="col12 txtBox">
-          <p class="title">Code Green - Starry Troop</p>
-          <p class="txtInfo">In this collection，There are 5 The Greek god character for you to unbox. Try your luck!</p>
+          <p class="title">Defender-Greek Gods</p>
+          <p class="txtInfo">In this collection，There are 5 Greek gods for you to unbox. Try your luck!</p>
           <p class="price">Price</p>
           <p class="priceTxt" v-if="radio == 'egg'">
             <span class="num">800</span>
             <span> EGG ≈ 5690 USDC</span>
           </p>
           <div class="priceText" v-else>
-            <p class="originalPrice">800 EGG ≈ 5690 USDC <span>原价</span></p>
+            <p class="originalPrice">800 EGG ≈ 5690 USDC <span>price</span></p>
             <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
           </div>
           <div class="totleNum">
@@ -77,7 +77,15 @@
       </div>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="GameFi Description" name="GameFi">GameFi Description</el-tab-pane>
+      <el-tab-pane label="GameFi Description" name="GameFi">
+        <p class="description">Defender’s “God Killing” game background is based on 
+ancient Greek mythology. Players can start the game 
+through blind boxes or freely choose mythological 
+characters. The player’s task is to pass the historical 
+background and character experience of each mythical 
+ﬁgure, travelled all over the worlds to win the ﬁnal “throne 
+of the gods”. </p>
+      </el-tab-pane>
       <el-tab-pane label="NFT Detail" name="NFT">
         <div class="detailBox">
           <div class="detailTitle">
@@ -163,19 +171,19 @@
         roleActive:0,
         roleList:[
           {
-            name:'雅典娜',
+            name:'Athena',
           },
           {
-            name:'波塞冬',
+            name:'Poseidon',
           },
           {
-            name:'维纳斯',
+            name:'Venus',
           },
           {
-            name:'阿波罗',
+            name:'Apollo',
           },
           {
-            name:'丘比特',
+            name:'Cupid',
           }
         ],
         infoArr:[
@@ -184,37 +192,37 @@
               {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               }
             ],
           },
@@ -223,37 +231,37 @@
               {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               }
             ],
           },
@@ -262,115 +270,115 @@
               {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               }
             ],
           },
           {
             info:[
-              {
+                            {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               }
             ],
           },
           {
             info:[
-              {
+                                          {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               }
             ],
           }
@@ -627,14 +635,14 @@
           span{
             position: absolute;
             right: 0;
-            bottom: 20%;
+            bottom: 30%;
             color: #fff;
             background-color: #C91731;
             width: 150px;
             height: 60px;
             text-align: center;
             line-height: 60px;
-            font-size: 14px;
+            font-size: 18px;
             border-top-left-radius:100px;
             border-bottom-left-radius:100px;
           }
@@ -849,6 +857,11 @@
     }
     /deep/ .el-tabs{
       margin-bottom: 76px;
+    }
+    .description{
+      font-size: 22px;
+      line-height: 40px;
+      color:#A39282;
     }
     .detailBox{
       .detailTitle{

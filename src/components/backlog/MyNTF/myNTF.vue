@@ -56,22 +56,22 @@
         shadowIndex:-1,
         roleList:[
           {
-            name:'所有角色',
+            name:'All',
           },
           {
-            name:'雅典娜',
+            name:'Athena',
           },
           {
-            name:'波塞冬',
+            name:'Poseidon',
           },
           {
-            name:'维纳斯',
+            name:'Venus',
           },
           {
-            name:'阿波罗',
+            name:'Apollo',
           },
           {
-            name:'丘比特',
+            name:'Cupid',
           }
         ],
         infoArr:[
@@ -80,37 +80,37 @@
               {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
               }
             ],
           },
@@ -119,37 +119,37 @@
               {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
               }
             ],
           },
@@ -158,115 +158,115 @@
               {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
               }
             ],
           },
           {
             info:[
-              {
+                            {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
               }
             ],
           },
           {
             info:[
-              {
+                                          {
                 pic:require('@/assets/picture/SSR.png'),
                 leval:'SSR',
-                name:'喜欢梭哈的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Big Whale Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/SR.png'),
                 leval:'SR',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Freedom of wealth Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/S.png'),
                 leval:'S',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Rich and noble Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/A+.png'),
                 leval:'A+',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Small profit Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               },
               {
                 pic:require('@/assets/picture/A.png'),
                 leval:'A',
-                name:'小有盈利的波赛冬',
-                text:'梭哈山赛，一夜暴富',
-                dot:'撼大地的海之神'
+                name:'Show-hand Fan Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
               }
             ],
           }

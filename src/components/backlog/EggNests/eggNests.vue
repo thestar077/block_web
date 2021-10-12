@@ -24,15 +24,15 @@
         <div :class="index<2?'sc-XhUPp kiNLFp colorBg':'sc-XhUPp kiNLFp'"></div>
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
-            <img :src="item.pic" width="100" alt="EGG" class="sc-hHftDr kCQmsc"></div>
+            <img :src="item.pic" width="100" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
-            <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">EGG-BUSD LP</h2>
+          <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">{{item.name}}</h2>
             <div class="sc-eCssSg ecyRc">
               <div class="sc-cxFLnm lbtiF" v-if="item.noFree">
                 <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ hMHdGP">
                   <path d="M23 12L20.56 9.21L20.9 5.52L17.29 4.7L15.4 1.5L12 2.96L8.6 1.5L6.71 4.69L3.1 5.5L3.44 9.2L1 12L3.44 14.79L3.1 18.49L6.71 19.31L8.6 22.5L12 21.03L15.4 22.49L17.29 19.3L20.9 18.48L20.56 14.79L23 12ZM9.38 16.01L7 13.61C6.61 13.22 6.61 12.59 7 12.2L7.07 12.13C7.46 11.74 8.1 11.74 8.49 12.13L10.1 13.75L15.25 8.59C15.64 8.2 16.28 8.2 16.67 8.59L16.74 8.66C17.13 9.05 17.13 9.68 16.74 10.07L10.82 16.01C10.41 16.4 9.78 16.4 9.38 16.01Z"></path>
                 </svg>No Fees</div>
-              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">60X</div></div>
+              <div class="sc-cxFLnm hyUuWC sc-dacFzL fIUiIW">{{item.num}}X</div></div>
           </div>
         </div>
         <div class="sc-eCssSg fAoKek">
@@ -51,7 +51,7 @@
         </div>
         <div class="sc-eCssSg MoQXc">
           <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">EGG-BUSD LP</div></div>
+          <div color="text" class="sc-gsTCUz UNsmv">{{item.stake}} LP</div></div>
         <div class="sc-eCssSg MoQXc">
           <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
           <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
@@ -82,7 +82,7 @@
           <div class="sc-kIeTtH cnxSGb">
             <div class="sc-eCssSg MoQXc">
               <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0xf952fc3ca7325cc27d15885d37117676d25bfda6" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">EGG-BUSD LP
+              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0xf952fc3ca7325cc27d15885d37117676d25bfda6" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">{{item.deposit}} LP
                 <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
                   <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
               </a>
@@ -122,36 +122,64 @@
         ],
         eggArr:[
           {
+            name:'DFD',
+            num:20,
+            stake:'DFD',
+            deposit:'DFD',
             pic:require('@/assets/picture/egg/1.jpg'),
             noFree:true,
             showDetail:false
           },
           {
+            name:'EGG',
+            num:20,
+            stake:'EGG',
+            deposit:'',
             pic:require('@/assets/picture/egg/2.jpg'),
             noFree:true,
             showDetail:false
           },
           {
+            name:'ETH',
+            num:2,
+            stake:'ETH',
+            deposit:'',
             pic:require('@/assets/picture/egg/3.jpg'),
             noFree:true,
             showDetail:false
           },
           {
+            name:'USDC',
+            num:'60',
+            stake:'',
+            deposit:'',
             pic:require('@/assets/picture/egg/4.jpg'),
             noFree:false,
             showDetail:false
           },
           {
+            name:'ETH-USDC',
+            num:'60',
+            stake:'',
+            deposit:'',
             pic:require('@/assets/picture/egg/5.jpg'),
             noFree:false,
             showDetail:false
           },
           {
+            name:'ETH-DFD',
+            num:'60',
+            stake:'',
+            deposit:'',
             pic:require('@/assets/picture/egg/6.jpg'),
             noFree:false,
             showDetail:false
           },
           {
+            name:'ETH-EGG',
+            num:'60',
+            stake:'',
+            deposit:'',
             pic:require('@/assets/picture/egg/7.jpg'),
             noFree:false,
             showDetail:false
@@ -172,7 +200,10 @@
 
 <style lang="less" scoped>
   .eggNestsPage{
-    background-color: #F8F2ED;
+    background-image: url('~@/assets/picture/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
   }
   .cpemDa {
     min-height: calc(100vh - 64px);
@@ -180,11 +211,12 @@
     padding-bottom: 16px;
   }
   .kszNjt {
-    margin-left: auto;
-    margin-right: auto;
     padding-left: 165px;
     padding-right: 165px;
-    background-color: #F8F2ED;
+    background-image: url('~@/assets/picture/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
   }
   .gOjCDZ {
     font-size: 24px;

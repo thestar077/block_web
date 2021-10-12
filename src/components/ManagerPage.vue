@@ -8,7 +8,7 @@
           <img class="mr25 cursorPointer pic collapseBtn" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
           <img class="logo" width="200px" src="@/assets/picture/LogoTextNewWhite.png">
         </div>
-        <button class="connectBtn" @click="dialogVisibleWallet = true">Connect</button>
+        <div class="connectBtn" @click="dialogVisibleWallet = true">Connect</div>
       </el-header>
       <!-- 内容 -->
       <el-main>
@@ -47,13 +47,18 @@
             </template>
           </el-menu>
           <div class="infoItem" v-if='!isCollapse'>
-            <div class="info">
-              <img class="picIcon" src="@/assets/picture/9.png">
-              $0.407
+            <div class="infoItemTop">
+              <div class="info">
+                <img class="picIcon" src="@/assets/picture/9.png">
+                $0.407
+              </div>
+              <div class="iconBox">
+                <img class="picIcon" src="@/assets/picture/1.png">
+                <img class="picIcon" src="@/assets/picture/2.png">
+                <img class="picIcon" src="@/assets/picture/2.png">
+              </div>
             </div>
-            <div class="iconBox">
-              <img class="picIcon" src="@/assets/picture/1.png">
-              <img class="picIcon" src="@/assets/picture/2.png">
+            <div class="infoItemBottom">
               <el-dropdown @command="changeLangage">
                 <span class="el-dropdown-link">
                   <img class="mr0 picIcon" src="@/assets/picture/3.png">
@@ -64,6 +69,7 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
+            
           </div>
           <div class="settingIcon" v-if='isCollapse'>
             <img class="pic" src="@/assets/picture/myicon/setting.png">
@@ -300,14 +306,21 @@ export default {
   }
   .infoItem{
     /*width: 250px;*/
-    display: flex;
-    justify-content:space-between;
-    align-items:center;
-    padding: 8px 20px;
+    padding: 20px 20px;
     position: fixed;
     left: 0;
     bottom: 0;
     border-top: 2px solid rgba(133, 133, 133, 0.1);
+    .infoItemTop{
+      display: flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .infoItemBottom{
+      display: flex;
+      justify-content:flex-end;
+      align-items:center;
+    }
     .info{
       color: #A39282;
       font-size: 16px;

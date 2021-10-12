@@ -82,8 +82,8 @@
           },
           {
             pic:require('@/assets/picture/bi4.png'),
-            num:'10000',
-            txt:'Total Pool Rewards(DFD)',
+            num:'54000',
+            txt:'Daliy Rewards(DFD)',
           },
           {
             pic:require('@/assets/picture/bi5.png'),
