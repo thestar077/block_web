@@ -672,6 +672,7 @@
 }
 .fpDRn {
     flex: 1 1 0%;
+    margin-right: 110px;
 }
 .lnUPhx {
     font-size: 20px;
