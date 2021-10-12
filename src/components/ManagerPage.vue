@@ -268,7 +268,10 @@ export default {
       /*margin-top: 64px;*/
       transform: translate3d(0px, 0px, 0px);
       transition: margin-top 0.2s ease 0s;
-      background-color: #F8F2ED;
+      /*background-color: #F8F2ED;*/
+      background-image: url('~@/assets/picture/tradeBg.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 250px;

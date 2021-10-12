@@ -193,7 +193,7 @@
 }
 .gQZLVC {
     color: rgb(170, 137, 41);
-    font-size: 28px;
+    font-size: 38px;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 24px;
