@@ -55,7 +55,7 @@
               <div class="iconBox">
                 <img class="picIcon" src="@/assets/picture/1.png">
                 <img class="picIcon" src="@/assets/picture/2.png">
-                <img class="picIcon" src="@/assets/picture/2.png">
+                <img class="picIcon" src="@/assets/picture/3.jpg">
               </div>
             </div>
             <div class="infoItemBottom">
@@ -328,11 +328,14 @@ export default {
       line-height: 1.5;   
       margin-right: 10px; 
       display: block;  
+      display: flex;
+      align-items:center;
     }
     .iconBox{
       display: flex;
-    justify-content:space-between;
-    align-items:center;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom: 10px;
     }
     .picIcon{
       width: 30px;
