@@ -6,7 +6,7 @@
       <el-header>
         <div>
           <img class="mr25 cursorPointer pic collapseBtn" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
-          <img class="logo" width="200px" src="@/assets/picture/LogoTextNewWhite.png">
+          <img class="logo" width="200px" src="@/assets/picture/logo.png">
         </div>
         <div class="connectBtn" @click="dialogVisibleWallet = true">Connect</div>
       </el-header>
