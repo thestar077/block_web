@@ -597,6 +597,7 @@ of the gods". </p>
       font-weight: 500;
       line-height: 25px;
       margin-bottom: 30px;
+      height: 350px;
       h5{
         color: #fff;
         font-size: 24px;
