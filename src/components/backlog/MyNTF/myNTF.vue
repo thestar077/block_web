@@ -332,12 +332,17 @@
 
 <style lang="less" scoped>
   .myNTFPage{
+    padding:22px 168px 0 168px;
+    .pcShow,.phoneShow{
+      background: #fff;
+    }
     .myNTF{
       padding: 20px 35px;
       font-size: 28px;
       font-weight: 500;
       line-height: 40px;
       color: #A39282;
+      background: #fff;
     }
     .line{
       width: 100%;
@@ -347,6 +352,7 @@
     .roleArr{
       width: 100%;
       display: flex;
+      background: #fff;
       justify-content:space-between;
       align-items:center;
       border-bottom: 1px solid #E9D9C9;

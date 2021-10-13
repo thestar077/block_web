@@ -1,160 +1,163 @@
 <template>
-  <div class="myNtfPage" id="myNtfPage"> 
-    <div class="roleArr">
-      <ul>
-        <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
-      </ul>
-      <div class="viewBtn" @click="handleView">
-        <span>More</span>
-        <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
+  <div class="myNtfPage" id="myNtfPage">
+    <div class="banner"></div> 
+    <div class="content">
+      <div class="roleArr">
+        <ul>
+          <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
+        </ul>
+        <div class="viewBtn" @click="handleView">
+          <span>More</span>
+          <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
+        </div>
       </div>
-    </div>
-     <el-carousel :height="imgHeight+'px'" class="phoneShow">
-      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index">
-        <div ref="imgBox">
-          <img width="80%" :src="item.pic">
+      <el-carousel :height="imgHeight+'px'" class="phoneShow">
+        <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index">
+          <div ref="imgBox">
+            <img width="80%" :src="item.pic">
+            <div class="textBox" v-if="isShow">
+              <h5>Attribute:{{item.leval}}</h5>
+              <p>{{item.name}}</p> 
+              <p>Skills:{{item.skill}}</p> 
+              <p>Features:{{item.features}}</p>          
+            </div>
+          </div>
+        </el-carousel-item> 
+      </el-carousel>
+      <el-row class="pcShow">
+        <el-col v-for="(item,index) in infoArr[roleActive].info" :key="'info2'+index">
+          <img width="100%" :src="item.pic">
           <div class="textBox" v-if="isShow">
             <h5>Attribute:{{item.leval}}</h5>
             <p>{{item.name}}</p> 
             <p>Skills:{{item.skill}}</p> 
             <p>Features:{{item.features}}</p>          
           </div>
+        </el-col>
+      </el-row>
+      <div class="mt20"></div>
+      <div class="blindBox">
+        <div class="titleTxt">
+          Blind Box
         </div>
-      </el-carousel-item> 
-    </el-carousel>
-    <el-row class="pcShow">
-      <el-col v-for="(item,index) in infoArr[roleActive].info" :key="'info2'+index">
-        <img width="100%" :src="item.pic">
-        <div class="textBox" v-if="isShow">
-          <h5>Attribute:{{item.leval}}</h5>
-          <p>{{item.name}}</p> 
-          <p>Skills:{{item.skill}}</p> 
-          <p>Features:{{item.features}}</p>          
-        </div>
-      </el-col>
-    </el-row>
-    <div class="mt20"></div>
-    <div class="blindBox">
-      <div class="titleTxt">
-        Blind Box
-      </div>
-      <div class="content">
-        <div class="col10">
-          <div class="box">
-            <img width="90%" src="@/assets/picture/box.png">
-            <span v-if="radio == 'usdc'">20% OFF</span>
-          </div>
-        </div>
-        <div class="col12 txtBox">
-          <p class="title">Defender-Greek Gods</p>
-          <p class="txtInfo">In this collection，There are 5 Greek gods for you to unbox. Try your luck!</p>
-          <p class="price">Price</p>
-          <p class="priceTxt" v-if="radio == 'egg'">
-            <span class="num">800</span>
-            <span> EGG ≈ 5690 USDC</span>
-          </p>
-          <div class="priceText" v-else>
-            <p class="originalPrice">800 EGG ≈ 5690 USDC <span>price</span></p>
-            <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
-          </div>
-          <div class="totleNum">
-            <span>Quantity</span>
-            <el-input-number v-model="num" :min="1" :max="10" label="描述文字"></el-input-number>
-          </div>
-          <div class="checkBox">
-            <div class="flex">
-              <span>购买方式</span>
-              <el-radio-group v-model="radio">
-                <el-radio label="egg">EGG</el-radio>
-                <el-radio label="usdc">USDC</el-radio>
-              </el-radio-group>
+        <div class="content">
+          <div class="col10">
+            <div class="box">
+              <img width="90%" src="@/assets/picture/box.png">
+              <span v-if="radio == 'usdc'">20% OFF</span>
             </div>
-            <div class="buyBtn" @click="handleBuy">
-              Buy
+          </div>
+          <div class="col12 txtBox">
+            <p class="title">Defender-Greek Gods</p>
+            <p class="txtInfo">In this collection，There are 5 Greek gods for you to unbox. Try your luck!</p>
+            <p class="price">Price</p>
+            <p class="priceTxt" v-if="radio == 'egg'">
+              <span class="num">800</span>
+              <span> EGG ≈ 5690 USDC</span>
+            </p>
+            <div class="priceText" v-else>
+              <p class="originalPrice">800 EGG ≈ 5690 USDC <span>price</span></p>
+              <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
+            </div>
+            <div class="totleNum">
+              <span>Quantity</span>
+              <el-input-number v-model="num" :min="1" :max="10" label="描述文字"></el-input-number>
+            </div>
+            <div class="checkBox">
+              <div class="flex">
+                <span>购买方式</span>
+                <el-radio-group v-model="radio">
+                  <el-radio label="egg">EGG</el-radio>
+                  <el-radio label="usdc">USDC</el-radio>
+                </el-radio-group>
+              </div>
+              <div class="buyBtn" @click="handleBuy">
+                Buy
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="GameFi Description" name="GameFi">
-        <p class="description">Defender’s “God Killing” game background is based on 
+      <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="GameFi Description" name="GameFi">
+          <p class="description">Defender's "God Killing" game background is based on 
 ancient Greek mythology. Players can start the game 
 through blind boxes or freely choose mythological 
-characters. The player’s task is to pass the historical 
+characters. The player's task is to pass the historical 
 background and character experience of each mythical 
-ﬁgure, travelled all over the worlds to win the ﬁnal “throne 
-of the gods”. </p>
-      </el-tab-pane>
-      <el-tab-pane label="NFT Detail" name="NFT">
-        <div class="detailBox">
-          <div class="detailTitle">
-            <span>NFT Detail：</span>
-            <span class="txt">发行者：Defender Team 数量：10000</span>
+ﬁgure, travelled all over the worlds to win the ﬁnal "throne 
+of the gods". </p>
+        </el-tab-pane>
+        <el-tab-pane label="NFT Detail" name="NFT">
+          <div class="detailBox">
+            <div class="detailTitle">
+              <span>NFT Detail：</span>
+              <span class="txt">发行者：Defender Team 数量：10000</span>
+            </div>
+            <el-table
+              :data="tableData"
+              stripe
+              style="width: 95%">
+              <el-table-column
+                prop="date"
+                label="Gods"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="name"
+                label="Rank"
+                width="180">
+                <template slot-scope="scope">
+                  <img width="80px" :src="scope.row.name?require('@/assets/picture/rank/5.png'):''">
+                </template>
+              </el-table-column>
+              <el-table-column
+                prop="address"
+                label="Issue amount">
+              </el-table-column>
+              <el-table-column
+                prop="name"
+                label="Attribute"
+                width="180">
+              </el-table-column>
+              <el-table-column
+                prop="name"
+                label="Probability"
+                width="180">
+              </el-table-column>
+            </el-table>
           </div>
-          <el-table
-            :data="tableData"
-            stripe
-            style="width: 95%">
-            <el-table-column
-              prop="date"
-              label="Gods"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="Rank"
-              width="180">
-              <template slot-scope="scope">
-                <img width="80px" :src="scope.row.name?require('@/assets/picture/rank/5.png'):''">
-              </template>
-            </el-table-column>
-            <el-table-column
-              prop="address"
-              label="Issue amount">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="Attribute"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="Probability"
-              width="180">
-            </el-table-column>
-          </el-table>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
+      <el-dialog :visible.sync="buyModelVisible" width="80%" append-to-body>
+        <div class="buyBox" id="myNtfPageBuyBox">
+          <el-row :gutter="20">
+            <el-col :span="16">
+              <div class="leftBox">
+                <img src="@/assets/picture/buy/1.png">
+                <div class="txtBox">
+                  <h5 class="title">属性：SSR</h5>
+                  <h6 class="dec">狗庄大佬波塞冬</h6>
+                  <p>技能：梭哈山赛，一夜暴富</p>
+                  <p>特点：震撼大地的海之神</p>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="rightBox">
+                <div class="title">Excellent !</div>
+                <div>
+                  <div class="buyBoxBtn" @click="handleNFT">My NFT</div>
+                  <div class="buyBoxBtn" @click="handleStaking">NFT Staking</div>
+                  <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
+                </div>
+                
+              </div>
+            </el-col>
+          </el-row>
         </div>
-      </el-tab-pane>
-    </el-tabs>
-    <el-dialog :visible.sync="buyModelVisible" width="80%" append-to-body>
-      <div class="buyBox" id="myNtfPageBuyBox">
-        <el-row :gutter="20">
-          <el-col :span="16">
-            <div class="leftBox">
-              <img src="@/assets/picture/buy/1.png">
-              <div class="txtBox">
-                <h5 class="title">属性：SSR</h5>
-                <h6 class="dec">狗庄大佬波塞冬</h6>
-                <p>技能：梭哈山赛，一夜暴富</p>
-                <p>特点：震撼大地的海之神</p>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="8">
-            <div class="rightBox">
-              <div class="title">Excellent !</div>
-              <div>
-                <div class="buyBoxBtn" @click="handleNFT">My NFT</div>
-                <div class="buyBoxBtn" @click="handleStaking">NFT Staking</div>
-                <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
-              </div>
-              
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-    </el-dialog>
+      </el-dialog>
   </div>
 </template>
 
@@ -517,8 +520,17 @@ of the gods”. </p>
       }
     }
   .myNtfPage{
-    padding:322px 168px;
-    background-color: #9898F3;
+    background-color: #F8F2ED;
+    padding-bottom: 50px;
+    .content{
+      padding:0 168px;
+    }
+    .banner{
+      width: 100%;
+      height: 460px;
+      background: #E9D9C9;
+      margin-bottom: 35px;
+    }
     .el-row{
         background-color: #fff;
         border: 1px solid #E9D9C9;

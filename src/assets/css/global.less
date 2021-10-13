@@ -266,7 +266,7 @@ input {
 	.bBhENM {
 	    display: none;
 	}
-    #myNtfPage,#myNTFPage{
+    #myNtfPage,#myNTFPage,#page_container{
         .phoneShow{
             display: none;
         }
@@ -307,7 +307,7 @@ input {
 	.bBhENM {
 	    display: none;
 	}
-    #myNtfPage,#myNTFPage{
+    #myNtfPage,#myNTFPage,#page_container{
         .phoneShow{
             display: none;
         }
@@ -339,7 +339,7 @@ input {
 	    grid-template-columns: repeat(12, 1fr);
 	    gap: 24px;
 	}
-    #myNtfPage,#myNTFPage{
+    #myNtfPage,#myNTFPage,#page_container{
         .phoneShow{
             display: block;
         }
@@ -348,7 +348,7 @@ input {
         }
     }
     #myNtfPage{
-        padding:0;
+        .content{padding:0;}
         .phoneShow{
             display: block;
             img,.textBox{
@@ -500,6 +500,9 @@ input {
         .infoItem{
             width: auto !important;
         }
+        .infoItemTop{
+            display: block;
+        }
     }
     #eggNestsPage{
         .ejJoEn > *{
@@ -529,7 +532,7 @@ input {
 	.ejJoEn > *{
 		max-width:80%;
 	}
-    #myNtfPage,#myNTFPage{
+    #myNtfPage,#myNTFPage,#page_container{
         .phoneShow{
             display: block;
         }
@@ -538,7 +541,7 @@ input {
         }
     }
     #myNtfPage{
-        padding:0;
+        .content{padding:0;}
         .phoneShow{
             display: block;
             img,.textBox{
@@ -611,6 +614,7 @@ input {
         } 
     }
     #myNTFPage{
+        padding:0;
         .phoneShow{
             img{
                 display: block;
@@ -619,6 +623,9 @@ input {
         }
     }
     #page_container{
+        .infoItemTop{
+            display: block;
+        }
         .contentBox{
             margin-left: 80px;
         }

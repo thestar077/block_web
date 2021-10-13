@@ -27,21 +27,21 @@
               <!-- 二级菜单,index使跳转路由 -->
               <el-submenu v-if="item.children && item.children.length>0" :index="item.id+''" :key="item.id">
                 <template slot="title">
-                  <img class="mr15 pic" :src="item.icon">
-                  <span>{{item.authName}}</span>
+                  <img class="mr15 pic" :src="index == item.id?item.icon1:item.icon">
+                  <span @click="clickSubmenu(item)">{{item.authName}}</span>
                 </template>
                 <el-menu-item-group 
                   v-for="subitem in item.children"
                   :key="subitem.id">
                   <template slot="title">
-                    <el-menu-item :index="'/'+subitem.path">{{subitem.authName}}</el-menu-item>
-                    <span @click="clickSubmenu(subitem)"></span>
+                    <el-menu-item @click="clickSubmenu(subitem)" :index="'/'+subitem.path">{{subitem.authName}}</el-menu-item>
+                    <span></span>
                   </template>
                 </el-menu-item-group>
               </el-submenu>
               <!-- 一级菜单,index必须是字符串，作为唯一标识 -->
               <el-menu-item :index="'/'+item.path" @click="clickmenu(item)" v-else :key="item.id">
-                <img class="mr15 pic" :src="item.icon">
+                <img class="mr15 pic" :src="index == item.id?item.icon1:item.icon">
                 <span>{{item.authName}}</span>
               </el-menu-item>
             </template>
@@ -56,9 +56,20 @@
                 <img class="picIcon" src="@/assets/picture/1.png">
                 <img class="picIcon" src="@/assets/picture/2.png">
                 <img class="picIcon" src="@/assets/picture/3.jpg">
+                <div class="phoneShow">
+                  <el-dropdown @command="changeLangage">
+                    <span class="el-dropdown-link">
+                      <img class="mr0 picIcon" src="@/assets/picture/3.png">
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item command="cn">简体中文</el-dropdown-item>
+                      <el-dropdown-item command="en">English</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </div>
               </div>
             </div>
-            <div class="infoItemBottom">
+            <div class="infoItemBottom pcShow">
               <el-dropdown @command="changeLangage">
                 <span class="el-dropdown-link">
                   <img class="mr0 picIcon" src="@/assets/picture/3.png">
@@ -139,14 +150,16 @@ export default {
           authName: "Home",
           path: "home",
           icon:require('@/assets/picture/myicon/Home.png'),
+          icon1:require('@/assets/picture/myicon/Home1.png'),
         },
         {
           id: "102",
           authName: "Trade",
           icon:require('@/assets/picture/myicon/Trade.png'),
+          icon1:require('@/assets/picture/myicon/Trade1.png'),
           children: [
-            { id: "01",pid: '1021', authName: "Exchange", path: "exchange" },
-            { id: "02",pid: '1021', authName: "Liquidity", path: "liquidity" }
+            { id: "01",pid: '102', authName: "Exchange", path: "exchange" },
+            { id: "02",pid: '102', authName: "Liquidity", path: "liquidity" }
           ]
         },
         {
@@ -154,30 +167,35 @@ export default {
           authName: "Egg Nests",
           path: "eggNests",
           icon:require('@/assets/picture/myicon/Egg Nests.png'),
+          icon1:require('@/assets/picture/myicon/Egg Nests1.png'),
         },
         {
           id: "104",
           authName: "NFT Box",
           path: "NFTBox",
           icon:require('@/assets/picture/myicon/NFTBox.png'),
+          icon1:require('@/assets/picture/myicon/NFTBox1.png'),
         },
         {
           id: "105",
           authName: "My NFT",
           path: "myNFT",
           icon:require('@/assets/picture/myicon/myNtf.png'),
+          icon1:require('@/assets/picture/myicon/myNtf1.png'),
         },
         {
           id: "106",
           authName: "NFT Staking",
           path: "NFTStaking",
-          icon:require('@/assets/picture/myicon/staking1.png'),
+          icon:require('@/assets/picture/myicon/staking3.png'),
+          icon1:require('@/assets/picture/myicon/staking2.png'),
         },
         {
           id: "107",
           authName: "Gitbook",
           path: "gitbook",
           icon:require('@/assets/picture/myicon/Gitbook.png'),
+          icon1:require('@/assets/picture/myicon/Gitbook1.png'),
         },
       ],
     };
@@ -204,12 +222,14 @@ export default {
       console.log(key, keyPath,'111');
     },
     clickmenu(item){
+      console.log(item,'aa');
       if(item.pid) this.index = item.pid;
       else this.index = item.id;
       this.$router.push(item.path);
       this.$forceUpdate();
     },
     clickSubmenu(item){
+      console.log(item,'item');
       if(item.pid) this.index = item.pid;
       else this.index = item.id;
       this.$router.push(item.path);
