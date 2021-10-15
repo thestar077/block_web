@@ -313,7 +313,7 @@ export default {
     background: #A39282;
   }
   ::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 5px #A39282;
+    /*-webkit-box-shadow: inset 0 0 5px #A39282;*/
     border-radius: 10px;
     background: #fff;
   }
