@@ -14,6 +14,7 @@ import "./assets/css/global.less";
 //导入字体图标
 import "./assets/fonts/iconfont.css";
 import 'default-passive-events'
+import { directives } from './directives';
 import Router from 'vue-router'
 import store from './store'
 import { storePlugin } from './store'
@@ -121,6 +122,9 @@ Vue.use(storePlugin)
 //         next('/')
 //     }
 // }
+
+// 注册指令
+directives.forEach(directive => Vue.directive(directive.name, directive.define));
 
 new Vue({
     router,
