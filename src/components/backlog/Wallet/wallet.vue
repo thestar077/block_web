@@ -15,7 +15,7 @@
 
 <script>
     import Vue from 'vue';
-    import { ethers } from 'ethers';
+    import Web3 from 'web3';
     import WalletConnect from "@walletconnect/client";
     import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
     var ComponentWallet = Vue.component('ComponentWallet', {
@@ -73,6 +73,71 @@
         methods: {
             async handleWallect(item,index){
                 this.walletIndex = index;
+                let currentWallet = this.walletList[this.walletIndex];
+                if (currentWallet['name'] !== 'WalletConnect') {
+                    try {
+                        if (window.ethereum) {
+                            await window.ethereum.send('eth_requestAccounts');
+                            window.web3 = new Web3(window.ethereum);
+                            console.log(window.web3);
+                            let accounts = await window.web3.eth.getAccounts();
+                            console.log(accounts);
+                        }
+                    } catch (error) {
+                        window.alert("Please install the wallet plugin first.");
+                        // console.log(error);
+                        // this.$emit('hideModal');
+                    }
+                    
+                } else {
+                    const provider = new WalletConnect({
+                        bridge: "https://bridge.walletconnect.org",
+                    });
+                    // Check if connection is already established
+                    if (!provider.connected) {
+                        console.log(provider);
+                        // create new session
+                        // await provider.createSession();
+                        // const uri = this.provider.uri;
+                        
+                        // console.log("uri = " + uri);
+                        provider.createSession().then(() => {
+                            // get uri for QR Code modal
+                            const uri = provider.uri;
+                            console.log("uri = " + uri);
+                            // display QR Code modal
+                            WalletConnectQRCodeModal.open(uri, () => {
+                                console.log("QR Code Modal closed");
+                            });
+                        });
+
+                        // Subscribe to connection events
+                        provider.on("connect", (error, payload) => {
+                            if (error) {
+                                throw error;
+                            }
+
+                            // Get provided accounts and chainId
+                            const { accounts, chainId } = payload.params[0];
+                        });
+
+                        provider.on("session_update", (error, payload) => {
+                            if (error) {
+                                throw error;
+                            }
+
+                            // Get updated accounts and chainId
+                            const { accounts, chainId } = payload.params[0];
+                        });
+
+                        provider.on("disconnect", (error, payload) => {
+                            if (error) {
+                                throw error;
+                            }
+                            // this.web3Store.update({ isConnected: false })
+                        })
+                    }
+                }
                 this.$emit('hideModal');
             }
         }

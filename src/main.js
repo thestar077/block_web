@@ -13,6 +13,7 @@ import "./assets/css/hd.css";
 import "./assets/css/global.less";
 //导入字体图标
 import "./assets/fonts/iconfont.css";
+import Web3Helper from "./web3/helper.js";
 import 'default-passive-events'
 import { directives } from './directives';
 import Router from 'vue-router'
@@ -122,6 +123,8 @@ Vue.use(storePlugin)
 //         next('/')
 //     }
 // }
+
+Web3Helper.detectNetworkChanges();
 
 // 注册指令
 directives.forEach(directive => Vue.directive(directive.name, directive.define));
