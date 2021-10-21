@@ -21,17 +21,17 @@
         Add liquidity to receive LP tokens
        </div>
       </div>
-      <button title="Settings" @click="showSetting" class="sc-dlfnbm gSiATn sc-hKgILt fwjcww" type="button">
+      <button title="Settings" v-click @click="showSetting" class="sc-dlfnbm gSiATn sc-hKgILt fwjcww" type="button">
        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19.43 12.98C19.47 12.66 19.5 12.34 19.5 12C19.5 11.66 19.47 11.34 19.43 11.02L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.97 19.05 5.05L16.56 6.05C16.04 5.65 15.48 5.32 14.87 5.07L14.49 2.42C14.46 2.18 14.25 2 14 2H9.99996C9.74996 2 9.53996 2.18 9.50996 2.42L9.12996 5.07C8.51996 5.32 7.95996 5.66 7.43996 6.05L4.94996 5.05C4.71996 4.96 4.45996 5.05 4.33996 5.27L2.33996 8.73C2.20996 8.95 2.26996 9.22 2.45996 9.37L4.56996 11.02C4.52996 11.34 4.49996 11.67 4.49996 12C4.49996 12.33 4.52996 12.66 4.56996 12.98L2.45996 14.63C2.26996 14.78 2.21996 15.05 2.33996 15.27L4.33996 18.73C4.45996 18.95 4.72996 19.03 4.94996 18.95L7.43996 17.95C7.95996 18.35 8.51996 18.68 9.12996 18.93L9.50996 21.58C9.53996 21.82 9.74996 22 9.99996 22H14C14.25 22 14.46 21.82 14.49 21.58L14.87 18.93C15.48 18.68 16.04 18.34 16.56 17.95L19.05 18.95C19.28 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.98ZM12 15.5C10.07 15.5 8.49996 13.93 8.49996 12C8.49996 10.07 10.07 8.5 12 8.5C13.93 8.5 15.5 10.07 15.5 12C15.5 13.93 13.93 15.5 12 15.5Z" fill="currentColor"></path>
        </svg></button>
-      <button title="Recent transactions" @click="dialogVisibleTransactions = true;" class="sc-dlfnbm gSiATn sc-hKgILt fwjcww" type="button">
+      <button title="Recent transactions" v-click @click="dialogVisibleTransactions = true;" class="sc-dlfnbm gSiATn sc-hKgILt fwjcww" type="button">
        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M13 3C8.03 3 4 7.03 4 12H1L4.89 15.89L4.96 16.03L9 12H6C6 8.13 9.13 5 13 5C16.87 5 20 8.13 20 12C20 15.87 16.87 19 13 19C11.07 19 9.32 18.21 8.06 16.94L6.64 18.36C8.27 19.99 10.51 21 13 21C17.97 21 22 16.97 22 12C22 7.03 17.97 3 13 3ZM12 8V13L16.28 15.54L17 14.33L13.5 12.25V8H12Z" fill="currentColor"></path>
        </svg></button>
      </div>
      <div color="text" class="sc-gsTCUz dtMTzn">
-      <span @click="isFirst = false" id="join-pool-button" variant="primary" type="button" class="sc-dlfnbm IcZWJ" >Add Liquidity</span>
+      <span v-click @click="isFirst = false" id="join-pool-button" variant="primary" type="button" class="sc-dlfnbm IcZWJ" >Add Liquidity</span>
      </div>
      </div>
      <div class="sc-aemoO hJLLNK">
@@ -69,7 +69,7 @@
     <div v-else class="sc-crrsfI eHffeS sc-gYhigD gdlclw">
    <div class="sc-cHjxUU hbOhGN">
     <div class="sc-dacFzL sc-jQbIHB sc-fvhGYg eJEsCB fLfbpJ kHEClt" >
-     <span @click="isFirst = true">
+     <span v-click @click="isFirst = true">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sc-jifIRw evqUXD">
        <line x1="19" y1="12" x2="5" y2="12"></line>
        <polyline points="12 19 5 12 12 5"></polyline>
@@ -97,11 +97,11 @@
         </div>
         <div class="sc-iWFSnp bHLdTZ">
          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
-         <button class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAulBMVEUAAADvrxDvtwjvuAnxuQvwuQrwuQvwuQrwugvwugvvtwvxuAvxugvvtwjvtgrwuQvxugnwuwryuQvxuwvvugvvtQvwuQvvtwzvuQ3wuAvvvxDvuAvvuArwugvvtwrvuQrvtgvvuAzvuAvvtwvvtgvwuQvFmQvFmQwZGRAZGRELDhF+Yw5EOQ82LhDirgs2Lg9wWQ4oIxDTpAxhTg7TowsnIxBhTw59ZA6Mbg1vWQ6Lbw6Lbg1EOA////8DpA4OAAAAJXRSTlMAEEBwj6/P3++/YJ+fIFDfb69fjzAw70BQvxCQsM+gUHCQcKCQAtJYUgAAAAFiS0dEPdBtUVkAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflARoNBydqCg4lAAADq0lEQVRo3sWabXeaMBSAg4gglrG1Vqrtttr2FgZrt6KOvf3/37UPakngJrk32LP70ZzzPOblXiCJEKTwRv44mIQRAEAUToOxP/LEqcKLZyEgMTmLkxPQ/SkYYjrQMTLS9xG8c//zIZAijZ347yMgh4NiFAIrmIrkA7DjjDHd5xE4BLkT3hgc44KUfEkIzpEShmkewYBIL63DDwPj3LL4YXD4b8w3Ggjj85gPGKU5gV98IRgundfnY1GWBMMCXa0ejU8ypFjGjYl8kuGiz4/JfJLhnD8BLZ9i6E3DGYdPMQTMAVL5FEOmCEImn2BIOR3o8wkGn94BjG83LDxqB3C+3eATO6DjWw2vs3DlyLcajgspYPCrimGYHpKYwwfgGDzrFPf5LMN+mpc8PscwtYwQzucYPPMIfcX5XcOTnhCb6+jzNwnzXW6RDS+1njATQkyAZNioLRWJD6kQK2OqvBo23ZaKwgfwxAgohk2/paLwIRM++vtWNbT87VYxSPytJhOu8fW5kQ0Sf/ciGyT+D3y1XqOF6LGQ//RzI/HLUjL8lPiafLjB8nifX8iwb3dlqRhkPm74iDwLjvn7C+djhkab06mI9PWhwfl9Q6OvGgthqj8Nzu8aGlNdEsb61uB81dAYK19XkBea+larglpT+QqbQDFUcoNsUPO3MvChP8mtoVIbWkO3PlR6/gJZpkdD1W04Gvr1p9LxIcWqda5LtL0Bq2+Vhg9TtFTkSqnY/lYMEv+PUvkKvFSgxS4v5PomrdZ6J/EbebVWhabY4eW6Vte/ZKiV9S8Zak25ziwPnB1WNdr8etnaHjiWR+YTXpfa/LUYPPOr9Su/Z2jKkmL4KIT4ROJ3DE1Zkgwz84vX31JT+RrOi5dhEtTK1xpUfmF4dUwsL7+4gc7ffyD4wDPQ+bDf6DQu1L6BwYfDfsKSY+Dwbw7faOZkzg0fgWY+fKZ9xuoNBfEz1jjNBoOFD+1e9ipyMdj48m7ILfANNj7EnO2cvqFgbefYngp9g5UPndOEgGew82fdTcGIY7Dz+ycJ9m3N1mDnA3LcsiYbCPw1svO7ComGwnFrmTANkBc0fuK8vZ8XBD7MdQcIMcFA4BvO027hBHFnOsS5fWM+aZScx+cw0+EQfDT//0eNQqzWrvw19aZC7NSJiHFmndzz+QHvfgK3E2nGPtXnKKI7p3sJVEXqO19DuQrs+GUmhkQSG99cl/4J7tAk8T26eRvO4hPe0Mn8h2B5vP4zCR78jAj/BxvHMSB40+znAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTAxLTI2VDEzOjA0OjUyKzAwOjAwvapJxgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wMS0yNlQxMzowNDo1MiswMDowMMz38XoAAAAASUVORK5CYII=" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+         <button v-click @click="showToken" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
-            BNB
+            {{token.name}}
            </div>
-           <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
+           <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg downArrow">
             <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
            </svg></span></button>
         </div>
@@ -122,7 +122,7 @@
         <div class="sc-iWFSnp bHLdTZ">
          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
          <button class="sc-jLiVlK eZTMLz open-currency-select-button"><span class="sc-tkKAw iONwHy">
-           <div color="text" class="sc-gsTCUz UNrzd">
+           <div color="text" class="sc-gsTCUz UNrzd selectCurrency">
             Select a currency
            </div>
            <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
@@ -131,7 +131,7 @@
         </div>
        </div>
       </div>
-      <button type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+      <button v-click type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
      </div>
     </div>
    </div>
@@ -151,7 +151,7 @@
       <el-row>
         <el-col :span="12">
           <!-- <el-row :gutter="20"> -->
-            <span :class="toleranceIndex == index?'toleranceIcon active':'toleranceIcon'" v-for="(item,index) in toleranceList" :key="index" @click="getTolerance(item,index)">{{item.name}}%</span>
+            <span v-click :class="toleranceIndex == index?'toleranceIcon active':'toleranceIcon'" v-for="(item,index) in toleranceList" :key="index" @click="getTolerance(item,index)">{{item.name}}%</span>
           <!-- </el-row> -->
         </el-col>
         <el-col :span="12" class="percentBox">
@@ -184,9 +184,25 @@
       <span>Please connect your wallet to view your recent transactions</span>
     </h3>
     <span slot="footer" class="dialog-footer">
-      <el-button class="closeBtn center block" @click="dialogVisibleTransactions = false">Close</el-button>
+      <el-button class="closeBtn center block" v-click @click="dialogVisibleTransactions = false">Close</el-button>
     </span> 
   </el-dialog>
+  <!-- Select Token -->
+  <el-dialog class="tokenDialog"
+      title="Select a token"
+      :visible.sync="dialogVisibleToken"
+      width="40%" append-to-body>
+      <el-input class="tokenInput" @input="search" v-model="input" placeholder="Search name"></el-input>
+      <p class="tokenName">Token name</p>
+      <div class="tokenBox">
+        <ul>
+          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleToken(item,index)">
+            <img :src="item.pic">
+             <span>{{item.name}}</span>
+          </li>
+        </ul>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -209,11 +225,146 @@
             name:1
           }
         ],
+        dialogVisibleToken:false,
         toleranceIndex:2,
         formData:{
           percent:1,
           minutes:24
-        }
+        },
+        token:{
+          pic:require('@/assets/picture/bi/1.png'),
+          name:'Uniswap (UNI)',
+        },
+        tokenList:[
+          {
+            pic:require('@/assets/picture/bi/1.png'),
+            name:'Uniswap (UNI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/2.png'),
+            name:'Tether USD (USDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/3.png'),
+            name:'USD Coin (USDC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/4.png'),
+            name:'Wrapped BTC (WBTC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/5.png'),
+            name:'ChainLink Token (LINK)',
+          },
+          {
+            pic:require('@/assets/picture/bi/6.png'),
+            name:'Graph Token (GRT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/7.png'),
+            name:'SushiToken (SUSHI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/8.png'),
+            name:'Compound (COMP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/9.png'),
+            name:'Magic Internet Money (MIM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/10.png'),
+            name:'yearn.finance (YFI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/11.png'),
+            name:'Curve DAO Token (CRV)',
+          },
+          {
+            pic:require('@/assets/picture/bi/12.png'),
+            name:'CelerToken (CELR)',
+          },
+          {
+            pic:require('@/assets/picture/bi/13.png'),
+            name:'Gnosis Token (GNO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/14.png'),
+            name:'Rari Governance Token (RGT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/15.png'),
+            name:'Badger (BADGER)',
+          },
+          {
+            pic:require('@/assets/picture/bi/16.png'),
+            name:'DODO bird (DODO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/17.png'),
+            name:'Balancer (BAL)',
+          },
+          {
+            pic:require('@/assets/picture/bi/18.png'),
+            name:'Synth sUSD (sUSD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/19.png'),
+            name:'MATH Token (MATH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/20.png'),
+            name:'Cream (CREAM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/21.png'),
+            name:'MCDEX Token (MCB)',
+          },
+          {
+            pic:require('@/assets/picture/bi/22.png'),
+            name:'Stake DAO Token (SDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/23.png'),
+            name:'dForce (DF)',
+          },
+          {
+            pic:require('@/assets/picture/bi/24.png'),
+            name:'Cap (CAP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/25.png'),
+            name:'Fuse Token (FUSE)',
+          },
+          {
+            pic:require('@/assets/picture/bi/26.png'),
+            name:'Alchemy (ALCH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/27.png'),
+            name:'Wrapped Ether (WETH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/28.png'),
+            name:'ArbiNYAN (NYAN)',
+          },
+          {
+            pic:require('@/assets/picture/bi/29.png'),
+            name:'dForce EUR (EUX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/30.png'),
+            name:'dForce USD (USX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/31.png'),
+            name:'DXdao (DXD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/32.png'),
+            name:'Wootrade Network (WOO)',
+          },
+        ]
       };
     },
     created() {
@@ -226,11 +377,194 @@
       getTolerance(item,index){
         this.toleranceIndex = index;
       },
+      showToken(){
+        this.dialogVisibleToken = true;
+      },
+      handleToken(item,index){
+        this.token = item;
+        this.dialogVisibleToken = false;
+      },
+      search(){
+        if(this.input){
+          let _search = this.input.toLowerCase();
+          let newListData = []; // 用于存放搜索出来数据的新数组
+          if (_search) {
+            this.tokenList.filter(item => {
+              if (item.name.toLowerCase().indexOf(_search) !== -1) {
+                newListData.push(item);
+              }
+            }) 
+          }
+          this.tokenList = newListData;
+        }else{
+          this.tokenList = [
+          {
+            pic:require('@/assets/picture/bi/1.png'),
+            name:'Uniswap (UNI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/2.png'),
+            name:'Tether USD (USDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/3.png'),
+            name:'USD Coin (USDC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/4.png'),
+            name:'Wrapped BTC (WBTC)',
+          },
+          {
+            pic:require('@/assets/picture/bi/5.png'),
+            name:'ChainLink Token (LINK)',
+          },
+          {
+            pic:require('@/assets/picture/bi/6.png'),
+            name:'Graph Token (GRT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/7.png'),
+            name:'SushiToken (SUSHI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/8.png'),
+            name:'Compound (COMP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/9.png'),
+            name:'Magic Internet Money (MIM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/10.png'),
+            name:'yearn.finance (YFI)',
+          },
+          {
+            pic:require('@/assets/picture/bi/11.png'),
+            name:'Curve DAO Token (CRV)',
+          },
+          {
+            pic:require('@/assets/picture/bi/12.png'),
+            name:'CelerToken (CELR)',
+          },
+          {
+            pic:require('@/assets/picture/bi/13.png'),
+            name:'Gnosis Token (GNO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/14.png'),
+            name:'Rari Governance Token (RGT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/15.png'),
+            name:'Badger (BADGER)',
+          },
+          {
+            pic:require('@/assets/picture/bi/16.png'),
+            name:'DODO bird (DODO)',
+          },
+          {
+            pic:require('@/assets/picture/bi/17.png'),
+            name:'Balancer (BAL)',
+          },
+          {
+            pic:require('@/assets/picture/bi/18.png'),
+            name:'Synth sUSD (sUSD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/19.png'),
+            name:'MATH Token (MATH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/20.png'),
+            name:'Cream (CREAM)',
+          },
+          {
+            pic:require('@/assets/picture/bi/21.png'),
+            name:'MCDEX Token (MCB)',
+          },
+          {
+            pic:require('@/assets/picture/bi/22.png'),
+            name:'Stake DAO Token (SDT)',
+          },
+          {
+            pic:require('@/assets/picture/bi/23.png'),
+            name:'dForce (DF)',
+          },
+          {
+            pic:require('@/assets/picture/bi/24.png'),
+            name:'Cap (CAP)',
+          },
+          {
+            pic:require('@/assets/picture/bi/25.png'),
+            name:'Fuse Token (FUSE)',
+          },
+          {
+            pic:require('@/assets/picture/bi/26.png'),
+            name:'Alchemy (ALCH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/27.png'),
+            name:'Wrapped Ether (WETH)',
+          },
+          {
+            pic:require('@/assets/picture/bi/28.png'),
+            name:'ArbiNYAN (NYAN)',
+          },
+          {
+            pic:require('@/assets/picture/bi/29.png'),
+            name:'dForce EUR (EUX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/30.png'),
+            name:'dForce USD (USX)',
+          },
+          {
+            pic:require('@/assets/picture/bi/31.png'),
+            name:'DXdao (DXD)',
+          },
+          {
+            pic:require('@/assets/picture/bi/32.png'),
+            name:'Wootrade Network (WOO)',
+          },
+        ]
+        }
+      }, 
     }
   };
 </script>
 
 <style lang="less" scoped>
+.tokenInput{
+  /deep/ .el-input__inner{
+    border:1px solid #AA8929;
+    padding:30px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+}
+.tokenName{
+  font-size: 24px;
+  padding:20px 0;
+  color: #AA8929;
+}
+.tokenBox{
+  height: 30vh;
+  overflow-y: scroll;
+  .tokenItem{
+    padding-bottom: 40px;
+    cursor: pointer;
+    img{
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      margin-right: 20px;
+    }
+    span{
+      font-size: 22px;
+      color: #cdb7a2;
+    }
+  }
+}
   .kgPYcZ {
     display: flex;
     flex-direction: column;
@@ -659,7 +993,7 @@
     align-items: center;
 }
 .cJbABh {
-    height: 20px;
+    height: 30px;
     display: flex;
     flex-direction: column;
     -webkit-box-pack: start;
@@ -711,6 +1045,9 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
 }
+.selectCurrency{
+  margin-top: -185px;
+}
 .fLfbpJ {
     width: 100%;
     display: flex;
@@ -735,6 +1072,7 @@
     align-items: center;
     flex-flow: row nowrap;
     padding: 0 15px 15px 20px;
+    height: 50px;
 }
 .dHAxfv {
     color: rgb(69, 42, 122);
@@ -755,10 +1093,13 @@
     overflow: hidden;
     padding: 0px;
 }
+.downArrow{
+  margin-top: 190px;
+}
 .ekurxD {
     -webkit-box-align: center;
     align-items: center;
-    height: 34px;
+    height: auto;
     font-size: 16px;
     font-weight: 500;
     background-color: transparent;

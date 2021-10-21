@@ -20,7 +20,7 @@
             <div class="sc-hOqqkJ imhYNd">~$0.00</div>
           </div>
           <div class="sc-dtwoBo inCwUZ">
-            <button type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+            <button v-click type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
           </div>
         </div>
       </div>

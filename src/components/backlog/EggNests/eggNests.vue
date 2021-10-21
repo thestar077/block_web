@@ -14,7 +14,7 @@
       </div>
       <div color="text" class="sc-gsTCUz UNrzd">Staked only</div></div>
     <div class="sc-kEjbxe dnCuQj">
-      <button type="button" v-for="(item,index) in actList" :key="index" @click="handleActive(index)" :class="actIndex == index?'sc-dlfnbm kjBbpq':'sc-dlfnbm xiYlH sc-iqHYGH cxRybB'">{{item.name}}</button>
+      <button v-click type="button" v-for="(item,index) in actList" :key="index" @click="handleActive(index)" :class="actIndex == index?'sc-dlfnbm kjBbpq':'sc-dlfnbm xiYlH sc-iqHYGH cxRybB'">{{item.name}}</button>
     </div>
   </div>
   <div>
@@ -72,7 +72,7 @@
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
           <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
         <div class="sc-tYoTV jYOTaZ"></div>
-        <div @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
+        <div v-click @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
           <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
           <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
             <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>

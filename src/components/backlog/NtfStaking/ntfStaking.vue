@@ -1,6 +1,8 @@
 <template>
   <div class="stakeNFTPage" id="stakeNFTPage"> 
-    <div class="banner"></div> 
+    <div class="banner">
+      <img width="100%" src="@/assets/picture/skaetBanner.png">
+    </div> 
     <div class="content">
       <el-row class="biArr">
         <el-col v-for="(item,index) in biArr" :key="index">
@@ -25,7 +27,7 @@
             <div class="btnA" v-else>{{item.sta}}</div>   
           </div>
           <div class="cardBox cursorPointer" v-for="(item,index) in 5-infoArr.length" :key="'info2-'+index" >
-            <img v-if="infoArr.length<5" @click="addModelVisible = true" width="95%" class="addCard" src="@/assets/picture/add.png">
+            <img v-if="infoArr.length<5" v-click @click="addModelVisible = true" width="95%" class="addCard" src="@/assets/picture/add.png">
           </div>
         </div>
       </div>
@@ -47,7 +49,7 @@
       </el-carousel>
       <div class="btnBox">
         <div class="flexBox">
-          <div class="btn1 sureBtn" @click="addModelVisible = false">Sure</div>
+          <div class="btn1 sureBtn" v-click @click="addModelVisible = false">Sure</div>
           <div class="btn1 cancelBtn" @click="addModelVisible = false">Cancel</div>
         </div>
       </div>
@@ -186,7 +188,6 @@
   .stakeNFTPage{
     .banner{
       width: 100%;
-      height: 460px;
       background: #E9D9C9;
     }
     .roleArr{

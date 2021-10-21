@@ -1,12 +1,14 @@
 <template>
   <div class="myNtfPage" id="myNtfPage">
-    <div class="banner"></div> 
+    <div class="banner">
+      <img width="100%" src="@/assets/picture/boxBanner.png">
+    </div> 
     <div class="content">
       <div class="roleArr">
         <ul>
-          <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
+          <li v-click @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
         </ul>
-        <div class="viewBtn" @click="handleView">
+        <div class="viewBtn" v-click @click="handleView">
           <span>More</span>
           <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
         </div>
@@ -71,7 +73,7 @@
                   <el-radio label="usdc">USDC</el-radio>
                 </el-radio-group>
               </div>
-              <div class="buyBtn" @click="handleBuy">
+              <div class="buyBtn" v-click @click="handleBuy">
                 Buy
               </div>
             </div>
@@ -148,8 +150,8 @@ of the gods". </p>
               <div class="rightBox">
                 <div class="title">Excellent !</div>
                 <div>
-                  <div class="buyBoxBtn" @click="handleNFT">My NFT</div>
-                  <div class="buyBoxBtn" @click="handleStaking">NFT Staking</div>
+                  <div class="buyBoxBtn" v-click @click="handleNFT">My NFT</div>
+                  <div class="buyBoxBtn" v-click @click="handleStaking">NFT Staking</div>
                   <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
                 </div>
                 
@@ -527,7 +529,6 @@ of the gods". </p>
     }
     .banner{
       width: 100%;
-      height: 460px;
       background: #E9D9C9;
       margin-bottom: 35px;
     }

@@ -283,7 +283,7 @@ export default {
     /*padding: 16px 12px;*/
     margin:0 auto;
     /*max-width: 95%;*/
-    min-height: calc(100vh - 64px);
+    /*min-height: calc(100vh - 64px);*/
     width: 100%;
     overflow-y: scroll;
     background-color: #F8F2ED;

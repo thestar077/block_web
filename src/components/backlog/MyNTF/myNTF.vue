@@ -4,7 +4,7 @@
     <div class="line"></div>
     <div class="roleArr">
       <ul>
-        <li @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
+        <li v-click @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
       </ul>
     </div>
     <el-carousel height="48vh" class="phoneShow">
@@ -16,7 +16,7 @@
                 <img width="33px" src="@/assets/picture/staking.png">
                 <span>NFT Staking</span>
               </div>
-              <div class="btn" @click="goContent(item)">
+              <div class="btn" v-click @click="goContent(item)">
                 Check The Content
               </div>
             </div>
@@ -31,7 +31,7 @@
             <img width="33px" src="@/assets/picture/staking.png">
             <span>NFT Staking</span>
           </div>
-          <div class="btn" @click="goContent(item)">
+          <div class="btn" v-click @click="goContent(item)">
             Check The Content
           </div>
         </div>
