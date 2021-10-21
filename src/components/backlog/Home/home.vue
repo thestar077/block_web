@@ -67,17 +67,6 @@
       </div>
     <!-- Connect to a wallet -->
     <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
-    <!-- <el-dialog
-      title="Connect to a wallet"
-      :visible.sync="dialogVisibleWallet"
-      width="25%" append-to-body>
-      <ul>
-        <li class="walletItem" v-for="(item,index) in walletList" :key="index" @click="handleWallect(item,index)">
-          <span class="dpJqVk">{{item.name}}</span>
-          <img width="32" height="32" :src="item.pic">
-        </li>
-      </ul>
-    </el-dialog> -->
   </div>
 </template>
 

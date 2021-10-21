@@ -8,7 +8,7 @@
           <img v-load class="mr25 cursorPointer pic collapseBtn" @click="isCollapse =!isCollapse" :src="isCollapse?require('@/assets/picture/collapse1.png'):require('@/assets/picture/collapse2.png')">
           <img class="logo" width="200px" src="@/assets/picture/logo.png">
         </div>
-        <div v-click class="connectBtn" @click="dialogVisibleWallet = true">Connect</div>
+        <div class="connectBtn" @click="dialogVisibleWallet = true">Connect</div>
       </el-header>
       <!-- 内容 -->
       <el-main>
@@ -93,7 +93,7 @@
       </el-main>
     </el-container>
     <!-- Connect to a wallet -->
-    <el-dialog
+    <!-- <el-dialog
       title="Connect to a wallet"
       :visible.sync="dialogVisibleWallet"
       width="25%" append-to-body>
@@ -103,7 +103,7 @@
           <img width="32" height="32" :src="item.pic">
         </li>
       </ul>
-    </el-dialog>
+    </el-dialog> -->
   </el-container>
 </template>
 
