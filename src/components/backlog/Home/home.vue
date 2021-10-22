@@ -80,7 +80,7 @@
         walletList:[
           {
             name:'Metamask',
-            pic:require('@/assets/picture/walle1.png'),
+            pic:require('@/assets/picture/Metamask.jpg'),
           },
           {
             name:'TrustWallet',

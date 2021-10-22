@@ -29,7 +29,7 @@
                   },
                   {
                      name:'TrustWallet',
-                     pic:require('@/assets/picture/tokenpocket.png'),
+                     pic:require('@/assets/picture/trustwallet.png'),
                    },
                    {
                      name:'MathWallet',
