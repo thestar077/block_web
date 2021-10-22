@@ -5,6 +5,8 @@ import state from './state'
 import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
+import baseData from './baseData'
+import url from './url'
 import {CHANGESPERVISEDETAIL, GET_USER_MENU} from './mutation-types'
 //挂载Vuex
 Vue.use(Vuex)
@@ -16,7 +18,9 @@ const store = window.myStore = new Vuex.Store({
   actions:{...actions},
   modules:{
   	CHANGESPERVISEDETAIL,
-  	GET_USER_MENU
+  	GET_USER_MENU,
+	baseData,
+	url,
   }
 })
 
