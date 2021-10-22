@@ -23,30 +23,26 @@
         data() {
             return {
                 walletList:[
-                {
+                 {
                     name:'Metamask',
                     pic:require('@/assets/picture/walle1.png'),
-                },
-                {
-                    name:'TrustWallet',
-                    pic:require('@/assets/picture/walle1.png'),
-                },
-                {
-                    name:'MathWallet',
-                    pic:require('@/assets/picture/walle1.png'),
-                },
-                {
-                    name:'TokenPocket',
-                    pic:require('@/assets/picture/walle1.png'),
-                },
-                {
-                    name:'WalletConnect',
-                    pic:require('@/assets/picture/walle1.png'),
-                },
-                {
-                    name:'Binance Chain Wallet',
-                    pic:require('@/assets/picture/walle1.png'),
-                }
+                  },
+                  {
+                     name:'TrustWallet',
+                     pic:require('@/assets/picture/tokenpocket.png'),
+                   },
+                   {
+                     name:'MathWallet',
+                     pic:require('@/assets/picture//mathwallet.png'),
+                   },
+                   {
+                     name:'TokenPocket',
+                     pic:require('@/assets/picture/tokenpocket.png'),
+                   },
+                   {
+                     name:'WalletConnect',
+                     pic:require('@/assets/picture/walletconnect.png'),
+                   }
                 ],
                 walletIndex:-1,
             }

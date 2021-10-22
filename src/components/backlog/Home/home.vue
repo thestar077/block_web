@@ -84,19 +84,19 @@
           },
           {
             name:'TrustWallet',
-            pic:require('@/assets/picture/walle1.png'),
+            pic:require('@/assets/picture/tokenpocket.png'),
           },
           {
             name:'MathWallet',
-            pic:require('@/assets/picture/walle1.png'),
+            pic:require('@/assets/picture//mathwallet.png'),
           },
           {
             name:'TokenPocket',
-            pic:require('@/assets/picture/walle1.png'),
+            pic:require('@/assets/picture/tokenpocket.png'),
           },
           {
             name:'WalletConnect',
-            pic:require('@/assets/picture/walle1.png'),
+            pic:require('@/assets/picture/walletconnect.png'),
           }
         ],
         walletIndex:-1,
