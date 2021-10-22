@@ -97,10 +97,6 @@
           {
             name:'WalletConnect',
             pic:require('@/assets/picture/walle1.png'),
-          },
-          {
-            name:'Binance Chain Wallet',
-            pic:require('@/assets/picture/walle1.png'),
           }
         ],
         walletIndex:-1,

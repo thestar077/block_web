@@ -8,8 +8,8 @@
         <el-col v-for="(item,index) in biArr" :key="index">
           <img width="100%" :src="item.pic">
           <div class="biTitle">
-            {{item.num}}
-            <span v-if="index == biArr.length-1">CLAM</span>
+            $ {{item.num}}
+            <span v-if="index == biArr.length-1">Claim</span>
           </div>
           <p class="biTxt">{{item.txt}}</p>       
         </el-col>
@@ -75,7 +75,7 @@
           {
             pic:require('@/assets/picture/bi2.png'),
             num:'1234',
-            txt:'Total Staking NFTS',
+            txt:'Total Staking NFTs',
           },
           {
             pic:require('@/assets/picture/bi3.png'),
@@ -85,7 +85,7 @@
           {
             pic:require('@/assets/picture/bi4.png'),
             num:'54000',
-            txt:'Daliy Rewards(DFD)',
+            txt:'Daily Rewards(DFD)',
           },
           {
             pic:require('@/assets/picture/bi5.png'),

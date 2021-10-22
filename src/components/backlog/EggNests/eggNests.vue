@@ -93,8 +93,11 @@
             <div class="sc-eCssSg MoQXc">
               <div color="text" class="sc-gsTCUz UNrzd">My Staked Value:</div>
               <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
-            <div class="sc-eCssSg FgqtZ">
-              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0x19e7cbecdd23a16dfa5573df54d98f7caae03019" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on BscScan</a></div>
+              <div class="sc-eCssSg MoQXc">
+              <div color="text" class="sc-gsTCUz UNrzd">View on Arbitrum:</div>
+              <div color="text" class="sc-gsTCUz UNrzd">{{item.name}} LP</div></div>
+           <!--  <div class="sc-eCssSg FgqtZ">
+              <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0x19e7cbecdd23a16dfa5573df54d98f7caae03019" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on Arbitrum</a></div> -->
           </div>
         </div>
       </div>

@@ -101,33 +101,34 @@ of the gods". </p>
               stripe
               style="width: 95%">
               <el-table-column
-                prop="date"
+                prop="god"
                 label="Gods"
                 width="180">
               </el-table-column>
               <el-table-column
-                prop="name"
+                prop="pic"
                 label="Rank"
                 width="180">
                 <template slot-scope="scope">
-                  <img width="80px" :src="scope.row.name?require('@/assets/picture/rank/5.png'):''">
+                  <img width="80px" :src="scope.row.pic?scope.row.pic:''">
                 </template>
               </el-table-column>
               <el-table-column
-                prop="address"
+                prop="amount"
                 label="Issue amount">
               </el-table-column>
               <el-table-column
-                prop="name"
+                prop="attribute"
                 label="Attribute"
                 width="180">
               </el-table-column>
               <el-table-column
-                prop="name"
+                prop="probability"
                 label="Probability"
                 width="180">
               </el-table-column>
             </el-table>
+            <p class="mt20">*The NFT attribute coefficient issued by the user is multiplied by the user's Stake Token value in the Farm pool to obtain the Farm reward output of DFD pledge mining. Specific as table.</p>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -139,10 +140,10 @@ of the gods". </p>
               <div class="leftBox">
                 <img src="@/assets/picture/buy/1.png">
                 <div class="txtBox">
-                  <h5 class="title">属性：SSR</h5>
-                  <h6 class="dec">狗庄大佬波塞冬</h6>
-                  <p>技能：梭哈山赛，一夜暴富</p>
-                  <p>特点：震撼大地的海之神</p>
+                  <h5 class="title">Rank：SSR</h5>
+                  <h6 class="dec">Big Whale Athena</h6>
+                  <p>Skills:Show-hand mainstream, stable profit</p>
+                  <p>Features:goddess of war, face the evil</p>
                 </div>
               </div>
             </el-col>
@@ -390,22 +391,41 @@ of the gods". </p>
         ],
         activeName: 'GameFi',
         tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+          god:'Show-hand Fan Gods',
+          pic:require('@/assets/picture/rank/1.png'),
+          amount:4000,
+          attribute:'1x',
+          probability:'40%'
+        }, 
+        {
+          god:'Small profit Gods',
+          pic:require('@/assets/picture/rank/2.png'),
+          amount:4000,
+          attribute:'2x',
+          probability:'40%'
+        },
+        {
+          god:'Rich and noble Gods',
+          pic:require('@/assets/picture/rank/3.png'),
+          amount:750,
+          attribute:'4x',
+          probability:'7.5%'
+        }, 
+        {
+          god:'Freedom of wealth Gods',
+          pic:require('@/assets/picture/rank/4.png'),
+          amount:750,
+          attribute:'8x',
+          probability:'7.5%'
+        },
+        {
+          god:'Big Whale Gods',
+          pic:require('@/assets/picture/rank/5.png'),
+          amount:500,
+          attribute:'10x',
+          probability:'5%'
+        }, 
+        ]
       };
     },
     created() {

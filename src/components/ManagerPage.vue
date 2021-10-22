@@ -136,10 +136,6 @@ export default {
         {
           name:'WalletConnect',
           pic:require('@/assets/picture/walle1.png'),
-        },
-        {
-          name:'Binance Chain Wallet',
-          pic:require('@/assets/picture/walle1.png'),
         }
       ],
       walletIndex:-1,
@@ -442,7 +438,10 @@ export default {
       border-left: 3px solid #fff;
       box-sizing: border-box;
     }
-    /deep/ .el-submenu__title,/deep/ .el-menu-item:hover {
+    /deep/ .el-submenu__title:hover{
+      background: #fff !important;
+    }
+    /deep/ .el-menu-item:hover {
       border-left: 3px solid rgb(239, 484, 485);
       background-color: #F8F2ED !important;
     }

@@ -3,7 +3,7 @@
     <div class="myNTF">
       My NFT
       <img class="arrow" src="@/assets/picture/arrow.png">
-      赛波冬A
+     Apollo A
     </div>
     <div class="line"></div>
     <div class="contentNFTBox">
@@ -25,7 +25,7 @@
       <div class="footerBox">
         <el-row :gutter="30">
           <el-col :span="8">
-            <p class="p1">Conteact:</p>
+            <p class="p1">Contract:</p>
             <p class="p2">oxhjdhjkahfuifhjksdhgriojgjhj</p>
           </el-col>
           <el-col :span="8">
@@ -52,22 +52,22 @@
           {
             name:'Description',
             value:0,
-            txt:'Description：Defender’s “God Killing” game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player’s task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final “throne of the gods”.'
+            txt:"Description：Defender's 'God Killing' game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player's task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final 'throne of the gods'."
           },
           {
             name:'About Defender',
             value:1,
-            txt:'Description：Defender’s “God Killing” game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player’s task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final “throne of the gods”.'
+            txt:"Description：Defender's 'God Killing' game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player's task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final 'throne of the gods'."
           },
           {
             name:'Detail',
             value:2,
-            txt:'Description：Defender’s “God Killing” game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player’s task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final “throne of the gods”.'
+            txt:"Description：Defender's 'God Killing' game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player's task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final 'throne of the gods'."
           },
           {
             name:'Attribute',
             value:3,
-            txt:'Description：Defender’s “God Killing” game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player’s task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final “throne of the gods”.'
+            txt:"Description：Defender's 'God Killing' game background is based on ancient Greek mythology. Players can start the game through blind boxes or freely choose mythological characters. The player's task is to pass the historical background and character experience of each mythical figure, travelled all over the worlds to win the final 'throne of the gods'."
           }
         ]
       };

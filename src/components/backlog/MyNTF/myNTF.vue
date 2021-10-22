@@ -1,6 +1,6 @@
 <template>
   <div class="myNTFPage" id="myNTFPage"> 
-    <div class="myNTF">My NTF</div>
+    <div class="myNTF">My NFT</div>
     <div class="line"></div>
     <div class="roleArr">
       <ul>
