@@ -5,10 +5,15 @@ const NFTS_ALL = 'NFTS_ALL';
 const NFTS_BY_NAME = 'NFTS_BY_NAME';
 const NFTS_BY_ID = 'NFTS_BY_ID';
 
+const CONFIG = 'CONFIG';
 
 export default {
     state: {
         nfts: [],
+        config: {},
+        consts: {
+            dgg_price_egg_default: 800,
+        },
     },
     actions: {
         getNftsAll({ commit }) {
@@ -39,7 +44,27 @@ export default {
                     commit('NFTS_ALL', nftData);
                 }
             })
-        }
+        },
+        getConfig({ commit }) {
+            let url = this.state.url.api.base + this.state.url.api.config.all;
+            axios({
+                url: url,
+                method: 'get',
+            }).then((data) => {
+                if (data.status === 200) {
+                    let configArr = JSON.parse(data.data).data;
+                    let configData = {};
+                    if (configArr.length > 0) {
+                        configArr.forEach((item) => {
+                            configData[item.name] = item.value;
+                        });
+                    }
+                    console.log('getConfig', configData);
+                    myStorage.set('config', configData);
+                    commit('CONFIG', configData);
+                }
+            })
+        },
     },
     mutations: {
         [NFTS_ALL](state, result) {
@@ -54,5 +79,8 @@ export default {
                 });
             }
         },
+        [CONFIG](state, result) {
+            state.config = result;
+        }
     },
 };
