@@ -40,7 +40,7 @@
                 </el-menu-item-group>
               </el-submenu>
               <!-- 一级菜单,index必须是字符串，作为唯一标识 -->
-              <el-menu-item :index="'/'+item.path" @click="clickmenu(item)" v-else :key="item.id">
+              <el-menu-item @click="clickmenu(item)" v-else :key="item.id">
                 <img class="mr15 pic" :src="index == item.id?item.icon1:item.icon">
                 <span>{{item.authName}}</span>
               </el-menu-item>
@@ -113,6 +113,7 @@ export default {
   
   data() {
     return {
+      lang:'cn',
       index:'',
       isCollapse: false,
       dialogVisibleWallet:false,
@@ -189,7 +190,7 @@ export default {
         {
           id: "107",
           authName: "Gitbook",
-          path: "gitbook",
+          path: "",
           icon:require('@/assets/picture/myicon/Gitbook.png'),
           icon1:require('@/assets/picture/myicon/Gitbook1.png'),
         },
@@ -203,22 +204,19 @@ export default {
   watch: {
     $route(to,form){
       this.path = to.path;
-      console.log(this.path,'path11');
     }
   },
   // 渲染前获取数据
   mounted() {
     this.path = this.$route.path;
-    console.log(this.path,'path22');
   },
   methods: {
     // 切换语言
     changeLangage(lang) {
-      this.$i48n.locale=lang;  //设置中英文模式
-      localStorage.setItem('language',this.$i48n.locale);
+      this.lang = lang;
+      this.$i18n.locale=lang;  //设置中英文模式
       window.sessionStorage.setItem("language", lang);
       let path = this.$route.path;
-      location.reload();
     },
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
@@ -227,8 +225,13 @@ export default {
       console.log(key, keyPath,'111');
     },
     clickmenu(item){
-      if(item.path === 'gitbook'){
-        let link = 'https://anne-tang.gitbook.io/defender-jie-shao/';
+      if(item.authName === 'Gitbook'){
+        let link = '';
+        if(this.lang == 'cn'){
+          link = 'https://anne-tang.gitbook.io/defender-jie-shao/';
+        }else{
+          link = 'https://anne-tang.gitbook.io/defender-finance/';
+        }
         window.open(link, '_blank');
       }else{
         if(item.pid) this.index = item.pid;
@@ -238,7 +241,6 @@ export default {
       }
     },
     clickSubmenu(item){
-      console.log(item,'item');
       if(item.pid) this.index = item.pid;
       else this.index = item.id;
       this.$router.push(item.path);
