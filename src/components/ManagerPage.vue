@@ -86,7 +86,7 @@
             <img class="pic" src="@/assets/picture/myicon/setting.png">
           </div>
         </el-aside>
-        <div class="contentBox gpBBCM">
+        <div :class="path === '/exchange' || path === '/liquidity'?'contentBox gpBBCM bg':'contentBox gpBBCM'">
           <router-view></router-view>
         </div>
         <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
@@ -194,13 +194,22 @@ export default {
           icon1:require('@/assets/picture/myicon/Gitbook1.png'),
         },
       ],
+      path:'',
     };
   },
   components: {
     ComponentWallet
   },
+  watch: {
+    $route(to,form){
+      this.path = to.path;
+      console.log(this.path,'path11');
+    }
+  },
   // 渲染前获取数据
-  created() {
+  mounted() {
+    this.path = this.$route.path;
+    console.log(this.path,'path22');
   },
   methods: {
     // 切换语言
@@ -218,11 +227,15 @@ export default {
       console.log(key, keyPath,'111');
     },
     clickmenu(item){
-      console.log(item,'aa');
-      if(item.pid) this.index = item.pid;
-      else this.index = item.id;
-      this.$router.push(item.path);
-      this.$forceUpdate();
+      if(item.path === 'gitbook'){
+        let link = 'https://anne-tang.gitbook.io/defender-jie-shao/';
+        window.open(link, '_blank');
+      }else{
+        if(item.pid) this.index = item.pid;
+        else this.index = item.id;
+        this.$router.push(item.path);
+        this.$forceUpdate();
+      }
     },
     clickSubmenu(item){
       console.log(item,'item');
@@ -291,9 +304,12 @@ export default {
       transform: translate3d(0px, 0px, 0px);
       transition: margin-top 0.2s ease 0s;
       /*background-color: #F8F2ED;*/
-      background-image: url('~@/assets/picture/tradeBg.jpg');
+      
       background-size: cover;
       background-repeat: no-repeat;
+  }
+  .bg{
+    background-image: url('~@/assets/picture/tradeBg.jpg');
   }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 250px;

@@ -467,7 +467,7 @@ of the gods". </p>
       },
       // buy btn
       handleBuy(){
-        this.buyModelVisible = true;
+        // this.buyModelVisible = true;
       },
       handleNFT(){
         this.$router.push({path: '/myNFT'});
