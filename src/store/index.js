@@ -7,6 +7,8 @@ import mutations from './mutations'
 import actions from './actions'
 import baseData from './baseData'
 import url from './url'
+import web3 from './web3'
+import abi from './abi'
 import {CHANGESPERVISEDETAIL, GET_USER_MENU} from './mutation-types'
 //挂载Vuex
 Vue.use(Vuex)
@@ -21,6 +23,8 @@ const store = window.myStore = new Vuex.Store({
   	GET_USER_MENU,
 	baseData,
 	url,
+	web3,
+	abi,
   }
 })
 

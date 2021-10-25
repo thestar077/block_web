@@ -124,7 +124,7 @@ Vue.use(storePlugin)
 //     }
 // }
 
-Web3Helper.detectNetworkChanges();
+Web3Helper.detectNetworkChanges(store);
 
 // 注册指令
 directives.forEach(directive => Vue.directive(directive.name, directive.define));
