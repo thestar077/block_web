@@ -1,16 +1,18 @@
 <template>
   <div class="myNTFPage" id="myNTFPage"> 
-    <div class="myNTF">My NFT</div>
-    <div class="line"></div>
     <div class="roleArr">
       <ul>
         <li v-click @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
       </ul>
     </div>
     <el-carousel height="48vh" class="phoneShow">
-      <el-carousel-item  v-for="(item,index) in infoArr[roleActive]" :key="'info1'+index">
+      <!-- bosun todo -->
+      <!-- <el-carousel-item  v-for="(item,index) in infoArr[roleActive]" :key="'info1'+index"> -->
+      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index">
         <div ref="imgBox">
-          <img class="cursorPointer" width="80%" :src="item.img" @touchstart="gotouchstart(index)">
+          <!-- bosun todo -->
+          <!-- <img class="cursorPointer" width="80%" :src="item.img" @touchstart="gotouchstart(index)"> -->
+          <img class="cursorPointer" width="80%" :src="item.pic" @touchstart="gotouchstart(index)">
             <div class="shadow" v-if="shadowIndex == index" @touchend="gotouchend(index)">
               <div class="btn">
                 <img width="33px" src="@/assets/picture/staking.png">
@@ -24,8 +26,12 @@
       </el-carousel-item>
     </el-carousel>
     <el-row class="pcShow">
-      <el-col v-for="(item,index) in infoArr[roleActive]" class="box" :key="'info2'+index">
-        <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.img">
+      <!-- bosun todo -->
+      <!-- <el-col v-for="(item,index) in infoArr[roleActive]" class="box" :key="'info2'+index"> -->
+      <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="'info2'+index">
+        <!-- bosun todo -->
+        <!-- <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.img"> -->
+        <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.pic">
         <div class="shadow" v-if="shadowIndex == index" @mouseleave="mouseLeave(index)">
           <div class="btn">
             <img width="33px" src="@/assets/picture/staking.png">
@@ -38,6 +44,10 @@
       </el-col>
     </el-row>
     <div class="line mt20"></div>
+     <el-pagination
+    layout="prev, pager, next"
+    :total="50">
+  </el-pagination>
   </div>
 </template>
 
@@ -77,8 +87,206 @@
         myNftArr: [
 
         ],
+        // bosun todo
+        // infoArr:[
+        //   [],[],[],[],[]
+        // ],
         infoArr:[
-          [],[],[],[],[]
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              }
+            ],
+          },
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              }
+            ],
+          },
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              }
+            ],
+          },
+          {
+            info:[
+               {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              }
+            ],
+          },
+          {
+            info:[
+                                          {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              }
+            ],
+          }
         ],
         activeName: 'GameFi',
       };
@@ -99,18 +307,19 @@
               console.log('newVal', newVal);
               newVal.forEach((item) => {
                 item.img = this.$store.state.url.static.base + this.$store.state.url.static.images + item.hash;
-                this.infoArr[0].push(item);
-                if (item.name == 'Athena') {
-                  this.infoArr[1].push(item);
-                } else if (item.name == 'Posiedon') {
-                  this.infoArr[2].push(item);
-                } else if (item.name == 'Venus') {
-                  this.infoArr[3].push(item);
-                } else if (item.name == 'Apollo') {
-                  this.infoArr[4].push(item);
-                } else if (item.name == 'Cupid') {
-                  this.infoArr[5].push(item);
-                }
+                // bosun todo
+                // this.infoArr[0].push(item);
+                // if (item.name == 'Athena') {
+                //   this.infoArr[1].push(item);
+                // } else if (item.name == 'Posiedon') {
+                //   this.infoArr[2].push(item);
+                // } else if (item.name == 'Venus') {
+                //   this.infoArr[3].push(item);
+                // } else if (item.name == 'Apollo') {
+                //   this.infoArr[4].push(item);
+                // } else if (item.name == 'Cupid') {
+                //   this.infoArr[5].push(item);
+                // }
               });
               console.log('$store.state.baseData.assets', this.infoArr );
           }
@@ -166,8 +375,32 @@
 <style lang="less" scoped>
   .myNTFPage{
     padding:22px 168px 0 168px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-image: url('~@/assets/picture/tradeBg.jpg');
     .pcShow,.phoneShow{
-      background: #fff;
+    }
+    .el-pagination{
+      text-align: center;
+      margin-top: 200px;
+    }
+    .el-pagination button:disabled{
+
+    }
+    /deep/ .el-pager li.active{
+      background: #A39282;
+      color: #fff;
+    }
+    /deep/ .el-pagination .btn-next,/deep/ .el-pagination .btn-prev,/deep/ .el-pager li{
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 100px;
+      line-height: 32px;
+      text-align: center;
+      display: inline-block;
+      color: #A39282;
     }
     .myNTF{
       padding: 20px 35px;
@@ -180,15 +413,13 @@
     .line{
       width: 100%;
       height: 20px;
-      background: #E9D9C9;
     }
     .roleArr{
       width: 100%;
       display: flex;
-      background: #fff;
       justify-content:space-between;
       align-items:center;
-      border-bottom: 1px solid #E9D9C9;
+      margin:40px auto 27px auto;
       .active{
         background: #A39282;
         color: #fff;
@@ -213,16 +444,20 @@
         display: flex;
         justify-content:space-between;
         align-items:center;
-        background-color: #fff;
         overflow-x: scroll;
         li{
+          width: 160px;
+          height: 60px;
+          text-align: center;
+          line-height: 60px;
           font-size: 28px;
           font-weight: 500;
-          line-height: 40px;
           color: #A39282;
           opacity: 1;
-          padding:20px 48px;
+          border-radius: 30px;
           cursor: pointer;
+          margin-right: 25px;
+          background: #fff;
         }
       }
     }

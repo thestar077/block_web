@@ -21,6 +21,7 @@
         </div>
       </div>
       <el-carousel :height="imgHeight+'px'" class="phoneShow">
+        <!-- bosun todo -->
         <!-- <el-carousel-item  v-for="(item,index) in nftArr[roleList[roleActive].name]" :key="'info1'+index"> -->
         <el-carousel-item  v-for="(item,index) in nftArr[roleActive].info" :key="'info1'+index">
           <div ref="imgBox">
@@ -36,8 +37,10 @@
         </el-carousel-item> 
       </el-carousel>
       <el-row class="pcShow">
+        <!-- bosun todo -->
         <!-- <el-col v-for="(item,index) in nftArr[roleList[roleActive].name]" :key="'info2'+index"> -->
         <el-col v-for="(item,index) in nftArr[roleActive].info" :key="'info2'+index">
+          <!-- bosun todo -->
           <!-- <img width="100%" :src="item.image"> -->
           <img width="100%" :src="item.pic">
           <div class="textBox" v-if="isShow">
@@ -148,30 +151,14 @@ of the gods". </p>
     </div>
       <el-dialog :visible.sync="buyModelVisible" width="80%" append-to-body>
         <div class="buyBox" id="myNtfPageBuyBox">
-          <el-row :gutter="20">
-            <el-col :span="16">
-              <div class="leftBox">
-                <img src="@/assets/picture/buy/1.png">
-                <div class="txtBox">
-                  <h5 class="title">Rank：SSR</h5>
-                  <h6 class="dec">Big Whale Athena</h6>
-                  <p>Skills:Show-hand mainstream, stable profit</p>
-                  <p>Features:goddess of war, face the evil</p>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="8">
-              <div class="rightBox">
-                <div class="title">Excellent !</div>
-                <div>
-                  <div class="buyBoxBtn" v-click @click="handleNFT">My NFT</div>
-                  <div class="buyBoxBtn" v-click @click="handleStaking">NFT Staking</div>
-                  <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
-                </div>
-                
-              </div>
-            </el-col>
-          </el-row>
+          <div class="rightBox">
+            <div class="title">Excellent !</div>
+            <div>
+              <div class="buyBoxBtn" v-click @click="handleNFT">My NFT</div>
+              <div class="buyBoxBtn" v-click @click="handleStaking">NFT Staking</div>
+              <div class="buyBoxBtn cancelBtn" @click="buyModelVisible = false">Cancel</div>
+            </div> 
+          </div>
         </div>
       </el-dialog>
   </div>
@@ -185,7 +172,7 @@ of the gods". </p>
     data() {
       return {
         isHave:false,
-        buyModelVisible:false,
+        buyModelVisible:true,
         imgHeight:'350',
         num:0,
         buyToken:'egg',
@@ -209,6 +196,8 @@ of the gods". </p>
             name:'Cupid',
           }
         ],
+        // bosun todo
+        // nftArr:[],
         nftArr:[
           {
             info:[
@@ -460,8 +449,9 @@ of the gods". </p>
     watch: {
       '$store.state.baseData.nfts': function(newVal) {
           if(newVal){
-              // this.nftArr = newVal;
-              // console.log('this.nftArr', this.nftArr)
+            // bosun todo
+            // this.nftArr = newVal;
+            // console.log('this.nftArr', this.nftArr)
           }
       },
       '$store.state.web3.nft_bought': function(newVal) {
@@ -525,7 +515,7 @@ of the gods". </p>
       },
       // buy btn
       async handleBuy(){
-        // this.buyModelVisible = true;
+        this.buyModelVisible = true;
         // Step 1: Check balances
         let buyer = this.user;
         let minter = this.minter;
@@ -628,7 +618,7 @@ of the gods". </p>
         }
       }
       .rightBox{
-        padding-top: 35%;
+        text-align: center;
         .title{
           font-size: 60px;
           font-weight: 500;
@@ -648,6 +638,8 @@ of the gods". </p>
           cursor: pointer;
           font-size: 34px;
           font-weight: bold;
+          display: block;
+          margin:0 auto;
           margin-bottom: 45px;
         }
         .cancelBtn{

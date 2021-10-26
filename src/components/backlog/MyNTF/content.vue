@@ -1,17 +1,15 @@
 <template>
   <div class="myNTFPage" id="myNTFPage"> 
-    <div class="myNTF">
-      My NFT
-      <img class="arrow" src="@/assets/picture/arrow.png">
-     Apollo A
+    <div class="myNTF" @click="goBack">
+       <span class="el-icon-arrow-left"></span>
+       Back
     </div>
-    <div class="line"></div>
     <div class="contentNFTBox">
       <el-row :gutter="50">
-        <el-col :span="8">
+        <el-col :span="6">
           <img class="rolePic" src="@/assets/picture/SSR.png">
         </el-col>
-        <el-col :span="16">
+        <el-col :span="18">
           <div>
             <div class="tagList">
               <span @click="tagIndex = index" :class="tagIndex == index?'tag active':'tag'" v-for="(item,index) in options" :key="index">{{item.name}}</span>
@@ -76,6 +74,9 @@
       
     },
     methods: {
+      goBack(){
+        this.$router.go(-1); 
+      },
     }
   };
 </script>
@@ -83,13 +84,32 @@
 <style lang="less" scoped>
   .myNTFPage{
     padding:22px 168px 0 168px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-image: url('~@/assets/picture/tradeBg.jpg');
     .myNTF{
       font-size: 28px;
       font-weight: 500;
       line-height: 40px;
       color: #A39282;
-      padding:20px 34px;
-      background: #fff;
+      padding:30px 34px;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 33px;
+      color: #A39282;
+      opacity: 1;
+      span{
+        width: 60px;
+        height: 60px;
+        color: #fff;
+        line-height: 60px;
+        text-align: center;
+        background: #A39282;
+        font-size: 30px;
+        border-radius: 100%;
+        margin-right: 23px;
+      }
     }
     .arrow{
       width: 7px;
@@ -101,7 +121,7 @@
       background: #E9D9C9;
     }
     .contentNFTBox{
-      padding-top: 50px;
+      /*padding-top: 50px;*/
       .rolePic{
         height: 400px;
       }
