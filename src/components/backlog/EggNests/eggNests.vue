@@ -70,7 +70,8 @@
           <div class="sc-eCssSg gqHjnk">
             <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}} LP</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
+          <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
+          <button v-else type="button" class="sc-dlfnbm hlRgJI">Deposit</button></div>
         <div class="sc-tYoTV jYOTaZ"></div>
         <div v-click @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
           <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
@@ -192,6 +193,11 @@
     },
     created() {
       
+    },
+    computed: {
+      accounts () {
+        return this.$store.state.web3.accounts;
+      },
     },
     methods: {
       handleActive(index){

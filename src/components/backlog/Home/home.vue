@@ -20,7 +20,8 @@
             <div class="sc-hOqqkJ imhYNd">~$0.00</div>
           </div>
           <div class="sc-dtwoBo inCwUZ">
-            <button v-click type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+            <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+            <button v-else type="button" class="sc-dlfnbm btoybd">Deposit</button>
           </div>
         </div>
       </div>
@@ -107,6 +108,11 @@
     },
     created() {
       
+    },
+    computed: {
+      accounts () {
+        return this.$store.state.web3.accounts;
+      },
     },
     methods: {
       
