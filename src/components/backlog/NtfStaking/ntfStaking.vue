@@ -1,23 +1,22 @@
 <template>
-  <div class="stakeNFTPage" id="stakeNFTPage"> 
-    <div class="banner">
-      <img width="100%" src="@/assets/picture/skaetBanner.png">
-    </div> 
+  <div class="stakeNFTPage" id="stakeNFTPage">   
     <div class="content">
-      <el-row class="biArr">
+      <div class="banner">
+        <img width="100%" src="@/assets/picture/skaetBanner.png">
+      </div>
+      <el-row :gutter="65">
         <el-col v-for="(item,index) in biArr" :key="index">
-          <img width="100%" :src="item.pic">
-          <div class="biTitle">
-            $ {{item.num}}
-            <span v-if="index == biArr.length-1">Claim</span>
-          </div>
-          <p class="biTxt">{{item.txt}}</p>       
+          <div  class="biArr">
+            <img width="100%" :src="item.pic">
+            <div class="biTitle">
+              $ {{item.num}}
+              <span v-if="index == biArr.length-1">Claim</span>
+            </div>
+            <p class="biTxt">{{item.txt}}</p>
+          </div>     
         </el-col>
       </el-row>
       <div class="stakeNFTBox">
-        <div class="roleArr">
-          <span>Stake NFT</span>
-        </div>
         <div class="cardBoxArr">
           <div class="cardBox" v-for="(item,index) in infoArr" :key="'info1-'+index">
             <img width="100%" :src="item.pic">
@@ -186,9 +185,21 @@
 
 <style lang="less" scoped>
   .stakeNFTPage{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('~@/assets/picture/nftBoxBg.png');
+    .content{
+      background: none !important;
+    }
     .banner{
       width: 100%;
       background: #E9D9C9;
+      border-radius: 30px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      img{
+        border-radius: 30px;
+      }
     }
     .roleArr{
       width: 100%;
@@ -267,12 +278,16 @@
         }
       }
       .stakeNFTBox{
-        border:1px solid #E9D9C9;
+        border-radius: 30px;
         background-color: #fff;
+        padding:33px 28px;
       }
-      .biArr{
-        margin-bottom: 36px;
-        background-color: #fff;
+      .biArr{;
+        background: #fff;
+        border-radius: 30px;
+        padding-top: 24px;
+        height: 280px;
+        margin-bottom: 40px;
         img{
           width:84px;
           height: 84px;
