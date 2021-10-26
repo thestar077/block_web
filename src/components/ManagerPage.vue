@@ -196,6 +196,7 @@ export default {
         },
       ],
       path:'',
+      screenWidth: document.body.clientWidth,
     };
   },
   components: {
@@ -209,6 +210,18 @@ export default {
   // 渲染前获取数据
   mounted() {
     this.path = this.$route.path;
+    const that = this
+    window.onresize = () => {
+        return (() => {
+            window.screenWidth = document.body.clientWidth;
+            that.screenWidth = window.screenWidth;
+            if(that.screenWidth>852){
+              that.isCollapse = false;
+            }else{
+              that.isCollapse = true;
+            }
+        })()
+    }
   },
   methods: {
     // 切换语言

@@ -26,7 +26,7 @@
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
             <img :src="item.pic" width="100" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
-          <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">{{item.name}}</h2>
+          <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">{{item.name}} LP</h2>
             <div class="sc-eCssSg ecyRc">
               <div class="sc-cxFLnm lbtiF" v-if="item.noFree">
                 <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ hMHdGP">
@@ -68,7 +68,7 @@
               <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
           </div>
           <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">EGG-BUSD LP</div>
+            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}} LP</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
           <button type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button></div>
         <div class="sc-tYoTV jYOTaZ"></div>
@@ -137,7 +137,7 @@
             name:'EGG',
             num:20,
             stake:'EGG',
-            deposit:'',
+            deposit:'EGG',
             pic:require('@/assets/picture/egg/2.jpg'),
             noFree:true,
             showDetail:false
@@ -146,7 +146,7 @@
             name:'ETH',
             num:2,
             stake:'ETH',
-            deposit:'',
+            deposit:'ETH',
             pic:require('@/assets/picture/egg/3.jpg'),
             noFree:true,
             showDetail:false
@@ -155,7 +155,7 @@
             name:'USDC',
             num:'60',
             stake:'',
-            deposit:'',
+            deposit:'USDC',
             pic:require('@/assets/picture/egg/4.jpg'),
             noFree:false,
             showDetail:false
@@ -164,7 +164,7 @@
             name:'ETH-USDC',
             num:'60',
             stake:'',
-            deposit:'',
+            deposit:'ETH-USDC',
             pic:require('@/assets/picture/egg/5.jpg'),
             noFree:false,
             showDetail:false
@@ -173,7 +173,7 @@
             name:'ETH-DFD',
             num:'60',
             stake:'',
-            deposit:'',
+            deposit:'ETH-DFD',
             pic:require('@/assets/picture/egg/6.jpg'),
             noFree:false,
             showDetail:false
@@ -182,7 +182,7 @@
             name:'ETH-EGG',
             num:'60',
             stake:'',
-            deposit:'',
+            deposit:'ETH-EGG',
             pic:require('@/assets/picture/egg/7.jpg'),
             noFree:false,
             showDetail:false
