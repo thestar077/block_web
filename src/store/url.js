@@ -9,6 +9,7 @@ export default {
                 nft_by_id: 'nftById',
                 nfts_by_name: 'nftsByName',
                 trade_token: 'tradeNft',
+                nft_asset_by_owner: 'nftAssetByOwner',
             },
             announcements: {
             

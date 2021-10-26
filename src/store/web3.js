@@ -17,14 +17,14 @@ export default {
         web3: '',
         address: {
             token: {
-                egg: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
-                dfd: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
-                dgg: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                egg: '0x6cf81809daf70601867A226c63359F264FC084E5',
+                dfd: '0x2fe3b9Ad0D10ba98dF1862897A6902bcD10f4dC0',
+                dgg: '0xE2f9DF720A9dafe74f15d271269B43fDC32e0d53',
                 usdc: '',
                 weth: '',
             },
-            rand: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
-            dgg_sale: '0x10C246E3B657A9b091C0D20454F76506e23f4F87',
+            rand: '0xBc45cA09c3d00a9bA25eB08b70849Db43A76BE03',
+            dgg_sale: '0xFFe63f7AeC1E895A182821885a6852735ED1E50F',
         },
         contracts: {
             token: {
@@ -116,6 +116,7 @@ export default {
                     dispatch('getTokenDfdContract');
                     dispatch('getRandContract');
                     dispatch('getDggSaleContract');
+                    dispatch('getMyNftAssets', this.state.web3.accounts[0]);
                     console.log('egg contract', this.state.web3.contracts.token.egg);
                     console.log('dgg contract', this.state.web3.contracts.token.dgg);
                     console.log('dfd contract', this.state.web3.contracts.token.dfd);

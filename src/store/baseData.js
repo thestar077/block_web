@@ -4,12 +4,16 @@ import myStorage from './myStorage';
 const NFTS_ALL = 'NFTS_ALL';
 const NFTS_BY_NAME = 'NFTS_BY_NAME';
 const NFTS_BY_ID = 'NFTS_BY_ID';
+const NFT_ASSET_BY_OWNER = 'NFT_ASSET_BY_OWNER';
+const NFT_ASSETS_LOADED = 'NFT_ASSETS_LOADED';
 
 const CONFIG = 'CONFIG';
 
 export default {
     state: {
         nfts: [],
+        assets: [],
+        assetsLoaded: 0,
         config: {},
         consts: {
             dgg_price_egg_default: 800,
@@ -42,6 +46,41 @@ export default {
                     myStorage.set('nfts', nftData);
                     myStorage.set('lastRefresh', (new Date()).getTime());
                     commit('NFTS_ALL', nftData);
+                }
+            })
+        },
+        getMyNftAssets({ commit }, owner) {
+            let url = this.state.url.api.base + this.state.url.api.nft.nft_asset_by_owner;
+            console.log('getMyNftAssets owner', owner);
+            axios({
+                url: url,
+                method: 'get',
+                params: {
+                    owner: owner,
+                }
+            }).then((data) => {
+                if (data.status === 200) {
+                    
+                    let myNftAsset = JSON.parse(data.data);
+                    console.log('getMyNfts', myNftAsset.responseData);
+                    commit('NFT_ASSETS_LOADED', 0);
+                    let metas = [];
+                    for (let idx = 0; idx < myNftAsset.responseData.length; idx++) {
+                        let item = myNftAsset.responseData[idx];
+                        let jsonUrl = this.state.url.static.base + item.meta;
+                        console.log('jsonUrl', jsonUrl);
+                        axios.get(jsonUrl).then(async (meta) => {
+                            let metaData = JSON.parse(meta.data);
+                            metas.push(metaData);
+                            commit('NFT_ASSETS_LOADED', idx+1);
+                            console.log('metas', metas)
+                            commit('NFT_ASSET_BY_OWNER', metas);
+                        });
+                    }
+
+                    
+                    // myStorage.set('config', configData);
+                    // commit('CONFIG', configData);
                 }
             })
         },
@@ -81,6 +120,12 @@ export default {
         },
         [CONFIG](state, result) {
             state.config = result;
+        },
+        [NFT_ASSET_BY_OWNER](state, result) {
+            state.assets = result;
+        },
+        [NFT_ASSETS_LOADED](state, result) {
+            state.assetsLoaded = result;
         }
     },
 };

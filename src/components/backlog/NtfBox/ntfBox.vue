@@ -260,6 +260,10 @@ of the gods". </p>
               this.nftBought = JSON.parse(newVal);
               console.log('nftBought', this.nftBought);
               if (this.nftBought.length > 0) {
+                setTimeout(() => {
+                  this.$router.push('myNFT');
+                }, 2000);
+                
                 return Message({
                   message: `Congratulations. You have successfully bought ${this.nftBought.length} DGGs.`,
                   type: 'success',
