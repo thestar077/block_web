@@ -1,22 +1,31 @@
 <template>
   <div class="myNtfPage" id="myNtfPage">
-    <div class="banner">
-      <img width="100%" src="@/assets/picture/boxBanner.png">
-    </div> 
-    <div class="content">
+    <div class="content pt40">
       <div class="roleArr">
-        <ul>
-          <li v-click @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
-        </ul>
-        <div class="viewBtn" v-click @click="handleView">
-          <span>More</span>
-          <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
+        <div class="roleArrLeft">
+          <ul>
+            <li v-click @click="changeTag(index)" :class="roleActive == index?'active':''" v-for="(item,index) in roleList" :key="index">{{item.name}}</li>
+          </ul>
+          <div class="viewBtn" v-click @click="handleView">
+            <span>More</span>
+            <img class="viewBtn" width="200" :src="isShow?require('@/assets/picture/myicon/view1.png'):require('@/assets/picture/myicon/view.png')">
+          </div>
+        </div>
+        <div class="switchBox">
+           <el-switch
+            v-model="isHave"
+            active-color="#A39282"
+            inactive-color="#EEEAF4">
+          </el-switch>
+          <span class="label">{{isHave?'Already owned':'All'}}</span>
         </div>
       </div>
       <el-carousel :height="imgHeight+'px'" class="phoneShow">
-        <el-carousel-item  v-for="(item,index) in nftArr[roleList[roleActive].name]" :key="'info1'+index">
+        <!-- <el-carousel-item  v-for="(item,index) in nftArr[roleList[roleActive].name]" :key="'info1'+index"> -->
+        <el-carousel-item  v-for="(item,index) in nftArr[roleActive].info" :key="'info1'+index">
           <div ref="imgBox">
-            <img width="80%" :src="item.image">
+            <!-- <img width="80%" :src="item.image"> -->
+            <img width="80%" :src="item.pic">
             <div class="textBox" v-if="isShow">
               <h5>Attribute:{{item.levelStr}}</h5>
               <p>{{item.desc}}</p> 
@@ -27,8 +36,10 @@
         </el-carousel-item> 
       </el-carousel>
       <el-row class="pcShow">
-        <el-col v-for="(item,index) in nftArr[roleList[roleActive].name]" :key="'info2'+index">
-          <img width="100%" :src="item.image">
+        <!-- <el-col v-for="(item,index) in nftArr[roleList[roleActive].name]" :key="'info2'+index"> -->
+        <el-col v-for="(item,index) in nftArr[roleActive].info" :key="'info2'+index">
+          <!-- <img width="100%" :src="item.image"> -->
+          <img width="100%" :src="item.pic">
           <div class="textBox" v-if="isShow">
             <h5>Attribute:{{item.levelStr}}</h5>
             <p>{{item.desc}}</p> 
@@ -37,11 +48,11 @@
           </div>
         </el-col>
       </el-row>
+       <div class="banner">
+        <img width="100%" src="@/assets/picture/boxBanner.png">
+      </div> 
       <div class="mt20"></div>
       <div class="blindBox">
-        <div class="titleTxt">
-          Blind Box
-        </div>
         <div class="content">
           <div class="col10">
             <div class="box">
@@ -52,14 +63,16 @@
           <div class="col12 txtBox">
             <p class="title">Defender-Greek Gods</p>
             <p class="txtInfo">In this collection，There are 5 Greek gods for you to unbox. Try your luck!</p>
-            <p class="price">Price</p>
-            <p class="priceTxt" v-if="buyToken == 'egg'">
-              <span class="num">{{800}}</span>
-              <span> EGG ≈ 5690 USDC</span>
-            </p>
-            <div class="priceText" v-else>
-              <p class="originalPrice">{{dggPriceEgg}} EGG ≈ 5690 USDC <span>price</span></p>
-              <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
+            <div class="priceBox">
+              <p class="price">Price</p>
+              <p class="priceTxt" v-if="buyToken == 'egg'">
+                <span class="num">{{800}}</span>
+                <span> EGG ≈ 5690 USDC</span>
+              </p>
+              <div class="priceText" v-else>
+                <p class="originalPrice">{{dggPriceEgg}} EGG ≈ 5690 USDC <span>price</span></p>
+                <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
+              </div>
             </div>
             <div class="totleNum">
               <span>Quantity</span>
@@ -73,9 +86,9 @@
                   <el-radio label="usdc">USDC</el-radio>
                 </el-radio-group>
               </div>
-              <div class="buyBtn" v-click @click="handleBuy">
-                Buy
-              </div>
+            </div>
+            <div class="buyBtn" v-click @click="handleBuy">
+              Buy
             </div>
           </div>
         </div>
@@ -171,6 +184,7 @@ of the gods". </p>
   export default {
     data() {
       return {
+        isHave:false,
         buyModelVisible:false,
         imgHeight:'350',
         num:0,
@@ -196,6 +210,201 @@ of the gods". </p>
           }
         ],
         nftArr:[
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Athena',
+                features:'goddess of war, face the evil',
+                skill:'Show-hand mainstream, stable profit',
+              }
+            ],
+          },
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Poseidon',
+                features:'The god of the sea who shakes the earth.',
+                skill:' Show-hand copycat, get rich overnight.',
+              }
+            ],
+          },
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Venus',
+                features:'arouse love and beauty in hearts of all things in the universe',
+                skill:'Show-hand DFD, reach the peak of life',
+              }
+            ],
+          },
+          {
+            info:[
+                            {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Apollo',
+                features:'God of the sun and protector of human civilization',
+                skill:'EGG full position, get nice lover',
+              }
+            ],
+          },
+          {
+            info:[
+              {
+                pic:require('@/assets/picture/SSR.png'),
+                leval:'SSR',
+                name:'Big Whale Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/SR.png'),
+                leval:'SR',
+                name:'Freedom of wealth Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/S.png'),
+                leval:'S',
+                name:'Rich and noble Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/A+.png'),
+                leval:'A+',
+                name:'Small profit Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              },
+              {
+                pic:require('@/assets/picture/A.png'),
+                leval:'A',
+                name:'Show-hand Fan Cupid',
+                features:'My arrow has been aimed at people bathed in love',
+                skill:'Band master, K-line divine hand',
+              }
+            ],
+          }
         ],
         activeName: 'GameFi',
         tableData: [{
@@ -251,8 +460,8 @@ of the gods". </p>
     watch: {
       '$store.state.baseData.nfts': function(newVal) {
           if(newVal){
-              this.nftArr = newVal;
-              console.log('this.nftArr', this.nftArr)
+              // this.nftArr = newVal;
+              // console.log('this.nftArr', this.nftArr)
           }
       },
       '$store.state.web3.nft_bought': function(newVal) {
@@ -379,6 +588,9 @@ of the gods". </p>
         overflow:hidden;
       }
     }
+    .pt40{
+      padding-top: 40px !important;
+    }
     .buyBox{
       .leftBox{
         img{
@@ -444,7 +656,9 @@ of the gods". </p>
       }
     }
   .myNtfPage{
-    background-color: #F8F2ED;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('~@/assets/picture/nftBoxBg.png');
     padding-bottom: 50px;
     .content{
       padding:0 168px;
@@ -452,11 +666,13 @@ of the gods". </p>
     .banner{
       width: 100%;
       background: #E9D9C9;
-      margin-bottom: 35px;
+      margin:36px auto 40px auto;
+      border-radius: 30px;
+      overflow: hidden;
     }
     .el-row{
-        background-color: #fff;
-        border: 1px solid #E9D9C9;
+   /*     background-color: #fff;
+        border: 1px solid #E9D9C9;*/
         border-top: none;
       }
     .el-carousel__container{
@@ -467,8 +683,28 @@ of the gods". </p>
       display: flex;
       justify-content:space-between;
       align-items:center;
-      border: 1px solid #E9D9C9;
-      background-color: #fff;
+      margin-bottom:60px;
+      /*background-color: #fff;*/
+      .roleArrLeft{
+        display: flex;
+        justify-content:flex-start;
+        align-items:center;
+      }
+      .switchBox{
+        display: flex;
+        justify-content:flex-start;
+        align-items:center;
+        .label{
+          font-size: 24px;
+          font-family: PingFang SC;
+          font-weight: bold;
+          line-height: 33px;
+          color: #A39282;
+          opacity: 1;
+          background: none;
+          margin-left: 23px;
+        }
+      }
       .active{
         background: #A39282;
         color: #fff;
@@ -493,15 +729,20 @@ of the gods". </p>
         display: flex;
         justify-content:space-between;
         align-items:center;
-        background-color: #fff;
+        /*background-color: #fff;*/
         li{
+          width: 160px;
+          text-align: center;
+          line-height: 60px;
+          height: 60px;
+          display: block;
           font-size: 24px;
           font-weight: 500;
-          line-height: 40px;
           color: #A39282;
-          opacity: 1;
-          padding:20px 48px;
+          border-radius: 31px;
           cursor: pointer;
+          margin-right: 25px;
+          background: #FFFFFF;
         }
       }
     }
@@ -536,7 +777,7 @@ of the gods". </p>
     }
     .blindBox{
       background-color: #fff;
-      border: 1px solid #E9D9C9;
+      border-radius: 30px;
       .titleTxt{
         padding: 24px 27px;
         font-size: 24px;
@@ -589,11 +830,16 @@ of the gods". </p>
             margin-bottom: 6px;
             font-weight: 800;
             line-height: 78px;
-            color: #050505;
+            color: #827569;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
             word-break: break-all;
+          }
+          .priceBox{
+            justify-content:flex-start;
+            align-items:center;
+            display: flex;
           }
           .txtInfo{
             font-size: 26px;
@@ -615,20 +861,27 @@ of the gods". </p>
             line-height: 59px;
             color: #A39282;
             margin:20px 0 0 0;
+            margin-right: 20px;
           }
           .priceTxt{
+            margin-top: 20px;
             font-size: 26px;;
             font-weight: bold;
             line-height: 59px;
             color: #333333;
-            padding-bottom: 20px;
-            border-bottom:1px solid #E9D9C9;
             .num{
-              font-size: 64px;
-              font-weight: bold;
-              line-height: 112px;
-              color: #EEB739;
               margin-right: 40px;
+              height: 80px;
+              font-size: 30px;
+              font-weight: bold;
+              line-height: 80px;
+              padding:0 20px;
+              font-size: 40px;
+              font-family: PingFang SC;
+              font-weight: bold;
+              border-radius: 20px;
+              color: #000000;
+              background:#E9EAEB;
             }
           }
           .priceText{
@@ -678,7 +931,10 @@ of the gods". </p>
             font-size: 22px;
             font-weight: bold;
             line-height: 42px;
-            color:  #A39282;
+            justify-content:space-between;
+            align-items:center;
+            display: flex;
+            color: #000000;
             span{
               margin-right: 55px;
             }
@@ -715,7 +971,7 @@ of the gods". </p>
             font-size: 22px;
             font-weight: bold;
             line-height: 42px;
-            color: #A39282;
+            color: #000;
             justify-content:space-between;
             align-items:center;
             display: flex;
@@ -752,21 +1008,28 @@ of the gods". </p>
                 color: #000000 !important;
               }
             }
-            .buyBtn{
-              width: 300px;
-              height: 75px;
-              text-align: center;
-              line-height: 75px;
-              font-size: 40px;
-              color: #fff;
-              background: #C91731;
-              opacity: 1;
-              border-radius: 20px;
-              cursor: pointer;
-            }
+          }
+          .buyBtn{
+            width: 689px;
+            height: 70px;
+            background: #A39282;
+            opacity: 1;
+            text-align: center;
+            line-height: 70px;
+            border-radius: 20px;
+            font-size: 34px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-top: 25px;
           }
         }
       }
+    }
+    /deep/ .el-tabs{
+      border-radius: 30px;
+      overflow: hidden;
+      margin-top: 20px;
     }
     /deep/ .el-tabs__item{
       font-size: 22px;

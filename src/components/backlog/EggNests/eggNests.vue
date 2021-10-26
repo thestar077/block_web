@@ -711,7 +711,7 @@
 .hlRgJI {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(170, 137, 41);
+    background-color: #A29181;
     box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px inset;
     color: rgb(255, 255, 255);
     cursor: pointer;

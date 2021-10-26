@@ -42,9 +42,9 @@
          </div>
          <div class="sc-iWFSnp bHLdTZ">
           <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
-          <button v-click @click="showToken" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+          <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token1.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
-             {{token.name}}
+             {{token1.name}}
             </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -72,9 +72,9 @@
          </div>
          <div class="sc-iWFSnp bHLdTZ">
           <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
-          <button class="sc-jLiVlK eZTMLz open-currency-select-button selectBtn"><span class="sc-tkKAw iONwHy">
+           <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token2.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
-             Select a currency
+             {{token2.name}}
             </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg  mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -187,10 +187,15 @@
           percent:1,
           minutes:24
         },
-        token:{
+        token1:{
           pic:require('@/assets/picture/bi/1.png'),
           name:'Uniswap (UNI)',
         },
+        token2:{
+          pic:require('@/assets/picture/bi/1.png'),
+          name:'Uniswap (UNI)',
+        },
+        tokenIndex:1,
         tokenList:[
           {
             pic:require('@/assets/picture/bi/1.png'),
@@ -333,11 +338,16 @@
       getTolerance(item,index){
         this.toleranceIndex = index;
       },
-      showToken(){
+      showToken(index){
+        this.tokenIndex = index;
         this.dialogVisibleToken = true;
       },
       handleToken(item,index){
-        this.token = item;
+        if(this.tokenIndex == 1){
+          this.token1 = item;
+        }else{
+          this.token2 = item;
+        }
         this.dialogVisibleToken = false;
       },
       search(){
@@ -591,7 +601,7 @@
 .kjBbpq {
     -webkit-box-align: center;
     align-items: center;
-    background-color: #aa8929;
+    background-color: #A29181;
     box-shadow: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -628,7 +638,7 @@
     align-items: center;
     background-color: rgb(239, 244, 245);
     box-shadow: none;
-    color: rgb(170, 137, 41);
+    color: #A29181;
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
@@ -680,14 +690,14 @@
     line-height: 1.1;
 }
 .eEIHSi {
-    color: #aa8929;
+    color: #897461;
     font-size: 26px;
     font-weight: 600;
     line-height: 1.5;
     margin-bottom: 8px;
 }
 .cHBkgC {
-    color: #aa8929;
+    color:#897461;
     font-size: 22px;
     font-weight: 400;
     line-height: 1.5;
@@ -701,7 +711,7 @@
     align-items: center;
     background-color: transparent;
     box-shadow: none;
-    color: rgb(170, 137, 41);
+    color: #A29181;
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
@@ -835,7 +845,7 @@
     border-radius: 24px;
 }
 .UNrzd {
-    color: #aa8929;
+    color: #A29181;
     font-size: 24px;
     font-weight: 400;
     line-height: 1.5;
@@ -857,7 +867,7 @@
     padding: 0px;
 }
 .dRSIFi {
-    fill: rgb(170, 137, 41);
+    fill: #A29181;
     flex-shrink: 0;
 }
 .kTSysC {
@@ -889,7 +899,7 @@
 .btoybd {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(170, 137, 41);
+    background-color: #A29181;
     box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px inset;
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -949,7 +959,7 @@
     align-items: center;
     background-color: rgb(239, 244, 245);
     box-shadow: none;
-    color: rgb(170, 137, 41);
+    color: #A29181;
     cursor: pointer;
     display: inline-flex;
     font-family: inherit;
@@ -973,7 +983,7 @@
     margin-right: 10px;
 }
 .active{
-  background-color: rgb(170, 137, 41);
+  background-color: #A29181;
     border-color: currentcolor;
     color: #fff;
 }

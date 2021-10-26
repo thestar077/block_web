@@ -240,8 +240,8 @@
     .btoybd {
         -webkit-box-align: center;
         align-items: center;
-        background-color: rgb(170, 137, 41);
-        box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px inset;
+        background-color: #A29181;
+        box-shadow: #A29181 0px -1px 0px inset;
         color: rgb(255, 255, 255);
         cursor: pointer;
         display: inline-flex;
@@ -249,7 +249,7 @@
         font-size: 22px;
         font-weight: 600;
         width: 100%;
-        height: 48px;
+        height: 75px;
         line-height: 1;
         letter-spacing: 0.03em;
         -webkit-box-pack: center;
