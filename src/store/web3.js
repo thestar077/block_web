@@ -7,6 +7,8 @@ const WEB3_ACCOUNTS = 'WEB3_ACCOUNTS';
 const WEB3_CONTRACT_TOKEN_EGG = 'WEB3_CONTRACT_TOKEN_EGG';
 const WEB3_CONTRACT_TOKEN_DGG = 'WEB3_CONTRACT_TOKEN_DGG';
 const WEB3_CONTRACT_TOKEN_DFD = 'WEB3_CONTRACT_TOKEN_DFD';
+const WEB3_CONTRACT_TOKEN_FTK1 = 'WEB3_CONTRACT_TOKEN_FTK1';
+const WEB3_CONTRACT_TOKEN_FTK2 = 'WEB3_CONTRACT_TOKEN_FTK2';
 const WEB3_CONTRACT_DGG_SALE = 'WEB3_CONTRACT_DGG_SALE';
 const WEB3_CONTRACT_POOL_SINGLE = 'WEB3_CONTRACT_POOL_SINGLE';
 const WEB3_CONTRACT_UNISWAP_FACTORY = 'WEB3_CONTRACT_UNISWAP_FACTORY';
@@ -128,19 +130,24 @@ export default {
                     dispatch('getTokenEggContract');
                     dispatch('getTokenDggContract');
                     dispatch('getTokenDfdContract');
+                    dispatch('getTokenFTK1Contract');
+                    dispatch('getTokenFTK2Contract');
                     dispatch('getRandContract');
                     dispatch('getDggSaleContract');
                     dispatch('getPoolSingleContract');
                     dispatch('getUniswapFactoryContract');
                     dispatch('getDefenderRouterV1Contract');
-                    dispatch('getDggSaleContract');
-                    dispatch('getDggSaleContract');
                     dispatch('getMyNftAssets', this.state.web3.accounts[0]);
-                    console.log('egg contract', this.state.web3.contracts.token.egg);
-                    console.log('dgg contract', this.state.web3.contracts.token.dgg);
-                    console.log('dfd contract', this.state.web3.contracts.token.dfd);
-                    console.log('rand contract', this.state.web3.contracts.rand);
-                    console.log('dgg-sale contract', this.state.web3.contracts.dgg_sale);
+                    console.log('egg contract', this.state.web3.contracts.token.egg.options.address);
+                    console.log('dgg contract', this.state.web3.contracts.token.dgg.options.address);
+                    console.log('dfd contract', this.state.web3.contracts.token.dfd.options.address);
+                    console.log('ftk1 contract', this.state.web3.contracts.token.ftk1.options.address);
+                    console.log('ftk2 contract', this.state.web3.contracts.token.ftk2.options.address);
+                    console.log('rand contract', this.state.web3.contracts.rand.options.address);
+                    console.log('dgg-sale contract', this.state.web3.contracts.dgg_sale.options.address);
+                    console.log('pool-single contract', this.state.web3.contracts.pool_single.options.address);
+                    console.log('uniswap-factory contract', this.state.web3.contracts.uniswap_factory.options.address);
+                    console.log('router-v1 contract', this.state.web3.contracts.router_v1.options.address);
                 }
             }
         },
@@ -172,6 +179,24 @@ export default {
                     this.state.web3.address.token.dfd
                 );
                 commit('WEB3_CONTRACT_TOKEN_DFD', contractDfdToken);
+            } 
+        },
+        getTokenFTK1Contract({ commit }) {
+            if (this.state.web3.web3) {
+                let contractFtk1 = new this.state.web3.web3.eth.Contract(
+                    JSON.parse(this.state.abi.token_mock),
+                    this.state.web3.address.ftk1
+                );
+                commit('WEB3_CONTRACT_TOKEN_FTK1', contractFtk1);
+            } 
+        },
+        getTokenFTK2Contract({ commit }) {
+            if (this.state.web3.web3) {
+                let contractFtk2 = new this.state.web3.web3.eth.Contract(
+                    JSON.parse(this.state.abi.token_mock),
+                    this.state.web3.address.ftk2
+                );
+                commit('WEB3_CONTRACT_TOKEN_FTK2', contractFtk2);
             } 
         },
         getRandContract({ commit }) {
@@ -253,6 +278,12 @@ export default {
         },
         [WEB3_CONTRACT_TOKEN_DFD](state, result) {
             state.contracts.token.dfd = result;
+        },
+        [WEB3_CONTRACT_TOKEN_FTK1](state, result) {
+            state.contracts.token.ftk1 = result;
+        },
+        [WEB3_CONTRACT_TOKEN_FTK2](state, result) {
+            state.contracts.token.ftk2 = result;
         },
         [WEB3_CONTRACT_RAND](state, result) {
             state.contracts.rand = result;
