@@ -376,7 +376,16 @@
     created() {
       
     },
+    computed: {
+
+    },
     methods: {
+      approve(amountA, amountB) {
+
+      },
+      addLiquidiy(amountA, amountB) {
+
+      },
       showSetting(){
         this.dialogVisibleSetting = true;
       },
