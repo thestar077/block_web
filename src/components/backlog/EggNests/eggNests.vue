@@ -19,7 +19,7 @@
   </div>
   <div>
   <div class="sc-kYrkKh cqrcSX"></div>
-    <div class="sc-eLgOdN ejJoEn">
+    <div class="sc-eLgOdN ejJoEn" v-if="eggArr && eggArr.length>0">
       <div class="sc-ikPAkQ diwHUn" v-for="(item,index) in eggArr" :key="index">
         <div :class="index<2?'sc-XhUPp kiNLFp colorBg':'sc-XhUPp kiNLFp'"></div>
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
@@ -96,7 +96,7 @@
               <div color="text" class="sc-gsTCUz UNrzd">$0</div></div>
               <div class="sc-eCssSg MoQXc">
               <div color="text" class="sc-gsTCUz UNrzd">View on Arbitrum:</div>
-              <div color="text" class="sc-gsTCUz UNrzd">{{item.name}} LP</div></div>
+              <div color="text" class="sc-gsTCUz UNrzd">{{item.name}}</div></div>
            <!--  <div class="sc-eCssSg FgqtZ">
               <a target="_blank" rel="noreferrer noopener" href="https://bscscan.com/token/0x19e7cbecdd23a16dfa5573df54d98f7caae03019" color="primary" class="sc-gsTCUz sc-lmoMRL dCVmTf iqbrwR">View on Arbitrum</a></div> -->
           </div>
@@ -104,7 +104,7 @@
       </div>
     </div>
   </div>
-  <div width="100%" class="sc-dIUggk hULlXf">
+  <div width="100%" class="sc-dIUggk hULlXf" v-if="!eggArr || eggArr.length == 0">
     <img width="100%" src="@/assets/picture/8.png" alt="illustration" class="sc-hHftDr kCQmsc"></div>
 </div>
 </template>
@@ -162,28 +162,28 @@
             showDetail:false
           },
           {
-            name:'ETH-USDC',
+            name:'ETH-USDC LP',
             num:'60',
             stake:'ETH-USDC LP',
-            deposit:'ETH-USDC',
+            deposit:'ETH-USDC LP',
             pic:require('@/assets/picture/egg/5.jpg'),
             noFree:false,
             showDetail:false
           },
           {
-            name:'ETH-DFD',
+            name:'ETH-DFD LP',
             num:'60',
             stake:'ETH-DFD LP',
-            deposit:'ETH-DFD',
+            deposit:'ETH-DFD LP',
             pic:require('@/assets/picture/egg/6.jpg'),
             noFree:false,
             showDetail:false
           },
           {
-            name:'ETH-EGG',
+            name:'ETH-EGG LP',
             num:'60',
             stake:'ETH-EGG LP',
-            deposit:'ETH-EGG',
+            deposit:'ETH-EGG LP',
             pic:require('@/assets/picture/egg/7.jpg'),
             noFree:false,
             showDetail:false
