@@ -193,7 +193,7 @@
       title="Select a token"
       :visible.sync="dialogVisibleToken"
       width="40%" append-to-body>
-      <el-input class="tokenInput" @input="search" v-model="input" placeholder="Search name"></el-input>
+      <el-input class="tokenInput" @input="search" v-model="tokenSelected" placeholder="Search name"></el-input>
       <p class="tokenName">Token name</p>
       <div class="tokenBox">
         <ul>
@@ -213,6 +213,9 @@
     data() {
       return {
         isFirst:true,
+        tokenSelected:'',
+        tokenA: '',
+        tokenB: '',
         dialogVisibleSetting:false,
         dialogVisibleTransactions:false,
         toleranceList:[
