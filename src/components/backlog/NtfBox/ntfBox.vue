@@ -172,7 +172,7 @@ of the gods". </p>
     data() {
       return {
         isHave:false,
-        buyModelVisible:true,
+        buyModelVisible:false,
         imgHeight:'350',
         num:0,
         buyToken:'egg',

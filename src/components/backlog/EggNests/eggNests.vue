@@ -26,7 +26,7 @@
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
             <img :src="item.pic" width="100" class="sc-hHftDr kCQmsc"></div>
           <div class="sc-eCssSg cseSbW">
-          <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">{{item.name}} LP</h2>
+          <h2 color="text" class="sc-gsTCUz sc-idOhPF dILVHG lnUPhx">{{item.name}}</h2>
             <div class="sc-eCssSg ecyRc">
               <div class="sc-cxFLnm lbtiF" v-if="item.noFree">
                 <svg viewBox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ hMHdGP">
@@ -51,7 +51,7 @@
         </div>
         <div class="sc-eCssSg MoQXc">
           <div color="text" class="sc-gsTCUz UNrzd">Stake:</div>
-          <div color="text" class="sc-gsTCUz UNsmv">{{item.stake}} LP</div></div>
+          <div color="text" class="sc-gsTCUz UNsmv">{{item.stake}}</div></div>
         <div class="sc-eCssSg MoQXc">
           <div color="text" class="sc-gsTCUz UNrzd">Earn:</div>
           <div color="text" class="sc-gsTCUz UNsmv">EGG</div></div>
@@ -68,7 +68,7 @@
               <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
           </div>
           <div class="sc-eCssSg gqHjnk">
-            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}} LP</div>
+            <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}}</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
           <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
           <button v-else type="button" class="sc-dlfnbm hlRgJI">Deposit</button></div>
@@ -83,7 +83,7 @@
           <div class="sc-kIeTtH cnxSGb">
             <div class="sc-eCssSg MoQXc">
               <div color="text" class="sc-gsTCUz UNrzd">Deposit:</div>
-              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0xf952fc3ca7325cc27d15885d37117676d25bfda6" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">{{item.deposit}} LP
+              <a target="_blank" rel="noreferrer noopener" href="https://exchange.goosedefi.com/#/add/0xe9e7cea3dedca5984780bafc599bd69add087d56/0xf952fc3ca7325cc27d15885d37117676d25bfda6" class="sc-gsTCUz sc-lmoMRL dCVmfN iqbrwR sc-hOqqkJ hShxNi" color="primary">{{item.deposit}}
                 <svg viewBox="0 0 24 24" color="primary" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ jcbDsj">
                   <path d="M18 19H6C5.45 19 5 18.55 5 18V6C5 5.45 5.45 5 6 5H11C11.55 5 12 4.55 12 4C12 3.45 11.55 3 11 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V13C21 12.45 20.55 12 20 12C19.45 12 19 12.45 19 13V18C19 18.55 18.55 19 18 19ZM14 4C14 4.55 14.45 5 15 5H17.59L8.46 14.13C8.07 14.52 8.07 15.15 8.46 15.54C8.85 15.93 9.48 15.93 9.87 15.54L19 6.41V9C19 9.55 19.45 10 20 10C20.55 10 21 9.55 21 9V4C21 3.45 20.55 3 20 3H15C14.45 3 14 3.45 14 4Z"></path></svg>
               </a>
@@ -155,7 +155,7 @@
           {
             name:'USDC',
             num:'60',
-            stake:'',
+            stake:'USDC',
             deposit:'USDC',
             pic:require('@/assets/picture/egg/4.jpg'),
             noFree:false,
@@ -164,7 +164,7 @@
           {
             name:'ETH-USDC',
             num:'60',
-            stake:'',
+            stake:'ETH-USDC LP',
             deposit:'ETH-USDC',
             pic:require('@/assets/picture/egg/5.jpg'),
             noFree:false,
@@ -173,7 +173,7 @@
           {
             name:'ETH-DFD',
             num:'60',
-            stake:'',
+            stake:'ETH-DFD LP',
             deposit:'ETH-DFD',
             pic:require('@/assets/picture/egg/6.jpg'),
             noFree:false,
@@ -182,7 +182,7 @@
           {
             name:'ETH-EGG',
             num:'60',
-            stake:'',
+            stake:'ETH-EGG LP',
             deposit:'ETH-EGG',
             pic:require('@/assets/picture/egg/7.jpg'),
             noFree:false,
