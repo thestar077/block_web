@@ -70,7 +70,7 @@
           <div class="sc-eCssSg gqHjnk">
             <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}}</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
+          <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" @click="getAuthorization" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
           <button v-else type="button" class="sc-dlfnbm hlRgJI">Deposit</button></div>
         <div class="sc-tYoTV jYOTaZ"></div>
         <div v-click @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
@@ -202,6 +202,10 @@
     methods: {
       handleActive(index){
         this.actIndex = index;
+      },
+       // 获取授权
+      getAuthorization(){
+        this.$router.push({path: "/authorization"});
       },
     }
   };

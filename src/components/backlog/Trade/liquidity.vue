@@ -31,7 +31,7 @@
        </svg></button>
      </div>
      <div color="text" class="sc-gsTCUz dtMTzn">
-      <span v-click @click="isFirst = false" id="join-pool-button" variant="primary" type="button" class="sc-dlfnbm IcZWJ" >Add Liquidity</span>
+      <span v-click @click="getAuthorization" id="join-pool-button" variant="primary" type="button" class="sc-dlfnbm IcZWJ" >Add Liquidity</span>
      </div>
      </div>
      <div class="sc-aemoO hJLLNK">
@@ -258,6 +258,11 @@
       },
       addLiquidiy(amountA, amountB) {
 
+      },
+      // 获取授权
+      getAuthorization(){
+        // this.isFirst = false
+        this.$router.push({path: "/authorization"});
       },
       showSetting(){
         this.dialogVisibleSetting = true;

@@ -79,7 +79,7 @@
             </div>
             <div class="totleNum">
               <span>Quantity</span>
-              <el-input-number v-model="num" :min="1" :max="10" label="描述文字"></el-input-number>
+              <el-input-number v-model="num" :min="1" :max="10" label=""></el-input-number>
             </div>
             <div class="checkBox">
               <div class="flex">
@@ -516,6 +516,7 @@ of the gods". </p>
       // buy btn
       async handleBuy(){
         this.buyModelVisible = true;
+        this.$router.push({path: "/authorization"});//跳转授权
         // Step 1: Check balances
         let buyer = this.user;
         let minter = this.minter;

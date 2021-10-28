@@ -87,7 +87,7 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo">
-       <button v-click type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+       <button v-click type="button" @click="getAuthorization" class="sc-dlfnbm btoybd">Unlock Wallet</button>
       </div>
      </div>
     </div>
@@ -349,6 +349,10 @@
           this.token2 = item;
         }
         this.dialogVisibleToken = false;
+      },
+      // 获取授权
+      getAuthorization(){
+        this.$router.push({path: "/authorization"});
       },
       search(){
         if(this.input){
