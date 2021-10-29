@@ -54,164 +54,208 @@ export default {
         },
         tokens: [
             {
+                symbol: 'FTK1',
+                pic:require('@/assets/picture/bi/32.png'),
+                name: 'Fake Token 1',
+                address: '0x05183B86125C3D4BE96E5C702cc333a2f4b67B2E',
+            },
+            {
+                symbol: 'FTK2',
+                pic:require('@/assets/picture/bi/31.png'),
+                name: 'Fake Token 2',
+                address: '0x8B4101e76CcEA9d3936b036d73749F4D5ab8Ecd1',
+            },
+            {
                 symbol: 'UNI',
                 pic:require('@/assets/picture/bi/1.png'),
                 name:'Uniswap (UNI)',
+                address: '',
             },
             {
                 symbol: 'USDT',
                 pic:require('@/assets/picture/bi/2.png'),
                 name:'Tether USD (USDT)',
+                address: '',
             },
             {
                 symbol: 'USDC',
                 pic:require('@/assets/picture/bi/3.png'),
                 name:'USD Coin (USDC)',
+                address: '',
             },
             {
                 symbol: 'WBTC',
                 pic:require('@/assets/picture/bi/4.png'),
                 name:'Wrapped BTC (WBTC)',
+                address: '',
             },
             {
                 symbol: 'LINK',
                 pic:require('@/assets/picture/bi/5.png'),
                 name:'ChainLink Token (LINK)',
+                address: '',
             },
             {
                 symbol: 'GRT',
                 pic:require('@/assets/picture/bi/6.png'),
                 name:'Graph Token (GRT)',
+                address: '',
             },
             {
                 symbol: 'SUSHI',
                 pic:require('@/assets/picture/bi/7.png'),
                 name:'SushiToken (SUSHI)',
+                address: '',
             },
             {
                 symbol: 'COMP',
                 pic:require('@/assets/picture/bi/8.png'),
                 name:'Compound (COMP)',
+                address: '',
             },
             {
                 symbol: 'MIM',
                 pic:require('@/assets/picture/bi/9.png'),
                 name:'Magic Internet Money (MIM)',
+                address: '',
             },
             {
                 symbol: 'YFI',
                 pic:require('@/assets/picture/bi/10.png'),
                 name:'yearn.finance (YFI)',
+                address: '',
             },
             {
                 symbol: 'CRV',
                 pic:require('@/assets/picture/bi/11.png'),
                 name:'Curve DAO Token (CRV)',
+                address: '',
             },
             {
                 symbol: 'CELR',
                 pic:require('@/assets/picture/bi/12.png'),
                 name:'CelerToken (CELR)',
+                address: '',
             },
             {
                 symbol: 'GNO',
                 pic:require('@/assets/picture/bi/13.png'),
                 name:'Gnosis Token (GNO)',
+                address: '',
             },
             {
                 symbol: 'RGT',
                 pic:require('@/assets/picture/bi/14.png'),
                 name:'Rari Governance Token (RGT)',
+                address: '',
             },
             {
                 symbol: 'BADGER',
                 pic:require('@/assets/picture/bi/15.png'),
                 name:'Badger (BADGER)',
+                address: '',
             },
             {
                 symbol: 'DODO',
                 pic:require('@/assets/picture/bi/16.png'),
                 name:'DODO bird (DODO)',
+                address: '',
             },
             {
                 symbol: 'BAL',
                 pic:require('@/assets/picture/bi/17.png'),
                 name:'Balancer (BAL)',
+                address: '',
             },
             {
                 symbol: 'sUSD',
                 pic:require('@/assets/picture/bi/18.png'),
                 name:'Synth sUSD (sUSD)',
+                address: '',
             },
             {
                 symbol: 'MATH',
                 pic:require('@/assets/picture/bi/19.png'),
                 name:'MATH Token (MATH)',
+                address: '',
             },
             {
                 symbol: 'CREAM',
                 pic:require('@/assets/picture/bi/20.png'),
                 name:'Cream (CREAM)',
+                address: '',
             },
             {
                 symbol: 'MCB',
                 pic:require('@/assets/picture/bi/21.png'),
                 name:'MCDEX Token (MCB)',
+                address: '',
             },
             {
                 symbol: 'SDT',
                 pic:require('@/assets/picture/bi/22.png'),
                 name:'Stake DAO Token (SDT)',
+                address: '',
             },
             {
                 symbol: 'DF',
                 pic:require('@/assets/picture/bi/23.png'),
                 name:'dForce (DF)',
+                address: '',
             },
             {
                 symbol: 'CAP',
                 pic:require('@/assets/picture/bi/24.png'),
                 name:'Cap (CAP)',
+                address: '',
             },
             {
                 symbol: 'FUSE',
                 pic:require('@/assets/picture/bi/25.png'),
                 name:'Fuse Token (FUSE)',
+                address: '',
             },
             {
                 symbol: 'ALCH',
                 pic:require('@/assets/picture/bi/26.png'),
                 name:'Alchemy (ALCH)',
+                address: '',
             },
             {
                 symbol: 'WETH',
                 pic:require('@/assets/picture/bi/27.png'),
                 name:'Wrapped Ether (WETH)',
+                address: '',
             },
             {
                 symbol: 'NYAN',
                 pic:require('@/assets/picture/bi/28.png'),
                 name:'ArbiNYAN (NYAN)',
+                address: '',
             },
             {
                 symbol: 'EUX',
                 pic:require('@/assets/picture/bi/29.png'),
                 name:'dForce EUR (EUX)',
+                address: '',
             },
             {
                 symbol: 'USX',
                 pic:require('@/assets/picture/bi/30.png'),
                 name:'dForce USD (USX)',
+                address: '',
             },
             {
                 symbol: 'DXD',
                 pic:require('@/assets/picture/bi/31.png'),
                 name:'DXdao (DXD)',
+                address: '',
             },
             {
                 symbol: 'WOO',
                 pic:require('@/assets/picture/bi/32.png'),
                 name:'Wootrade Network (WOO)',
+                address: '',
             },
         ],
         minter: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc',
@@ -328,7 +372,7 @@ export default {
         getTokenDggContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractDggToken = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.tokenDgg),
+                    JSON.parse(this.state.abi.token_dgg),
                     this.state.web3.address.token.dgg
                 );
                 commit('WEB3_CONTRACT_TOKEN_DGG', contractDggToken);

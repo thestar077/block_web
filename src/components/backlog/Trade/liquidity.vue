@@ -31,7 +31,7 @@
        </svg></button>
      </div>
      <div color="text" class="sc-gsTCUz dtMTzn">
-      <span v-click @click="getAuthorization" id="join-pool-button" variant="primary" type="button" class="sc-dlfnbm IcZWJ" >Add Liquidity</span>
+      <span v-click @click="getAuthorization()" id="join-pool-button" variant="primary" type="button" class="sc-dlfnbm IcZWJ" >Add Liquidity</span>
      </div>
      </div>
      <div class="sc-aemoO hJLLNK">
@@ -132,7 +132,8 @@
         </div>
        </div>
       </div>
-      <button v-click type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+      <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+      <button v-else type="button" class="sc-dlfnbm btoybd">Deposit</button>
      </div>
     </div>
    </div>
@@ -243,6 +244,9 @@
       
     },
     computed: {
+      accounts () {
+        return this.$store.state.web3.accounts;
+      },
       tokenList: {
         set: function(newVal) {
           this.tokenListData = newVal;
@@ -261,8 +265,8 @@
       },
       // 获取授权
       getAuthorization(){
-        // this.isFirst = false
-        this.$router.push({path: "/authorization"});
+        this.isFirst = false
+        // this.$router.push({path: "/authorization"});
       },
       showSetting(){
         this.dialogVisibleSetting = true;
