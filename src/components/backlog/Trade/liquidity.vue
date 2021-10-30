@@ -97,7 +97,7 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
+         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountA" />
          <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
             {{tokenA.name}}
@@ -121,7 +121,7 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
+         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" />
          <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
             {{tokenB.name}}
@@ -133,7 +133,7 @@
        </div>
       </div>
       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
-      <button v-else type="button" class="sc-dlfnbm btoybd">Deposit</button>
+      <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button>
      </div>
     </div>
    </div>
@@ -217,6 +217,8 @@
         searchText:'',
         tokenA: this.$store.state.web3.tokens[0],
         tokenB: this.$store.state.web3.tokens[0],
+        amountA: 0,
+        amountB: 0,
         dialogVisibleSetting:false,
         dialogVisibleTransactions:false,
         toleranceList:[
@@ -247,6 +249,18 @@
       accounts () {
         return this.$store.state.web3.accounts;
       },
+      contractFactory() {
+        return this.$store.state.web3.contracts.uniswap_factory;
+      },
+      contractRouter() {
+        return this.$store.state.web3.contracts.router_v1;
+      },
+      user() {
+        return (this.$store.state.web3.accounts.length > 0) ? this.$store.state.web3.accounts[0] : '';
+      },
+      minter() {
+        return this.$store.state.web3.minter;
+      },
       tokenList: {
         set: function(newVal) {
           this.tokenListData = newVal;
@@ -257,11 +271,48 @@
       }
     },
     methods: {
-      approve(amountA, amountB) {
+      async approve() {
+        // console.log('tokenA', this.tokenA);
+        // console.log('tokenB', this.tokenB);
+        // console.log('amountA', this.amountA);
+        // console.log('amountB', this.amountB);
+        let amountA = parseInt(this.amountA);
+        let amountB = parseInt(this.amountB);
+        if (this.contractRouter == null || this.contractRouter == undefined) {
+          alert("Invalid contract. Please contact the customer service.");
+          return;
+        }
+
+        let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
+            JSON.parse(this.$store.state.abi.token_erc20),
+            this.tokenA.address,
+        );
+
+        let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
+            JSON.parse(this.$store.state.abi.token_erc20),
+            this.tokenB.address,
+        );
+
+        console.log('contractTokenA', contractTokenA);
+        console.log('contractTokenB', contractTokenB);
+
+        await contractTokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
+        await contractTokenB.methods.approve(this.contractRouter.options.address, amountB).send({ from: this.user });
+
+        let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
+        let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenA = ${allowanceTokenA}, Allowance of tokenB = ${allowanceTokenB}`);
+
+        // await this.contractRouter.methods.addLiquidiy(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user).send({from: this.user});
 
       },
       addLiquidiy(amountA, amountB) {
+          if (this.contractRouter == null || this.contractRouter == undefined) {
+            alert("Invalid contract. Please contact the customer service.");
+            return;
+          }
 
+          
       },
       // 获取授权
       getAuthorization(){

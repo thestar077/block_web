@@ -34,8 +34,8 @@ export default {
             rand: '0xBc45cA09c3d00a9bA25eB08b70849Db43A76BE03',
             dgg_sale: '0xFFe63f7AeC1E895A182821885a6852735ED1E50F',
             pool_single: '0x2586bA9AedCa16E7e25AaD304A1d87Bd588e18D2',
-            uniswap_factory: '0xfE3b47E38E3d1DD3295ab7E40371342a15Ea6d7f',
-            router_v1: '0x12FAa8F16e4EB106D2b8d63Ad91ECd152e093812',
+            uniswap_factory: '0x7fbB0100631334606B906CEFe9C70E97EA50508c',
+            router_v1: '0x2C6e44269d876754bAC783DDCE9B0547ADaE5a64',
         },
         contracts: {
             token: {
