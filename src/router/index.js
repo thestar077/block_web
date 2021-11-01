@@ -22,6 +22,8 @@ import Content from "../components/backlog/MyNTF/content.vue";
 import NFTStaking from "../components/backlog/NtfStaking/ntfStaking.vue";
 // Authorization
 import Authorization from "../components/backlog/Authorization/index.vue";
+// Remove Liquity
+import RemoveLiquity from "../components/backlog/RemoveLiquity/index.vue";
 
 
 Vue.use(VueRouter);
@@ -59,6 +61,7 @@ const routes = [
       { path: "/content", component: Content },
       { path: "/NFTStaking", component: NFTStaking },
       { path: "/authorization", component: Authorization },
+      { path: "/removeLiquity", component: RemoveLiquity },
     ]
   },
   {

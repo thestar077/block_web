@@ -54,6 +54,32 @@
          In this collection,There are 5 Greek gods for you to unbox.Try your luck! 
         </div>
        </div>
+       <div class="historyBox">
+         <el-collapse v-model="activeNames">
+            <el-collapse-item title="BAKE/BUSD" name="1">
+              <p class="swapTxt">
+                <span>Pooled BAKE</span>
+                <span>10523412 <img :src="tokenA.pic"></span>
+              </p>
+              <p class="swapTxt">
+                <span>Pooled BUSD</span>
+                <span>10523412 <img :src="tokenB.pic"></span>
+              </p>
+               <p class="swapTxt">
+                <span>Your pool tokens:</span>
+                <span>0.66</span>
+              </p>
+               <p class="swapTxt">
+                <span>Your pool share:</span>
+                <span>10.78%</span>
+              </p>
+              <div class="sc-edoZmE hyACfo handleBtn">
+                <button type="button" class="sc-dlfnbm btoybd">Add</button>
+                <button type="button" @click="handleRemove" class="sc-dlfnbm btoybd">Remove</button>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
+       </div>
        <div>
         <div font-size="14px" color="text" class="sc-gsTCUz kxDGqL" style="padding: 0.5rem 0px;"> 
          <a id="import-pool-link" class="sc-bTvRPi bhoBuD" href="#/find"></a>
@@ -98,7 +124,9 @@
         </div>
         <div class="sc-iWFSnp bHLdTZ">
          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountA" />
-         <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+         <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
+          <span>MAX</span>
+          <img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
             {{tokenA.name}}
            </div>
@@ -122,7 +150,9 @@
         </div>
         <div class="sc-iWFSnp bHLdTZ">
          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" />
-         <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+         <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
+           <span>MAX</span>
+           <img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
             {{tokenB.name}}
            </div>
@@ -132,12 +162,65 @@
         </div>
        </div>
       </div>
-      <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
-      <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button>
+      <div class="sc-edoZmE hyACfo">
+        <button v-click type="button" v-if="istokenBApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
+        <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+        <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button>
+      </div>
+      <div class="sc-edoZmE hyACfo approveBtn">
+        <div>
+          <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = !istokenAApprove" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
+        </div>
+        <div>
+          <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = !istokenBApprove" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
+          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
+        </div>
+      </div>
+<!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+      <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button> -->
      </div>
     </div>
    </div>
     </div>  
+  <!-- ConfirmSwap -->
+  <el-dialog
+    title="Your will receive"
+    :visible.sync="dialogVisibleConfirmSwap"
+    width="40%" append-to-body>
+    <div class="biItem">
+      <div class="biPic">
+        <span>{{tokenA.value}}</span>
+        <img :src="tokenA.pic">
+        <img :src="tokenB.pic">
+      </div>
+    </div>
+    <p  class="swapTips">{{tokenA.name}}/{{tokenA.name}} Pool Tokens</p>
+    <p class="swapTips2">Output is estimated.If the price changes by more than 0.8% your transaction will revert.</p>
+    <p class="swapTxt">
+      <span>{{tokenA.name}} Deposited</span>
+      <span><img :src="tokenA.pic"> {{tokenA.value}}</span>
+    </p>
+   <p class="swapTxt">
+      <span>{{tokenB.name}} Deposited</span>
+      <span><img :src="tokenB.pic"> {{tokenB.value}}</span>
+    </p>
+    <p class="swapTxt">
+      <span>Rates</span>
+      <span>1{{tokenA.name}} = {{tokenB.value}} {{tokenB.name}}</span>
+    </p>
+    <p class="swapTxt">
+      <span> </span>
+      <span>1{{tokenB.name}} = {{tokenA.value}} {{tokenA.name}}</span>
+    </p>
+    <p class="swapTxt">
+      <span>Share of Pool:</span>
+      <span>10.78%</span>
+    </p>
+    <span slot="footer" class="dialog-footer">
+      <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Cofirm Supply</el-button>
+    </span> 
+  </el-dialog>
     <!-- setting -->
   <el-dialog
     title="Setting"
@@ -185,8 +268,22 @@
     <h3 class="block textAlignCenter">
       <span>Please connect your wallet to view your recent transactions</span>
     </h3>
+    <div class="recentVisible">
+      <div class="flex"> 
+          <span>Swap {{tokenA.value}} {{tokenA.name}} for {{tokenB.value}} {{tokenB.name}}</span>
+          <span class="el-icon-link"></span>
+      </div>
+      <span class="el-icon-check"></span>
+    </div>
+    <div class="recentVisible">
+      <div class="flex"> 
+          <span>Approve {{tokenA.name}}</span>
+          <span class="el-icon-link"></span>
+      </div>
+      <span class="el-icon-check"></span>
+    </div>
     <span slot="footer" class="dialog-footer">
-      <el-button class="closeBtn center block" v-click @click="dialogVisibleTransactions = false">Close</el-button>
+      <el-button class="closeBtn center block" @click="dialogVisibleTransactions = false">Close</el-button>
     </span> 
   </el-dialog>
   <!-- Select Token -->
@@ -205,6 +302,31 @@
         </ul>
       </div>
     </el-dialog>
+     <!-- Waiting for confirmation -->
+  <el-dialog
+    title="Waiting for confirmation"
+    :visible.sync="dialogVisibleConfirmationWaiting"
+    width="40%" append-to-body>
+    <div class="el-icon-loading submittedIcon"></div>
+    <p class="submittedVisible waitingTxt">
+      <span>Swapping {{tokenA.value}} {{tokenA.name}} for {{tokenB.value}} {{tokenB.name}}</span>
+    </p>
+    <p class="watingTips">Confirm this transaction in your wallet</p>
+  </el-dialog>
+   <!-- Transaction submitted -->
+  <el-dialog
+    title="Transaction submitted"
+    :visible.sync="dialogVisibleTransactionsSubmitted"
+    width="40%" append-to-body>
+    <div class="el-icon-bottom submittedIcon"></div>
+    <p class="submittedVisible">
+      <span>View on bscscan</span>
+      <span class="el-icon-link"></span>
+    </p>
+    <span slot="footer" class="dialog-footer">
+      <el-button class="closeBtn center block" @click="dialogVisibleTransactionsSubmitted = false">Close</el-button>
+    </span> 
+  </el-dialog>
   </div>
 </template>
 
@@ -215,6 +337,9 @@
       return {
         isFirst:true,
         searchText:'',
+        dialogVisibleConfirmSwap:false,
+        dialogVisibleConfirmationWaiting:false,
+        dialogVisibleTransactionsSubmitted:false,
         tokenA: this.$store.state.web3.tokens[0],
         tokenB: this.$store.state.web3.tokens[0],
         amountA: 0,
@@ -240,6 +365,9 @@
         },
         tokenIndex:1,
         tokenListData: [],
+        istokenAApprove:false,
+        istokenBApprove:false,
+        activeNames:['1'],
       };
     },
     created() {
@@ -353,6 +481,32 @@
           this.tokenList = this.$store.state.web3.token;
         }
       }, 
+      cofirmSwap(){
+        this.dialogVisibleConfirmSwap = false;
+        const TIME_COUNT = 3;
+        if(!this.timer){
+        this.timer = setInterval(() => {
+          if(this.count > 0 && this.count <= TIME_COUNT){
+            this.dialogVisibleConfirmationWaiting = true;
+            this.count++;
+          }else{
+            this.dialogVisibleConfirmationWaiting = false;
+            this.dialogVisibleTransactionsSubmitted = true;
+            clearInterval(this.timer);
+            this.timer = null;
+          }
+        }, 1000)
+        }
+      },
+      changeBi(){
+        let token1 = this.tokenA;
+        let token2 = this.tokenB;
+        this.tokenA = token2;
+        this.tokenB = token1;
+      },
+      handleRemove(){
+        this.$router.push({path: "/removeLiquity"});
+      },
     }
   };
 </script>
@@ -366,10 +520,133 @@
     font-size: 20px;
   }
 }
+.historyBox{
+  font-size: 20px !important;
+  .handleBtn{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    button{
+      margin-right: 20px;
+      background: #A29181;
+    }
+  }
+}
 .tokenName{
   font-size: 24px;
   padding:20px 0;
   color: #A29181;
+}
+.mr20{
+  margin-right: 20px;
+}
+.approveBtn{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  .swapBtn{
+    background: #E7E8EA;
+    color: #C8C9CB;
+  }
+}
+.changeBtn{
+  font-size: 30px;
+  color: #999;
+  margin:20px;
+  cursor: pointer;
+}
+.biItem{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  span{
+   font-size: 28px;
+   color: #AA8929;
+  }
+  .biPic{
+    margin-bottom: 20px;
+    img{
+      margin-right: 10px;
+      width: 40px;
+      border-radius: 100%;
+    }
+  }
+}
+.swapTips{
+  font-size: 28px;
+  margin:50px 0;
+  color: #AA8929;
+}
+.swapTips2{
+  font-size: 24px;
+  margin:50px 0;
+  color: #AA8929;
+}
+.swapTxt{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin:10px 0;
+  img{
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    margin-left: 10px;
+  }
+  span{
+    font-size: 24px;
+    color: #d7c799;
+  }
+}
+.submittedIcon{
+  font-size: 150px;
+  display: block;
+  margin:0 auto;
+  text-align: center;
+  color: #AA8929;
+}
+.waitingTxt{
+  width: auto !important;
+  text-align: center;
+}
+.watingTips{
+  margin-top: 10px;
+  font-size: 24px;
+  color: #d7c799;
+  text-align: center;
+}
+.submittedVisible{
+  margin:0 auto;
+  width: 280px;
+  margin-top: 30px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  span{
+    font-size: 24px;
+    text-align: center;
+    color: #AA8929;
+    display: block;
+    margin-right: 20px;
+  }
+}
+.recentVisible{
+  margin-top: 30px;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  .flex{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+  }
+  span{
+    font-size: 20px;
+    text-align: center;
+    color: #d7c799;
+    display: block;
+    margin-right: 20px;
+  }
 }
 .tokenBox{
   height: 30vh;
@@ -950,6 +1227,7 @@
     height: 24px;
     box-shadow: rgba(0, 0, 0, 0.075) 0px 6px 10px;
     border-radius: 24px;
+    margin-left: 20px;
 }
 .eZTMLz {
     -webkit-box-align: center;
