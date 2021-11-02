@@ -1,6 +1,16 @@
 import Web3 from 'web3';
 import axios from 'axios';
 import myStorage from './myStorage';
+import abiTokenDefender from '../assets/abi/DefenderToken.json';
+import abiTokenMock from '../assets/abi/ERC20Mock.json';
+import abiTokenDgg from '../assets/abi/DggToken.json';
+import abiDggSale from '../assets/abi/DggSale.json';
+import abiRand from '../assets/abi/RandOracle.json';
+import abiUniswapPair from '../assets/abi/UniswapV2Pair.json';
+import abiUniswapFactory from '../assets/abi/UniswapV2Factory.json';
+import abiRouter from '../assets/abi/DefenderRouterV1.json';
+import abiWeth from '../assets/abi/WETH.json';
+import abiPoolSingle from '../assets/abi/PoolSingle.json';
 
 const WEB3 = 'WEB3';
 const WEB3_ACCOUNTS = 'WEB3_ACCOUNTS';
@@ -9,6 +19,7 @@ const WEB3_CONTRACT_TOKEN_DGG = 'WEB3_CONTRACT_TOKEN_DGG';
 const WEB3_CONTRACT_TOKEN_DFD = 'WEB3_CONTRACT_TOKEN_DFD';
 const WEB3_CONTRACT_TOKEN_FTK1 = 'WEB3_CONTRACT_TOKEN_FTK1';
 const WEB3_CONTRACT_TOKEN_FTK2 = 'WEB3_CONTRACT_TOKEN_FTK2';
+const WEB3_CONTRACT_TOKEN_PAIR = 'WEB3_CONTRACT_TOKEN_PAIR';
 const WEB3_CONTRACT_DGG_SALE = 'WEB3_CONTRACT_DGG_SALE';
 const WEB3_CONTRACT_POOL_SINGLE = 'WEB3_CONTRACT_POOL_SINGLE';
 const WEB3_CONTRACT_UNISWAP_FACTORY = 'WEB3_CONTRACT_UNISWAP_FACTORY';
@@ -22,20 +33,20 @@ export default {
         web3: '',
         address: {
             token: {
-                egg: '0x6cf81809daf70601867A226c63359F264FC084E5',
-                dfd: '0x2fe3b9Ad0D10ba98dF1862897A6902bcD10f4dC0',
-                dgg: '0xE2f9DF720A9dafe74f15d271269B43fDC32e0d53',
-                usdt: '0x3871d88C340EdB964A026278910bc52e93600e87',
-                usdc: '0xC05826f074e39044f134D648F1b08286Eb451846',
-                weth: '0x654Ca1BBb6057714A2efda8834E504c65e9812f7',
-                ftk1: '0x05183B86125C3D4BE96E5C702cc333a2f4b67B2E',
-                ftk2: '0x8B4101e76CcEA9d3936b036d73749F4D5ab8Ecd1',
+                egg: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
+                dfd: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
+                dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
+                usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
+                usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
+                weth: '0xEfDC2a236Dba7a8f60726b49abC79Ee6b22Ed445',
+                ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
             },
-            rand: '0xBc45cA09c3d00a9bA25eB08b70849Db43A76BE03',
-            dgg_sale: '0xFFe63f7AeC1E895A182821885a6852735ED1E50F',
-            pool_single: '0x2586bA9AedCa16E7e25AaD304A1d87Bd588e18D2',
-            uniswap_factory: '0x7fbB0100631334606B906CEFe9C70E97EA50508c',
-            router_v1: '0x2C6e44269d876754bAC783DDCE9B0547ADaE5a64',
+            rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
+            dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
+            pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
+            uniswap_factory: '0xded2cB506a7374B9645726565b1bD790E605B7b1',
+            router_v1: '0x521fe809562DCDE295A48D017b4571d1cA15041E',
         },
         contracts: {
             token: {
@@ -45,6 +56,7 @@ export default {
                 usdt: '',
                 usdc: '',
                 weth: '',
+                pair: '',
             },
             rand: '',
             dgg_sale: '',
@@ -57,13 +69,13 @@ export default {
                 symbol: 'FTK1',
                 pic:require('@/assets/picture/bi/32.png'),
                 name: 'Fake Token 1',
-                address: '0x05183B86125C3D4BE96E5C702cc333a2f4b67B2E',
+                address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
             },
             {
                 symbol: 'FTK2',
                 pic:require('@/assets/picture/bi/31.png'),
                 name: 'Fake Token 2',
-                address: '0x8B4101e76CcEA9d3936b036d73749F4D5ab8Ecd1',
+                address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
             },
             {
                 symbol: 'UNI',
@@ -362,7 +374,7 @@ export default {
             // console.log('this.state.web3.address.token.egg', this.state.web3.address.token.egg);
             if (this.state.web3.web3) {
                 let contractEggToken = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.token_egg),
+                    abiTokenDefender,
                     this.state.web3.address.token.egg
                 );
                 commit('WEB3_CONTRACT_TOKEN_EGG', contractEggToken);
@@ -372,7 +384,7 @@ export default {
         getTokenDggContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractDggToken = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.token_dgg),
+                    abiTokenDgg,
                     this.state.web3.address.token.dgg
                 );
                 commit('WEB3_CONTRACT_TOKEN_DGG', contractDggToken);
@@ -381,7 +393,7 @@ export default {
         getTokenDfdContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractDfdToken = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.token_dfd),
+                    abiTokenDefender,
                     this.state.web3.address.token.dfd
                 );
                 commit('WEB3_CONTRACT_TOKEN_DFD', contractDfdToken);
@@ -390,7 +402,7 @@ export default {
         getTokenFTK1Contract({ commit }) {
             if (this.state.web3.web3) {
                 let contractFtk1 = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.token_mock),
+                    abiTokenDefender,
                     this.state.web3.address.ftk1
                 );
                 commit('WEB3_CONTRACT_TOKEN_FTK1', contractFtk1);
@@ -399,16 +411,25 @@ export default {
         getTokenFTK2Contract({ commit }) {
             if (this.state.web3.web3) {
                 let contractFtk2 = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.token_mock),
+                    abiTokenDefender,
                     this.state.web3.address.ftk2
                 );
                 commit('WEB3_CONTRACT_TOKEN_FTK2', contractFtk2);
             } 
         },
+        getTokenUniswapPairContract({ commit }, address) {
+            if (this.state.web3.web3) {
+                let contractPair = new this.state.web3.web3.eth.Contract(
+                    abiUniswapPair,
+                    address
+                );
+                commit('WEB3_CONTRACT_TOKEN_PAIR', contractPair);
+            } 
+        },
         getRandContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractRand = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.rand),
+                    abiRand,
                     this.state.web3.address.rand
                 );
                 commit('WEB3_CONTRACT_RAND', contractRand);
@@ -417,7 +438,7 @@ export default {
         getDggSaleContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractDggSale = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.dgg_sale),
+                    abiDggSale,
                     this.state.web3.address.dgg_sale
                 );
                 commit('WEB3_CONTRACT_DGG_SALE', contractDggSale);
@@ -426,7 +447,7 @@ export default {
         getPoolSingleContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractPoolSingle = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.pool_single),
+                    abiPoolSingle,
                     this.state.web3.address.pool_single
                 );
                 commit('WEB3_CONTRACT_POOL_SINGLE', contractPoolSingle);
@@ -435,7 +456,7 @@ export default {
         getUniswapFactoryContract({ commit }) {
             if (this.state.web3.web3) {
                 let contractUniswapFactory = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.uniswap_factory),
+                    abiUniswapFactory,
                     this.state.web3.address.uniswap_factory
                 );
                 commit('WEB3_CONTRACT_UNISWAP_FACTORY', contractUniswapFactory);
@@ -444,7 +465,7 @@ export default {
         getDefenderRouterV1Contract({ commit }) {
             if (this.state.web3.web3) {
                 let contractDefenderRouterV1 = new this.state.web3.web3.eth.Contract(
-                    JSON.parse(this.state.abi.router_v1),
+                    abiRouter,
                     this.state.web3.address.router_v1
                 );
                 commit('WEB3_CONTRACT_DEFENDER_ROUTER_V1', contractDefenderRouterV1);
@@ -490,6 +511,9 @@ export default {
         },
         [WEB3_CONTRACT_TOKEN_FTK2](state, result) {
             state.contracts.token.ftk2 = result;
+        },
+        [WEB3_CONTRACT_TOKEN_PAIR](state, result) {
+            state.contracts.token.pair = result;
         },
         [WEB3_CONTRACT_RAND](state, result) {
             state.contracts.rand = result;

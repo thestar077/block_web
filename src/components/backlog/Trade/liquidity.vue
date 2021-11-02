@@ -165,16 +165,20 @@
       <div class="sc-edoZmE hyACfo">
         <button v-click type="button" v-if="istokenBApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
         <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
-        <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button>
+        <button v-else type="button" class="sc-dlfnbm btoybd" @click="addLiquidity()">Deposit</button>
       </div>
       <div class="sc-edoZmE hyACfo approveBtn">
         <div>
           <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = !istokenAApprove" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
+          <!-- <button type="button" v-if="!istokenAApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
         </div>
         <div>
           <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = !istokenBApprove" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
+          <!-- <button type="button" v-if="!istokenBApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
+          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
         </div>
       </div>
 <!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
@@ -332,6 +336,7 @@
 
 <script>
   import qs from 'qs';
+  import abiTokenDefender from '../../../assets/abi/DefenderToken.json'
   export default {
     data() {
       return {
@@ -412,12 +417,12 @@
         }
 
         let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
-            JSON.parse(this.$store.state.abi.token_erc20),
+            abiTokenDefender,
             this.tokenA.address,
         );
 
         let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
-            JSON.parse(this.$store.state.abi.token_erc20),
+            abiTokenDefender,
             this.tokenB.address,
         );
 
@@ -429,18 +434,81 @@
 
         let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
         let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
-        console.log(`Allowance of tokenA = ${allowanceTokenA}, Allowance of tokenB = ${allowanceTokenB}`);
+        console.log(`Allowance of tokenA = ${allowanceTokenA}, Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
 
         // await this.contractRouter.methods.addLiquidiy(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user).send({from: this.user});
 
       },
-      addLiquidiy(amountA, amountB) {
+      async approveTokenA() {
+        let amountA = parseInt(this.amountA);
+        if (this.contractRouter == null || this.contractRouter == undefined) {
+          alert("Invalid contract. Please contact the customer service.");
+          return;
+        }
+
+        let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
+            abiTokenDefender,
+            this.tokenA.address,
+        );
+
+        console.log('contractRouter', this.contractRouter);
+        await contractTokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
+        console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
+        let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+      },
+      async approveTokenB() {
+        let amountB = parseInt(this.amountB);
+        if (this.contractRouter == null || this.contractRouter == undefined) {
+          alert("Invalid contract. Please contact the customer service.");
+          return;
+        }
+
+        let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
+            abiTokenDefender,
+            this.tokenB.address,
+        );
+
+        console.log('contractTokenB', contractTokenB);
+
+        await contractTokenB.methods.approve(this.contractRouter.options.address, amountB).send({ from: this.user });
+
+        let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
+      },
+      async addLiquidity() {
           if (this.contractRouter == null || this.contractRouter == undefined) {
             alert("Invalid contract. Please contact the customer service.");
             return;
           }
 
-          
+          if (this.contractFactory == null || this.contractFactory == undefined) {
+            alert("Invalid contract. Please contact the customer service.");
+            return;
+          }
+
+          let timeNow = Math.floor(Date.now() / 1000);
+          let expiry = 10 * 60;  // 10 mins
+          let deadline = timeNow + expiry;
+          let amountA = parseInt(this.amountA);
+          let amountB = parseInt(this.amountB);
+          await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
+
+          let _amountA = await this.contractRouter.methods.amountA().call();
+          let _amountB = await this.contractRouter.methods.amountB().call();
+          let _liquidity = await this.contractRouter.methods.liquidity().call();
+          console.log(`_amountA = ${_amountA}, _amountB = ${_amountB}, _liquidity = ${_liquidity}`);
+
+          // let addrPair = await this.contractFactory.getPair(this.tokenA.address, this.tokenB.address).call();
+          // console.log(`addrPair = ${addrPair}`);
+          // getTokenUniswapPairContract(addrPair);
+
+          // let contractPair = this.$store.state.web3.contracts.pair;
+          // console.log('contractPair', contractPair);
+          // let balanceTokenA = await this.tokenA.methods.balanceOf(this.contractRouter.options.address);
+          // let balanceTokenB = await this.tokenB.methods.balanceOf(this.contractRouter.options.address);
+          // let balancePair = await this.contractPair.methods.balanceOf(this.user);
+          // console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balancePair = ${balancePair}`);
       },
       // 获取授权
       getAuthorization(){
