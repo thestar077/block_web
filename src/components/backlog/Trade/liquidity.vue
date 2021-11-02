@@ -74,7 +74,7 @@
                 <span>10.78%</span>
               </p>
               <div class="sc-edoZmE hyACfo handleBtn">
-                <button type="button" class="sc-dlfnbm btoybd">Add</button>
+                <button type="button" @click="getAuthorization()" class="sc-dlfnbm btoybd">Add</button>
                 <button type="button" @click="handleRemove" class="sc-dlfnbm btoybd">Remove</button>
               </div>
             </el-collapse-item>
@@ -162,20 +162,20 @@
         </div>
        </div>
       </div>
-      <div class="sc-edoZmE hyACfo">
-        <button v-click type="button" v-if="istokenBApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
-        <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
-        <button v-else type="button" class="sc-dlfnbm btoybd" @click="addLiquidity()">Deposit</button>
+      <div class="sc-edoZmE hyACfo mt30">
+        <button v-click type="button" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
+        <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
+        <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Deposit</button>
       </div>
       <div class="sc-edoZmE hyACfo approveBtn">
         <div>
-          <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = !istokenAApprove" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+          <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
           <!-- <button type="button" v-if="!istokenAApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
         </div>
         <div>
-          <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = !istokenBApprove" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
+          <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
           <!-- <button type="button" v-if="!istokenBApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
@@ -331,6 +331,8 @@
       <el-button class="closeBtn center block" @click="dialogVisibleTransactionsSubmitted = false">Close</el-button>
     </span> 
   </el-dialog>
+  <!-- Connect to a wallet -->
+    <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
   </div>
 </template>
 
@@ -342,6 +344,7 @@
       return {
         isFirst:true,
         searchText:'',
+        dialogVisibleWallet:false,
         dialogVisibleConfirmSwap:false,
         dialogVisibleConfirmationWaiting:false,
         dialogVisibleTransactionsSubmitted:false,
@@ -608,7 +611,11 @@
 .mr20{
   margin-right: 20px;
 }
+.mt30{
+  margin-top: 30px;
+}
 .approveBtn{
+  margin-top: 50px;
   display: flex;
   justify-content:space-between;
   align-items: center;
@@ -629,7 +636,7 @@
   align-items: center;
   span{
    font-size: 28px;
-   color: #AA8929;
+   color: #A29181;
   }
   .biPic{
     margin-bottom: 20px;
@@ -643,12 +650,12 @@
 .swapTips{
   font-size: 28px;
   margin:50px 0;
-  color: #AA8929;
+  color: #A29181;
 }
 .swapTips2{
   font-size: 24px;
   margin:50px 0;
-  color: #AA8929;
+  color: #A29181;
 }
 .swapTxt{
   display: flex;
@@ -671,7 +678,7 @@
   display: block;
   margin:0 auto;
   text-align: center;
-  color: #AA8929;
+  color: #A29181;
 }
 .waitingTxt{
   width: auto !important;
@@ -693,7 +700,7 @@
   span{
     font-size: 24px;
     text-align: center;
-    color: #AA8929;
+    color: #A29181;
     display: block;
     margin-right: 20px;
   }
@@ -1171,7 +1178,7 @@
 .btoybd {
     -webkit-box-align: center;
     align-items: center;
-    background-color: rgb(170, 137, 41);
+    background-color: #A29181;
     box-shadow: rgba(14, 14, 44, 0.4) 0px -1px 0px inset;
     color: rgb(255, 255, 255);
     cursor: pointer;
@@ -1282,6 +1289,8 @@
     border-color: initial;
     border-image: initial;
     padding: 0px 10px;
+    height: 60px;
+    margin-top: -330px;
 }
 .iONwHy {
     display: flex;
@@ -1289,6 +1298,8 @@
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
+    height: 100px;
+    margin-top: 150px;
 }
 .kUFaZj {
     width: 24px;

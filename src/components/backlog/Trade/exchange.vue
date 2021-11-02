@@ -88,7 +88,7 @@
       </div>
       <div class="sc-edoZmE hyACfo">
         <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd">Swap</button>
-        <button v-click type="button" v-else @click="getAuthorization" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+        <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
       </div>
       <div class="sc-edoZmE hyACfo approveBtn">
         <div>
@@ -250,6 +250,8 @@
         </ul>
       </div>
     </el-dialog>
+    <!-- Connect to a wallet -->
+    <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
   </div>
 </template>
 
@@ -260,6 +262,7 @@
       return {
         count:1,
         input:'',
+        dialogVisibleWallet:false,
         dialogVisibleConfirmationWaiting:false,
         dialogVisibleTransactionsSubmitted:false,
         dialogVisibleConfirmSwap:false,

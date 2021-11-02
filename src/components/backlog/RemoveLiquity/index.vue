@@ -2,7 +2,7 @@
   <div class="authorization" id="authorizationPage"> 
     <div class="box">
       <div class="header">
-        <span class="el-icon-back"></span>
+        <span @click="goBack" class="el-icon-back"></span>
         <span>Remove Liquidity</span>
       </div>
       <div class="box1">
@@ -36,8 +36,8 @@
         <span>1 BUSD = 2.765 BUSD</span>
       </p>
       <div class="sc-edoZmE hyACfo handleBtn">
-        <button type="button" class="sc-dlfnbm btoybd" @click="dialogVisibleConfirmSwap = true">Approve</button>
-        <button type="button" class="sc-dlfnbm btoybd">Enter an amount</button>
+        <button type="button" class="sc-dlfnbm btoybd bgActive" @click="dialogVisibleConfirmSwap = true">Approve</button>
+        <button type="button" class="sc-dlfnbm btoybd bgActive">Enter an amount</button>
       </div>
     </div>
     <div class="box2">
@@ -150,6 +150,9 @@
         this.activeNum = index;
         this.num = item.num;
       },
+      goBack(){
+        this.$router.go(-1);
+      },
       cofirmSwap(){
         this.dialogVisibleConfirmSwap = false;
         const TIME_COUNT = 3;
@@ -172,6 +175,10 @@
 </script>
 
 <style lang="less" scoped>
+  .bgActive{
+    background: #A29181 !important;
+    color: #fff !important;
+  }
    /deep/ .el-input-number{
       display: block;
       margin:0 auto;

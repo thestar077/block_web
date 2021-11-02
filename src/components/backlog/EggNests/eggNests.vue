@@ -70,8 +70,19 @@
           <div class="sc-eCssSg gqHjnk">
             <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}}</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" @click="getAuthorization" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
-          <button v-else type="button" class="sc-dlfnbm hlRgJI">Deposit</button></div>
+          <div class="sc-eCssSg cIpmpl" v-if="isApprove">
+            <div class="sc-gInsOo grsaJH" v-if="isDeposite">
+              <el-input-number v-model="item.num" @change="handleChange" :min="1" :max="10" label=""></el-input-number>
+            </div>
+            <div class="sc-gInsOo grsaJH stakeBox" v-else>
+                <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
+                <button disabled="" type="button" class="sc-dlfnbm IcZWJ bgActive">Stake</button>
+              </div>
+          </div>
+           <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
+           <!-- v-else -->
+          <button type="button" @click="handleDeposite(item)" class="sc-dlfnbm hlRgJI">Deposit</button></div>
+          <button type="button" @click="handleApprove" v-if="!isApprove" class="sc-dlfnbm hlRgJI">Approve Contract</button>
         <div class="sc-tYoTV jYOTaZ"></div>
         <div v-click @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
           <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
@@ -106,6 +117,31 @@
   </div>
   <div width="100%" class="sc-dIUggk hULlXf" v-if="!eggArr || eggArr.length == 0">
     <img width="100%" src="@/assets/picture/8.png" alt="illustration" class="sc-hHftDr kCQmsc"></div>
+  <!-- deposite token -->
+  <el-dialog
+    :title="'Deposite '+tokenItem.name+' token'"
+    :visible.sync="dialogVisibleDeposite" class="depositeVisible"
+    width="40%" append-to-body>
+    <p class="p1">
+      <span></span>
+      <span>0 {{tokenItem.name}} Availiable</span>
+    </p>
+    <p class="p1">
+      <span>0</span>
+      <span>{{tokenItem.name}}<span class="maxBtn">Max</span></span>
+    </p>
+    <p class="p1">
+      <span></span>
+      <span>Deposite Fee:0 {{tokenItem.name}}</span>
+    </p>
+    <span slot="footer" class="dialog-footer">
+      <el-button class="closeBtn center block" @click="dialogVisibleDeposite = false">Close</el-button>
+      <el-button class="closeBtn center block bgActive" @click="handleConfirmDeposite">Confirm</el-button>
+      <el-button class="closeBtn center block pendBtn" @click="dialogVisibleDeposite = false">Pending Confirmation</el-button>
+    </span> 
+  </el-dialog>
+  <!-- Connect to a wallet -->
+    <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
 </div>
 </template>
 
@@ -114,6 +150,11 @@
   export default {
     data() {
       return {
+        dialogVisibleWallet:false,
+        dialogVisibleDeposite:false,
+        tokenItem:{},
+        isApprove:false,
+        isDeposite:false,
         actIndex:0,
         isStaked:false,
         actList:[
@@ -207,6 +248,17 @@
       getAuthorization(){
         this.$router.push({path: "/authorization"});
       },
+      handleApprove(){
+        this.isApprove  = true;
+      },
+      handleDeposite(item){
+        this.tokenItem = item;
+        this.dialogVisibleDeposite = true;
+      },
+      handleConfirmDeposite(){
+        this.dialogVisibleDeposite = false;
+        this.isDeposite = true;
+      },
     }
   };
 </script>
@@ -217,6 +269,46 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment:fixed;
+  }
+  .dialog-footer{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    .pendBtn{
+      background: #eff4f5;
+      color: #999;
+    }
+  }
+  .stakeBox{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    button{
+      float:right;
+    }
+  }
+  .bgActive{
+    background: #A29181 !important;
+    color: #fff !important;
+  }
+  .depositeVisible{
+    .p1{
+      display: flex;
+      align-items: center;
+      justify-content:space-between;
+      font-size: 24px;
+      color:#A29181;
+      margin:10px 0;
+    }
+    .maxBtn{
+      background: #A29181;
+      color: #fff;
+      cursor: pointer;
+      margin-left: 20px;
+      padding:5px 10px;
+      border-radius: 50px;
+    }
   }
   .cpemDa {
     min-height: calc(100vh - 64px);
@@ -595,6 +687,29 @@
     width: 32px;
     padding: 0px;
 }
+/deep/ .el-input-number{
+  width: 80%;
+  height: 60px;
+  display: block;
+  margin:0 auto;
+  text-align: center;
+  border-radius: 20px;
+  overflow: hidden;
+}
+/deep/ .el-input__inner{
+  height: 60px;
+  line-height: 60px;
+}
+/deep/ .el-input-number .el-input{
+  height: 60px;
+}
+/deep/ .el-input-number__decrease, /deep/ .el-input-number__increase{
+  background: #A29181 !important;
+    color: #fff !important;
+    height: 60px;
+    line-height: 60px;
+    width: 60px;
+}
 .eSZGEW {
     -webkit-box-align: center;
     align-items: center;
@@ -679,7 +794,6 @@
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    flex-direction: column;
 }
 .IcZWJ:disabled, .IcZWJ.button--disabled {
     background-color: rgb(233, 234, 235);
