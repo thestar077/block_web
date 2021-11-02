@@ -516,7 +516,7 @@ of the gods". </p>
       // buy btn
       async handleBuy(){
         this.buyModelVisible = true;
-        this.$router.push({path: "/authorization"});//跳转授权
+        // this.$router.push({path: "/authorization"});//跳转授权
         // Step 1: Check balances
         let buyer = this.user;
         let minter = this.minter;

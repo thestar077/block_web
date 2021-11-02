@@ -22,8 +22,11 @@
             <img width="100%" :src="item.pic">
             <h5 class="title">{{item.leval}}</h5>
             <p class="txt">{{item.name}}</p>
-            <div class="btnA" v-if="item.sta == 'Unstake'">{{item.sta}}</div>     
-            <div class="btnA" v-else>{{item.sta}}</div>   
+            <div @click="handleBtn(item)">
+              <div class="btnA" v-if="item.sta == 'Unstake'">{{item.sta}}</div>     
+              <div class="btnA" v-else>{{item.sta}}</div> 
+            </div>
+              
           </div>
           <div class="cardBox cursorPointer" v-for="(item,index) in 5-infoArr.length" :key="'info2-'+index" >
             <img v-if="infoArr.length<5" v-click @click="addModelVisible = true" width="95%" class="addCard" src="@/assets/picture/add.png">
@@ -31,8 +34,19 @@
         </div>
       </div>
     </div>
-    <!-- addModel -->
-    <el-dialog :visible.sync="addModelVisible" width="80%" append-to-body>
+      <!-- Waiting for confirmation -->
+  <el-dialog
+    title="Waiting for confirmation"
+    :visible.sync="dialogVisibleConfirmationWaiting"
+    width="40%" append-to-body>
+    <div class="el-icon-loading submittedIcon"></div>
+    <p class="submittedVisible waitingTxt">
+      <span>Swapping {{itemRole.name}} </span>
+    </p>
+    <p class="watingTips">Confirm this transaction in your wallet</p>
+  </el-dialog>
+    <!-- waiting staking -->
+    <el-dialog class="waitingBox" :visible.sync="waitingModelVisible" width="80%" append-to-body>
       <el-carousel trigger="click" :interval="0" arrow="always" height="450px">
         <el-carousel-item v-for="(item, index) in newArr" :key="index">
           <ul class="cardUl">
@@ -53,6 +67,55 @@
         </div>
       </div>
     </el-dialog>
+  <!-- Waiting for confirmation -->
+  <el-dialog
+    title="Waiting for confirmation"
+    :visible.sync="dialogVisibleConfirmationWaiting"
+    width="40%" append-to-body>
+    <div class="el-icon-loading submittedIcon"></div>
+    <p class="submittedVisible waitingTxt">
+      <span>Swapping {{itemRole.name}} </span>
+    </p>
+    <p class="watingTips">Confirm this transaction in your wallet</p>
+  </el-dialog>
+  <!-- Waiting Staking -->
+  <el-dialog
+    class="waitingBox"
+    title=""
+    :visible.sync="dialogVisibleWaitingStaking"
+    width="40%" append-to-body>
+    <div>
+      <img src="@/assets/picture/6731.png">
+      <p>Waiting for blockchain confirmation</p>
+    </div>
+  </el-dialog>
+  <!-- unStaking -->
+  <el-dialog
+    class="waitingBox"
+    title=""
+    :visible.sync="dialogVisibleUnStaking"
+    width="40%" append-to-body>
+    <div>
+      <img class="rolePic" src="@/assets/picture/A+.png">
+      <span class="tips">Select NFT Stake</span>
+      <div class="waitingBoxFooter">
+        <span @click="handleUnstake">Unstake</span>
+        <span @click="dialogVisibleUnStaking = false">Cancel</span>
+      </div>
+    </div>
+  </el-dialog>
+  <!-- Staked -->
+  <el-dialog
+    class="waitingBox"
+    title=""
+    :visible.sync="dialogVisibleWaitingunStaked"
+    width="40%" append-to-body>
+    <div>
+      <img src="@/assets/picture/6727.png">
+      <p>Congratulations</p>
+      <p>You have Successfully Unstaked Your NFTs ！</p>
+    </div>
+  </el-dialog>
   </div>
 </template>
 
@@ -62,8 +125,13 @@
     data() {
       return {
         radio:-1,
+        dialogVisibleWaitingStaking:false,
+        dialogVisibleConfirmationWaiting:false,
+        dialogVisibleUnStaking:false,
         addModelVisible:false,
+        dialogVisibleWaitingunStaked:false,
         num:0,
+        itemRole:{},
         isShow:false,
         biArr:[
           {
@@ -178,12 +246,117 @@
             let newArr = [].push(obj)
             return newArr;
         }
-      }
+      },
+      handleBtn(item){
+        console.log(item,'item');
+        this.itemRole = item;
+        if(item.sta == "Approve"){
+          this.dialogVisibleConfirmationWaiting = true;
+        }else if(item.sta == "Stake"){
+          this.dialogVisibleWaitingStaking = true;
+        }else{
+          this.dialogVisibleUnStaking = true;
+        }
+      },
+      handleUnstake(){
+        this.dialogVisibleUnStaking = false;
+        this.dialogVisibleWaitingunStaked = true;
+      },
     }
   };
 </script>
 
 <style lang="less" scoped>
+  .waitingBox{
+    /deep/ .el-dialog{
+      background: none;
+      border:none;
+      box-shadow: none;
+    }
+    .rolePic{
+      width: 50%;
+    }
+    img{
+      display: block;
+      margin:0 auto;
+      margin-bottom: 30px;
+    }
+    p{
+      text-align: center;
+      color: #fff;
+      font-size: 30px;
+    }
+    .tips{
+      text-align: center;
+      color: #fff;
+      display: block;
+      font-size: 30px;
+    }
+    .waitingBoxFooter{
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      text-align: center;
+      margin:0 auto;
+      width:650px;
+      span:last-of-type{
+        margin-right:0;
+        background: #9A9991;
+      };
+      span{
+        margin-top: 30px;
+        width: 300px;
+        height: 80px;
+        background: #A39282;
+        opacity: 1;
+        border-radius: 10px;
+        line-height: 80px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #FFFFFF;
+        opacity: 1;
+        margin-right: 50px;
+        cursor: pointer;
+      }
+    }
+  }
+  .submittedIcon{
+      font-size: 150px;
+      display: block;
+      margin:0 auto;
+      text-align: center;
+      color: #A29181;
+    }
+    .waitingTxt{
+      width: auto !important;
+      text-align: center;
+      span{
+        text-align: center !important;
+        display: block !important;
+        margin:0 auto !important;
+      }
+    }
+    .watingTips{
+      margin-top: 10px;
+      font-size: 24px;
+      color: #d7c799;
+      text-align: center;
+    }
+    .submittedVisible{
+      margin:0 auto;
+      width: 280px;
+      margin-top: 30px;
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      span{
+        font-size: 24px;
+        text-align: center;
+        color: #A29181;
+        display: block;
+        margin-right: 20px;
+      }
+    }
   .stakeNFTPage{
     background-size: cover;
     background-repeat: no-repeat;
@@ -226,6 +399,7 @@
       margin:0 auto;
       display: block;
       border:none;
+      cursor: pointer;
     }
     .el-col-24{
       width: 20%;
@@ -326,11 +500,11 @@
       }
     }
   }
-  /deep/ .el-dialog{
+  .addBox /deep/ .el-dialog{
     background: none;
     border:none;
   }
-  /deep/ .el-dialog__body,/deep/ .el-dialog .el-dialog__header{
+  .addBox /deep/ .el-dialog__body,/deep/ .el-dialog .el-dialog__header{
     background: none;
     border:none;
     .btnBox{
