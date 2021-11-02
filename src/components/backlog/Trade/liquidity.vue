@@ -169,16 +169,16 @@
       </div>
       <div class="sc-edoZmE hyACfo approveBtn">
         <div>
-          <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
-          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
-          <!-- <button type="button" v-if="!istokenAApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+          <!-- <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
+          <button type="button" v-if="!istokenAApprove" @click="approveTokenA()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
         </div>
         <div>
-          <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
-          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
-          <!-- <button type="button" v-if="!istokenBApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
+          <!-- <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
+          <button type="button" v-if="!istokenBApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
+          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
         </div>
       </div>
 <!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
@@ -490,6 +490,22 @@
             return;
           }
 
+          let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
+              abiTokenDefender,
+              this.tokenA.address,
+          );
+
+          let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
+              abiTokenDefender,
+              this.tokenB.address,
+          );
+
+          let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
+          console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+
+          let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
+          console.log(`Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
+
           let timeNow = Math.floor(Date.now() / 1000);
           let expiry = 10 * 60;  // 10 mins
           let deadline = timeNow + expiry;
@@ -502,16 +518,16 @@
           let _liquidity = await this.contractRouter.methods.liquidity().call();
           console.log(`_amountA = ${_amountA}, _amountB = ${_amountB}, _liquidity = ${_liquidity}`);
 
-          // let addrPair = await this.contractFactory.getPair(this.tokenA.address, this.tokenB.address).call();
-          // console.log(`addrPair = ${addrPair}`);
-          // getTokenUniswapPairContract(addrPair);
+          let addrPair = await this.contractFactory.methods.getPair(this.tokenA.address, this.tokenB.address).call();
+          console.log(`addrPair = ${addrPair}`);
+          this.$store.dispatch('getTokenUniswapPairContract', addrPair);
 
-          // let contractPair = this.$store.state.web3.contracts.pair;
-          // console.log('contractPair', contractPair);
-          // let balanceTokenA = await this.tokenA.methods.balanceOf(this.contractRouter.options.address);
-          // let balanceTokenB = await this.tokenB.methods.balanceOf(this.contractRouter.options.address);
-          // let balancePair = await this.contractPair.methods.balanceOf(this.user);
-          // console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balancePair = ${balancePair}`);
+          let contractPair = this.$store.state.web3.contracts.token.pair;
+          console.log('contractPair', contractPair);
+            let balanceTokenA = await contractTokenA.methods.balanceOf(contractPair.options.address).call();
+            let balanceTokenB = await contractTokenB.methods.balanceOf(contractPair.options.address).call();
+            let balancePair = await contractPair.methods.balanceOf(this.user).call();
+            console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balanceTokenPair = ${balancePair}`);
       },
       // 获取授权
       getAuthorization(){
