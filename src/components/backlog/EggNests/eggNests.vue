@@ -76,12 +76,13 @@
             </div>
             <div class="sc-gInsOo grsaJH stakeBox" v-else>
                 <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-                <button disabled="" type="button" class="sc-dlfnbm IcZWJ bgActive">Stake</button>
+                <button  @click="handleDeposite(item)" type="button" class="sc-dlfnbm IcZWJ bgActive">Stake</button>
               </div>
           </div>
            <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
            <!-- v-else -->
-          <button type="button" @click="handleDeposite(item)" class="sc-dlfnbm hlRgJI">Deposit</button></div>
+          <!-- <button type="button" class="sc-dlfnbm hlRgJI">Deposit</button> -->
+        </div>
           <button type="button" @click="handleApprove" v-if="!isApprove" class="sc-dlfnbm hlRgJI">Approve Contract</button>
         <div class="sc-tYoTV jYOTaZ"></div>
         <div v-click @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
@@ -258,6 +259,14 @@
       handleConfirmDeposite(){
         this.dialogVisibleDeposite = false;
         this.isDeposite = true;
+      },
+      handleChange(currentValue, oldValue) {
+        console.log(currentValue, oldValue);
+        if(currentValue>oldValue){
+          this.dialogVisibleDeposite = true;
+        }else{
+          this.$router.push({path: "/removeLiquity"});
+        }
       },
     }
   };

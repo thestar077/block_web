@@ -3,7 +3,7 @@
     <div class="box">
       <div class="header">
         <span @click="goBack" class="el-icon-back"></span>
-        <span>Remove Liquidity</span>
+        <span>Remove BNB Token</span>
       </div>
       <div class="box1">
         <div class="headerTxt">

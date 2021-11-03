@@ -83,15 +83,17 @@
             </div>
             <div class="checkBox">
               <div class="flex">
-                <span>购买方式</span>
-                <el-radio-group v-model="buyToken">
-                  <el-radio label="egg">EGG</el-radio>
-                  <el-radio label="usdc">USDC</el-radio>
-                </el-radio-group>
+                <div class="flex">
+                  <span>购买方式</span>
+                  <el-radio-group v-model="buyToken">
+                    <el-radio label="egg">EGG</el-radio>
+                    <el-radio label="usdc">USDC</el-radio>
+                  </el-radio-group>
+                </div>
+                <div class="buyBtn" v-click @click="handleBuy">
+                  Buy
+                </div>
               </div>
-            </div>
-            <div class="buyBtn" v-click @click="handleBuy">
-              Buy
             </div>
           </div>
         </div>
@@ -924,10 +926,10 @@ of the gods". </p>
             font-size: 22px;
             font-weight: bold;
             line-height: 42px;
-            justify-content:space-between;
+            justify-content:flex-start;
             align-items:center;
             display: flex;
-            color: #000000;
+            color: #A39282;
             span{
               margin-right: 55px;
             }
@@ -969,6 +971,7 @@ of the gods". </p>
             align-items:center;
             display: flex;
             span{
+              color: #A39282  ;
               margin-right: 20px;
             }
             /deep/ .el-radio-group{
@@ -1003,18 +1006,19 @@ of the gods". </p>
             }
           }
           .buyBtn{
-            width: 689px;
-            height: 70px;
-            background: #A39282;
+            width: 341px;
+            height: 76px;
+            background: #C91731;
             opacity: 1;
-            text-align: center;
-            line-height: 70px;
             border-radius: 20px;
-            font-size: 34px;
-            cursor: pointer;
+            font-size: 40px;
+            font-family: PingFang SC;
             font-weight: bold;
+            line-height: 76px;
+            text-align: center;
+            cursor: pointer;
             color: #FFFFFF;
-            margin-top: 25px;
+            margin-left:150px;
           }
         }
       }

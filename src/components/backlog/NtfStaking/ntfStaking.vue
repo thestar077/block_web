@@ -45,8 +45,8 @@
     </p>
     <p class="watingTips">Confirm this transaction in your wallet</p>
   </el-dialog>
-    <!-- waiting staking -->
-    <el-dialog class="waitingBox" :visible.sync="waitingModelVisible" width="80%" append-to-body>
+    <!-- addModelVisible -->
+    <el-dialog class="addBox" :visible.sync="addModelVisible" width="80%" append-to-body>
       <el-carousel trigger="click" :interval="0" arrow="always" height="450px">
         <el-carousel-item v-for="(item, index) in newArr" :key="index">
           <ul class="cardUl">
@@ -89,6 +89,18 @@
       <p>Waiting for blockchain confirmation</p>
     </div>
   </el-dialog>
+  <!-- Staked -->
+  <el-dialog
+    class="waitingBox"
+    title=""
+    :visible.sync="dialogVisibleStaked"
+    width="40%" append-to-body>
+    <div>
+      <img src="@/assets/picture/6727.png">
+      <p>Congratulations</p>
+      <p>You have Successfully Staked Your NFTs ！</p>
+    </div>
+  </el-dialog>
   <!-- unStaking -->
   <el-dialog
     class="waitingBox"
@@ -125,6 +137,7 @@
     data() {
       return {
         radio:-1,
+        dialogVisibleStaked:false,
         dialogVisibleWaitingStaking:false,
         dialogVisibleConfirmationWaiting:false,
         dialogVisibleUnStaking:false,
@@ -223,6 +236,7 @@
         ],
         newArr:[],
         activeName: 'GameFi',
+        count:1,
       };
     },
     mounted() {
@@ -253,7 +267,20 @@
         if(item.sta == "Approve"){
           this.dialogVisibleConfirmationWaiting = true;
         }else if(item.sta == "Stake"){
-          this.dialogVisibleWaitingStaking = true;
+          const TIME_COUNT = 3;
+          if(!this.timer){
+            this.timer = setInterval(() => {
+              this.dialogVisibleWaitingStaking = true;
+              if(this.count > 0 && this.count <= TIME_COUNT){
+                this.count++;
+              }else{
+                this.dialogVisibleStaked = true;
+                this.dialogVisibleWaitingStaking = false;
+                clearInterval(this.timer);
+                this.timer = null;
+              }
+            }, 1000)
+          }
         }else{
           this.dialogVisibleUnStaking = true;
         }
