@@ -74,7 +74,7 @@
                 <span>10.78%</span>
               </p>
               <div class="sc-edoZmE hyACfo handleBtn">
-                <button type="button" @click="getAuthorization()" class="sc-dlfnbm btoybd">Add</button>
+                <button type="button" @click="hadnleAdd" class="sc-dlfnbm btoybd">Add</button>
                 <button type="button" @click="handleRemove" class="sc-dlfnbm btoybd">Remove</button>
               </div>
             </el-collapse-item>
@@ -128,7 +128,7 @@
           <span>MAX</span>
           <img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
-            {{tokenA.name}}
+            {{tokenA.name?tokenA.name:'Select a currency'}}
            </div>
            <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg downArrow">
             <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -154,7 +154,7 @@
            <span>MAX</span>
            <img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
-            {{tokenB.name}}
+            {{tokenB.name?tokenB.name:'Select a currency'}}
            </div>
            <svg style="margin-top:120px;" viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg">
             <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -163,11 +163,15 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo mt30">
-        <button v-click type="button" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
-        <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
-        <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Deposit</button>
+        <button v-click v-if="isAdd" type="button" @click="handleSupply" :class="isSupplyDisable?'sc-dlfnbm btoybd supplyDisable':'sc-dlfnbm btoybd'">Supply</button>
+        <div v-if="!isAdd">
+          <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
+          <button v-click type="button" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
+          <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
+          <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Deposit</button>
+        </div>
       </div>
-      <div class="sc-edoZmE hyACfo approveBtn">
+      <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd">
         <div>
           <!-- <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
@@ -343,7 +347,9 @@
     data() {
       return {
         isFirst:true,
+        isAdd:false,
         searchText:'',
+        isSupplyDisable:true,
         dialogVisibleWallet:false,
         dialogVisibleConfirmSwap:false,
         dialogVisibleConfirmationWaiting:false,
@@ -529,9 +535,20 @@
             let balancePair = await contractPair.methods.balanceOf(this.user).call();
             console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balanceTokenPair = ${balancePair}`);
       },
+      handleSupply(){
+        if(!this.isSupplyDisable){
+          this.dialogVisibleConfirmSwap = true;
+        }
+      },
+      hadnleAdd(){
+        this.isFirst = false;
+        this.isAdd = true;
+        this.isSupplyDisable = false;
+      },
       // 获取授权
       getAuthorization(){
-        this.isFirst = false
+        this.isFirst = false;
+        this.isAdd = false;
         // this.$router.push({path: "/authorization"});
       },
       showSetting(){
@@ -545,11 +562,13 @@
         this.dialogVisibleToken = true;
       },
       handleToken(item,index){
-        if(this.tokenIndex == 1){
+        console.log(index,'index');
+        if(index== 1){
           this.tokenA = item;
         }else{
           this.tokenB = item;
         }
+        this.isSupplyDisable = false;
         this.dialogVisibleToken = false;
       },
       search(){
@@ -811,6 +830,11 @@
 .cxRybB {
     background-color: transparent;
     color: rgb(143, 128, 186);
+}
+.supplyDisable{
+  background: #E9EAEB !important;
+  color: #C0C4C6 !important;
+  margin-top: 20px;
 }
 .xiYlH {
     -webkit-box-align: center;
