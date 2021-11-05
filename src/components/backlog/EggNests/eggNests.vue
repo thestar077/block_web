@@ -71,8 +71,14 @@
             <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}}</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
           <div class="sc-eCssSg cIpmpl" v-if="isApprove">
-            <div class="sc-gInsOo grsaJH" v-if="isDeposite">
-              <el-input-number v-model="item.num" @change="handleChange" :min="1" :max="10" label=""></el-input-number>
+            <div class="sc-gInsOo grsaJH stakeBox" v-if="isDeposite">
+              <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">{{item.num}}</h2>
+              <div class="addRemoveBox">
+                <button  @click="handleRemove" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-minus"></button>
+                <button  @click="handleAdd" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-plus"></button>
+              </div>
+                
+              <!-- <el-input-number v-model="item.num" @change="handleChange" :min="1" :max="10" label=""></el-input-number> -->
             </div>
             <div class="sc-gInsOo grsaJH stakeBox" v-else>
                 <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
@@ -141,6 +147,25 @@
       <el-button class="closeBtn center block pendBtn" @click="dialogVisibleDeposite = false">Pending Confirmation</el-button>
     </span> 
   </el-dialog>
+  <!-- remove token -->
+  <el-dialog
+    :title="'Withdraw '+tokenItem.name"
+    :visible.sync="dialogVisibleRemove" class="depositeVisible"
+    width="40%" append-to-body>
+    <p class="p1">
+      <span></span>
+      <span>0.986522222 {{tokenItem.name}}</span>
+    </p>
+    <p class="p1">
+      <span>0</span>
+      <span>{{tokenItem.name}}<span class="maxBtn">Max</span></span>
+    </p>
+    <span slot="footer" class="dialog-footer">
+      <el-button class="closeBtn center block" @click="dialogVisibleDeposite = false">Close</el-button>
+      <el-button class="closeBtn center block bgActive" @click="dialogVisibleRemove = false">Confirm</el-button>
+      <el-button class="closeBtn center block pendBtn">Pending Confirmation</el-button>
+    </span> 
+  </el-dialog>
   <!-- Connect to a wallet -->
     <ComponentWallet :showModal="dialogVisibleWallet" @hideModal="dialogVisibleWallet = false" />
 </div>
@@ -151,6 +176,7 @@
   export default {
     data() {
       return {
+        dialogVisibleRemove:false,
         dialogVisibleWallet:false,
         dialogVisibleDeposite:false,
         tokenItem:{},
@@ -260,13 +286,11 @@
         this.dialogVisibleDeposite = false;
         this.isDeposite = true;
       },
-      handleChange(currentValue, oldValue) {
-        console.log(currentValue, oldValue);
-        if(currentValue>oldValue){
-          this.dialogVisibleDeposite = true;
-        }else{
-          this.$router.push({path: "/removeLiquity"});
-        }
+      handleAdd(){
+        this.dialogVisibleDeposite = true;
+      },
+      handleRemove(){
+       this.dialogVisibleRemove = true;
       },
     }
   };
@@ -278,6 +302,14 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment:fixed;
+  }
+  .addRemoveBox{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    button{
+      margin-left: 20px;
+    }
   }
   .dialog-footer{
     display: flex;

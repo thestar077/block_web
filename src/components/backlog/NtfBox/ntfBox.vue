@@ -59,7 +59,7 @@
         <div class="content">
           <div class="col10">
             <div class="box">
-              <img width="90%" src="@/assets/picture/box.png">
+              <img width="350vw" src="@/assets/picture/box.png">
               <span v-if="buyToken == 'usdc'">20% OFF</span>
             </div>
           </div>
@@ -90,9 +90,14 @@
                     <el-radio label="usdc">USDC</el-radio>
                   </el-radio-group>
                 </div>
-                <div class="buyBtn" v-click @click="handleBuy">
+              </div>
+            </div>
+            <div class="buyBtnBox">
+              <div :class="!isApprove?'buyBtn':'buyBtn disableBTn'" :disabled="!isApprove?false:true" v-click @click="handleApprove">
+                  Approve
+              </div>
+              <div  :class="isApprove?'buyBtn':'buyBtn disableBTn'" :disabled="isApprove?false:true" v-click @click="handleBuy">
                   Buy
-                </div>
               </div>
             </div>
           </div>
@@ -173,6 +178,7 @@ of the gods". </p>
   export default {
     data() {
       return {
+        isApprove:false,
         isHave:false,
         buyModelVisible:false,
         imgHeight:'350',
@@ -204,35 +210,35 @@ of the gods". </p>
           {
             info:[
               {
-                pic:require('@/assets/picture/SSR.png'),
+                pic:require('@/assets/picture/role/Athena/SSR.png'),
                 leval:'SSR',
                 name:'Big Whale Athena',
                 features:'goddess of war, face the evil',
                 skill:'Show-hand mainstream, stable profit',
               },
               {
-                pic:require('@/assets/picture/SR.png'),
+                pic:require('@/assets/picture/role/Athena/SR.png'),
                 leval:'SR',
                 name:'Freedom of wealth Athena',
                 features:'goddess of war, face the evil',
                 skill:'Show-hand mainstream, stable profit',
               },
               {
-                pic:require('@/assets/picture/S.png'),
+                pic:require('@/assets/picture/role/Athena/S.png'),
                 leval:'S',
                 name:'Rich and noble Athena',
                 features:'goddess of war, face the evil',
                 skill:'Show-hand mainstream, stable profit',
               },
               {
-                pic:require('@/assets/picture/A+.png'),
+                pic:require('@/assets/picture/role/Athena/A+.png'),
                 leval:'A+',
                 name:'Small profit Athena',
                 features:'goddess of war, face the evil',
                 skill:'Show-hand mainstream, stable profit',
               },
               {
-                pic:require('@/assets/picture/A.png'),
+                pic:require('@/assets/picture/role/Athena/A.png'),
                 leval:'A',
                 name:'Show-hand Fan Athena',
                 features:'goddess of war, face the evil',
@@ -243,35 +249,35 @@ of the gods". </p>
           {
             info:[
               {
-                pic:require('@/assets/picture/SSR.png'),
+                pic:require('@/assets/picture/role/Poseidon/SSR.png'),
                 leval:'SSR',
                 name:'Big Whale Poseidon',
                 features:'The god of the sea who shakes the earth.',
                 skill:' Show-hand copycat, get rich overnight.',
               },
               {
-                pic:require('@/assets/picture/SR.png'),
+                pic:require('@/assets/picture/role/Poseidon/SR.png'),
                 leval:'SR',
                 name:'Freedom of wealth Poseidon',
                 features:'The god of the sea who shakes the earth.',
                 skill:' Show-hand copycat, get rich overnight.',
               },
               {
-                pic:require('@/assets/picture/S.png'),
+                pic:require('@/assets/picture/role/Poseidon/S.png'),
                 leval:'S',
                 name:'Rich and noble Poseidon',
                 features:'The god of the sea who shakes the earth.',
                 skill:' Show-hand copycat, get rich overnight.',
               },
               {
-                pic:require('@/assets/picture/A+.png'),
+                pic:require('@/assets/picture/role/Poseidon/A+.png'),
                 leval:'A+',
                 name:'Small profit Poseidon',
                 features:'The god of the sea who shakes the earth.',
                 skill:' Show-hand copycat, get rich overnight.',
               },
               {
-                pic:require('@/assets/picture/A.png'),
+                pic:require('@/assets/picture/role/Poseidon/A.png'),
                 leval:'A',
                 name:'Show-hand Fan Poseidon',
                 features:'The god of the sea who shakes the earth.',
@@ -282,35 +288,35 @@ of the gods". </p>
           {
             info:[
               {
-                pic:require('@/assets/picture/SSR.png'),
+                pic:require('@/assets/picture/role/Venus/SSR.png'),
                 leval:'SSR',
                 name:'Big Whale Venus',
                 features:'arouse love and beauty in hearts of all things in the universe',
                 skill:'Show-hand DFD, reach the peak of life',
               },
               {
-                pic:require('@/assets/picture/SR.png'),
+                pic:require('@/assets/picture/role/Venus/SR.png'),
                 leval:'SR',
                 name:'Freedom of wealth Venus',
                 features:'arouse love and beauty in hearts of all things in the universe',
                 skill:'Show-hand DFD, reach the peak of life',
               },
               {
-                pic:require('@/assets/picture/S.png'),
+                pic:require('@/assets/picture/role/Venus/S.png'),
                 leval:'S',
                 name:'Rich and noble Venus',
                 features:'arouse love and beauty in hearts of all things in the universe',
                 skill:'Show-hand DFD, reach the peak of life',
               },
               {
-                pic:require('@/assets/picture/A+.png'),
+                pic:require('@/assets/picture/role/Venus/A+.png'),
                 leval:'A+',
                 name:'Small profit Venus',
                 features:'arouse love and beauty in hearts of all things in the universe',
                 skill:'Show-hand DFD, reach the peak of life',
               },
               {
-                pic:require('@/assets/picture/A.png'),
+                pic:require('@/assets/picture/role/Venus/A.png'),
                 leval:'A',
                 name:'Show-hand Fan Venus',
                 features:'arouse love and beauty in hearts of all things in the universe',
@@ -321,35 +327,35 @@ of the gods". </p>
           {
             info:[
                             {
-                pic:require('@/assets/picture/SSR.png'),
+                pic:require('@/assets/picture/role/Apollo/SSR.png'),
                 leval:'SSR',
                 name:'Big Whale Apollo',
                 features:'God of the sun and protector of human civilization',
                 skill:'EGG full position, get nice lover',
               },
               {
-                pic:require('@/assets/picture/SR.png'),
+                pic:require('@/assets/picture/role/Apollo/SR.png'),
                 leval:'SR',
                 name:'Freedom of wealth Apollo',
                 features:'God of the sun and protector of human civilization',
                 skill:'EGG full position, get nice lover',
               },
               {
-                pic:require('@/assets/picture/S.png'),
+                pic:require('@/assets/picture/role/Apollo/S.png'),
                 leval:'S',
                 name:'Rich and noble Apollo',
                 features:'God of the sun and protector of human civilization',
                 skill:'EGG full position, get nice lover',
               },
               {
-                pic:require('@/assets/picture/A+.png'),
+                pic:require('@/assets/picture/role/Apollo/A+.png'),
                 leval:'A+',
                 name:'Small profit Apollo',
                 features:'God of the sun and protector of human civilization',
                 skill:'EGG full position, get nice lover',
               },
               {
-                pic:require('@/assets/picture/A.png'),
+                pic:require('@/assets/picture/role/Apollo/A.png'),
                 leval:'A',
                 name:'Show-hand Fan Apollo',
                 features:'God of the sun and protector of human civilization',
@@ -360,35 +366,35 @@ of the gods". </p>
           {
             info:[
               {
-                pic:require('@/assets/picture/SSR.png'),
+                pic:require('@/assets/picture/role/Cupid/SSR.png'),
                 leval:'SSR',
                 name:'Big Whale Cupid',
                 features:'My arrow has been aimed at people bathed in love',
                 skill:'Band master, K-line divine hand',
               },
               {
-                pic:require('@/assets/picture/SR.png'),
+                pic:require('@/assets/picture/role/Cupid/SR.png'),
                 leval:'SR',
                 name:'Freedom of wealth Cupid',
                 features:'My arrow has been aimed at people bathed in love',
                 skill:'Band master, K-line divine hand',
               },
               {
-                pic:require('@/assets/picture/S.png'),
+                pic:require('@/assets/picture/role/Cupid/S.png'),
                 leval:'S',
                 name:'Rich and noble Cupid',
                 features:'My arrow has been aimed at people bathed in love',
                 skill:'Band master, K-line divine hand',
               },
               {
-                pic:require('@/assets/picture/A+.png'),
+                pic:require('@/assets/picture/role/Cupid/A+.png'),
                 leval:'A+',
                 name:'Small profit Cupid',
                 features:'My arrow has been aimed at people bathed in love',
                 skill:'Band master, K-line divine hand',
               },
               {
-                pic:require('@/assets/picture/A.png'),
+                pic:require('@/assets/picture/role/Cupid/A.png'),
                 leval:'A',
                 name:'Show-hand Fan Cupid',
                 features:'My arrow has been aimed at people bathed in love',
@@ -514,6 +520,9 @@ of the gods". </p>
         this.$nextTick(function(){
           this.imgHeight = this.$refs.imgBox[0].offsetHeight;
         })
+      },
+      handleApprove(){
+        this.isApprove = true;
       },
       // buy btn
       async handleBuy(){
@@ -788,11 +797,11 @@ of the gods". </p>
         display: flex;
         .col10{
           float: left;
-          width: 40%;
+          width: 35%;
         }
         .col12{
           float: left;
-          width: 60%;
+          width: 65%;
         }
         .box{
           position: relative;
@@ -1005,20 +1014,31 @@ of the gods". </p>
               }
             }
           }
+          .buyBtnBox{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 20px;
+            padding-bottom: 40px;
+          }
+          .disableBTn{
+            background: #E9EAEB !important;
+            color: #999999 !important;
+          }
           .buyBtn{
-            width: 341px;
+            width: 500px;
             height: 76px;
-            background: #C91731;
+            background: #A39282;
             opacity: 1;
             border-radius: 20px;
-            font-size: 40px;
+            font-size: 30px;
             font-family: PingFang SC;
             font-weight: bold;
             line-height: 76px;
             text-align: center;
             cursor: pointer;
             color: #FFFFFF;
-            margin-left:150px;
+            margin-right:150px;
           }
         }
       }

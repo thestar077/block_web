@@ -87,10 +87,10 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo">
-        <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd">Swap</button>
+        <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd" @click="dialogVisibleConfirmSwap = true">Swap</button>
         <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
       </div>
-      <div class="sc-edoZmE hyACfo approveBtn">
+      <div class="sc-edoZmE hyACfo" >
         <div>
           <button v-click type="button" v-if="!isToken1Approve" @click="approve()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
@@ -155,14 +155,16 @@
           <span>Swap {{tokenA.value}} {{tokenA.name}} for {{tokenB.value}} {{tokenB.name}}</span>
           <span class="el-icon-link"></span>
       </div>
-      <span class="el-icon-check"></span>
+      <span class="el-icon-circle-check"></span>
+      <span style="color:red;" class="el-icon-circle-close"></span>
     </div>
     <div class="recentVisible">
       <div class="flex"> 
           <span>Approve {{tokenA.name}}</span>
           <span class="el-icon-link"></span>
       </div>
-      <span class="el-icon-check"></span>
+      <span class="el-icon-circle-check"></span>
+      <span style="color:red;" class="el-icon-circle-close"></span>
     </div>
     <span slot="footer" class="dialog-footer">
       <el-button class="closeBtn center block" @click="dialogVisibleTransactions = false">Close</el-button>

@@ -36,8 +36,8 @@
         <span>1 BUSD = 2.765 BUSD</span>
       </p>
       <div class="sc-edoZmE hyACfo handleBtn">
-        <button type="button" class="sc-dlfnbm btoybd bgActive" @click="dialogVisibleConfirmSwap = true">Approve</button>
-        <button type="button" class="sc-dlfnbm btoybd bgActive">Enter an amount</button>
+        <button type="button" :disabled="!isApprove && num !== 0" :class="isApprove || num === 0?'c-dlfnbm btoybd disableBtn':'c-dlfnbm btoybd bgActive'" @click="dialogVisibleConfirmSwap = true">Approve</button>
+        <button type="button" :disabled="!isApprove" @click="dialogVisibleConfirmSwap = true" :class="!isApprove?'c-dlfnbm btoybd disableBtn':'c-dlfnbm btoybd bgActive'" >{{num === 0?'Enter an amount':'Remove'}}</button>
       </div>
     </div>
     <div class="box2">
@@ -119,6 +119,7 @@
   export default {
     data() {
       return {
+        isApprove:false,
         dialogVisibleConfirmSwap:false,
         dialogVisibleConfirmationWaiting:false,
         dialogVisibleTransactionsSubmitted:false,
@@ -155,6 +156,7 @@
       },
       cofirmSwap(){
         this.dialogVisibleConfirmSwap = false;
+        this.isApprove = true;
         const TIME_COUNT = 3;
         if(!this.timer){
         this.timer = setInterval(() => {
@@ -178,6 +180,11 @@
   .bgActive{
     background: #A29181 !important;
     color: #fff !important;
+  }
+  .disableBtn{
+    background: #E9EAEB !important;
+    color: #C0C4C6 !important;
+    margin-top: 20px;
   }
    /deep/ .el-input-number{
       display: block;
