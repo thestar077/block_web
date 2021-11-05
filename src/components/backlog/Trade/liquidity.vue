@@ -382,6 +382,9 @@
       
     },
     computed: {
+      web3() {
+        return this.$store.state.web3.web3;
+      },
       accounts () {
         return this.$store.state.web3.accounts;
       },
@@ -408,10 +411,11 @@
     },
     methods: {
       async approve() {
-        // console.log('tokenA', this.tokenA);
-        // console.log('tokenB', this.tokenB);
-        // console.log('amountA', this.amountA);
-        // console.log('amountB', this.amountB);
+        if (this.web3 == null || this.web3 == undefined) {
+          alert('Please connect to your wallet first.');
+          return;
+        }
+
         let amountA = parseInt(this.amountA);
         let amountB = parseInt(this.amountB);
         if (this.contractRouter == null || this.contractRouter == undefined) {
@@ -443,6 +447,11 @@
 
       },
       async approveTokenA() {
+        if (this.web3 == null || this.web3 == undefined) {
+          alert('Please connect to your wallet first.');
+          return;
+        }
+
         let amountA = parseInt(this.amountA);
         if (this.contractRouter == null || this.contractRouter == undefined) {
           alert("Invalid contract. Please contact the customer service.");
@@ -461,6 +470,11 @@
         console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
       },
       async approveTokenB() {
+        if (this.web3 == null || this.web3 == undefined) {
+          alert('Please connect to your wallet first.');
+          return;
+        }
+
         let amountB = parseInt(this.amountB);
         if (this.contractRouter == null || this.contractRouter == undefined) {
           alert("Invalid contract. Please contact the customer service.");
@@ -480,6 +494,11 @@
         console.log(`Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
       },
       async addLiquidity() {
+        if (this.web3 == null || this.web3 == undefined) {
+          alert('Please connect to your wallet first.');
+          return;
+        }
+
           if (this.contractRouter == null || this.contractRouter == undefined) {
             alert("Invalid contract. Please contact the customer service.");
             return;

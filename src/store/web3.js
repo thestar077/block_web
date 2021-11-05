@@ -25,12 +25,13 @@ const WEB3_CONTRACT_POOL_SINGLE = 'WEB3_CONTRACT_POOL_SINGLE';
 const WEB3_CONTRACT_UNISWAP_FACTORY = 'WEB3_CONTRACT_UNISWAP_FACTORY';
 const WEB3_CONTRACT_DEFENDER_ROUTER_V1 = 'WEB3_CONTRACT_DEFENDER_ROUTER_V1';
 const WEB3_CONTRACT_RAND = 'WEB3_CONTRACT_RAND';
+const WEB3_SWAP_PATHS = 'WEB3_SWAP_PATHS';
 const NFT_ASSET = 'NFT_ASSET';
 const NFT_BOUGHT = 'NFT_BOUGHT';
 
 export default {
     state: {
-        web3: '',
+        web3: null,
         address: {
             token: {
                 egg: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
@@ -269,6 +270,9 @@ export default {
                 name:'Wootrade Network (WOO)',
                 address: '',
             },
+        ],
+        swap_paths: [
+            [0, 1], // FTK1 -> FTK2
         ],
         minter: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc',
         accounts: '',
@@ -529,6 +533,9 @@ export default {
         },
         [WEB3_CONTRACT_DEFENDER_ROUTER_V1](state, result) {
             state.contracts.router_v1 = result;
+        },
+        [WEB3_SWAP_PATHS](state, result) {
+            state.swap_paths = result;
         },
         [NFT_ASSET](state, result) {
             state.asset = result;

@@ -41,10 +41,10 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <input class="sc-fybufo dHAxfv token-amount-input" v-model="token1.value" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
-          <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token1.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+          <input class="sc-fybufo dHAxfv token-amount-input" v-model="amountA" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" @blur="handleTokenChange(false)"/>
+          <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
-             {{token1.name}}
+             {{tokenA.name}}
             </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -71,10 +71,10 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" v-model="token2.value" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" />
-           <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="token2.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" v-model="amountB" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" @blur="handleTokenChange(false)" />
+           <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
-             {{token2.name}}
+             {{tokenB.name}}
             </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg  mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
@@ -92,11 +92,11 @@
       </div>
       <div class="sc-edoZmE hyACfo approveBtn">
         <div>
-          <button v-click type="button" v-if="!isToken1Approve" @click="isToken1Approve = !isToken1Approve" class="sc-dlfnbm btoybd mr20">Approve {{token1.name}}</button>
+          <button v-click type="button" v-if="!isToken1Approve" @click="isToken1Approve = !isToken1Approve" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
         </div>
         <div>
-          <button v-click type="button" v-if="!isToken2Approve" @click="isToken2Approve = !isToken2Approve" class="sc-dlfnbm btoybd mr20">Approve {{token2.name}}</button>
+          <button v-click type="button" v-if="!isToken2Approve" @click="isToken2Approve = !isToken2Approve" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
         </div>
       </div>
@@ -152,14 +152,14 @@
     </h3>
     <div class="recentVisible">
       <div class="flex"> 
-          <span>Swap {{token1.value}} {{token1.name}} for {{token2.value}} {{token2.name}}</span>
+          <span>Swap {{tokenA.value}} {{tokenA.name}} for {{tokenB.value}} {{tokenB.name}}</span>
           <span class="el-icon-link"></span>
       </div>
       <span class="el-icon-check"></span>
     </div>
     <div class="recentVisible">
       <div class="flex"> 
-          <span>Approve {{token1.name}}</span>
+          <span>Approve {{tokenA.name}}</span>
           <span class="el-icon-link"></span>
       </div>
       <span class="el-icon-check"></span>
@@ -175,27 +175,27 @@
     width="40%" append-to-body>
     <div class="biItem">
       <div class="biPic">
-        <img :src="token1.pic">
-        <span>{{token1.value}}</span>
+        <img :src="tokenA.pic">
+        <span>{{tokenA.value}}</span>
       </div>
-      <span>{{token1.name}}</span>
+      <span>{{tokenA.name}}</span>
     </div>
     <div @click="changeBi" class="el-icon-bottom changeBtn"></div>
     <div class="biItem">
       <div class="biPic">
-        <img :src="token1.pic">
-        <span>{{token1.value}}</span>
+        <img :src="tokenA.pic">
+        <span>{{tokenA.value}}</span>
       </div>
-      <span>{{token1.name}}</span>
+      <span>{{tokenA.name}}</span>
     </div>
-    <p class="swapTips">Output is estimated.You will receive at least{{token2.value}} {{token2.name}} or the transaction will revert.</p>
+    <p class="swapTips">Output is estimated.You will receive at least{{tokenB.value}} {{tokenB.name}} or the transaction will revert.</p>
     <p class="swapTxt">
       <span>Price</span>
-      <span>{{token1.value}} {{token1.name}} / {{token2.name}}</span>
+      <span>{{tokenA.value}} {{tokenA.name}} / {{tokenB.name}}</span>
     </p>
     <p class="swapTxt">
       <span>Minimum received</span>
-      <span>{{token1.value}} {{token2.name}}</span>
+      <span>{{tokenA.value}} {{tokenB.name}}</span>
     </p>
     <p class="swapTxt">
       <span>Pricr Impact</span>
@@ -203,7 +203,7 @@
     </p>
     <p class="swapTxt">
       <span>Liquidity Provider Fee</span>
-      <span>0.03996 {{token1.name}}</span>
+      <span>0.03996 {{tokenA.name}}</span>
     </p>
     <span slot="footer" class="dialog-footer">
       <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Cofirm Swap</el-button>
@@ -216,7 +216,7 @@
     width="40%" append-to-body>
     <div class="el-icon-loading submittedIcon"></div>
     <p class="submittedVisible waitingTxt">
-      <span>Swapping {{token1.value}} {{token1.name}} for {{token2.value}} {{token2.name}}</span>
+      <span>Swapping {{tokenA.value}} {{tokenA.name}} for {{tokenB.value}} {{tokenB.name}}</span>
     </p>
     <p class="watingTips">Confirm this transaction in your wallet</p>
   </el-dialog>
@@ -257,6 +257,7 @@
 
 <script>
   import qs from 'qs';
+  import abiTokenDefender from '../../../assets/abi/DefenderToken.json';
   export default {
     data() {
       return {
@@ -285,153 +286,68 @@
           percent:1,
           minutes:24
         },
-        token1:{
-          value:0,
-          pic:require('@/assets/picture/bi/1.png'),
-          name:'Uniswap (UNI)',
-        },
-        token2:{
-          value:0,
-          pic:require('@/assets/picture/bi/1.png'),
-          name:'Uniswap (UNI)',
-        },
+        tokenA: this.$store.state.web3.tokens[0],
+        tokenB: this.$store.state.web3.tokens[1],
+        amountA: 0,
+        amountB: 0,
+        tokenAIndex: 0,
+        tokenBIndex: 1,
+        tokenPathSelected: [],
         tokenIndex:1,
-        isToken1Approve:false,
-        isToken2Approve:false,
-        tokenList:[
-          {
-            pic:require('@/assets/picture/bi/1.png'),
-            name:'Uniswap (UNI)',
-          },
-          {
-            pic:require('@/assets/picture/bi/2.png'),
-            name:'Tether USD (USDT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/3.png'),
-            name:'USD Coin (USDC)',
-          },
-          {
-            pic:require('@/assets/picture/bi/4.png'),
-            name:'Wrapped BTC (WBTC)',
-          },
-          {
-            pic:require('@/assets/picture/bi/5.png'),
-            name:'ChainLink Token (LINK)',
-          },
-          {
-            pic:require('@/assets/picture/bi/6.png'),
-            name:'Graph Token (GRT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/7.png'),
-            name:'SushiToken (SUSHI)',
-          },
-          {
-            pic:require('@/assets/picture/bi/8.png'),
-            name:'Compound (COMP)',
-          },
-          {
-            pic:require('@/assets/picture/bi/9.png'),
-            name:'Magic Internet Money (MIM)',
-          },
-          {
-            pic:require('@/assets/picture/bi/10.png'),
-            name:'yearn.finance (YFI)',
-          },
-          {
-            pic:require('@/assets/picture/bi/11.png'),
-            name:'Curve DAO Token (CRV)',
-          },
-          {
-            pic:require('@/assets/picture/bi/12.png'),
-            name:'CelerToken (CELR)',
-          },
-          {
-            pic:require('@/assets/picture/bi/13.png'),
-            name:'Gnosis Token (GNO)',
-          },
-          {
-            pic:require('@/assets/picture/bi/14.png'),
-            name:'Rari Governance Token (RGT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/15.png'),
-            name:'Badger (BADGER)',
-          },
-          {
-            pic:require('@/assets/picture/bi/16.png'),
-            name:'DODO bird (DODO)',
-          },
-          {
-            pic:require('@/assets/picture/bi/17.png'),
-            name:'Balancer (BAL)',
-          },
-          {
-            pic:require('@/assets/picture/bi/18.png'),
-            name:'Synth sUSD (sUSD)',
-          },
-          {
-            pic:require('@/assets/picture/bi/19.png'),
-            name:'MATH Token (MATH)',
-          },
-          {
-            pic:require('@/assets/picture/bi/20.png'),
-            name:'Cream (CREAM)',
-          },
-          {
-            pic:require('@/assets/picture/bi/21.png'),
-            name:'MCDEX Token (MCB)',
-          },
-          {
-            pic:require('@/assets/picture/bi/22.png'),
-            name:'Stake DAO Token (SDT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/23.png'),
-            name:'dForce (DF)',
-          },
-          {
-            pic:require('@/assets/picture/bi/24.png'),
-            name:'Cap (CAP)',
-          },
-          {
-            pic:require('@/assets/picture/bi/25.png'),
-            name:'Fuse Token (FUSE)',
-          },
-          {
-            pic:require('@/assets/picture/bi/26.png'),
-            name:'Alchemy (ALCH)',
-          },
-          {
-            pic:require('@/assets/picture/bi/27.png'),
-            name:'Wrapped Ether (WETH)',
-          },
-          {
-            pic:require('@/assets/picture/bi/28.png'),
-            name:'ArbiNYAN (NYAN)',
-          },
-          {
-            pic:require('@/assets/picture/bi/29.png'),
-            name:'dForce EUR (EUX)',
-          },
-          {
-            pic:require('@/assets/picture/bi/30.png'),
-            name:'dForce USD (USX)',
-          },
-          {
-            pic:require('@/assets/picture/bi/31.png'),
-            name:'DXdao (DXD)',
-          },
-          {
-            pic:require('@/assets/picture/bi/32.png'),
-            name:'Wootrade Network (WOO)',
-          },
-        ]
+        isToken1Approve: false,
+        isToken2Approve: false,
+        isTokenApproved: false,
+        tokenListData: [],
+        currentContracts: {
+          tokenA: {},
+          tokenB: {},
+          pair: {},
+        }
       };
     },
-    created() {
-      
+    async created() {
+      this.amountA = 0;
+      this.amountB = 0;
+    },
+    computed: {
+        web3() {
+          return this.$store.state.web3.web3;
+        },
+        accounts () {
+          return this.$store.state.web3.accounts;
+        },
+        contractFactory() {
+          return this.$store.state.web3.contracts.uniswap_factory;
+        },
+        contractRouter() {
+          return this.$store.state.web3.contracts.router_v1;
+        },
+        user() {
+          return (this.$store.state.web3.accounts.length > 0) ? this.$store.state.web3.accounts[0] : '';
+        },
+        minter() {
+          return this.$store.state.web3.minter;
+        },
+        tokenList: {
+          set: function(newVal) {
+            this.tokenListData = newVal;
+          },
+          get: function() {
+            return (this.tokenListData.length == 0) ? this.$store.state.web3.tokens : this.tokenListData;
+          }
+        },
+        swapPaths() {
+          return this.$store.state.web3.swap_paths;
+        },
+    },
+    watch: {
+      tokenAIndex: async function(val) {
+        await this.handleTokenChange(true);
+        
+      },
+      tokenBIndex: async function(val) {
+        await this.handleTokenChange(true);
+      }
     },
     methods: {
       showSetting(){
@@ -446,9 +362,11 @@
       },
       handleToken(item,index){
         if(this.tokenIndex == 1){
-          this.token1 = item;
+          this.tokenA = item;
+          this.tokenAIndex = index;
         }else{
-          this.token2 = item;
+          this.tokenB = item;
+          this.tokenBIndex = index;
         }
         this.dialogVisibleToken = false;
       },
@@ -469,143 +387,14 @@
           }
           this.tokenList = newListData;
         }else{
-          this.tokenList = [
-          {
-            pic:require('@/assets/picture/bi/1.png'),
-            name:'Uniswap (UNI)',
-          },
-          {
-            pic:require('@/assets/picture/bi/2.png'),
-            name:'Tether USD (USDT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/3.png'),
-            name:'USD Coin (USDC)',
-          },
-          {
-            pic:require('@/assets/picture/bi/4.png'),
-            name:'Wrapped BTC (WBTC)',
-          },
-          {
-            pic:require('@/assets/picture/bi/5.png'),
-            name:'ChainLink Token (LINK)',
-          },
-          {
-            pic:require('@/assets/picture/bi/6.png'),
-            name:'Graph Token (GRT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/7.png'),
-            name:'SushiToken (SUSHI)',
-          },
-          {
-            pic:require('@/assets/picture/bi/8.png'),
-            name:'Compound (COMP)',
-          },
-          {
-            pic:require('@/assets/picture/bi/9.png'),
-            name:'Magic Internet Money (MIM)',
-          },
-          {
-            pic:require('@/assets/picture/bi/10.png'),
-            name:'yearn.finance (YFI)',
-          },
-          {
-            pic:require('@/assets/picture/bi/11.png'),
-            name:'Curve DAO Token (CRV)',
-          },
-          {
-            pic:require('@/assets/picture/bi/12.png'),
-            name:'CelerToken (CELR)',
-          },
-          {
-            pic:require('@/assets/picture/bi/13.png'),
-            name:'Gnosis Token (GNO)',
-          },
-          {
-            pic:require('@/assets/picture/bi/14.png'),
-            name:'Rari Governance Token (RGT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/15.png'),
-            name:'Badger (BADGER)',
-          },
-          {
-            pic:require('@/assets/picture/bi/16.png'),
-            name:'DODO bird (DODO)',
-          },
-          {
-            pic:require('@/assets/picture/bi/17.png'),
-            name:'Balancer (BAL)',
-          },
-          {
-            pic:require('@/assets/picture/bi/18.png'),
-            name:'Synth sUSD (sUSD)',
-          },
-          {
-            pic:require('@/assets/picture/bi/19.png'),
-            name:'MATH Token (MATH)',
-          },
-          {
-            pic:require('@/assets/picture/bi/20.png'),
-            name:'Cream (CREAM)',
-          },
-          {
-            pic:require('@/assets/picture/bi/21.png'),
-            name:'MCDEX Token (MCB)',
-          },
-          {
-            pic:require('@/assets/picture/bi/22.png'),
-            name:'Stake DAO Token (SDT)',
-          },
-          {
-            pic:require('@/assets/picture/bi/23.png'),
-            name:'dForce (DF)',
-          },
-          {
-            pic:require('@/assets/picture/bi/24.png'),
-            name:'Cap (CAP)',
-          },
-          {
-            pic:require('@/assets/picture/bi/25.png'),
-            name:'Fuse Token (FUSE)',
-          },
-          {
-            pic:require('@/assets/picture/bi/26.png'),
-            name:'Alchemy (ALCH)',
-          },
-          {
-            pic:require('@/assets/picture/bi/27.png'),
-            name:'Wrapped Ether (WETH)',
-          },
-          {
-            pic:require('@/assets/picture/bi/28.png'),
-            name:'ArbiNYAN (NYAN)',
-          },
-          {
-            pic:require('@/assets/picture/bi/29.png'),
-            name:'dForce EUR (EUX)',
-          },
-          {
-            pic:require('@/assets/picture/bi/30.png'),
-            name:'dForce USD (USX)',
-          },
-          {
-            pic:require('@/assets/picture/bi/31.png'),
-            name:'DXdao (DXD)',
-          },
-          {
-            pic:require('@/assets/picture/bi/32.png'),
-            name:'Wootrade Network (WOO)',
-          },
-        ]
+          this.tokenList = this.$store.state.web3.token;
         }
       }, 
       changeBi(){
-        let token1 = this.token1;
-        let token2 = this.token2;
-        this.token1 = token2;
-        this.token2 = token1;
+        let tokenA = this.tokenA;
+        let tokenB = this.tokenB;
+        this.tokenA = tokenB;
+        this.tokenB = tokenA;
       },
       cofirmSwap(){
         this.dialogVisibleConfirmSwap = false;
@@ -624,6 +413,82 @@
           }, 1000)
           }
         },
+        async prepareContracts() {
+          if (this.tokenPathSelected.length > 0) {
+              this.currentContracts.tokenA = new this.$store.state.web3.web3.eth.Contract(
+                abiTokenDefender,
+                this.tokenA.address,
+            );
+
+            this.currentContracts.tokenB = new this.$store.state.web3.web3.eth.Contract(
+                abiTokenDefender,
+                this.tokenB.address,
+            );
+
+            let addrPair = await this.contractFactory.methods.getPair(this.tokenA.address, this.tokenB.address).call();
+            console.log(`addrPair = ${addrPair}`);
+            this.$store.dispatch('getTokenUniswapPairContract', addrPair);
+
+            this.currentContracts.pair = this.$store.state.web3.contracts.token.pair;
+            console.log('this.currentContracts.pair', this.currentContracts.pair);
+          }
+        },
+      walletConnected() {
+        return this.web3 !== null && this.web3 !== undefined;
+      },
+      tokenSelectionChanged() {
+        this.tokenPathSelected = [];
+        if (this.swapPaths.length > 0) {
+          this.swapPaths.forEach((path) => {
+            if (path.includes(this.tokenAIndex) && path.includes(this.tokenBIndex)) {
+              path.forEach((item) => {
+                this.tokenPathSelected.push(this.tokenList[item].address);
+              })
+            }
+          });
+        }
+        console.log('this.tokenPathSelected', this.tokenPathSelected);
+      },
+      async computeTokenAmount() {
+        if (this.tokenPathSelected.length == 0) {
+          alert("Current token pair is not supported.");
+        } else {
+          let balanceTokenA = await this.currentContracts.tokenA.methods.balanceOf(this.currentContracts.pair.options.address).call();
+          let balanceTokenB = await this.currentContracts.tokenB.methods.balanceOf(this.currentContracts.pair.options.address).call();
+          let balancePair = await this.currentContracts.pair.methods.balanceOf(this.user).call();
+          console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balanceTokenPair = ${balancePair}`);
+
+          // console.log(`tokenA amount = ${this.amountA}`)
+
+          if (this.amountA > 0) {
+            let amountsOut = await this.contractRouter.methods.getAmountsOut(this.amountA, this.tokenPathSelected).call();
+            
+            console.log('tokenB amount', amountsOut)
+            this.amountB = amountsOut[this.tokenBIndex];
+          } else if (this.amountB > 0) {
+            let amountsIn = await this.contractRouter.methods.getAmountsIn(this.amountB, this.tokenPathSelected).call();
+            
+            console.log('tokenA amount', amountsIn)
+            this.amountA = amountsIn[this.tokenAIndex];
+          }
+        }
+      },
+      async handleTokenChange(selectionChanged) {
+        console.log('**************')
+        if (this.amountA > 0 || this.amountB > 0) {
+          if (this.walletConnected() === false) {
+            alert('Please connect to your wallet first.');
+            return;
+          } else {
+            if (selectionChanged || this.tokenPathSelected.length === 0) {
+              this.tokenSelectionChanged();
+              await this.prepareContracts();
+            }
+            
+            await this.computeTokenAmount();
+          }
+        }
+      }
     }
   };
 </script>
