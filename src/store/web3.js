@@ -271,9 +271,12 @@ export default {
                 address: '',
             },
         ],
-        swap_paths: [
-            [0, 1], // FTK1 -> FTK2
-        ],
+        swap: {
+            paths: [
+                [0, 1], // FTK1 -> FTK2
+            ],
+            sliding: 0.003,
+        },
         minter: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc',
         accounts: '',
         assets: [],
@@ -535,7 +538,7 @@ export default {
             state.contracts.router_v1 = result;
         },
         [WEB3_SWAP_PATHS](state, result) {
-            state.swap_paths = result;
+            state.swap.paths = result;
         },
         [NFT_ASSET](state, result) {
             state.asset = result;

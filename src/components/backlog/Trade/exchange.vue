@@ -87,14 +87,17 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo">
-        <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd" @click="dialogVisibleConfirmSwap = true">Swap</button>
-        <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
+        <!-- <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd" @click="dialogVisibleConfirmSwap = true">Swap</button>
+        <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button> -->
+        <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
+        <button v-else-if="needsApprove == true" @click="approve()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+        <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="dialogVisibleConfirmSwap = true">Swap</button>
       </div>
       <div class="sc-edoZmE hyACfo" >
-        <div>
+        <!-- <div>
           <button v-click type="button" v-if="!isToken1Approve" @click="approve()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
-        </div>
+        </div> -->
         <!-- <div>
           <button v-click type="button" v-if="!isToken2Approve" @click="isToken2Approve = !isToken2Approve" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
@@ -208,7 +211,7 @@
       <span>0.03996 {{tokenA.name}}</span>
     </p>
     <span slot="footer" class="dialog-footer">
-      <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Cofirm Swap</el-button>
+      <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Confirm Swap</el-button>
     </span> 
   </el-dialog>
    <!-- Waiting for confirmation -->
@@ -299,6 +302,7 @@
         isToken1Approve: false,
         isToken2Approve: false,
         isTokenApproved: false,
+        needsApprove: true,
         tokenListData: [],
         currentContracts: {
           tokenA: {},
@@ -339,7 +343,10 @@
           }
         },
         swapPaths() {
-          return this.$store.state.web3.swap_paths;
+          return this.$store.state.web3.swap.paths;
+        },
+        swapSliding() {
+          return this.$store.state.web3.swap.sliding;
         },
     },
     watch: {
@@ -398,22 +405,23 @@
         this.tokenA = tokenB;
         this.tokenB = tokenA;
       },
-      cofirmSwap(){
-        this.dialogVisibleConfirmSwap = false;
-        const TIME_COUNT = 3;
-        if(!this.timer){
-          this.timer = setInterval(() => {
-            if(this.count > 0 && this.count <= TIME_COUNT){
-              this.dialogVisibleConfirmationWaiting = true;
-              this.count++;
-            }else{
-              this.dialogVisibleConfirmationWaiting = false;
-              this.dialogVisibleTransactionsSubmitted = true;
-              clearInterval(this.timer);
-              this.timer = null;
-            }
-          }, 1000)
-          }
+      async cofirmSwap(){
+        // this.dialogVisibleConfirmSwap = false;
+        // const TIME_COUNT = 3;
+        // if(!this.timer){
+        //   this.timer = setInterval(() => {
+        //     if(this.count > 0 && this.count <= TIME_COUNT){
+        //       this.dialogVisibleConfirmationWaiting = true;
+        //       this.count++;
+        //     }else{
+        //       this.dialogVisibleConfirmationWaiting = false;
+        //       this.dialogVisibleTransactionsSubmitted = true;
+        //       clearInterval(this.timer);
+        //       this.timer = null;
+        //     }
+        //   }, 1000)
+        //   }
+        await this.swap();
         },
         async prepareContracts() {
           if (this.tokenPathSelected.length > 0) {
@@ -476,7 +484,7 @@
         }
       },
       async handleTokenChange(selectionChanged) {
-        console.log('**************')
+        this.needsApprove = true;
         if (this.amountA > 0 || this.amountB > 0) {
           if (this.walletConnected() === false) {
             alert('Please connect to your wallet first.');
@@ -497,6 +505,17 @@
           return;
         }
 
+        if (this.amountA <= 0) {
+          alert('Please specify the amount to swap.');
+          return;
+        }
+
+        if (this.amountB == 0) {
+            this.tokenSelectionChanged();
+            await this.prepareContracts();
+            await this.computeTokenAmount();
+        }
+
         let amountA = parseInt(this.amountA);
         if (this.contractRouter == null || this.contractRouter == undefined) {
           alert("Invalid contract. Please contact the customer service.");
@@ -507,6 +526,28 @@
         console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
         let allowanceTokenA = await this.currentContracts.tokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
         console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+
+        this.needsApprove = false;
+      },
+      async swap() {
+        if (this.amountA > 0 && this.amountB > 0) {
+          let timeNow = Math.floor(Date.now() / 1000);
+          let expiry = 10 * 60;  // 10 mins
+          let deadline = timeNow + expiry;
+
+          let amountIn = this.amountA;
+          let amountOutMin = Math.floor(this.amountB * (1.0 - this.swapSliding));
+          let to = this.user;
+          
+          await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, this.tokenPathSelected, to, deadline).send({ from: this.user });
+
+          let balanceTokenA = await this.currentContracts.tokenA.methods.balanceOf(this.currentContracts.pair.options.address).call();
+          let balanceTokenB = await this.currentContracts.tokenB.methods.balanceOf(this.currentContracts.pair.options.address).call();
+          
+          console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}`);
+        } else {
+          alert("Please specify the amounts to swap.");
+        }
       }
     }
   };
