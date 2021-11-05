@@ -92,13 +92,13 @@
       </div>
       <div class="sc-edoZmE hyACfo approveBtn">
         <div>
-          <button v-click type="button" v-if="!isToken1Approve" @click="isToken1Approve = !isToken1Approve" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
+          <button v-click type="button" v-if="!isToken1Approve" @click="approve()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
         </div>
-        <div>
+        <!-- <div>
           <button v-click type="button" v-if="!isToken2Approve" @click="isToken2Approve = !isToken2Approve" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
-        </div>
+        </div> -->
       </div>
      </div>
     </div>
@@ -488,6 +488,23 @@
             await this.computeTokenAmount();
           }
         }
+      },
+      async approve() {
+        if (this.web3 == null || this.web3 == undefined) {
+          alert('Please connect to your wallet first.');
+          return;
+        }
+
+        let amountA = parseInt(this.amountA);
+        if (this.contractRouter == null || this.contractRouter == undefined) {
+          alert("Invalid contract. Please contact the customer service.");
+          return;
+        }
+
+        await this.currentContracts.tokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
+        console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
+        let allowanceTokenA = await this.currentContracts.tokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
       }
     }
   };
