@@ -59,7 +59,7 @@
         <div class="content">
           <div class="col10">
             <div class="box">
-              <img width="300vw" src="@/assets/picture/box.png">
+              <img width="350vw" src="@/assets/picture/box.png">
               <span v-if="buyToken == 'usdc'">20% OFF</span>
             </div>
           </div>
@@ -797,11 +797,11 @@ of the gods". </p>
         display: flex;
         .col10{
           float: left;
-          width: 40%;
+          width: 35%;
         }
         .col12{
           float: left;
-          width: 60%;
+          width: 65%;
         }
         .box{
           position: relative;

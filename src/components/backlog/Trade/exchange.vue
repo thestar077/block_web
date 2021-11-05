@@ -90,15 +90,15 @@
         <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd" @click="dialogVisibleConfirmSwap = true">Swap</button>
         <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
       </div>
-      <div class="sc-edoZmE hyACfo approveBtn" >
+      <div class="sc-edoZmE hyACfo" >
         <div>
-          <button v-click type="button" v-if="!isToken1Approve" @click="isToken1Approve = !isToken1Approve" class="sc-dlfnbm btoybd mr20">Approve {{token1.name}}</button>
+          <button v-click type="button" v-if="!isToken1Approve" @click="isToken1Approve = !isToken1Approve" class="sc-dlfnbm btoybd mr20">Approve</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
         </div>
-        <div>
+      <!--   <div>
           <button v-click type="button" v-if="!isToken2Approve" @click="isToken2Approve = !isToken2Approve" class="sc-dlfnbm btoybd mr20">Approve {{token2.name}}</button>
           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Swap</button>
-        </div>
+        </div> -->
       </div>
      </div>
     </div>
