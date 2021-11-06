@@ -124,15 +124,15 @@
         </div>
         <div class="sc-iWFSnp bHLdTZ">
          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountA" />
-         <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
-          <span>MAX</span>
-          <img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
-           <div color="text" class="sc-gsTCUz UNrzd">
+         <div v-click class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
+          <span class="mr20">MAX</span>
+          <img v-if="tokenA.pic" :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+           <div color="text" @click="showToken(1)" class="sc-gsTCUz UNrzd">
             {{tokenA.name?tokenA.name:'Select a currency'}}
            </div>
            <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg downArrow">
             <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
-           </svg></span></button>
+           </svg></span></div>
         </div>
        </div>
       </div>
@@ -151,8 +151,8 @@
         <div class="sc-iWFSnp bHLdTZ">
          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" />
          <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
-           <span>MAX</span>
-           <img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+           <span class="mr20">MAX</span>
+           <img v-if="tokenB.pic" :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
            <div color="text" class="sc-gsTCUz UNrzd">
             {{tokenB.name?tokenB.name:'Select a currency'}}
            </div>
@@ -163,26 +163,20 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo mt30">
-        <button v-click v-if="isAdd" type="button" @click="handleSupply" :class="isSupplyDisable?'sc-dlfnbm btoybd supplyDisable':'sc-dlfnbm btoybd'">Supply</button>
+        <button v-click type="button" @click="handleSupply" :class="istokenAApprove && istokenBApprove?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
         <div v-if="!isAdd">
           <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
-          <button v-click type="button" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd">Swap</button>
+<!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
           <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
           <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Deposit</button>
         </div>
       </div>
-      <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd">
+      <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (istokenAApprove && istokenBApprove)">
         <div>
-          <!-- <button type="button" v-if="!istokenAApprove" @click="istokenAApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
-          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
-          <button type="button" v-if="!istokenAApprove" @click="approveTokenA()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
-          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
+          <button type="button" @click="approveTokenA()" :class="!istokenAApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.name}}</button>
         </div>
         <div>
-          <!-- <button type="button" v-if="!istokenBApprove" @click="istokenBApprove = true" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
-          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button> -->
-          <button type="button" v-if="!istokenBApprove" @click="approveTokenB()" class="sc-dlfnbm btoybd mr20">Approve {{tokenB.name}}</button>
-          <button type="button" @click="dialogVisibleConfirmSwap = true" v-else class="sc-dlfnbm btoybd mr20 swapBtn">Supply</button>
+          <button type="button" @click="approveTokenB()" :class="!istokenBApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.name}}</button>
         </div>
       </div>
 <!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
@@ -354,8 +348,10 @@
         dialogVisibleConfirmSwap:false,
         dialogVisibleConfirmationWaiting:false,
         dialogVisibleTransactionsSubmitted:false,
-        tokenA: this.$store.state.web3.tokens[0],
-        tokenB: this.$store.state.web3.tokens[0],
+        tokenA:{},
+        tokenB:{},
+        // tokenA: this.$store.state.web3.tokens[0],
+        // tokenB: this.$store.state.web3.tokens[0],
         amountA: 0,
         amountB: 0,
         dialogVisibleSetting:false,
@@ -453,6 +449,7 @@
 
       },
       async approveTokenA() {
+        this.istokenAApprove = true;
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
           return;
@@ -476,6 +473,7 @@
         console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
       },
       async approveTokenB() {
+        this.istokenBApprove = true;
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
           return;
@@ -555,9 +553,7 @@
             console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balanceTokenPair = ${balancePair}`);
       },
       handleSupply(){
-        if(!this.isSupplyDisable){
           this.dialogVisibleConfirmSwap = true;
-        }
       },
       hadnleAdd(){
         this.isFirst = false;
@@ -578,6 +574,12 @@
       },
       showToken(index){
         this.tokenIndex = index;
+        // if(index == 1){
+        //   this.istokenAApprove = true;
+        // }else{
+        //   this.istokenBApprove = true;
+        // }
+        // this.isAdd = true;
         this.dialogVisibleToken = true;
       },
       handleToken(item,index){
@@ -637,6 +639,12 @@
 </script>
 
 <style lang="less" scoped>
+  .kTSysC{
+    overflow: hidden;
+  }
+  .mt20{
+    margin-top: 20px;
+  }
 .tokenInput{
   /deep/ .el-input__inner{
     border:1px solid #A29181;
@@ -644,6 +652,9 @@
     border-radius: 20px;
     font-size: 20px;
   }
+}
+.mr20{
+  margin-right: 20px;
 }
 .historyBox{
   font-size: 20px !important;
@@ -1215,8 +1226,8 @@
     position: relative;
 }
 .kTSysC {
-    display: flex;
-    position: relative;
+/*    display: flex;
+    position: relative;*/
     background-color: rgb(250, 249, 250);
     z-index: 1;
     flex-flow: column nowrap;
@@ -1384,5 +1395,11 @@
     border-color: initial;
     border-image: initial;
     padding: 0px 0.5rem;
+}
+.ekurxD{
+  margin-top: 0;
+}
+.iONwHy{
+  margin-top: -15px;
 }
 </style>
