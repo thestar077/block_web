@@ -340,6 +340,7 @@
   export default {
     data() {
       return {
+        count:1,
         isFirst:true,
         isAdd:false,
         searchText:'',
