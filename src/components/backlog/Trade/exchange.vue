@@ -90,8 +90,10 @@
         <!-- <button v-click type="button" v-if="isToken2Approve && isToken2Approve" class="sc-dlfnbm btoybd" @click="dialogVisibleConfirmSwap = true">Swap</button>
         <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button> -->
         <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
-        <button v-else-if="needsApprove == true" @click="approve()" class="sc-dlfnbm btoybd mr20">Approve {{tokenA.name}}</button>
-        <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="dialogVisibleConfirmSwap = true">Swap</button>
+         <!-- v-else-if="needsApprove == true" -->
+        <button v-if="needsApprove" @click="approve()" class="sc-dlfnbm btoybd mr20 mt20">Approve {{tokenA.name}}</button>
+        <!-- v-else -->
+        <button v-else type="button" class="sc-dlfnbm btoybd mt30 mt20" @click="dialogVisibleConfirmSwap = true">Swap</button>
       </div>
       <div class="sc-edoZmE hyACfo" >
         <!-- <div>
@@ -406,21 +408,21 @@
         this.tokenB = tokenA;
       },
       async cofirmSwap(){
-        // this.dialogVisibleConfirmSwap = false;
-        // const TIME_COUNT = 3;
-        // if(!this.timer){
-        //   this.timer = setInterval(() => {
-        //     if(this.count > 0 && this.count <= TIME_COUNT){
-        //       this.dialogVisibleConfirmationWaiting = true;
-        //       this.count++;
-        //     }else{
-        //       this.dialogVisibleConfirmationWaiting = false;
-        //       this.dialogVisibleTransactionsSubmitted = true;
-        //       clearInterval(this.timer);
-        //       this.timer = null;
-        //     }
-        //   }, 1000)
-        //   }
+        this.dialogVisibleConfirmSwap = false;
+        const TIME_COUNT = 3;
+        if(!this.timer){
+          this.timer = setInterval(() => {
+            if(this.count > 0 && this.count <= TIME_COUNT){
+              this.dialogVisibleConfirmationWaiting = true;
+              this.count++;
+            }else{
+              this.dialogVisibleConfirmationWaiting = false;
+              this.dialogVisibleTransactionsSubmitted = true;
+              clearInterval(this.timer);
+              this.timer = null;
+            }
+          }, 1000)
+          }
         await this.swap();
         },
         async prepareContracts() {
@@ -500,6 +502,7 @@
         }
       },
       async approve() {
+        this.needsApprove = false;
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
           return;
@@ -575,6 +578,9 @@
   color: #999;
   margin:20px;
   cursor: pointer;
+}
+.mt20{
+  margin-top: 20px;
 }
 .biItem{
   display: flex;
