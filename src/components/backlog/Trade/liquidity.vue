@@ -163,12 +163,14 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo mt30">
-        <button v-click type="button" @click="handleSupply" :class="tokenANeedsApprove && tokenBNeedsApprove?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
+       
         <div v-if="!isAdd">
           <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
 <!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="tokenANeedsApprove && tokenBNeedsApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
           <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
-          <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Deposit</button>
+          <!-- unlock wallet之后就是supply，不要deposit，两个按钮变成一个 -->
+          <button v-if="accounts == null || accounts == undefined || accounts.length == 0" v-click type="button" @click="handleSupply" :class="istokenAApprove && istokenBApprove?'sc-dlfnbm btoybd mt30':'sc-dlfnbm btoybd supplyDisable mt30'">Supply</button>
+          <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Supply</button>
         </div>
       </div>
       <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (tokenANeedsApprove && tokenBNeedsApprove)">
@@ -422,6 +424,14 @@
         get: function() {
           return (this.tokenListData.length == 0) ? this.$store.state.web3.tokens : this.tokenListData;
         }
+      }
+    },
+    watch: {
+      'amountA': function(val){
+        this.amountA = val.replace(/\D/g, '')
+      },
+      'amountB': function(val){
+        this.amountB = val.replace(/\D/g, '')
       }
     },
     methods: {
