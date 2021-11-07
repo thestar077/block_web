@@ -163,20 +163,22 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo mt30">
-        <button v-click type="button" @click="handleSupply" :class="istokenAApprove && istokenBApprove?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
+        <button v-click type="button" @click="handleSupply" :class="tokenANeedsApprove && tokenBNeedsApprove?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
         <div v-if="!isAdd">
           <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
-<!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
+<!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="tokenANeedsApprove && tokenBNeedsApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
           <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
           <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Deposit</button>
         </div>
       </div>
-      <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (istokenAApprove && istokenBApprove)">
+      <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (tokenANeedsApprove && tokenBNeedsApprove)">
         <div>
-          <button type="button" @click="approveTokenA()" :class="!istokenAApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.name}}</button>
+          <!-- <button type="button" @click="approveTokenA()" :class="!tokenANeedsApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.name}}</button> -->
+          <button type="button" @click="approveTokenA()" v-if="tokenANeedsApprove == true">Approve {{tokenA.name}}</button>
         </div>
         <div>
-          <button type="button" @click="approveTokenB()" :class="!istokenBApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.name}}</button>
+          <!-- <button type="button" @click="approveTokenB()" :class="!tokenBNeedsApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.name}}</button> -->
+          <button type="button" @click="approveTokenB()" v-if="tokenBNeedsApprove == true">Approve {{tokenB.name}}</button>
         </div>
       </div>
 <!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
@@ -297,7 +299,7 @@
       <p class="tokenName">Token name</p>
       <div class="tokenBox">
         <ul>
-          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleToken(item,index)">
+          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleToken(item, index)">
             <img :src="item.pic">
              <span>{{item.name}}</span>
           </li>
@@ -351,10 +353,18 @@
         dialogVisibleTransactionsSubmitted:false,
         tokenA:{},
         tokenB:{},
+        tokenAIndex: 0,
+        tokenBIndex: 1,
+        tokenABalance: 0,
+        tokenBBalance: 0,
+        tokenANeedsApprove:false,
+        tokenBNeedsApprove:false,
         // tokenA: this.$store.state.web3.tokens[0],
         // tokenB: this.$store.state.web3.tokens[0],
         amountA: 0,
         amountB: 0,
+        amountAMax: 0,
+        amountBMax: 0,
         dialogVisibleSetting:false,
         dialogVisibleTransactions:false,
         toleranceList:[
@@ -376,17 +386,19 @@
         },
         tokenIndex:1,
         tokenListData: [],
-        istokenAApprove:false,
-        istokenBApprove:false,
         activeNames:['1'],
       };
     },
     created() {
-      
+      this.tokenANeedsApprove = false;
+      this.tokenBNeedsApprove = false;
     },
     computed: {
       web3() {
         return this.$store.state.web3.web3;
+      },
+      walletConnected() {
+        return this.$store.state.web3.web3 !== null && this.$store.state.web3.web3 !== undefined;
       },
       accounts () {
         return this.$store.state.web3.accounts;
@@ -450,7 +462,7 @@
 
       },
       async approveTokenA() {
-        this.istokenAApprove = true;
+        this.tokenANeedsApprove = true;
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
           return;
@@ -474,7 +486,7 @@
         console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
       },
       async approveTokenB() {
-        this.istokenBApprove = true;
+        this.tokenBNeedsApprove = true;
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
           return;
@@ -574,24 +586,45 @@
         this.toleranceIndex = index;
       },
       showToken(index){
+        if (this.walletConnected === false) {
+          alert("Please unlock your wallet first.");
+          return;
+        }
         this.tokenIndex = index;
         // if(index == 1){
-        //   this.istokenAApprove = true;
+        //   this.tokenANeedsApprove = true;
         // }else{
-        //   this.istokenBApprove = true;
+        //   this.tokenBNeedsApprove = true;
         // }
         // this.isAdd = true;
         this.dialogVisibleToken = true;
       },
-      handleToken(item,index){
-        console.log(index,'index');
-        if(index== 1){
+      async handleToken(item, index){
+        if(this.tokenIndex== 1){
           this.tokenA = item;
+          this.tokenAIndex = index;
         }else{
           this.tokenB = item;
+          this.tokenBIndex = item;
         }
+        await this.getTokenBalance(item);
         this.isSupplyDisable = false;
         this.dialogVisibleToken = false;
+      },
+      async getTokenBalance(item) {
+        if (item.address.length > 0) {
+          let contract = item.contract;
+          let balance = await contract.methods.balanceOf(this.user).call();
+          if (this.tokenIndex == 1) {
+            this.tokenABalance = balance;
+          } else {
+            this.tokenBBalance = balance;
+          }
+          console.log(`balance = ${balance}`);
+        } else {
+          alert("The currently selected token is not supported.");
+        }
+        
       },
       search(){
         if(this.searchText){
