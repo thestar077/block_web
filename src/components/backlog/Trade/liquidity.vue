@@ -167,20 +167,36 @@
         <div v-if="!isAdd">
           <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
 <!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
-          <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
+          <div v-if="isUnLock">
+            <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
+          </div>
+          
           <!-- unlock wallet之后就是supply，不要deposit，两个按钮变成一个 -->
           <button v-if="accounts == null || accounts == undefined || accounts.length == 0" v-click type="button" @click="handleSupply" :class="istokenAApprove && istokenBApprove?'sc-dlfnbm btoybd mt30':'sc-dlfnbm btoybd supplyDisable mt30'">Supply</button>
           <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Supply</button>
         </div>
       </div>
-      <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (istokenAApprove && istokenBApprove)">
-        <div>
-          <button type="button" @click="approveTokenA()" :class="!istokenAApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.name}}</button>
-        </div>
-        <div>
-          <button type="button" @click="approveTokenB()" :class="!istokenBApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.name}}</button>
+      <div v-if="isUnLock">
+        <div class="sc-edoZmE hyACfo approveBtn">
+          <div>
+            <button type="button" class="sc-dlfnbm btoybd mr20 supplyDisable">Approve {{tokenA.name}}</button>
+          </div>
+          <div>
+            <button type="button" class="sc-dlfnbm btoybd mr20 supplyDisable">Approve {{tokenB.name}}</button>
+          </div>
         </div>
       </div>
+      <div v-else>
+        <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (istokenAApprove && istokenBApprove)">
+          <div>
+            <button type="button" @click="approveTokenA()" :class="!istokenAApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.name}}</button>
+          </div>
+          <div>
+            <button type="button" @click="approveTokenB()" :class="!istokenBApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.name}}</button>
+          </div>
+        </div>
+      </div>
+      
 <!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
       <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button> -->
      </div>
@@ -343,6 +359,7 @@
     data() {
       return {
         count:1,
+        isUnLock:true,
         isFirst:true,
         isAdd:false,
         searchText:'',
@@ -423,6 +440,10 @@
       }
     },
     methods: {
+      handleWallet(){
+        this.dialogVisibleWallet = true;
+        this.isUnLock = false;
+      },
       async approve() {
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
