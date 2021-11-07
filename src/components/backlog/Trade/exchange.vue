@@ -317,6 +317,14 @@
       this.amountA = 0;
       this.amountB = 0;
     },
+    watch: {
+      'amountA': function(val){
+        this.amountA = val.replace(/\D/g, '')
+      },
+      'amountB': function(val){
+        this.amountB = val.replace(/\D/g, '')
+      }
+    },
     computed: {
         web3() {
           return this.$store.state.web3.web3;
