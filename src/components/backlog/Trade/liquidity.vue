@@ -12,7 +12,7 @@
      </div>
     </div>
     <!-- first -->
-    <div v-if="isFirst" class="sc-crrsfI eHffeS sc-gYhigD gdlclw">
+    <div v-if="currentPage == 0" class="sc-crrsfI eHffeS sc-gYhigD gdlclw">
      <div class="sc-iuAqxS cqvrXa">
      <div class="sc-eCssSg kZklEQ">
       <div class="sc-DJfgX fpDRn">
@@ -96,7 +96,7 @@
     <div v-else class="sc-crrsfI eHffeS sc-gYhigD gdlclw">
    <div class="sc-cHjxUU hbOhGN">
     <div class="sc-dacFzL sc-jQbIHB sc-fvhGYg eJEsCB fLfbpJ kHEClt" >
-     <span v-click @click="isFirst = true">
+     <span v-click @click="currentPage = 0">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sc-jifIRw evqUXD">
        <line x1="19" y1="12" x2="5" y2="12"></line>
        <polyline points="12 19 5 12 12 5"></polyline>
@@ -164,34 +164,20 @@
       </div>
       <div class="sc-edoZmE hyACfo mt30">
        
-        <div v-if="!isAdd">
-          <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
-<!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
-          <div v-if="isUnLock">
-            <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
-          </div>
+        <div>
+          <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd ">Unlock Wallet</button>
           <!-- unlock wallet之后就是supply，不要deposit，两个按钮变成一个 -->
-          <!-- <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleSupply" :class="tokenANeedsApprove === false && tokenBNeedsApprove === false?'sc-dlfnbm btoybd mt30':'sc-dlfnbm btoybd supplyDisable mt30'">Supply</button> -->
-          <button v-else type="button" class="sc-dlfnbm btoybd mt30" @click="addLiquidity()">Supply</button>
+          <button v-else type="button" @click="handleSupply" :class="tokenANeedsApprove === false && tokenBNeedsApprove === false && enoughToSupply === true ?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
+          <!-- <button v-else type="button" class="sc-dlfnbm btoybd" @click="addLiquidity()">Supply</button> -->
         </div>
       </div>
-      <div v-if="isUnLock">
+      <div>
         <div class="sc-edoZmE hyACfo approveBtn">
           <div>
-            <button type="button" class="sc-dlfnbm btoybd mr20 supplyDisable">Approve {{tokenA.name}}</button>
+            <button type="button" @click="approveTokenA()" :class="tokenANeedsApprove ? 'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.symbol}}</button>
           </div>
           <div>
-            <button type="button" class="sc-dlfnbm btoybd mr20 supplyDisable">Approve {{tokenB.name}}</button>
-          </div>
-        </div>
-      </div>
-      <div v-else>
-        <div class="sc-edoZmE hyACfo approveBtn" v-if="!isAdd || (istokenAApprove && istokenBApprove)">
-          <div>
-            <button type="button" @click="approveTokenA()" :class="!istokenAApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenA.name}}</button>
-          </div>
-          <div>
-            <button type="button" @click="approveTokenB()" :class="!istokenBApprove?'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.name}}</button>
+            <button type="button" @click="approveTokenB()" :class="tokenBNeedsApprove ? 'sc-dlfnbm btoybd mr20':'sc-dlfnbm btoybd mr20 supplyDisable'">Approve {{tokenB.symbol}}</button>
           </div>
         </div>
       </div>
@@ -359,10 +345,8 @@
       return {
         count:1,
         isUnLock:true,
-        isFirst:true,
-        isAdd:false,
+        currentPage:0,
         searchText:'',
-        isSupplyDisable:true,
         dialogVisibleWallet:false,
         dialogVisibleConfirmSwap:false,
         dialogVisibleConfirmationWaiting:false,
@@ -373,6 +357,8 @@
         tokenBIndex: 1,
         tokenABalance: 0,
         tokenBBalance: 0,
+        tokenAAllowance: 0,
+        tokenBAllowance: 0,
         tokenANeedsApprove:false,
         tokenBNeedsApprove:false,
         // tokenA: this.$store.state.web3.tokens[0],
@@ -415,6 +401,9 @@
       },
       walletConnected() {
         return this.$store.state.web3.web3 !== null && this.$store.state.web3.web3 !== undefined;
+      },
+      enoughToSupply() {
+        return this.amountA > 0 && this.amountA <= this.tokenAAllowance && this.amountB > 0 && this.amountB <= this.tokenBAllowance;
       },
       accounts () {
         return this.$store.state.web3.accounts;
@@ -490,54 +479,53 @@
 
       },
       async approveTokenA() {
-        this.tokenANeedsApprove = true;
+        
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please unlock your wallet first.');
           return;
         }
 
-        let amountA = parseInt(this.amountA);
         if (this.contractRouter == null || this.contractRouter == undefined) {
           alert("Invalid contract. Please contact the customer service.");
           return;
         }
 
-        if (amountA <= 0 || amountA > this.tokenABalance) {
-          alert('Amount for ' + this.tokenA.name + ' is invalid.');
+        let amountA = parseInt(this.amountA);
+        if (amountA <= 0 || amountA > this.tokenABalance || amountA <= this.tokenAAllowance || this.tokenA.name == undefined) {
           return;
         }
 
+        this.tokenANeedsApprove = true;
         let contractTokenA = this.tokenA.contract;
         await contractTokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
         console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
-        let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
-        console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+        this.tokenAAllowance = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenA = ${this.tokenAAllowance}, address = ${this.contractRouter.options.address}`);
 
         this.tokenANeedsApprove = false;
       },
       async approveTokenB() {
-        this.tokenBNeedsApprove = true;
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please connect to your wallet first.');
           return;
         }
 
-        let amountB = parseInt(this.amountB);
         if (this.contractRouter == null || this.contractRouter == undefined) {
           alert("Invalid contract. Please contact the customer service.");
           return;
         }
 
-        if (amountB <= 0 || amountB > this.tokenBBalance) {
-          alert('Amount for ' + this.tokenB.name + ' is invalid.');
+        let amountB = parseInt(this.amountB);
+        if (amountB <= 0 || amountB > this.tokenBBalance || amountB <= this.tokenBAllowance || this.tokenB.name == undefined) {
           return;
         }
 
+        this.tokenBNeedsApprove = true;
         let contractTokenB = this.tokenB.contract;
         await contractTokenB.methods.approve(this.contractRouter.options.address, amountB).send({ from: this.user });
 
-        let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
-        console.log(`Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
+        this.tokenBAllowance = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenB = ${this.tokenBAllowance}, address = ${this.contractRouter.options.address}`);
 
         this.tokenBNeedsApprove = false;
       },
@@ -567,21 +555,8 @@
             return;
           }
 
-          let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
-              abiTokenDefender,
-              this.tokenA.address,
-          );
-
-          let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
-              abiTokenDefender,
-              this.tokenB.address,
-          );
-
-          let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
-          console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
-
-          let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
-          console.log(`Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
+          let contractTokenA = this.tokenA.contract;
+          let contractTokenB = this.tokenB.contract;
 
           let timeNow = Math.floor(Date.now() / 1000);
           let expiry = 10 * 60;  // 10 mins
@@ -610,15 +585,11 @@
           this.dialogVisibleConfirmSwap = true;
       },
       hadnleAdd(){
-        this.isFirst = false;
-        this.isAdd = true;
-        this.isSupplyDisable = false;
+        this.currentPage = 1;
       },
       // 获取授权
       getAuthorization(){
-        this.isFirst = false;
-        this.isAdd = false;
-        // this.$router.push({path: "/authorization"});
+        this.currentPage = 1;
       },
       showSetting(){
         this.dialogVisibleSetting = true;
@@ -642,28 +613,38 @@
         if(this.tokenIndex== 1){
           this.tokenA = item;
           this.tokenAIndex = index;
-          this.tokenANeedsApprove = true;
+          if (this.amountA > 0) {
+            this.tokenANeedsApprove = true;
+          }
         }else{
           this.tokenB = item;
           this.tokenBIndex = item;
-          this.tokenBNeedsApprove = true;
+          if (this.amountB > 0) {
+            this.tokenBNeedsApprove = true;
+          }
         }
         await this.getTokenBalance(item);
-        this.isSupplyDisable = false;
+        await this.getTokenAllowance(item);
         this.dialogVisibleToken = false;
       },
       handleAmountChange(index) {
         if (index == 1) {
-          this.tokenANeedsApprove = true;
+          this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
         } else {
-          this.tokenBNeedsApprove = true;
+          this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
         }
       },
       handleMax(index) {
         if (index == 1) {
           this.amountA = this.tokenABalance;
+          if (this.amountA > 0) {
+            this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+          }
         } else {
           this.amountB = this.tokenBBalance;
+          if (this.amountB > 0) {
+            this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
+          }
         }
       },
       async getTokenBalance(item) {
@@ -679,7 +660,20 @@
         } else {
           alert("The currently selected token is not supported.");
         }
-        
+      },
+      async getTokenAllowance(item) {
+        if (item.address.length > 0) {
+          let contract = item.contract;
+          let allowance = await contract.methods.allowance(this.user, this.contractRouter.options.address).call();
+          console.log(`Allowance = ${allowance}`);
+          if (this.tokenIndex == 1) {
+            this.tokenAAllowance = allowance;
+          } else {
+            this.tokenBAllowance = allowance;
+          }
+        } else {
+          alert("The currently selected token is not supported.");
+        }
       },
       search(){
         if(this.searchText){
@@ -769,7 +763,7 @@
   margin-top: 30px;
 }
 .approveBtn{
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   justify-content:space-between;
   align-items: center;
