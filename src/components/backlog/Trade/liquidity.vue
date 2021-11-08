@@ -474,7 +474,7 @@
       async approveTokenA() {
         this.tokenANeedsApprove = true;
         if (this.web3 == null || this.web3 == undefined) {
-          alert('Please connect to your wallet first.');
+          alert('Please unlock your wallet first.');
           return;
         }
 
@@ -484,16 +484,18 @@
           return;
         }
 
-        let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
-            abiTokenDefender,
-            this.tokenA.address,
-        );
+        if (amountA <= 0 || amountA > this.tokenABalance) {
+          alert('Amount for ' + this.tokenA.name + ' is invalid.');
+          return;
+        }
 
-        console.log('contractRouter', this.contractRouter);
+        let contractTokenA = this.tokenA.contract;
         await contractTokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
         console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
         let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
         console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+
+        this.tokenANeedsApprove = false;
       },
       async approveTokenB() {
         this.tokenBNeedsApprove = true;
@@ -508,17 +510,18 @@
           return;
         }
 
-        let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
-            abiTokenDefender,
-            this.tokenB.address,
-        );
+        if (amountB <= 0 || amountB > this.tokenBBalance) {
+          alert('Amount for ' + this.tokenB.name + ' is invalid.');
+          return;
+        }
 
-        console.log('contractTokenB', contractTokenB);
-
+        let contractTokenB = this.tokenB.contract;
         await contractTokenB.methods.approve(this.contractRouter.options.address, amountB).send({ from: this.user });
 
         let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
         console.log(`Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
+
+        this.tokenBNeedsApprove = false;
       },
       async addLiquidity() {
         if (this.web3 == null || this.web3 == undefined) {
@@ -604,6 +607,10 @@
         this.dialogVisibleToken = true;
       },
       async handleTokenChange(item, index){
+        if (this.tokenIndex== 1 && index === this.tokenBIndex || this.tokenIndex == 2 && index === this.tokenAIndex) {
+          alert("Tokens cannot be the same. Please try again.")
+          return;
+        }
         if(this.tokenIndex== 1){
           this.tokenA = item;
           this.tokenAIndex = index;
