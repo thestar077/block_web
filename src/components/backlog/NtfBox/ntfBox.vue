@@ -60,7 +60,7 @@
           <div class="col10">
             <div class="box">
               <img width="350vw" src="@/assets/picture/box.png">
-              <span v-if="buyToken == 'usdc'">20% OFF</span>
+              <span v-if="buyToken == '2'">20% OFF</span>
             </div>
           </div>
           <div class="col12 txtBox">
@@ -68,7 +68,7 @@
             <p class="txtInfo">In this collection，There are 5 Greek gods for you to unbox. Try your luck!</p>
             <div class="priceBox">
               <p class="price">Price</p>
-              <p class="priceTxt" v-if="buyToken == 'egg'">
+              <p class="priceTxt" v-if="buyToken == '1'">
                 <span class="num">{{800}}</span>
                 <span> EGG ≈ 5690 USDC</span>
               </p>
@@ -86,8 +86,8 @@
                 <div class="flex">
                   <span>购买方式</span>
                   <el-radio-group v-model="buyToken">
-                    <el-radio label="egg">EGG</el-radio>
-                    <el-radio label="usdc">USDC</el-radio>
+                    <el-radio label="1">EGG</el-radio>
+                    <el-radio label="2">USDC</el-radio>
                   </el-radio-group>
                 </div>
               </div>
@@ -183,7 +183,7 @@ of the gods". </p>
         buyModelVisible:false,
         imgHeight:'350',
         num:0,
-        buyToken:'egg',
+        buyToken:'1',
         nftBought: [],
         isShow:false,
         roleActive:0,
@@ -542,7 +542,7 @@ of the gods". </p>
         let numberToBuy = this.num;
         let price = this.dggPriceEgg;
         let total = numberToBuy * price;
-        if (this.buyToken === 'egg') {
+        if (this.buyToken === '1') {
           let balanceEgg = await this.eggTokenContract.methods.balanceOf(buyer).call();
           console.log(`Before purchase: balanceEgg of buyer = ${balanceEgg}`);
           buyerTokenAddress = this.eggTokenContract.options.address;
@@ -553,7 +553,7 @@ of the gods". </p>
           await this.eggTokenContract.methods.approve(this.dggSaleContract.options.address, total).send({from: buyer});
           let allowance = await this.eggTokenContract.methods.allowance(buyer, this.dggSaleContract.options.address).call();
           console.log(`EGG allowance to dgg-sale contract = ${allowance}`);
-        } else if (this.buyToken === 'usdc') {
+        } else if (this.buyToken === '2') {
           // Add later.
         }
 
@@ -909,7 +909,7 @@ of the gods". </p>
               }
             }
             .presentPrice{
-              padding-bottom: 50px;
+              padding-bottom: 20px;
               font-weight: bold;
               color: #A39282;
               justify-content:flex-start;
