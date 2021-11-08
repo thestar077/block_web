@@ -524,10 +524,20 @@
         this.tokenBNeedsApprove = false;
       },
       async addLiquidity() {
-        if (this.web3 == null || this.web3 == undefined) {
-          alert('Please connect to your wallet first.');
-          return;
-        }
+          if (this.web3 == null || this.web3 == undefined) {
+            alert('Please connect to your wallet first.');
+            return;
+          }
+
+          if (this.tokenA.name == undefined || this.tokenB.name == undefined) {
+            alert('Please select the tokens to supply.');
+            return;
+          }
+
+          if (this.amountA <= 0 || this.amountB <= 0) {
+            alert('Please specify the amounts to supply.');
+            return;
+          }
 
           if (this.contractRouter == null || this.contractRouter == undefined) {
             alert("Invalid contract. Please contact the customer service.");
