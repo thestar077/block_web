@@ -309,7 +309,7 @@ export default {
         nests: [
             {
                 name:'DFD',
-                num:20,
+                num:0,
                 stake:'DFD',
                 deposit:'DFD',
                 pic:require('@/assets/picture/egg/1.jpg'),
@@ -318,6 +318,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
+                isStaked:false,
             },
             {
                 name:'EGG',
@@ -330,6 +331,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
+                isStaked:false,
             },
             {
             name:'ETH',
@@ -342,6 +344,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '',
+                isStaked:false,
             },
             {
                 name:'USDC',
@@ -354,6 +357,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '',
+                isStaked:false,
             },
             {
                 name:'ETH-USDC LP',
@@ -366,6 +370,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '',
+                isStaked:false,
             },
             {
                 name:'ETH-DFD LP',
@@ -378,6 +383,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '',
+                isStaked:false,
             },
             {
                 name:'ETH-EGG LP',
@@ -390,6 +396,7 @@ export default {
                 amount: 0,
                 approved: false,
                 address: '',
+                isStaked:false,
             }
         ],
         swap: {

@@ -70,8 +70,8 @@
           <div class="sc-eCssSg gqHjnk">
             <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}}</div>
             <div color="textSubtle" font-size="12px" class="sc-gsTCUz ghdcvx">Staked</div></div>
-          <div class="sc-eCssSg cIpmpl" v-if="isApprove">
-            <div class="sc-gInsOo grsaJH stakeBox" v-if="isDeposite">
+          <div class="sc-eCssSg cIpmpl" v-if="item.approved">
+            <div class="sc-gInsOo grsaJH stakeBox" v-if="Number(item.num) > 0">
               <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">{{item.num}}</h2>
               <div class="addRemoveBox">
                 <button  @click="handleRemove" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-minus"></button>
@@ -180,10 +180,10 @@
         dialogVisibleWallet:false,
         dialogVisibleDeposite:false,
         tokenItem:{},
-        isApprove:false,
         isDeposite:false,
         actIndex:0,
         isStaked:false,
+        info:{},
         actList:[
           {
             name:'Active',
@@ -230,17 +230,18 @@
         this.$router.push({path: "/authorization"});
       },
       handleApprove(item){
-        // this.isApprove  = true;
-        if (this.web3 == null || this.web3 == undefined) {
-          alert('Please connect to your wallet first.');
-          return;
-        }
+        item.approved = true
+        this.info = item
+        // if (this.web3 == null || this.web3 == undefined) {
+        //   alert('Please connect to your wallet first.');
+        //   return;
+        // }
 
-        let amount = parseInt(item.amount);
-        if (amount <= 0) {
-          alert('Please specify the amount to approve.');
-          return;
-        }
+        // let amount = parseInt(item.amount);
+        // if (amount <= 0) {
+        //   alert('Please specify the amount to approve.');
+        //   return;
+        // }
 
         
         // if (this.contractRouter == null || this.contractRouter == undefined) {
