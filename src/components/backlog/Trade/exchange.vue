@@ -406,7 +406,7 @@
           }
           this.tokenList = newListData;
         }else{
-          this.tokenList = this.$store.state.web3.token;
+          this.tokenList = this.$store.state.web3.tokens;
         }
       }, 
       changeBi(){

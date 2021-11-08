@@ -19,8 +19,8 @@
   </div>
   <div>
   <div class="sc-kYrkKh cqrcSX"></div>
-    <div class="sc-eLgOdN ejJoEn" v-if="eggArr && eggArr.length>0">
-      <div class="sc-ikPAkQ diwHUn" v-for="(item,index) in eggArr" :key="index">
+    <div class="sc-eLgOdN ejJoEn" v-if="nestArr && nestArr.length>0">
+      <div class="sc-ikPAkQ diwHUn" v-for="(item,index) in nestArr" :key="index">
         <div :class="index<2?'sc-XhUPp kiNLFp colorBg':'sc-XhUPp kiNLFp'"></div>
         <div class="sc-eCssSg sc-dtwoBo ejYhYu inCwUZ">
           <div width="64" height="64" class="sc-dIUggk dzdjjs">
@@ -89,7 +89,7 @@
            <!-- v-else -->
           <!-- <button type="button" class="sc-dlfnbm hlRgJI">Deposit</button> -->
         </div>
-          <button type="button" @click="handleApprove" v-if="!isApprove" class="sc-dlfnbm hlRgJI">Approve Contract</button>
+          <button type="button" @click="handleApprove(item)" v-if="item.approved === false" class="sc-dlfnbm hlRgJI">Approve Contract</button>
         <div class="sc-tYoTV jYOTaZ"></div>
         <div v-click @click="item.showDetail = !item.showDetail" aria-label="Hide or show expandable content" role="button" class="sc-bTvRPi bhoBuD">
           <div color="primary" class="sc-gsTCUz dCVmfN">Details</div>
@@ -122,7 +122,7 @@
       </div>
     </div>
   </div>
-  <div width="100%" class="sc-dIUggk hULlXf" v-if="!eggArr || eggArr.length == 0">
+  <div width="100%" class="sc-dIUggk hULlXf" v-if="!nestArr || nestArr.length == 0">
     <img width="100%" src="@/assets/picture/8.png" alt="illustration" class="sc-hHftDr kCQmsc"></div>
   <!-- deposite token -->
   <el-dialog
@@ -192,80 +192,34 @@
             name:'Inactive',
           }
         ],
-        eggArr:[
-          {
-            name:'DFD',
-            num:20,
-            stake:'DFD',
-            deposit:'DFD',
-            pic:require('@/assets/picture/egg/1.jpg'),
-            noFree:true,
-            showDetail:false
-          },
-          {
-            name:'EGG',
-            num:20,
-            stake:'EGG',
-            deposit:'EGG',
-            pic:require('@/assets/picture/egg/2.jpg'),
-            noFree:true,
-            showDetail:false
-          },
-          {
-            name:'ETH',
-            num:2,
-            stake:'ETH',
-            deposit:'ETH',
-            pic:require('@/assets/picture/egg/3.jpg'),
-            noFree:true,
-            showDetail:false
-          },
-          {
-            name:'USDC',
-            num:'60',
-            stake:'USDC',
-            deposit:'USDC',
-            pic:require('@/assets/picture/egg/4.jpg'),
-            noFree:false,
-            showDetail:false
-          },
-          {
-            name:'ETH-USDC LP',
-            num:'60',
-            stake:'ETH-USDC LP',
-            deposit:'ETH-USDC LP',
-            pic:require('@/assets/picture/egg/5.jpg'),
-            noFree:false,
-            showDetail:false
-          },
-          {
-            name:'ETH-DFD LP',
-            num:'60',
-            stake:'ETH-DFD LP',
-            deposit:'ETH-DFD LP',
-            pic:require('@/assets/picture/egg/6.jpg'),
-            noFree:false,
-            showDetail:false
-          },
-          {
-            name:'ETH-EGG LP',
-            num:'60',
-            stake:'ETH-EGG LP',
-            deposit:'ETH-EGG LP',
-            pic:require('@/assets/picture/egg/7.jpg'),
-            noFree:false,
-            showDetail:false
-          }
-        ],
+        poolSelected: 0,
       };
     },
     created() {
       
     },
     computed: {
-      accounts () {
-        return this.$store.state.web3.accounts;
-      },
+        web3() {
+          return this.$store.state.web3.web3;
+        },
+        accounts () {
+          return this.$store.state.web3.accounts;
+        },
+        contractFactory() {
+          return this.$store.state.web3.contracts.uniswap_factory;
+        },
+        contractRouter() {
+          return this.$store.state.web3.contracts.router_v1;
+        },
+        user() {
+          return (this.$store.state.web3.accounts.length > 0) ? this.$store.state.web3.accounts[0] : '';
+        },
+        minter() {
+          return this.$store.state.web3.minter;
+        },
+        nestArr() {
+          return this.$store.state.web3.nests;
+        },
     },
     methods: {
       handleActive(index){
@@ -275,8 +229,31 @@
       getAuthorization(){
         this.$router.push({path: "/authorization"});
       },
-      handleApprove(){
-        this.isApprove  = true;
+      handleApprove(item){
+        // this.isApprove  = true;
+        if (this.web3 == null || this.web3 == undefined) {
+          alert('Please connect to your wallet first.');
+          return;
+        }
+
+        let amount = parseInt(item.amount);
+        if (amount <= 0) {
+          alert('Please specify the amount to approve.');
+          return;
+        }
+
+        
+        // if (this.contractRouter == null || this.contractRouter == undefined) {
+        //   alert("Invalid contract. Please contact the customer service.");
+        //   return;
+        // }
+
+        // await this.currentContracts.tokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
+        // console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
+        // let allowanceTokenA = await this.currentContracts.tokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
+        // console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+
+        // this.needsApprove = false;
       },
       handleDeposite(item){
         this.tokenItem = item;
@@ -291,6 +268,11 @@
       },
       handleRemove(){
        this.dialogVisibleRemove = true;
+      },
+      preparePoolTest(poolIdx) {
+        this.poolSelected = poolIdx;
+        this.nestArr[this.poolSelected].amount = 100;
+
       },
     }
   };

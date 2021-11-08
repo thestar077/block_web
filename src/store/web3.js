@@ -20,6 +20,7 @@ const WEB3_CONTRACT_TOKEN_DFD = 'WEB3_CONTRACT_TOKEN_DFD';
 const WEB3_CONTRACT_TOKEN_FTK1 = 'WEB3_CONTRACT_TOKEN_FTK1';
 const WEB3_CONTRACT_TOKEN_FTK2 = 'WEB3_CONTRACT_TOKEN_FTK2';
 const WEB3_CONTRACT_TOKEN_PAIR = 'WEB3_CONTRACT_TOKEN_PAIR';
+const WEB3_CONTRACT_TOKENS = 'WEB3_CONTRACT_TOKENS';
 const WEB3_CONTRACT_DGG_SALE = 'WEB3_CONTRACT_DGG_SALE';
 const WEB3_CONTRACT_POOL_SINGLE = 'WEB3_CONTRACT_POOL_SINGLE';
 const WEB3_CONTRACT_UNISWAP_FACTORY = 'WEB3_CONTRACT_UNISWAP_FACTORY';
@@ -71,205 +72,325 @@ export default {
                 pic:require('@/assets/picture/bi/32.png'),
                 name: 'Fake Token 1',
                 address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                contract: {},
             },
             {
                 symbol: 'FTK2',
                 pic:require('@/assets/picture/bi/31.png'),
                 name: 'Fake Token 2',
                 address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                contract: {},
             },
             {
                 symbol: 'UNI',
                 pic:require('@/assets/picture/bi/1.png'),
                 name:'Uniswap (UNI)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'USDT',
                 pic:require('@/assets/picture/bi/2.png'),
                 name:'Tether USD (USDT)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'USDC',
                 pic:require('@/assets/picture/bi/3.png'),
                 name:'USD Coin (USDC)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'WBTC',
                 pic:require('@/assets/picture/bi/4.png'),
                 name:'Wrapped BTC (WBTC)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'LINK',
                 pic:require('@/assets/picture/bi/5.png'),
                 name:'ChainLink Token (LINK)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'GRT',
                 pic:require('@/assets/picture/bi/6.png'),
                 name:'Graph Token (GRT)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'SUSHI',
                 pic:require('@/assets/picture/bi/7.png'),
                 name:'SushiToken (SUSHI)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'COMP',
                 pic:require('@/assets/picture/bi/8.png'),
                 name:'Compound (COMP)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'MIM',
                 pic:require('@/assets/picture/bi/9.png'),
                 name:'Magic Internet Money (MIM)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'YFI',
                 pic:require('@/assets/picture/bi/10.png'),
                 name:'yearn.finance (YFI)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'CRV',
                 pic:require('@/assets/picture/bi/11.png'),
                 name:'Curve DAO Token (CRV)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'CELR',
                 pic:require('@/assets/picture/bi/12.png'),
                 name:'CelerToken (CELR)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'GNO',
                 pic:require('@/assets/picture/bi/13.png'),
                 name:'Gnosis Token (GNO)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'RGT',
                 pic:require('@/assets/picture/bi/14.png'),
                 name:'Rari Governance Token (RGT)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'BADGER',
                 pic:require('@/assets/picture/bi/15.png'),
                 name:'Badger (BADGER)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'DODO',
                 pic:require('@/assets/picture/bi/16.png'),
                 name:'DODO bird (DODO)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'BAL',
                 pic:require('@/assets/picture/bi/17.png'),
                 name:'Balancer (BAL)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'sUSD',
                 pic:require('@/assets/picture/bi/18.png'),
                 name:'Synth sUSD (sUSD)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'MATH',
                 pic:require('@/assets/picture/bi/19.png'),
                 name:'MATH Token (MATH)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'CREAM',
                 pic:require('@/assets/picture/bi/20.png'),
                 name:'Cream (CREAM)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'MCB',
                 pic:require('@/assets/picture/bi/21.png'),
                 name:'MCDEX Token (MCB)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'SDT',
                 pic:require('@/assets/picture/bi/22.png'),
                 name:'Stake DAO Token (SDT)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'DF',
                 pic:require('@/assets/picture/bi/23.png'),
                 name:'dForce (DF)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'CAP',
                 pic:require('@/assets/picture/bi/24.png'),
                 name:'Cap (CAP)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'FUSE',
                 pic:require('@/assets/picture/bi/25.png'),
                 name:'Fuse Token (FUSE)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'ALCH',
                 pic:require('@/assets/picture/bi/26.png'),
                 name:'Alchemy (ALCH)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'WETH',
                 pic:require('@/assets/picture/bi/27.png'),
                 name:'Wrapped Ether (WETH)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'NYAN',
                 pic:require('@/assets/picture/bi/28.png'),
                 name:'ArbiNYAN (NYAN)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'EUX',
                 pic:require('@/assets/picture/bi/29.png'),
                 name:'dForce EUR (EUX)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'USX',
                 pic:require('@/assets/picture/bi/30.png'),
                 name:'dForce USD (USX)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'DXD',
                 pic:require('@/assets/picture/bi/31.png'),
                 name:'DXdao (DXD)',
                 address: '',
+                contract: {},
             },
             {
                 symbol: 'WOO',
                 pic:require('@/assets/picture/bi/32.png'),
                 name:'Wootrade Network (WOO)',
                 address: '',
+                contract: {},
             },
+        ],
+        nests: [
+            {
+                name:'DFD',
+                num:20,
+                stake:'DFD',
+                deposit:'DFD',
+                pic:require('@/assets/picture/egg/1.jpg'),
+                noFree:true,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
+            },
+            {
+                name:'EGG',
+                num:20,
+                stake:'EGG',
+                deposit:'EGG',
+                pic:require('@/assets/picture/egg/2.jpg'),
+                noFree:true,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
+            },
+            {
+            name:'ETH',
+                num:2,
+                stake:'ETH',
+                deposit:'ETH',
+                pic:require('@/assets/picture/egg/3.jpg'),
+                noFree:true,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '',
+            },
+            {
+                name:'USDC',
+                num:'60',
+                stake:'USDC',
+                deposit:'USDC',
+                pic:require('@/assets/picture/egg/4.jpg'),
+                noFree:false,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '',
+            },
+            {
+                name:'ETH-USDC LP',
+                num:'60',
+                stake:'ETH-USDC LP',
+                deposit:'ETH-USDC LP',
+                pic:require('@/assets/picture/egg/5.jpg'),
+                noFree:false,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '',
+            },
+            {
+                name:'ETH-DFD LP',
+                num:'60',
+                stake:'ETH-DFD LP',
+                deposit:'ETH-DFD LP',
+                pic:require('@/assets/picture/egg/6.jpg'),
+                noFree:false,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '',
+            },
+            {
+                name:'ETH-EGG LP',
+                num:'60',
+                stake:'ETH-EGG LP',
+                deposit:'ETH-EGG LP',
+                pic:require('@/assets/picture/egg/7.jpg'),
+                noFree:false,
+                showDetail:false,
+                amount: 0,
+                approved: false,
+                address: '',
+            }
         ],
         swap: {
             paths: [
@@ -355,6 +476,7 @@ export default {
                     dispatch('getTokenEggContract');
                     dispatch('getTokenDggContract');
                     dispatch('getTokenDfdContract');
+                    dispatch('getTokenContracts');
                     dispatch('getTokenFTK1Contract');
                     dispatch('getTokenFTK2Contract');
                     dispatch('getRandContract');
@@ -422,6 +544,21 @@ export default {
                     this.state.web3.address.ftk2
                 );
                 commit('WEB3_CONTRACT_TOKEN_FTK2', contractFtk2);
+            } 
+        },
+        getTokenContracts({ commit }) {
+            if (this.state.web3.web3) {
+                let tokens = this.state.web3.tokens;
+                tokens.forEach((token) => {
+                    if (token.address.length > 0) {
+                        token.contract = new this.state.web3.web3.eth.Contract(
+                            abiTokenDefender,
+                            token.address,
+                        );
+                    }
+                });
+                
+                commit('WEB3_CONTRACT_TOKENS', tokens);
             } 
         },
         getTokenUniswapPairContract({ commit }, address) {
@@ -518,6 +655,9 @@ export default {
         },
         [WEB3_CONTRACT_TOKEN_FTK2](state, result) {
             state.contracts.token.ftk2 = result;
+        },
+        [WEB3_CONTRACT_TOKENS](state, result) {
+            state.tokens = result;
         },
         [WEB3_CONTRACT_TOKEN_PAIR](state, result) {
             state.contracts.token.pair = result;
