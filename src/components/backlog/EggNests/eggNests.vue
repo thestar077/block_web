@@ -128,7 +128,8 @@
   <el-dialog
     :title="'Deposite '+tokenItem.name+' token'"
     :visible.sync="dialogVisibleDeposite" class="depositeVisible"
-    width="40%" append-to-body>
+    append-to-body
+    width="40%">
     <p class="p1">
       <span></span>
       <span>0 {{tokenItem.name}} Availiable</span>
@@ -151,7 +152,8 @@
   <el-dialog
     :title="'Withdraw '+tokenItem.name"
     :visible.sync="dialogVisibleRemove" class="depositeVisible"
-    width="40%" append-to-body>
+    append-to-body
+    width="40%">
     <p class="p1">
       <span></span>
       <span>0.986522222 {{tokenItem.name}}</span>
@@ -961,5 +963,10 @@
     max-width: 31.5%;
     width: 100%;
     margin: 0px 8px 32px;
+}
+@media(max-width:641px) {
+  .depositeVisible /deep/ .el-dialog {
+    width:80%!important;
+  }
 }
 </style>

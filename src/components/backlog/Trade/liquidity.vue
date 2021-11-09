@@ -165,7 +165,7 @@
       <div class="sc-edoZmE hyACfo mt30">
        
         <div v-if="!isAdd">
-          <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button>
+          <!-- <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button> -->
 <!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
           <div v-if="isUnLock">
             <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
