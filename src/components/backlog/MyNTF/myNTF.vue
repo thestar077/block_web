@@ -327,6 +327,7 @@
     },
     methods: {
       changeTag(index){
+        console.log(indexll)
         this.roleActive = index;
       },
       handleClick(tab, event) {
@@ -377,7 +378,7 @@
     padding:22px 168px 0 168px;
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 100vh;
+    min-height: calc(100% - 16px);
     background-image: url('~@/assets/picture/tradeBg.jpg');
     .pcShow,.phoneShow{
     }
@@ -386,7 +387,12 @@
       margin-top: 200px;
     }
     .el-pagination button:disabled{
-
+      width:60px;
+      height:60px;
+    }
+    .el-pagination /deep/ button:disabled  i {
+      font-size: 20px!important;
+      font-weight: bold!important;
     }
     /deep/ .el-pager li.active{
       background: #A39282;
@@ -394,13 +400,15 @@
     }
     /deep/ .el-pagination .btn-next,/deep/ .el-pagination .btn-prev,/deep/ .el-pager li{
       padding: 0;
-      width: 32px;
-      height: 32px;
+      width: 60px;
+      height: 60px;
       border-radius: 100px;
-      line-height: 32px;
+      line-height: 60px;
       text-align: center;
       display: inline-block;
       color: #A39282;
+      font-size:20px;
+      margin-right:10px;
     }
     .myNTF{
       padding: 20px 35px;
@@ -522,4 +530,22 @@
       }
     }
   }
+  @media(max-width:641px) {
+    .roleArr{
+      ul{
+        width:auto!important;
+        padding:0 16px!important;
+        overflow: auto!important;
+        li{
+            width:auto!important;
+            padding:0 16px!important;
+            margin-right:20px!important;
+        }
+      }
+    }
+    .el-carousel__item  .shadow img {
+      margin: 0 12px 0 0!important;
+    }
+  }
+
 </style>
