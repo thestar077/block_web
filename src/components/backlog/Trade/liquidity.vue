@@ -200,15 +200,15 @@
         <img :src="tokenB.pic">
       </div>
     </div>
-    <p  class="swapTips">{{tokenA.name}}/{{tokenA.name}} Pool Tokens</p>
+    <p  class="swapTips">{{tokenA.symbol}}/{{tokenA.symbol}} Pool Tokens</p>
     <p class="swapTips2">Output is estimated.If the price changes by more than 0.8% your transaction will revert.</p>
     <p class="swapTxt">
-      <span>{{tokenA.name}} Deposited</span>
-      <span><img :src="tokenA.pic"> {{tokenA.value}}</span>
+      <span>{{tokenA.symbol}} Deposited</span>
+      <span><img :src="tokenA.pic"> {{amountA}}</span>
     </p>
    <p class="swapTxt">
-      <span>{{tokenB.name}} Deposited</span>
-      <span><img :src="tokenB.pic"> {{tokenB.value}}</span>
+      <span>{{tokenB.symbol}} Deposited</span>
+      <span><img :src="tokenB.pic"> {{amountB}}</span>
     </p>
     <p class="swapTxt">
       <span>Rates</span>
@@ -223,7 +223,7 @@
       <span>10.78%</span>
     </p>
     <span slot="footer" class="dialog-footer">
-      <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Cofirm Supply</el-button>
+      <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Confirm Supply</el-button>
     </span> 
   </el-dialog>
     <!-- setting -->
