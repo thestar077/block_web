@@ -41,8 +41,8 @@ export default {
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
                 weth: '0xFFe63f7AeC1E895A182821885a6852735ED1E50F',
-                ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
-                ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                ftk1: '0xAB96cf1eD96eDdBaa9Ea3812b58b44336826bbeB',
+                ftk2: '0x229bDE80F288C3a12a15e639238c359482636397',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
@@ -71,15 +71,17 @@ export default {
                 symbol: 'FTK1',
                 pic:require('@/assets/picture/bi/32.png'),
                 name: 'Fake Token 1',
-                address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                address: '0xAB96cf1eD96eDdBaa9Ea3812b58b44336826bbeB',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'FTK2',
                 pic:require('@/assets/picture/bi/31.png'),
                 name: 'Fake Token 2',
-                address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                address: '0x229bDE80F288C3a12a15e639238c359482636397',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'UNI',
@@ -87,6 +89,7 @@ export default {
                 name:'Uniswap (UNI)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'USDT',
@@ -94,6 +97,7 @@ export default {
                 name:'Tether USD (USDT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'USDC',
@@ -101,6 +105,7 @@ export default {
                 name:'USD Coin (USDC)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'WBTC',
@@ -108,6 +113,7 @@ export default {
                 name:'Wrapped BTC (WBTC)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'LINK',
@@ -115,6 +121,7 @@ export default {
                 name:'ChainLink Token (LINK)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'GRT',
@@ -122,6 +129,7 @@ export default {
                 name:'Graph Token (GRT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'SUSHI',
@@ -129,6 +137,7 @@ export default {
                 name:'SushiToken (SUSHI)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'COMP',
@@ -136,6 +145,7 @@ export default {
                 name:'Compound (COMP)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'MIM',
@@ -143,6 +153,7 @@ export default {
                 name:'Magic Internet Money (MIM)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'YFI',
@@ -150,6 +161,7 @@ export default {
                 name:'yearn.finance (YFI)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CRV',
@@ -157,6 +169,7 @@ export default {
                 name:'Curve DAO Token (CRV)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CELR',
@@ -164,6 +177,7 @@ export default {
                 name:'CelerToken (CELR)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'GNO',
@@ -171,6 +185,7 @@ export default {
                 name:'Gnosis Token (GNO)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'RGT',
@@ -178,6 +193,7 @@ export default {
                 name:'Rari Governance Token (RGT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'BADGER',
@@ -185,6 +201,7 @@ export default {
                 name:'Badger (BADGER)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'DODO',
@@ -192,6 +209,7 @@ export default {
                 name:'DODO bird (DODO)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'BAL',
@@ -199,6 +217,7 @@ export default {
                 name:'Balancer (BAL)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'sUSD',
@@ -206,6 +225,7 @@ export default {
                 name:'Synth sUSD (sUSD)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'MATH',
@@ -213,6 +233,7 @@ export default {
                 name:'MATH Token (MATH)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CREAM',
@@ -220,6 +241,7 @@ export default {
                 name:'Cream (CREAM)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'MCB',
@@ -227,6 +249,7 @@ export default {
                 name:'MCDEX Token (MCB)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'SDT',
@@ -234,6 +257,7 @@ export default {
                 name:'Stake DAO Token (SDT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'DF',
@@ -241,6 +265,7 @@ export default {
                 name:'dForce (DF)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CAP',
@@ -248,6 +273,7 @@ export default {
                 name:'Cap (CAP)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'FUSE',
@@ -255,6 +281,7 @@ export default {
                 name:'Fuse Token (FUSE)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'ALCH',
@@ -262,6 +289,7 @@ export default {
                 name:'Alchemy (ALCH)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'WETH',
@@ -269,6 +297,7 @@ export default {
                 name:'Wrapped Ether (WETH)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'NYAN',
@@ -276,6 +305,7 @@ export default {
                 name:'ArbiNYAN (NYAN)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'EUX',
@@ -283,6 +313,7 @@ export default {
                 name:'dForce EUR (EUX)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'USX',
@@ -290,6 +321,7 @@ export default {
                 name:'dForce USD (USX)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'DXD',
@@ -297,6 +329,7 @@ export default {
                 name:'DXdao (DXD)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'WOO',
@@ -304,6 +337,7 @@ export default {
                 name:'Wootrade Network (WOO)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
         ],
         nests: [
@@ -553,15 +587,18 @@ export default {
                 commit('WEB3_CONTRACT_TOKEN_FTK2', contractFtk2);
             } 
         },
-        getTokenContracts({ commit }) {
+        async getTokenContracts({ commit }) {
             if (this.state.web3.web3) {
                 let tokens = this.state.web3.tokens;
-                tokens.forEach((token) => {
+                tokens.forEach(async (token) => {
                     if (token.address.length > 0) {
                         token.contract = new this.state.web3.web3.eth.Contract(
                             abiTokenDefender,
                             token.address,
                         );
+
+                        let decimals = await token.contract.methods.decimals().call();
+                        token.decimals = parseInt(decimals);
                     }
                 });
                 
