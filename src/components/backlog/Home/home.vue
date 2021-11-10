@@ -344,4 +344,9 @@
           margin-right: 16px;
       }
     }
+    @media(max-width:641px){
+      .homePage .hsFDCH{
+        padding:0 20px;
+      }
+    }
 </style>
