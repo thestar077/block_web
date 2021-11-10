@@ -1099,4 +1099,40 @@ of the gods". </p>
       }
     }
   }
+  @media(max-width:641px) {
+    .roleArr{
+      display: inline!important;
+      .roleArrLeft{
+        display: inline!important;
+        ul{
+          width:auto;
+          padding:0 16px;
+          overflow: auto;
+          justify-content:flex-start;
+          li{
+            width:auto;
+            padding:0 16px;
+            margin-right:20px;
+          }
+        }
+        .viewBtn{
+          justify-content: flex-start;
+          display: inline-block;
+          margin:20px;
+        }
+      }
+      .switchBox{
+        display: inline-block!important;
+        .label{
+          margin-left:0!important;
+          display: inline-block!important;
+        }
+      }
+    }
+    /deep/ .el-table{
+      table{
+        width:auto!important;
+      }
+    }
+  }
 </style>

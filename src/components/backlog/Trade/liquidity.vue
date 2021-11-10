@@ -163,9 +163,16 @@
        </div>
       </div>
       <div class="sc-edoZmE hyACfo mt30">
-       
-        <div>
-          <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd ">Unlock Wallet</button>
+
+        <!-- <div> -->
+          <!-- <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd ">Unlock Wallet</button> -->
+
+        <div v-if="!isAdd">
+          <!-- <button v-click type="button" class="sc-dlfnbm btoybd supplyDisable">no Pool</button> -->
+<!--           <button v-click type="button" @click="dialogVisibleConfirmSwap = true" v-if="istokenAApprove && istokenBApprove" class="sc-dlfnbm btoybd mt20">Swap</button> -->
+          <div v-if="isUnLock">
+            <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
+          </div>
           <!-- unlock wallet之后就是supply，不要deposit，两个按钮变成一个 -->
           <button v-else type="button" @click="handleSupply" :class="tokenANeedsApprove === false && tokenBNeedsApprove === false && enoughToSupply === true ?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
           <!-- <button v-else type="button" class="sc-dlfnbm btoybd" @click="addLiquidity()">Supply</button> -->
