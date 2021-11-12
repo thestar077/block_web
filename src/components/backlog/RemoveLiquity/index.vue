@@ -3,7 +3,7 @@
     <div class="box">
       <div class="header">
         <span @click="goBack" class="el-icon-back"></span>
-        <span>Remove BNB Token</span>
+        <span>Remove {{liquiditySelected ? liquiditySelected.tokenA.symbol : ''}} - {{liquiditySelected ? liquiditySelected.tokenB.symbol : ''}}</span>
       </div>
       <div class="box1">
         <div class="headerTxt">
@@ -143,7 +143,55 @@
       };
     },
     created() {
-      
+      console.log("params", this.$route.params.liquidity);
+    },
+    computed: {
+      web3() {
+        return this.$store.state.web3.web3;
+      },
+      walletConnected() {
+        return this.$store.state.web3.web3 !== null && this.$store.state.web3.web3 !== undefined;
+      },
+      accounts () {
+        return this.$store.state.web3.accounts;
+      },
+      contractFactory() {
+        return this.$store.state.web3.contracts.uniswap_factory;
+      },
+      contractRouter() {
+        return this.$store.state.web3.contracts.router_v1;
+      },
+      user() {
+        return (this.$store.state.web3.accounts.length > 0) ? this.$store.state.web3.accounts[0] : '';
+      },
+      minter() {
+        return this.$store.state.web3.minter;
+      },
+      serverUrl() {
+        return this.$store.state.api.base;
+      },
+      transactions() {
+        return this.$store.state.baseData.transactions;
+      },
+      displayDecimals() {
+        return this.$store.state.baseData.consts.display_decimals;
+      },
+      defaultContractDecimals() {
+        return this.$store.state.baseData.consts.contract_decimals;
+      },
+      liquidities() {
+        return this.$store.state.web3.liquidities;
+      },
+      liquiditySelected() {
+        return (this.$store.state.web3.liquidities.length > 0) ? this.$store.state.web3.liquidities[this.$route.params.liquidity] : null;
+      }
+    },
+    watch: {
+      transactions: function(val) {
+        if (val && val.length > 0) {
+          this.$store.dispatch('getMyLiquidities');
+        }
+      },
     },
     methods: {
       handleChange(){},

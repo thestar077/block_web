@@ -471,7 +471,7 @@
       },
       transactions: function(val) {
         if (val && val.length > 0) {
-          this.aggregateTransactions();
+          this.$store.dispatch('getMyLiquidities');
         }
       },
       'amountA': function(val){
@@ -896,58 +896,6 @@
                     .on('connected', str => console.log('Liquidity connected', str))
             });
       },
-      async aggregateTransactions() {
-        let liquidities = [];
-        if (this.transactions.length > 0) {
-          for (let i = 0; i < this.transactions.length; i++) {
-            let transaction = this.transactions[i];
-            let exists = false;
-            liquidities.forEach((liquidity) => {
-              if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
-                liquidity.amountA = (parseFloat(liquidity.amountA) + parseFloat(transaction.data.amountA)).toFixed(this.displayDecimals);
-                liquidity.amountB = (parseFloat(liquidity.amountB) + parseFloat(transaction.data.amountB)).toFixed(this.displayDecimals);
-                liquidity.liquidity = (parseFloat(liquidity.liquidity) + (transaction.data.amountPair / Math.pow(10, this.defaultContractDecimals))).toFixed(this.displayDecimals);
-                exists = true;
-                return;
-              }
-            });
-            if (!exists) {
-              let tokenA = null;
-              let tokenB = null;
-              this.tokenList.forEach((token) => {
-                if (transaction.data.tokenA == token.symbol) {
-                  tokenA = token;
-                }
-
-                if (transaction.data.tokenB == token.symbol) {
-                  tokenB = token;
-                }
-              })
-              liquidities.push({
-                tokenA: tokenA,
-                tokenB: tokenB,
-                amountA: transaction.data.amountA,
-                amountB: transaction.data.amountB,
-                liquidity: (transaction.data.amountPair / Math.pow(10, this.defaultContractDecimals)).toFixed(this.displayDecimals),
-                supplies: 0,
-              })
-            }
-          }
-
-          for (let i = 0; i < liquidities.length; i++) {
-            let supplies = await this.contractRouter.methods.getSupplies(liquidities[i].tokenA.address, liquidities[i].tokenB.address).call();
-            if (supplies == 0) {
-              supplies = await this.contractRouter.methods.getSupplies(liquidities[i].tokenB.address, liquidities[i].tokenA.address).call();
-            }
-
-            liquidities[i].supplies = (supplies / Math.pow(10, this.defaultContractDecimals)).toFixed(this.displayDecimals);
-          }
-
-          this.$store.commit('GET_LIQUIDITIES', liquidities);
-        }
-
-        console.log('liquidities', liquidities);
-      },
       changeBi(){
         let token1 = this.tokenA;
         let token2 = this.tokenB;
@@ -955,7 +903,7 @@
         this.tokenB = token1;
       },
       handleRemove(liquidity, index){
-        this.$router.push({path: "/removeLiquity"});
+        this.$router.push({path: `/removeLiquity/${index}`});
       },
     }
   };

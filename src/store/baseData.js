@@ -125,18 +125,10 @@ export default {
                         transaction.data = JSON.parse(transaction.detail);
                     })
                     console.log('getMyTransactions', transactions);
-                    // let configData = {};
-                    // if (configArr.length > 0) {
-                    //     configArr.forEach((item) => {
-                    //         configData[item.name] = item.value;
-                    //     });
-                    // }
-                    // console.log('getConfig', configData);
-                    // myStorage.set('config', configData);
                     commit('MY_TRANSACTIONS', transactions);
                 }
             })
-        }
+        },
     },
     mutations: {
         [NFTS_ALL](state, result) {
