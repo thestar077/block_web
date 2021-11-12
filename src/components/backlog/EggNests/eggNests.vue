@@ -135,7 +135,7 @@
       <span>0 {{tokenItem.name}} Availiable</span>
     </p>
     <p class="p1">
-      <span>0</span>
+     <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
       <span>{{tokenItem.name}}<span class="maxBtn">Max</span></span>
     </p>
     <p class="p1">
@@ -184,6 +184,7 @@
         tokenItem:{},
         isDeposite:false,
         actIndex:0,
+        amountB:0,
         isStaked:false,
         info:{},
         actList:[
@@ -968,5 +969,15 @@
   .depositeVisible /deep/ .el-dialog {
     width:80%!important;
   }
+}
+.el-input-number{
+  width:calc(100% - 300px);
+  margin:0;
+}
+.el-input-number /deep/ input {
+  text-align: left;
+  color:#333;
+  border:none;
+  font-size: 32px;
 }
 </style>

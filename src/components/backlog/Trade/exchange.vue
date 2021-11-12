@@ -41,7 +41,10 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <input class="sc-fybufo dHAxfv token-amount-input" v-model="amountA" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" @blur="handleTokenChange(false)"/>
+          <!-- <input class="sc-fybufo dHAxfv token-amount-input" v-model="amountA" inputmode="decimal" title="Token Amount" 
+            autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
+            spellcheck="false" value="" @blur="handleTokenChange(false)"/> -->
+            <el-input-number v-model="amountA" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
           <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
              {{tokenA.name}}
@@ -71,7 +74,10 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" v-model="amountB" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" @blur="handleTokenChange(false)" />
+          <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" v-model="amountB" title="Token Amount" 
+            autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
+            spellcheck="false" value="" @blur="handleTokenChange(false)" /> -->
+          <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
            <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
              {{tokenB.name}}
@@ -1183,5 +1189,9 @@
 /deep/ .el-input__inner{
   background: none;
   border:none;
+}
+.el-input-number /deep/ input {
+  text-align: left;
+  color:#333;
 }
 </style>

@@ -4,7 +4,7 @@
       <div class="banner">
         <img width="100%" src="@/assets/picture/skaetBanner.png">
       </div>
-      <el-row :gutter="65">
+      <el-row :gutter="20">
         <el-col v-for="(item,index) in biArr" :key="index">
           <div  class="biArr">
             <img width="100%" :src="item.pic">
@@ -607,6 +607,21 @@
             border-color: #DCDFE6;
           }
         }
+      }
+    }
+
+    @media(max-width:641px) {
+      .stakeNFTPage .el-row{
+        margin:0!important;
+      }
+      .stakeNFTPage .el-col-24{
+        width:50%;
+      }
+      .stakeNFTPage .content .cardBoxArr{
+        flex-wrap: wrap;
+      }
+      .stakeNFTPage .content .cardBox{
+        width:50%;
       }
     }
 </style>

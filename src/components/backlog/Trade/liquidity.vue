@@ -123,7 +123,10 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountA" @blur="handleAmountChange(1)"/>
+         <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" 
+          autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
+          spellcheck="false" value="" v-model="amountA" @blur="handleAmountChange(1)"/> -->
+         <el-input-number v-model="amountA" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
          <div class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
           <span class="mr20" @click="handleMax(1)">MAX</span>
           <img v-if="tokenA.pic" :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
@@ -149,7 +152,8 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" @blur="handleAmountChange(2)" />
+         <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" @blur="handleAmountChange(2)" /> -->
+         <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
          <button class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
            <span class="mr20" @click="handleMax(2)">MAX</span>
            <img v-if="tokenB.pic" :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
@@ -1720,5 +1724,9 @@
 }
 .iONwHy{
   margin-top: -15px;
+}
+.el-input-number /deep/ input {
+  text-align: left;
+  color:#333;
 }
 </style>
