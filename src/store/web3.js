@@ -29,6 +29,7 @@ const WEB3_CONTRACT_RAND = 'WEB3_CONTRACT_RAND';
 const WEB3_SWAP_PATHS = 'WEB3_SWAP_PATHS';
 const NFT_ASSET = 'NFT_ASSET';
 const NFT_BOUGHT = 'NFT_BOUGHT';
+const GET_LIQUIDITIES = 'GET_LIQUIDITIES';
 
 export default {
     state: {
@@ -40,15 +41,15 @@ export default {
                 dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0xFFe63f7AeC1E895A182821885a6852735ED1E50F',
+                weth: '0x12FAa8F16e4EB106D2b8d63Ad91ECd152e093812',
                 ftk1: '0xAB96cf1eD96eDdBaa9Ea3812b58b44336826bbeB',
                 ftk2: '0x229bDE80F288C3a12a15e639238c359482636397',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
             pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0xBc45cA09c3d00a9bA25eB08b70849Db43A76BE03',
-            router_v1: '0xE491196981ddB787f0DDa69685a2623d26570B16',
+            uniswap_factory: '0x654Ca1BBb6057714A2efda8834E504c65e9812f7',
+            router_v1: '0x05183B86125C3D4BE96E5C702cc333a2f4b67B2E',
         },
         contracts: {
             token: {
@@ -437,12 +438,12 @@ export default {
             paths: [
                 [0, 1], // FTK1 -> FTK2
             ],
-            sliding: 0.003,
+            slippage: 0.003,
         },
         minter: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc',
         accounts: '',
         assets: [],
-        liquidiy: [],
+        liquidities: [],
         nft_bought: [],
     },
     actions: {
@@ -526,6 +527,7 @@ export default {
                     dispatch('getUniswapFactoryContract');
                     dispatch('getDefenderRouterV1Contract');
                     dispatch('getMyNftAssets', this.state.web3.accounts[0]);
+                    dispatch('getMyTransactions', this.state.web3.accounts[0]);
                     console.log('egg contract', this.state.web3.contracts.token.egg.options.address);
                     console.log('dgg contract', this.state.web3.contracts.token.dgg.options.address);
                     console.log('dfd contract', this.state.web3.contracts.token.dfd.options.address);
@@ -656,6 +658,7 @@ export default {
                     abiRouter,
                     this.state.web3.address.router_v1
                 );
+
                 commit('WEB3_CONTRACT_DEFENDER_ROUTER_V1', contractDefenderRouterV1);
             } 
         },
@@ -673,9 +676,10 @@ export default {
                 }
             })
         },
-        addLiquidity({ commit }, data) {
-
-        }
+        // async getSupplies({ commit }) {
+        //     let supplies = await this.state.web3.contracts.router_v1.methods.getSupplies().call();
+        //     console.log('getSupplies', supplies);
+        // }
     },
     mutations: {
         [WEB3](state, result) {
@@ -730,5 +734,8 @@ export default {
         [NFT_BOUGHT](state, result) {
             state.nft_bought = result;
         },
+        [GET_LIQUIDITIES](state, result) {
+            state.liquidities = result;
+        }
     }
 }
