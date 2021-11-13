@@ -44,6 +44,16 @@ export default {
         let config = myStorage.get('config');
         this.$store.commit('CONFIG', config);
       }
+
+      let userConfigSlippage = myStorage.get('config_slippage');
+      if (userConfigSlippage) {
+        this.$store.commit('CONFIG_SLIPPAGE', parseFloat(userConfigSlippage));
+      }
+
+      let userConfigDeadline = myStorage.get('config_deadline');
+      if (userConfigDeadline) {
+        this.$store.commit('CONFIG_DEADLINE', parseInt(userConfigDeadline));
+      }
     },
     loadAnnouncements() {
 

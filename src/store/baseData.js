@@ -9,13 +9,18 @@ const NFT_ASSET_BY_OWNER = 'NFT_ASSET_BY_OWNER';
 const NFT_ASSETS_LOADED = 'NFT_ASSETS_LOADED';
 const CONFIG = 'CONFIG';
 const MY_TRANSACTIONS = 'MY_TRANSACTIONS';
+const CONFIG_SLIPPAGE = 'CONFIG_SLIPPAGE';
+const CONFIG_DEADLINE = 'CONFIG_DEADLINE';
 
 export default {
     state: {
         nfts: [],
         assets: [],
         assetsLoaded: 0,
-        config: {},
+        config: {
+            slippage: 0.003,
+            deadline: 10 * 60,
+        },
         consts: {
             dgg_price_egg_default: 800,
             display_decimals: 4,
@@ -154,6 +159,12 @@ export default {
         },
         [MY_TRANSACTIONS](state, result) {
             state.transactions = result;
+        },
+        [CONFIG_SLIPPAGE](state, result) {
+            state.config.slippage = result;
+        },
+        [CONFIG_DEADLINE](state, result) {
+            state.config.deadline = result;
         }
     },
 };

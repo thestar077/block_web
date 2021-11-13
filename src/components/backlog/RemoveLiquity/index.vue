@@ -196,6 +196,9 @@
       },
       liquiditySelected() {
         return (this.$store.state.web3.liquidities.length > 0) ? this.$store.state.web3.liquidities[this.$route.params.liquidity] : null;
+      },
+      expiry() {
+        return this.$store.state.baseData.config.deadline;
       }
     },
     watch: {
@@ -265,8 +268,8 @@
         this.dialogVisibleConfirmationWaiting = true;
         
         let timeNow = Math.floor(Date.now() / 1000);
-        let expiry = 10 * 60;  // 10 mins
-        let deadline = timeNow + expiry;
+        // let expiry = 10 * 60;  // 10 mins
+        let deadline = timeNow + this.expiry;
 
         let liquidityRemoving = parseFloat(this.liquidityRemoving) * 10 ** this.displayDecimals + '00000000000000';
         console.log('liquidityRemoving', liquidityRemoving);

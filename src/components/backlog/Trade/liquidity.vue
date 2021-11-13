@@ -462,6 +462,9 @@
       },
       liquidities() {
         return this.$store.state.web3.liquidities;
+      },
+      expiry() {
+        return this.$store.state.baseData.config.deadline;
       }
     },
     watch: {
@@ -608,8 +611,7 @@
           let contractTokenB = this.tokenB.contract;
 
           let timeNow = Math.floor(Date.now() / 1000);
-          let expiry = 10 * 60;  // 10 mins
-          let deadline = timeNow + expiry;
+          let deadline = timeNow + this.expiry;
           let amountA = parseInt(this.amountA);
           let amountB = parseInt(this.amountB);
           await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
@@ -814,10 +816,8 @@
         this.dialogVisibleConfirmationWaiting = true;
         
           let timeNow = Math.floor(Date.now() / 1000);
-          let expiry = 10 * 60;  // 10 mins
-          let deadline = timeNow + expiry;
+          let deadline = timeNow + this.expiry;
 
-          console.log(`this.tokenA.address = ${this.tokenA.address}, this.tokenB.address = ${this.tokenB.address}, user = ${this.user}, deadline = ${deadline}`);
           let amountA = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
           let amountB = toFixed(this.amountB * Math.pow(10, this.tokenA.decimals)) + '';
           console.log(`amountA = ${amountA}, amountB = ${amountB}`);
