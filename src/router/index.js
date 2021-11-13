@@ -61,7 +61,7 @@ const routes = [
       { path: "/content", component: Content },
       { path: "/NFTStaking", component: NFTStaking },
       { path: "/authorization", component: Authorization },
-      { path: "/removeLiquity", component: RemoveLiquity },
+      { path: "/removeLiquity/:liquidity", component: RemoveLiquity },
     ]
   },
   {

@@ -16,7 +16,15 @@ export default {
             },
             config: {
                 all: 'configAll',
+                getByUser: 'configByUser',
+                addUserConfig: 'addUserConfig',
+                updateUserConfig: 'updateUserConfig',
             },
+            transaction: {
+                getByUser: 'transactionsByUser',
+                getByUserAndCategory: 'transactionsByUserAndCategory',
+                addTransaction: 'addTransaction',
+            }
         },
         static: {
             base: 'http://47.74.37.101:3001/static/nfts/',

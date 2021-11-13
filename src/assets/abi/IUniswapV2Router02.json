@@ -151,64 +151,6 @@
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "reserveIn",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reserveOut",
-        "type": "uint256"
-      }
-    ],
-    "name": "getAmountIn",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountIn",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountIn",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reserveIn",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reserveOut",
-        "type": "uint256"
-      }
-    ],
-    "name": "getAmountOut",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountOut",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountOut",
-        "type": "uint256"
-      },
-      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -247,35 +189,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountA",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reserveA",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "reserveB",
-        "type": "uint256"
-      }
-    ],
-    "name": "quote",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "amountB",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "pure",
     "type": "function"
   },
   {
@@ -640,6 +553,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "amountOutExpected",
+        "type": "uint256"
+      },
+      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -648,6 +566,11 @@
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -674,6 +597,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "amountOutExpected",
+        "type": "uint256"
+      },
+      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -682,6 +610,11 @@
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -741,6 +674,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "amountOutExpected",
+        "type": "uint256"
+      },
+      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -749,6 +687,11 @@
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -813,6 +756,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "amountOutExpected",
+        "type": "uint256"
+      },
+      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -821,6 +769,11 @@
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -885,6 +838,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "amountInExpected",
+        "type": "uint256"
+      },
+      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -893,6 +851,11 @@
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -924,6 +887,11 @@
         "type": "uint256"
       },
       {
+        "internalType": "uint256",
+        "name": "amountInExpected",
+        "type": "uint256"
+      },
+      {
         "internalType": "address[]",
         "name": "path",
         "type": "address[]"
@@ -932,6 +900,11 @@
         "internalType": "address",
         "name": "to",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "slippage",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",

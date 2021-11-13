@@ -350,8 +350,8 @@
         swapPaths() {
           return this.$store.state.web3.swap.paths;
         },
-        swapSliding() {
-          return this.$store.state.web3.swap.sliding;
+        swapSlippage() {
+          return this.$store.state.web3.swap.slippage;
         },
     },
     watch: {

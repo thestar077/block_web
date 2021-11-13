@@ -29,6 +29,7 @@ const WEB3_CONTRACT_RAND = 'WEB3_CONTRACT_RAND';
 const WEB3_SWAP_PATHS = 'WEB3_SWAP_PATHS';
 const NFT_ASSET = 'NFT_ASSET';
 const NFT_BOUGHT = 'NFT_BOUGHT';
+const GET_LIQUIDITIES = 'GET_LIQUIDITIES';
 
 export default {
     state: {
@@ -40,15 +41,15 @@ export default {
                 dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0x6cf81809daf70601867A226c63359F264FC084E5',
+                weth: '0x10C246E3B657A9b091C0D20454F76506e23f4F87',
                 ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
                 ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
             pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0x944022c22325031A1524e0f402B0F57fdEC10Fc1',
-            router_v1: '0x2fe3b9Ad0D10ba98dF1862897A6902bcD10f4dC0',
+            uniswap_factory: '0xE96A4C13834A13Dd08071c7a15Cd70f9c342ace6',
+            router_v1: '0x9085E0b5b53AE53535E62efc0e91F9A96333225B',
         },
         contracts: {
             token: {
@@ -73,6 +74,7 @@ export default {
                 name: 'Fake Token 1',
                 address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'FTK2',
@@ -80,6 +82,7 @@ export default {
                 name: 'Fake Token 2',
                 address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'UNI',
@@ -87,6 +90,7 @@ export default {
                 name:'Uniswap (UNI)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'USDT',
@@ -94,6 +98,7 @@ export default {
                 name:'Tether USD (USDT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'USDC',
@@ -101,6 +106,7 @@ export default {
                 name:'USD Coin (USDC)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'WBTC',
@@ -108,6 +114,7 @@ export default {
                 name:'Wrapped BTC (WBTC)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'LINK',
@@ -115,6 +122,7 @@ export default {
                 name:'ChainLink Token (LINK)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'GRT',
@@ -122,6 +130,7 @@ export default {
                 name:'Graph Token (GRT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'SUSHI',
@@ -129,6 +138,7 @@ export default {
                 name:'SushiToken (SUSHI)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'COMP',
@@ -136,6 +146,7 @@ export default {
                 name:'Compound (COMP)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'MIM',
@@ -143,6 +154,7 @@ export default {
                 name:'Magic Internet Money (MIM)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'YFI',
@@ -150,6 +162,7 @@ export default {
                 name:'yearn.finance (YFI)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CRV',
@@ -157,6 +170,7 @@ export default {
                 name:'Curve DAO Token (CRV)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CELR',
@@ -164,6 +178,7 @@ export default {
                 name:'CelerToken (CELR)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'GNO',
@@ -171,6 +186,7 @@ export default {
                 name:'Gnosis Token (GNO)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'RGT',
@@ -178,6 +194,7 @@ export default {
                 name:'Rari Governance Token (RGT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'BADGER',
@@ -185,6 +202,7 @@ export default {
                 name:'Badger (BADGER)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'DODO',
@@ -192,6 +210,7 @@ export default {
                 name:'DODO bird (DODO)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'BAL',
@@ -199,6 +218,7 @@ export default {
                 name:'Balancer (BAL)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'sUSD',
@@ -206,6 +226,7 @@ export default {
                 name:'Synth sUSD (sUSD)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'MATH',
@@ -213,6 +234,7 @@ export default {
                 name:'MATH Token (MATH)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CREAM',
@@ -220,6 +242,7 @@ export default {
                 name:'Cream (CREAM)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'MCB',
@@ -227,6 +250,7 @@ export default {
                 name:'MCDEX Token (MCB)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'SDT',
@@ -234,6 +258,7 @@ export default {
                 name:'Stake DAO Token (SDT)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'DF',
@@ -241,6 +266,7 @@ export default {
                 name:'dForce (DF)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'CAP',
@@ -248,6 +274,7 @@ export default {
                 name:'Cap (CAP)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'FUSE',
@@ -255,6 +282,7 @@ export default {
                 name:'Fuse Token (FUSE)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'ALCH',
@@ -262,6 +290,7 @@ export default {
                 name:'Alchemy (ALCH)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'WETH',
@@ -269,6 +298,7 @@ export default {
                 name:'Wrapped Ether (WETH)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'NYAN',
@@ -276,6 +306,7 @@ export default {
                 name:'ArbiNYAN (NYAN)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'EUX',
@@ -283,6 +314,7 @@ export default {
                 name:'dForce EUR (EUX)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'USX',
@@ -290,6 +322,7 @@ export default {
                 name:'dForce USD (USX)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'DXD',
@@ -297,6 +330,7 @@ export default {
                 name:'DXdao (DXD)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
             {
                 symbol: 'WOO',
@@ -304,6 +338,7 @@ export default {
                 name:'Wootrade Network (WOO)',
                 address: '',
                 contract: {},
+                decimals: 18,
             },
         ],
         nests: [
@@ -403,12 +438,12 @@ export default {
             paths: [
                 [0, 1], // FTK1 -> FTK2
             ],
-            sliding: 0.003,
+            slippage: 0.003,
         },
         minter: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc',
         accounts: '',
         assets: [],
-        liquidiy: [],
+        liquidities: [],
         nft_bought: [],
     },
     actions: {
@@ -492,6 +527,7 @@ export default {
                     dispatch('getUniswapFactoryContract');
                     dispatch('getDefenderRouterV1Contract');
                     dispatch('getMyNftAssets', this.state.web3.accounts[0]);
+                    dispatch('getMyTransactions', this.state.web3.accounts[0]);
                     console.log('egg contract', this.state.web3.contracts.token.egg.options.address);
                     console.log('dgg contract', this.state.web3.contracts.token.dgg.options.address);
                     console.log('dfd contract', this.state.web3.contracts.token.dfd.options.address);
@@ -553,15 +589,18 @@ export default {
                 commit('WEB3_CONTRACT_TOKEN_FTK2', contractFtk2);
             } 
         },
-        getTokenContracts({ commit }) {
+        async getTokenContracts({ commit }) {
             if (this.state.web3.web3) {
                 let tokens = this.state.web3.tokens;
-                tokens.forEach((token) => {
+                tokens.forEach(async (token) => {
                     if (token.address.length > 0) {
                         token.contract = new this.state.web3.web3.eth.Contract(
                             abiTokenDefender,
                             token.address,
                         );
+
+                        let decimals = await token.contract.methods.decimals().call();
+                        token.decimals = parseInt(decimals);
                     }
                 });
                 
@@ -619,6 +658,7 @@ export default {
                     abiRouter,
                     this.state.web3.address.router_v1
                 );
+
                 commit('WEB3_CONTRACT_DEFENDER_ROUTER_V1', contractDefenderRouterV1);
             } 
         },
@@ -636,9 +676,96 @@ export default {
                 }
             })
         },
-        addLiquidity({ commit }, data) {
+        async getMyLiquidities({ commit }) {
+            let liquidities = [];
+            let transactions = this.state.baseData.transactions;
+            let contractRouter = this.state.web3.contracts.router_v1;
+            let defaultContractDecimals = this.state.baseData.consts.contract_decimals;
+            let displayDecimals = this.state.baseData.consts.display_decimals;
+            let tokenList = this.state.web3.tokens;
+            let swapPaths = this.state.web3.swap.paths;
+            if (transactions.length > 0 && this.state.web3.contracts) {
+                for (let i = 0; i < transactions.length; i++) {
+                    let transaction = transactions[i];
+                    if (transaction.category == 0) {    // Add Liquidity
+                        let exists = false;
+                        liquidities.forEach((liquidity) => {
+                            if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
+                                liquidity.amountA = (parseFloat(liquidity.amountA) + parseFloat(transaction.data.amountA) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                liquidity.amountB = (parseFloat(liquidity.amountB) + parseFloat(transaction.data.amountB) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                liquidity.liquidity = (parseFloat(liquidity.liquidity) + (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
+                                exists = true;
+                                return;
+                            }
+                        });
+                        if (!exists) {
+                            let tokenA = null;
+                            let tokenB = null;
+                            tokenList.forEach((token) => {
+                                if (transaction.data.tokenA == token.symbol) {
+                                tokenA = token;
+                                }
+                
+                                if (transaction.data.tokenB == token.symbol) {
+                                tokenB = token;
+                                }
+                            })
+                            let newLiquidity = {
+                                tokenA: tokenA,
+                                tokenB: tokenB,
+                                amountA: (transaction.data.amountA / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
+                                amountB: (transaction.data.amountB / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
+                                liquidity: (transaction.data.amountPair / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
+                                supplies: 0,
+                                priceAB: 0,
+                                priceBA: 0,
+                            };
+                            console.log('newLiquidity', newLiquidity);
+                            liquidities.push(newLiquidity);
+                        }
+                    }
 
-        }
+                    for (let i = 0; i < transactions.length; i++) {
+                        let transaction = transactions[i];
+                        if (transaction.category == 1) {   // Remove liquidity
+                            liquidities.forEach((liquidity) => {
+                                if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
+                                    liquidity.amountA = (parseFloat(liquidity.amountA) - parseFloat(transaction.data.amountA) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                    liquidity.amountB = (parseFloat(liquidity.amountB) - parseFloat(transaction.data.amountB) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                    liquidity.liquidity = (parseFloat(liquidity.liquidity) - (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
+                                    return;
+                                }
+                            });
+                        }
+                    }
+                }
+
+                // Prepare swap paths
+                for (let i = 0; i < liquidities.length; i++) {
+                    
+                    let supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenA.address, liquidities[i].tokenB.address).call();
+                    if (supplies == 0) {
+                    supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenB.address, liquidities[i].tokenA.address).call();
+                    }
+        
+                    liquidities[i].supplies = (supplies / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+
+
+                    let liquidity = liquidities[i];
+                    // console.log('liquidity', liquidity);
+                    let amountA = Math.floor(liquidity.amountA);
+                    let amountsOut = await contractRouter.methods.getAmountsOut(amountA, [liquidity.tokenA.address, liquidity.tokenB.address]).call();
+                    let priceAB = (amountsOut[amountsOut.length - 1] * 1.0 / amountsOut[0]);
+                    let priceBA = 1.0 / priceAB;
+                    liquidities[i].priceAB = priceAB.toFixed(displayDecimals);
+                    liquidities[i].priceBA = priceBA.toFixed(displayDecimals);
+                }
+    
+                commit('GET_LIQUIDITIES', liquidities);
+            }
+    
+            console.log('liquidities', liquidities);
+        },
     },
     mutations: {
         [WEB3](state, result) {
@@ -693,5 +820,8 @@ export default {
         [NFT_BOUGHT](state, result) {
             state.nft_bought = result;
         },
+        [GET_LIQUIDITIES](state, result) {
+            state.liquidities = result;
+        }
     }
 }

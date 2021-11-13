@@ -1,13 +1,14 @@
 import axios from 'axios';
 import myStorage from './myStorage';
+import state from './state';
 
 const NFTS_ALL = 'NFTS_ALL';
 const NFTS_BY_NAME = 'NFTS_BY_NAME';
 const NFTS_BY_ID = 'NFTS_BY_ID';
 const NFT_ASSET_BY_OWNER = 'NFT_ASSET_BY_OWNER';
 const NFT_ASSETS_LOADED = 'NFT_ASSETS_LOADED';
-
 const CONFIG = 'CONFIG';
+const MY_TRANSACTIONS = 'MY_TRANSACTIONS';
 
 export default {
     state: {
@@ -17,7 +18,10 @@ export default {
         config: {},
         consts: {
             dgg_price_egg_default: 800,
+            display_decimals: 4,
+            contract_decimals: 18,
         },
+        transactions: [],
     },
     actions: {
         getNftsAll({ commit }) {
@@ -104,6 +108,27 @@ export default {
                 }
             })
         },
+        getMyTransactions({ commit }, owner) {
+            let url = this.state.url.api.base + this.state.url.api.transaction.getByUser;
+            axios({
+                url: url,
+                method: 'get',
+                params: {
+                    owner: owner,
+                }
+            }).then((data) => {
+                if (data.status === 200) {
+                    // console.log('getMyTransactions', data.data);
+                    let transactions = JSON.parse(data.data).data;
+                    
+                    transactions.forEach((transaction) => {
+                        transaction.data = JSON.parse(transaction.detail);
+                    })
+                    console.log('getMyTransactions', transactions);
+                    commit('MY_TRANSACTIONS', transactions);
+                }
+            })
+        },
     },
     mutations: {
         [NFTS_ALL](state, result) {
@@ -126,6 +151,9 @@ export default {
         },
         [NFT_ASSETS_LOADED](state, result) {
             state.assetsLoaded = result;
+        },
+        [MY_TRANSACTIONS](state, result) {
+            state.transactions = result;
         }
     },
 };
