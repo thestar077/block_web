@@ -6,9 +6,11 @@
     </div>
     <div class="sc-fmlJLJ eyMhHH">
      <div class="sc-kEjbxe dnCuQj">
-     <a variant="tertiary" colorkey="textSubtle" id="swap-nav-link" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button" href="/exchange">Swap</a>
-     <a variant="subtle" id="pool-nav-link" type="button" class="sc-dlfnbm kjBbpq" href="/liquidity">Liquidity</a>
-      <!--  <a id="pool-nav-link" href="https://www.binance.org/en/panama" target="_blank" rel="noreferrer noopener" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button">Bridge</a> -->
+        <router-link to="/exchange" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB">Swap</router-link>
+        <router-link to="/liquidity" class="sc-dlfnbm kjBbpq ">Liquidity</router-link>
+        <!-- <a variant="tertiary" colorkey="textSubtle" id="swap-nav-link" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button" href="/exchange">Swap</a>
+        <a variant="subtle" id="pool-nav-link" type="button" class="sc-dlfnbm kjBbpq" href="/liquidity">Liquidity</a>
+        <a id="pool-nav-link" href="https://www.binance.org/en/panama" target="_blank" rel="noreferrer noopener" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button">Bridge</a> -->
      </div>
     </div>
     <!-- first -->
@@ -123,10 +125,7 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" 
-          autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
-          spellcheck="false" value="" v-model="amountA" @blur="handleAmountChange(1)"/> -->
-         <el-input-number v-model="amountA" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
+         <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountA" @blur="handleAmountChange(1)"/>
          <div class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
           <span class="mr20" @click="handleMax(1)">MAX</span>
           <img v-if="tokenA.pic" :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
@@ -152,8 +151,7 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" @blur="handleAmountChange(2)" /> -->
-         <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
+         <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountB" @blur="handleAmountChange(2)" />
          <button class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
            <span class="mr20" @click="handleMax(2)">MAX</span>
            <img v-if="tokenB.pic" :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
@@ -278,9 +276,9 @@
         <el-input class="percentInput" v-model="formData.minutes" placeholder=""></el-input>Minutes
       </el-col>
     </el-row>
-    <!--< span slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisibleSetting = false">取 消</el-button>
-      <el-button type="primary" @click="dialogVisibleSetting = false">确 定</el-button>
+    <!-- <span slot="footer" class="dialog-footer">
+      <el-button class="closeBtn center block" @click="dialogVisibleSetting = false">Close</el-button>
+      <el-button class="closeBtn center block bgActive" @click="handleConfirm">Confirm</el-button>
     </span> -->
   </el-dialog>
    <!-- Recent Transactions -->
@@ -381,8 +379,8 @@
         tokenBNeedsApprove:false,
         // tokenA: this.$store.state.web3.tokens[0],
         // tokenB: this.$store.state.web3.tokens[0],
-        amountA: 0,
-        amountB: 0,
+        amountA: '',
+        amountB: '',
         amountAMax: 0,
         amountBMax: 0,
         dialogVisibleSetting:false,
@@ -450,7 +448,13 @@
       },
       'amountB': function(val){
         this.amountB = val.replace(/\D/g, '')
-      }
+      },
+      'formData.percent':function(val){
+        if(Number(val) >= 100) {
+          val = 100
+        }
+        this.formData.percent = String(val).replace(/\D/g, '')
+      },
     },
     methods: {
       handleWallet(){
@@ -717,6 +721,9 @@
       handleRemove(){
         this.$router.push({path: "/removeLiquity"});
       },
+      handleConfirm() {   // 处理设置
+
+      }
     }
   };
 </script>
@@ -948,6 +955,15 @@
   background: #E9EAEB !important;
   color: #C0C4C6 !important;
   margin-top: 20px;
+}
+.dialog-footer{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.bgActive{
+  background: #A29181 !important;
+  color: #fff !important;
 }
 .xiYlH {
     -webkit-box-align: center;

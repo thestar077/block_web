@@ -65,7 +65,7 @@
           <div class="sc-eCssSg cIpmpl">
             <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
             <div class="sc-gInsOo grsaJH">
-              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest</button></div>
+              <button disabled="" type="button" class="sc-dlfnbm IcZWJ">Harvest all</button></div>
           </div>
           <div class="sc-eCssSg gqHjnk">
             <div color="secondary" font-size="12px" class="sc-gsTCUz dXVGhj">{{item.name}}</div>
@@ -73,19 +73,21 @@
           <div class="sc-eCssSg cIpmpl" v-if="item.approved">
             <div class="sc-gInsOo grsaJH stakeBox" v-if="Number(item.num) > 0">
               <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">{{item.num}}</h2>
+              <!-- 增加/减少 -->
               <div class="addRemoveBox">
-                <button  @click="handleRemove" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-minus"></button>
-                <button  @click="handleAdd" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-plus"></button>
+                <button  @click="handleChange(item)" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-minus"></button>
+                <button  @click="handleChange(item)" type="button" class="sc-dlfnbm IcZWJ bgActive el-icon-plus"></button>
               </div>
                 
               <!-- <el-input-number v-model="item.num" @change="handleChange" :min="1" :max="10" label=""></el-input-number> -->
             </div>
             <div class="sc-gInsOo grsaJH stakeBox" v-else>
                 <h2 color="textDisabled" class="sc-gsTCUz sc-idOhPF dcRjaX lnUPhx">0</h2>
-                <button  @click="handleDeposite(item)" type="button" class="sc-dlfnbm IcZWJ bgActive">Stake</button>
+                <button  @click="handleChange(item)" type="button" class="sc-dlfnbm IcZWJ bgActive">Stake</button>
               </div>
           </div>
-           <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
+           <button v-if="accounts == null || accounts == undefined || accounts.length == 0"  type="button" 
+            @click="dialogVisibleWallet = true" class="sc-dlfnbm hlRgJI">Unlock Wallet</button>
            <!-- v-else -->
           <!-- <button type="button" class="sc-dlfnbm hlRgJI">Deposit</button> -->
         </div>
@@ -124,48 +126,29 @@
   </div>
   <div width="100%" class="sc-dIUggk hULlXf" v-if="!nestArr || nestArr.length == 0">
     <img width="100%" src="@/assets/picture/8.png" alt="illustration" class="sc-hHftDr kCQmsc"></div>
-  <!-- deposite token -->
+  <!-- change token -->
   <el-dialog
-    :title="'Deposite '+tokenItem.name+' token'"
-    :visible.sync="dialogVisibleDeposite" class="depositeVisible"
+    :title="'Change '+info.name+' token'"
+    :visible.sync="dialogVisibleChange" class="depositeVisible"
     append-to-body
+    :close-on-click-modal="false"
     width="40%">
     <p class="p1">
       <span></span>
-      <span>0 {{tokenItem.name}} Availiable</span>
+      <span>0 {{info.name}} Availiable</span>
     </p>
     <p class="p1">
-     <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
-      <span>{{tokenItem.name}}<span class="maxBtn">Max</span></span>
+      <input style="border:none;color:#333;outline:none" v-model="info.num" />
+      <span>{{info.name}}<span class="maxBtn">Max</span></span>
     </p>
-    <p class="p1">
-      <span></span>
-      <span>Deposite Fee:0 {{tokenItem.name}}</span>
-    </p>
-    <span slot="footer" class="dialog-footer">
-      <el-button class="closeBtn center block" @click="dialogVisibleDeposite = false">Close</el-button>
-      <el-button class="closeBtn center block bgActive" @click="handleConfirmDeposite">Confirm</el-button>
-      <el-button class="closeBtn center block pendBtn" @click="dialogVisibleDeposite = false">Pending Confirmation</el-button>
-    </span> 
-  </el-dialog>
-  <!-- remove token -->
-  <el-dialog
-    :title="'Withdraw '+tokenItem.name"
-    :visible.sync="dialogVisibleRemove" class="depositeVisible"
-    append-to-body
-    width="40%">
     <p class="p1">
       <span></span>
-      <span>0.986522222 {{tokenItem.name}}</span>
-    </p>
-    <p class="p1">
-      <span>0</span>
-      <span>{{tokenItem.name}}<span class="maxBtn">Max</span></span>
+      <span>Deposite Fee:0 {{info.name}}</span>
     </p>
     <span slot="footer" class="dialog-footer">
-      <el-button class="closeBtn center block" @click="dialogVisibleDeposite = false">Close</el-button>
-      <el-button class="closeBtn center block bgActive" @click="dialogVisibleRemove = false">Confirm</el-button>
-      <el-button class="closeBtn center block pendBtn">Pending Confirmation</el-button>
+      <el-button class="closeBtn center block" @click="dialogVisibleChange = false">Close</el-button>
+      <el-button class="closeBtn center block bgActive" @click="handleConfirm">Confirm</el-button>
+      <el-button class="closeBtn center block pendBtn" @click="dialogVisibleChange = false">Pending Confirmation</el-button>
     </span> 
   </el-dialog>
   <!-- Connect to a wallet -->
@@ -178,15 +161,12 @@
   export default {
     data() {
       return {
-        dialogVisibleRemove:false,
         dialogVisibleWallet:false,
-        dialogVisibleDeposite:false,
-        tokenItem:{},
-        isDeposite:false,
+        dialogVisibleChange:false,
+        info:{},
         actIndex:0,
         amountB:0,
         isStaked:false,
-        info:{},
         actList:[
           {
             name:'Active',
@@ -224,6 +204,12 @@
           return this.$store.state.web3.nests;
         },
     },
+    watch: {
+      'info.num': function(val){
+        console.log(val)
+        this.info.num = val.replace(/\D/g, '')
+      }
+    },
     methods: {
       handleActive(index){
         this.actIndex = index;
@@ -259,19 +245,13 @@
 
         // this.needsApprove = false;
       },
-      handleDeposite(item){
-        this.tokenItem = item;
-        this.dialogVisibleDeposite = true;
+      handleConfirm(){
+        this.dialogVisibleChange = false;
       },
-      handleConfirmDeposite(){
-        this.dialogVisibleDeposite = false;
-        this.isDeposite = true;
-      },
-      handleAdd(){
-        this.dialogVisibleDeposite = true;
-      },
-      handleRemove(){
-       this.dialogVisibleRemove = true;
+      handleChange(info){
+        console.log(info)
+        this.info = JSON.parse(JSON.stringify(info))
+        this.dialogVisibleChange = true;
       },
       preparePoolTest(poolIdx) {
         this.poolSelected = poolIdx;
@@ -966,6 +946,13 @@
     margin: 0px 8px 32px;
 }
 @media(max-width:641px) {
+  .ejJoEn{
+    justify-content: flex-start;
+    padding:0 20px;
+  }
+  #eggNestsPage .ejJoEn > * {
+    min-width:100%;
+  }
   .depositeVisible /deep/ .el-dialog {
     width:80%!important;
   }

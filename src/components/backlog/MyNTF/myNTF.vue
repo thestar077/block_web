@@ -378,7 +378,7 @@
     padding:22px 168px 0 168px;
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: calc(100% - 16px);
+    height:100%;
     background-image: url('~@/assets/picture/tradeBg.jpg');
     .pcShow,.phoneShow{
     }
@@ -427,7 +427,7 @@
       display: flex;
       justify-content:space-between;
       align-items:center;
-      margin:40px auto 27px auto;
+      padding:40px 0 27px;
       .active{
         background: #A39282;
         color: #fff;
