@@ -1134,5 +1134,31 @@ of the gods". </p>
         width:auto!important;
       }
     }
+    .content.pt40{
+      padding:40px 20px 0!important ;
+    }
+    .buyBtnBox{
+      margin-left:30px;
+    }
+    .el-table{
+      width:100%!important;
+    }
+    .myNtfPage .detailBox .detailTitle .txt{
+      margin-right:0;
+      word-break:break-all;
+    }
+    .myNtfPage .el-tabs{
+      padding:20px;
+    }
+    .myNtfPage .detailBox .detailTitle span{
+      margin-right:0;
+    }
+    .blindBox .box{
+      margin:0!important;
+    }
+    .blindBox .box img{
+      width:80%!important;
+      padding:20px;
+    }
   }
 </style>

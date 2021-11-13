@@ -6,9 +6,11 @@
    </div>
    <div class="sc-fmlJLJ eyMhHH">
     <div class="sc-kEjbxe dnCuQj">
-     <a variant="subtle" id="swap-nav-link" type="button" class="sc-dlfnbm kjBbpq" href="/exchange">Swap</a>
+      <router-link to="/exchange" class="sc-dlfnbm kjBbpq">Swap</router-link>
+      <router-link to="/liquidity" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB">Liquidity</router-link>
+     <!-- <a variant="subtle" id="swap-nav-link" type="button" class="sc-dlfnbm kjBbpq" href="/exchange">Swap</a>
      <a variant="tertiary" colorkey="textSubtle" id="pool-nav-link" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button" href="/liquidity">Liquidity</a>
-    <!--  <a id="pool-nav-link" href="https://www.binance.org/en/panama" target="_blank" rel="noreferrer noopener" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button">Bridge</a> -->
+     <a id="pool-nav-link" href="https://www.binance.org/en/panama" target="_blank" rel="noreferrer noopener" class="sc-dlfnbm xiYlH sc-iqHYGH cxRybB" type="button">Bridge</a> -->
     </div>
    </div>
    <div class="sc-crrsfI eHffeS sc-gYhigD gdlclw">
@@ -41,10 +43,7 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <!-- <input class="sc-fybufo dHAxfv token-amount-input" v-model="amountA" inputmode="decimal" title="Token Amount" 
-            autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
-            spellcheck="false" value="" @blur="handleTokenChange(false)"/> -->
-            <el-input-number v-model="amountA" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
+          <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountA"  @blur="handleTokenChange(false)"/>
           <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
              {{tokenA.name}}
@@ -58,6 +57,7 @@
        <div class="sc-aemoO WypEE">
         <div class="sc-dacFzL sc-jQbIHB sc-GTWni eJEsCB fLfbpJ ILfeX" style="padding: 0px 20px;">
          <div class="sc-bSFVuW jyABpM" @click="changeBi">
+           <!-- 交换按钮 -->
           <button class="sc-dlfnbm xiYlH sc-hKgILt fwjcqd" type="button" style="border-radius: 50%;">
            <svg style="margin-top: -5px;
     height: 20px;" viewbox="0 0 24 25" color="primary" width="24px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ dRSIFi">
@@ -74,10 +74,7 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" v-model="amountB" title="Token Amount" 
-            autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
-            spellcheck="false" value="" @blur="handleTokenChange(false)" /> -->
-          <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
+          <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountB"  @blur="handleTokenChange(false)" />
            <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
             <div color="text" class="sc-gsTCUz UNrzd">
              {{tokenB.name}}
@@ -148,9 +145,9 @@
         <el-input class="percentInput" v-model="formData.deadline" placeholder=""></el-input>Minutes
       </el-col>
     </el-row>
-    <!--< span slot="footer" class="dialog-footer">
-      <el-button @click="dialogVisibleSetting = false">取 消</el-button>
-      <el-button type="primary" @click="dialogVisibleSetting = false">确 定</el-button>
+    <!-- <span slot="footer" class="dialog-footer">
+      <el-button class="closeBtn center block" @click="dialogVisibleSetting = false">Close</el-button>
+      <el-button class="closeBtn center block bgActive" @click="handleConfirm">Confirm</el-button>
     </span> -->
   </el-dialog>
    <!-- Recent Transactions -->
@@ -302,8 +299,8 @@
         },
         tokenA: this.$store.state.web3.tokens[0],
         tokenB: this.$store.state.web3.tokens[1],
-        amountA: 0,
-        amountB: 0,
+        amountA: '',
+        amountB: '',
         tokenAIndex: 0,
         tokenBIndex: 1,
         tokenPathSelected: [],
@@ -321,16 +318,7 @@
       };
     },
     async created() {
-      this.amountA = 0;
-      this.amountB = 0;
-    },
-    watch: {
-      'amountA': function(val){
-        this.amountA = val.replace(/\D/g, '')
-      },
-      'amountB': function(val){
-        this.amountB = val.replace(/\D/g, '')
-      }
+ 
     },
     computed: {
         web3() {
@@ -367,6 +355,18 @@
         },
     },
     watch: {
+      'amountA': function(newVal) {
+        this.amountA = newVal.replace(/\D/g, '')
+      },
+      'amountB': function(newVal) {
+        this.amountB = newVal.replace(/\D/g, '')
+      },
+      'formData.percent':function(val){
+        if(Number(val) >= 100) {
+          val = 100
+        }
+        this.formData.percent = String(val).replace(/\D/g, '')
+      },
       tokenAIndex: async function(val) {
         await this.handleTokenChange(true);
         
@@ -585,6 +585,9 @@
         } else {
           alert("Please specify the amounts to swap.");
         }
+      },
+      handleConfirm() {  // 处理设置
+
       }
     }
   };
@@ -1030,6 +1033,10 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     height: 100%;
+    svg{
+      margin:0!important;
+      height:40px;
+    }
 }
 .kUFaZj {
     width: 24px;
@@ -1115,6 +1122,15 @@
     outline: 0px;
     padding: 0px 24px;
     transition: background-color 0.2s ease 0s;
+}
+.dialog-footer{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.bgActive{
+  background: #A29181 !important;
+  color: #fff !important;
 }
 .ILfeX {
     flex-wrap: wrap;

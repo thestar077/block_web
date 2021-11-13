@@ -357,7 +357,7 @@ export default {
             },
             {
                 name:'EGG',
-                num:20,
+                num:0,
                 stake:'EGG',
                 deposit:'EGG',
                 pic:require('@/assets/picture/egg/2.jpg'),
@@ -370,7 +370,7 @@ export default {
             },
             {
             name:'ETH',
-                num:2,
+                num:20,
                 stake:'ETH',
                 deposit:'ETH',
                 pic:require('@/assets/picture/egg/3.jpg'),
@@ -396,7 +396,7 @@ export default {
             },
             {
                 name:'ETH-USDC LP',
-                num:'60',
+                num:'50',
                 stake:'ETH-USDC LP',
                 deposit:'ETH-USDC LP',
                 pic:require('@/assets/picture/egg/5.jpg'),
@@ -409,7 +409,7 @@ export default {
             },
             {
                 name:'ETH-DFD LP',
-                num:'60',
+                num:'25',
                 stake:'ETH-DFD LP',
                 deposit:'ETH-DFD LP',
                 pic:require('@/assets/picture/egg/6.jpg'),
@@ -422,7 +422,7 @@ export default {
             },
             {
                 name:'ETH-EGG LP',
-                num:'60',
+                num:'10',
                 stake:'ETH-EGG LP',
                 deposit:'ETH-EGG LP',
                 pic:require('@/assets/picture/egg/7.jpg'),

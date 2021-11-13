@@ -210,20 +210,20 @@ export default {
   // 渲染前获取数据
   mounted() {
     this.path = this.$route.path;
-    const that = this
+    this.handleResize()
     window.onresize = () => {
-        return (() => {
-            window.screenWidth = document.body.clientWidth;
-            that.screenWidth = window.screenWidth;
-            if(that.screenWidth>852){
-              that.isCollapse = false;
-            }else{
-              that.isCollapse = true;
-            }
-        })()
+      this.handleResize()
     }
   },
   methods: {
+    handleResize() {
+      this.screenWidth = window.screen.width
+      if(this.screenWidth>641){
+        this.isCollapse = false;
+      }else{
+        this.isCollapse = true;
+      }
+    },
     // 切换语言
     changeLangage(lang) {
       this.lang = lang;

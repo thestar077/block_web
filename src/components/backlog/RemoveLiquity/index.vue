@@ -8,7 +8,7 @@
       <div class="box1">
         <div class="headerTxt">
           <span>Amount</span>
-          <span>Detailed</span>
+          <!-- <span>Detailed</span> -->
         </div>
         <p class="p1">{{percentage}} %</p>
         <el-slider v-model="percentage"></el-slider>
