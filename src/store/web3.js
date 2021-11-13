@@ -41,15 +41,15 @@ export default {
                 dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0x12FAa8F16e4EB106D2b8d63Ad91ECd152e093812',
-                ftk1: '0xAB96cf1eD96eDdBaa9Ea3812b58b44336826bbeB',
-                ftk2: '0x229bDE80F288C3a12a15e639238c359482636397',
+                weth: '0x10C246E3B657A9b091C0D20454F76506e23f4F87',
+                ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
             pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0x654Ca1BBb6057714A2efda8834E504c65e9812f7',
-            router_v1: '0x05183B86125C3D4BE96E5C702cc333a2f4b67B2E',
+            uniswap_factory: '0xE96A4C13834A13Dd08071c7a15Cd70f9c342ace6',
+            router_v1: '0x9085E0b5b53AE53535E62efc0e91F9A96333225B',
         },
         contracts: {
             token: {
@@ -72,7 +72,7 @@ export default {
                 symbol: 'FTK1',
                 pic:require('@/assets/picture/bi/32.png'),
                 name: 'Fake Token 1',
-                address: '0xAB96cf1eD96eDdBaa9Ea3812b58b44336826bbeB',
+                address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
                 contract: {},
                 decimals: 18,
             },
@@ -80,7 +80,7 @@ export default {
                 symbol: 'FTK2',
                 pic:require('@/assets/picture/bi/31.png'),
                 name: 'Fake Token 2',
-                address: '0x229bDE80F288C3a12a15e639238c359482636397',
+                address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
                 contract: {},
                 decimals: 18,
             },
@@ -683,56 +683,89 @@ export default {
             let defaultContractDecimals = this.state.baseData.consts.contract_decimals;
             let displayDecimals = this.state.baseData.consts.display_decimals;
             let tokenList = this.state.web3.tokens;
+            let swapPaths = this.state.web3.swap.paths;
             if (transactions.length > 0 && this.state.web3.contracts) {
-              for (let i = 0; i < transactions.length; i++) {
-                let transaction = transactions[i];
-                let exists = false;
-                liquidities.forEach((liquidity) => {
-                  if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
-                    liquidity.amountA = (parseFloat(liquidity.amountA) + parseFloat(transaction.data.amountA)).toFixed(displayDecimals);
-                    liquidity.amountB = (parseFloat(liquidity.amountB) + parseFloat(transaction.data.amountB)).toFixed(displayDecimals);
-                    liquidity.liquidity = (parseFloat(liquidity.liquidity) + (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
-                    exists = true;
-                    return;
-                  }
-                });
-                if (!exists) {
-                  let tokenA = null;
-                  let tokenB = null;
-                  tokenList.forEach((token) => {
-                    if (transaction.data.tokenA == token.symbol) {
-                      tokenA = token;
+                for (let i = 0; i < transactions.length; i++) {
+                    let transaction = transactions[i];
+                    if (transaction.category == 0) {    // Add Liquidity
+                        let exists = false;
+                        liquidities.forEach((liquidity) => {
+                            if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
+                                liquidity.amountA = (parseFloat(liquidity.amountA) + parseFloat(transaction.data.amountA) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                liquidity.amountB = (parseFloat(liquidity.amountB) + parseFloat(transaction.data.amountB) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                liquidity.liquidity = (parseFloat(liquidity.liquidity) + (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
+                                exists = true;
+                                return;
+                            }
+                        });
+                        if (!exists) {
+                            let tokenA = null;
+                            let tokenB = null;
+                            tokenList.forEach((token) => {
+                                if (transaction.data.tokenA == token.symbol) {
+                                tokenA = token;
+                                }
+                
+                                if (transaction.data.tokenB == token.symbol) {
+                                tokenB = token;
+                                }
+                            })
+                            let newLiquidity = {
+                                tokenA: tokenA,
+                                tokenB: tokenB,
+                                amountA: (transaction.data.amountA / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
+                                amountB: (transaction.data.amountB / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
+                                liquidity: (transaction.data.amountPair / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
+                                supplies: 0,
+                                priceAB: 0,
+                                priceBA: 0,
+                            };
+                            console.log('newLiquidity', newLiquidity);
+                            liquidities.push(newLiquidity);
+                        }
                     }
-    
-                    if (transaction.data.tokenB == token.symbol) {
-                      tokenB = token;
+
+                    for (let i = 0; i < transactions.length; i++) {
+                        let transaction = transactions[i];
+                        if (transaction.category == 1) {   // Remove liquidity
+                            liquidities.forEach((liquidity) => {
+                                if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
+                                    liquidity.amountA = (parseFloat(liquidity.amountA) - parseFloat(transaction.data.amountA) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                    liquidity.amountB = (parseFloat(liquidity.amountB) - parseFloat(transaction.data.amountB) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                    liquidity.liquidity = (parseFloat(liquidity.liquidity) - (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
+                                    return;
+                                }
+                            });
+                        }
                     }
-                  })
-                  liquidities.push({
-                    tokenA: tokenA,
-                    tokenB: tokenB,
-                    amountA: transaction.data.amountA,
-                    amountB: transaction.data.amountB,
-                    liquidity: (transaction.data.amountPair / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals),
-                    supplies: 0,
-                  })
                 }
-              }
-    
-              for (let i = 0; i < liquidities.length; i++) {
-                let supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenA.address, liquidities[i].tokenB.address).call();
-                if (supplies == 0) {
-                  supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenB.address, liquidities[i].tokenA.address).call();
+
+                // Prepare swap paths
+                for (let i = 0; i < liquidities.length; i++) {
+                    
+                    let supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenA.address, liquidities[i].tokenB.address).call();
+                    if (supplies == 0) {
+                    supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenB.address, liquidities[i].tokenA.address).call();
+                    }
+        
+                    liquidities[i].supplies = (supplies / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+
+
+                    let liquidity = liquidities[i];
+                    // console.log('liquidity', liquidity);
+                    let amountA = Math.floor(liquidity.amountA);
+                    let amountsOut = await contractRouter.methods.getAmountsOut(amountA, [liquidity.tokenA.address, liquidity.tokenB.address]).call();
+                    let priceAB = (amountsOut[amountsOut.length - 1] * 1.0 / amountsOut[0]);
+                    let priceBA = 1.0 / priceAB;
+                    liquidities[i].priceAB = priceAB.toFixed(displayDecimals);
+                    liquidities[i].priceBA = priceBA.toFixed(displayDecimals);
                 }
     
-                liquidities[i].supplies = (supplies / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
-              }
-    
-              commit('GET_LIQUIDITIES', liquidities);
+                commit('GET_LIQUIDITIES', liquidities);
             }
     
             console.log('liquidities', liquidities);
-          },
+        },
     },
     mutations: {
         [WEB3](state, result) {

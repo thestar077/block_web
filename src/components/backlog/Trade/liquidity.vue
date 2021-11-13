@@ -123,10 +123,10 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" 
+         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" 
           autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" 
-          spellcheck="false" value="" v-model="amountA" @blur="handleAmountChange(1)"/> -->
-         <el-input-number v-model="amountA" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
+          spellcheck="false" value="" v-model="amountA" @blur="handleAmountChange(1)"/>
+         <!-- <el-input-number v-model="amountA" :controls="false" @blur="handleTokenChange(false)" :min="0"></el-input-number> -->
          <div class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
           <span class="mr20" @click="handleMax(1)">MAX</span>
           <img v-if="tokenA.pic" :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
@@ -152,8 +152,8 @@
          </div>
         </div>
         <div class="sc-iWFSnp bHLdTZ">
-         <!-- <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" @blur="handleAmountChange(2)" /> -->
-         <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="1" :max="100"></el-input-number>
+         <input class="sc-fybufo dHAxfv token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" v-model="amountB" @blur="handleAmountChange(2)" />
+         <!-- <el-input-number v-model="amountB" :controls="false" @blur="handleTokenChange(false)" :min="0"></el-input-number> -->
          <button class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
            <span class="mr20" @click="handleMax(2)">MAX</span>
            <img v-if="tokenB.pic" :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
@@ -344,6 +344,7 @@
 <script>
   import qs from 'qs';
   import axios from 'axios';
+  import {toFixed} from '../../../utils/math.js';
   import abiTokenDefender from '../../../assets/abi/DefenderToken.json'
   export default {
     data() {
@@ -475,9 +476,11 @@
         }
       },
       'amountA': function(val){
+        val = val + '';
         this.amountA = val.replace(/\D/g, '')
       },
       'amountB': function(val){
+        val = val + '';
         this.amountB = val.replace(/\D/g, '')
       }
     },
@@ -714,6 +717,7 @@
         console.log('this.tokenPathSelected', this.tokenPathSelected);
       },
       async handleTokenChange(item, index){
+        console.log(`AAA this.tokenIndex = ${this.tokenIndex}, index = ${index}`);
         if (this.tokenIndex== 1 && index === this.tokenBIndex || this.tokenIndex == 2 && index === this.tokenAIndex) {
           alert("Tokens cannot be the same. Please try again.")
           return;
@@ -721,6 +725,7 @@
         await this.getTokenBalance(item);
         await this.getTokenAllowance(item);
 
+        console.log('BBB')
         if(this.tokenIndex== 1){
           this.tokenA = item;
           this.tokenAIndex = index;
@@ -761,10 +766,12 @@
           let balance = await contract.methods.balanceOf(this.user).call();
           if (this.tokenIndex == 1) {
             this.tokenABalance = Math.floor(balance / Math.pow(10, item.decimals));
+            console.log(`TokenA balance = ${this.tokenABalance}`);
           } else {
             this.tokenBBalance = Math.floor(balance / Math.pow(10, item.decimals));
+            console.log(`TokenB balance = ${this.tokenBBalance}`);
           }
-          console.log(`balance = ${balance / Math.pow(10, item.decimals)}`);
+          
         } else {
           alert("The currently selected token is not supported.");
         }
@@ -811,7 +818,10 @@
           let deadline = timeNow + expiry;
 
           console.log(`this.tokenA.address = ${this.tokenA.address}, this.tokenB.address = ${this.tokenB.address}, user = ${this.user}, deadline = ${deadline}`);
-          await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, this.amountA, this.amountB, 0, 0, this.user, deadline).send({from: this.user});
+          let amountA = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
+          let amountB = toFixed(this.amountB * Math.pow(10, this.tokenA.decimals)) + '';
+          console.log(`amountA = ${amountA}, amountB = ${amountB}`);
+          await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
 
           console.log('addLiquidity succeed.')
           setTimeout(() => {
@@ -856,8 +866,8 @@
                             let blockNumber = evt.blockNumber;
                             let url = this.$store.state.url.api.base + this.$store.state.url.api.transaction.addTransaction;
                             let body = {
-                              tokenA: this.tokenA.symbol,
-                              tokenB: this.tokenB.symbol,
+                              tokenA: tokenA,
+                              tokenB: tokenB,
                               amountA: amountA,
                               amountB: amountB,
                               amountPair: liquidity,
@@ -872,6 +882,71 @@
                                 data: {
                                   owner: this.user,
                                   category: 0,   // Add Liquidity
+                                  transactionHash: transactionHash,
+                                  blockHash: blockHash,
+                                  blockNumber: blockNumber,
+                                  value: JSON.stringify(body)
+                                }
+                            }).then((res) => {
+                                let result = JSON.parse(res.data);
+                                if (result.status == 'success') {
+                                  
+                                    this.$store.dispatch('getMyTransactions', this.user);
+                                }
+                                
+                                this.dialogVisibleConfirmationWaiting = false;
+                            }, (err) => {
+                                console.log('error', err);
+                                this.dialogVisibleConfirmationWaiting = false;
+                            })
+                        }
+                      })
+                    .on('changed', changed => console.log('Liquidity changed', changed))
+                    .on('error', err => {throw err})
+                    .on('connected', str => console.log('Liquidity connected', str));
+
+                  contract.events.RemoveLiquidity(options)
+                    .on('data', evt => {
+                        let data = evt.returnValues;
+                        console.log('************* RemoveLiquidity data', data)
+                        if (data.sender == this.user) {
+                            let addrA = data.tokenA;
+                            let addrB = data.tokenB;
+                            let tokenA = '';
+                            let tokenB = '';
+                            this.tokenList.forEach((token) => {
+                              if (token.address == addrA) {
+                                tokenA = token.symbol;
+                              }
+
+                              if (token.address == addrB) {
+                                tokenB = token.symbol;
+                              }
+                            })
+                            let amountA = data.amountA;
+                            let amountB = data.amountB;
+                            let liquidity = data.liquidity;
+                            let transactionHash = evt.transactionHash;
+                            let blockHash = evt.blockHash;
+                            let blockNumber = evt.blockNumber;
+                            let url = this.$store.state.url.api.base + this.$store.state.url.api.transaction.addTransaction;
+                            let body = {
+                              tokenA: tokenA,
+                              tokenB: tokenB,
+                              amountA: amountA,
+                              amountB: amountB,
+                              amountPair: liquidity,
+                              rateAB: amountB / amountA,
+                              rateBA: amountA / amountB,
+                            };
+                            console.log('body', body);
+      
+                            axios({
+                                url: url,
+                                method: 'post',
+                                data: {
+                                  owner: this.user,
+                                  category: 1,   // Remove Liquidity
                                   transactionHash: transactionHash,
                                   blockHash: blockHash,
                                   blockNumber: blockNumber,
@@ -894,6 +969,7 @@
                     .on('changed', changed => console.log('Liquidity changed', changed))
                     .on('error', err => {throw err})
                     .on('connected', str => console.log('Liquidity connected', str))
+            
             });
       },
       changeBi(){
