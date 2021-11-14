@@ -73,7 +73,7 @@
               </p>
                <p class="swapTxt">
                 <span>Your pool share:</span>
-                <span>{{(item.supplies == 0) ? '100' : (item.liquidity / item.supplies * 100)}}%</span>
+                <span>{{(item.supplies == 0) ? '100' : Math.floor((item.liquidity / item.supplies * 100))}}%</span>
               </p>
               <div class="sc-edoZmE hyACfo handleBtn">
                 <button type="button" @click="handleAdd2(item, index)" class="sc-dlfnbm btoybd">Add</button>

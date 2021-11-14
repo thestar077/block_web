@@ -197,8 +197,8 @@
       liquiditySelected() {
         return (this.$store.state.web3.liquidities.length > 0) ? this.$store.state.web3.liquidities[this.$route.params.liquidity] : null;
       },
-      expiry() {
-        return this.$store.state.baseData.config.deadline;
+      deadline() {
+        return this.$store.state.baseData.userConfig.deadline;
       }
     },
     watch: {
@@ -269,10 +269,11 @@
         
         let timeNow = Math.floor(Date.now() / 1000);
         // let expiry = 10 * 60;  // 10 mins
-        let deadline = timeNow + this.expiry;
+        let deadline = timeNow + this.deadline;
 
         let liquidityRemoving = parseFloat(this.liquidityRemoving) * 10 ** this.displayDecimals + '00000000000000';
         console.log('liquidityRemoving', liquidityRemoving);
+
 
         await this.contractRouter.methods.removeLiquidity(this.liquiditySelected.tokenA.address, this.liquiditySelected.tokenB.address, liquidityRemoving, 0, 0, this.user, deadline).send({from: this.user});
 

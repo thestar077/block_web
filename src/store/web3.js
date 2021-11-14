@@ -41,15 +41,15 @@ export default {
                 dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0x10C246E3B657A9b091C0D20454F76506e23f4F87',
+                weth: '0x58Aae248b0D85404E7eE33341b97Cab51A35F3dd',
                 ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
                 ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
             pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0xE96A4C13834A13Dd08071c7a15Cd70f9c342ace6',
-            router_v1: '0x9085E0b5b53AE53535E62efc0e91F9A96333225B',
+            uniswap_factory: '0x8ADf189dB7478aB8ab764A651567aA41E7C6e0da',
+            router_v1: '0x68888D1c58760D0f1921Fc45cd4b6f63e6d4eeFA',
         },
         contracts: {
             token: {
@@ -723,19 +723,20 @@ export default {
                             liquidities.push(newLiquidity);
                         }
                     }
+                }
 
-                    for (let i = 0; i < transactions.length; i++) {
-                        let transaction = transactions[i];
-                        if (transaction.category == 1) {   // Remove liquidity
-                            liquidities.forEach((liquidity) => {
-                                if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
-                                    liquidity.amountA = (parseFloat(liquidity.amountA) - parseFloat(transaction.data.amountA) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
-                                    liquidity.amountB = (parseFloat(liquidity.amountB) - parseFloat(transaction.data.amountB) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
-                                    liquidity.liquidity = (parseFloat(liquidity.liquidity) - (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
-                                    return;
-                                }
-                            });
-                        }
+                console.log('AAAAAAAAAAAAAA liquidity', liquidities);
+                for (let i = 0; i < transactions.length; i++) {
+                    let transaction = transactions[i];
+                    if (transaction.category == 1) {   // Remove liquidity
+                        liquidities.forEach((liquidity) => {
+                            if (liquidity.tokenA.symbol === transaction.data.tokenA && liquidity.tokenB.symbol === transaction.data.tokenB) {
+                                liquidity.amountA = (parseFloat(liquidity.amountA) - parseFloat(transaction.data.amountA) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                liquidity.amountB = (parseFloat(liquidity.amountB) - parseFloat(transaction.data.amountB) / Math.pow(10, defaultContractDecimals)).toFixed(displayDecimals);
+                                liquidity.liquidity = (parseFloat(liquidity.liquidity) - (transaction.data.amountPair / Math.pow(10, defaultContractDecimals))).toFixed(displayDecimals);
+                                return;
+                            }
+                        });
                     }
                 }
 
