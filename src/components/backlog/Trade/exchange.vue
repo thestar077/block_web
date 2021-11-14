@@ -126,11 +126,11 @@
       <el-row>
         <el-col :span="12">
           <!-- <el-row :gutter="20"> -->
-            <span :class="toleranceIndex == index?'toleranceIcon active':'toleranceIcon'" v-for="(item,index) in toleranceList" :key="index" @click="updateSlippage(item,index)">{{item.name}}%</span>
+            <span :class="toleranceIndex == index?'toleranceIcon active':'toleranceIcon'" v-for="(item,index) in toleranceList" :key="index" @click="updateSlippage(index)">{{item.name}}%</span>
           <!-- </el-row> -->
         </el-col>
         <el-col :span="12" class="percentBox">
-          <el-input class="percentInput w100" v-model="formData.slippage" placeholder=""></el-input>%
+          <el-input class="percentInput w100" v-model="formData.slippage" @blur="slippageBlurred()" placeholder=""></el-input>%
         </el-col>
       </el-row>
     </div>
@@ -142,7 +142,7 @@
     </h3>
     <el-row>
       <el-col :span="14" class="percentBox">
-        <el-input class="percentInput" v-model="formData.deadline" placeholder=""></el-input>Minutes
+        <el-input class="percentInput" v-model="formData.deadline" @blur="deadlineBlurred()" placeholder=""></el-input>Minutes
       </el-col>
     </el-row>
     <!-- <span slot="footer" class="dialog-footer">
@@ -317,8 +317,7 @@
         }
       };
     },
-    async created() {
- 
+    created() {
     },
     computed: {
         web3() {
@@ -351,7 +350,10 @@
           return this.$store.state.web3.swap.paths;
         },
         swapSlippage() {
-          return this.$store.state.web3.swap.slippage;
+          return this.$store.state.baseData.userConfig.slippage;
+        },
+        deadline() {
+          return this.$store.state.baseData.userConfig.deadline;
         },
     },
     watch: {
@@ -361,12 +363,6 @@
       'amountB': function(newVal) {
         this.amountB = newVal.replace(/\D/g, '')
       },
-      'formData.percent':function(val){
-        if(Number(val) >= 100) {
-          val = 100
-        }
-        this.formData.percent = String(val).replace(/\D/g, '')
-      },
       tokenAIndex: async function(val) {
         await this.handleTokenChange(true);
         
@@ -375,31 +371,45 @@
         await this.handleTokenChange(true);
       },
       'formData.slippage': function(val) {
-        if (val) {
-          console.log('formData.slippage', this.formData.slippage);
-          let slippage = this.formData.slippage / 100.0;
-          myStorage.set('config_slippage', slippage);
-          this.$store.commit('CONFIG_SLIPPAGE', slippage);
-        }
-      },
-      'formData.deadline': function(val) {
-        if (val) {
-          console.log('formData.deadline', this.formData.deadline);
-          let deadline = this.formData.deadline * 60;
-          myStorage.set('config_deadline', deadline);
-          this.$store.commit('CONFIG_DEADLINE', deadline);
-        }
+          if (val) {
+            if(Number(val) >= 100) {
+              val = 100
+            }
+            // this.formData.slippage = String(val).replace(/\D/g, '');
+          }
       },
     },
     methods: {
       showSetting(){
+        this.formData.slippage = this.swapSlippage * 100.0;
+        this.formData.deadline = this.deadline / 60.0;
+        this.slippageBlurred();
         this.dialogVisibleSetting = true;
       },
-      updateSlippage(item,index){
+      updateSlippage(index){
         this.toleranceIndex = index;
-        let slippage = this.toleranceList[index].name / 100.0;
+        this.formData.slippage = this.toleranceList[index].name;
+        let slippage = this.formData.slippage / 100.0;
+        this.$store.commit('USER_CONFIG_SLIPPAGE', slippage);
         myStorage.set('config_slippage', slippage);
-        this.$store.commit('CONFIG_SLIPPAGE', slippage);
+      },
+      slippageBlurred() {
+        let slippage = this.formData.slippage;
+        this.toleranceIndex = -1;
+        for (let i = 0; i < this.toleranceList.length; i++) {
+          let tolerance = this.toleranceList[i];
+          if (tolerance.name == slippage) {
+            this.toleranceIndex = i;
+          }
+        }
+
+        this.$store.commit('USER_CONFIG_SLIPPAGE', slippage / 100.0);
+        myStorage.set('config_slippage', slippage / 100.0);
+      },
+      deadlineBlurred() {
+        let deadline = this.formData.deadline * 60.0;
+        myStorage.set('config_deadline', deadline);
+        this.$store.commit('USER_CONFIG_DEADLINE', deadline);
       },
       showToken(index){
         this.tokenIndex = index;

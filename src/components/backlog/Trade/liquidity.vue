@@ -244,11 +244,11 @@
       <el-row>
         <el-col :span="12">
           <!-- <el-row :gutter="20"> -->
-            <span v-click :class="toleranceIndex == index?'toleranceIcon active':'toleranceIcon'" v-for="(item,index) in toleranceList" :key="index" @click="getTolerance(item,index)">{{item.name}}%</span>
+            <span :class="toleranceIndex == index?'toleranceIcon active':'toleranceIcon'" v-for="(item,index) in toleranceList" :key="index" @click="updateSlippage(index)">{{item.name}}%</span>
           <!-- </el-row> -->
         </el-col>
         <el-col :span="12" class="percentBox">
-          <el-input class="percentInput w100" v-model="formData.percent" placeholder=""></el-input>%
+          <el-input class="percentInput w100" v-model="formData.slippage" @blur="slippageBlurred()" placeholder=""></el-input>%
         </el-col>
       </el-row>
     </div>
@@ -260,7 +260,7 @@
     </h3>
     <el-row>
       <el-col :span="14" class="percentBox">
-        <el-input class="percentInput" v-model="formData.minutes" placeholder=""></el-input>Minutes
+        <el-input class="percentInput" v-model="formData.deadline" @blur="deadlineBlurred()" placeholder=""></el-input>Minutes
       </el-col>
     </el-row>
     <!-- <span slot="footer" class="dialog-footer">
@@ -343,6 +343,7 @@
 <script>
   import qs from 'qs';
   import axios from 'axios';
+  import myStorage from '../../../store/myStorage';
   import {toFixed} from '../../../utils/math.js';
   import abiTokenDefender from '../../../assets/abi/DefenderToken.json'
   export default {
@@ -393,8 +394,8 @@
         dialogVisibleToken:false,
         toleranceIndex:2,
         formData:{
-          percent:1,
-          minutes:24
+          slippage:1,
+          deadline:24
         },
         tokenIndex:1,
         tokenListData: [],
@@ -444,9 +445,6 @@
       swapPaths() {
         return this.$store.state.web3.swap.paths;
       },
-      swapSlippage() {
-        return this.$store.state.web3.swap.slippage;
-      },
       serverUrl() {
         return this.$store.state.api.base;
       },
@@ -462,9 +460,12 @@
       liquidities() {
         return this.$store.state.web3.liquidities;
       },
-      expiry() {
-        return this.$store.state.baseData.config.deadline;
-      }
+      swapSlippage() {
+        return this.$store.state.baseData.userConfig.slippage;
+      },
+      deadline() {
+        return this.$store.state.baseData.userConfig.deadline;
+      },
     },
     watch: {
       contractRouter: function(newVal) {
@@ -485,11 +486,11 @@
         val = val + '';
         this.amountB = val.replace(/\D/g, '')
       },
-      'formData.percent':function(val){
+      'formData.slippage':function(val){
         if(Number(val) >= 100) {
           val = 100
         }
-        this.formData.percent = String(val).replace(/\D/g, '')
+        // this.formData.percent = String(val).replace(/\D/g, '')
       },
     },
     methods: {
@@ -616,7 +617,7 @@
           let contractTokenB = this.tokenB.contract;
 
           let timeNow = Math.floor(Date.now() / 1000);
-          let deadline = timeNow + this.expiry;
+          let deadline = timeNow + this.deadline;
           let amountA = parseInt(this.amountA);
           let amountB = parseInt(this.amountB);
           await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
@@ -696,7 +697,35 @@
         this.currentPage = 1;
       },
       showSetting(){
+        this.formData.slippage = this.swapSlippage * 100.0;
+        this.formData.deadline = this.deadline / 60.0;
+        this.slippageBlurred();
         this.dialogVisibleSetting = true;
+      },
+      updateSlippage(index){
+        this.toleranceIndex = index;
+        this.formData.slippage = this.toleranceList[index].name;
+        let slippage = this.formData.slippage / 100.0;
+        this.$store.commit('USER_CONFIG_SLIPPAGE', slippage);
+        myStorage.set('config_slippage', slippage);
+      },
+      slippageBlurred() {
+        let slippage = this.formData.slippage;
+        this.toleranceIndex = -1;
+        for (let i = 0; i < this.toleranceList.length; i++) {
+          let tolerance = this.toleranceList[i];
+          if (tolerance.name == slippage) {
+            this.toleranceIndex = i;
+          }
+        }
+
+        this.$store.commit('USER_CONFIG_SLIPPAGE', slippage / 100.0);
+        myStorage.set('config_slippage', slippage / 100.0);
+      },
+      deadlineBlurred() {
+        let deadline = this.formData.deadline * 60.0;
+        myStorage.set('config_deadline', deadline);
+        this.$store.commit('USER_CONFIG_DEADLINE', deadline);
       },
       getTolerance(item,index){
         this.toleranceIndex = index;
@@ -821,7 +850,7 @@
         this.dialogVisibleConfirmationWaiting = true;
         
           let timeNow = Math.floor(Date.now() / 1000);
-          let deadline = timeNow + this.expiry;
+          let deadline = timeNow + this.deadline;
 
           let amountA = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
           let amountB = toFixed(this.amountB * Math.pow(10, this.tokenA.decimals)) + '';

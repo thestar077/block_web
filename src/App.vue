@@ -45,14 +45,20 @@ export default {
         this.$store.commit('CONFIG', config);
       }
 
-      let userConfigSlippage = myStorage.get('config_slippage');
-      if (userConfigSlippage) {
-        this.$store.commit('CONFIG_SLIPPAGE', parseFloat(userConfigSlippage));
+      let userConstSlippage = myStorage.get('config_slippage');
+      if (userConstSlippage) {
+        console.log('userConstSlippage', userConstSlippage);
+        this.$store.commit('USER_CONFIG_SLIPPAGE', parseFloat(userConstSlippage));
+      } else {
+        this.$store.commit('USER_CONFIG_SLIPPAGE', this.$store.state.baseData.consts.slippage);
       }
 
-      let userConfigDeadline = myStorage.get('config_deadline');
-      if (userConfigDeadline) {
-        this.$store.commit('CONFIG_DEADLINE', parseInt(userConfigDeadline));
+      let userConstDeadline = myStorage.get('config_deadline');
+      if (userConstDeadline) {
+        console.log('userConstDeadline', userConstDeadline);
+        this.$store.commit('USER_CONFIG_DEADLINE', parseInt(userConstDeadline));
+      } else {
+        this.$store.commit('USER_CONFIG_DEADLINE', this.$store.state.baseData.consts.deadline);
       }
     },
     loadAnnouncements() {
