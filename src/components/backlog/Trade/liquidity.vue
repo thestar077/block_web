@@ -738,7 +738,7 @@
         this.tokenIndex = index;
         this.dialogVisibleToken = true;
       },
-      tokenSelectionChanged() {
+      computeSwapPath() {
         console.log(`tokenAIndex = ${this.tokenAIndex}, tokenBIndex = ${this.tokenBIndex}`)
         this.tokenPathSelected = [];
         if (this.swapPaths.length > 0) {
@@ -761,7 +761,6 @@
         await this.getTokenBalance(item);
         await this.getTokenAllowance(item);
 
-        console.log('BBB')
         if(this.tokenIndex== 1){
           this.tokenA = item;
           this.tokenAIndex = index;
@@ -772,11 +771,12 @@
           this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
         }
 
-        this.tokenSelectionChanged();
+        this.computeSwapPath();
         
         this.dialogVisibleToken = false;
       },
       handleAmountChange(index) {
+        console.log(`AAAAAAA amountA = ${this.amountA}, allowanceA = ${this.tokenAAllowance}, amountB = ${this.amountB}, allowanceB = ${this.tokenBAllowance}`)
         if (index == 1) {
           this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
         } else {

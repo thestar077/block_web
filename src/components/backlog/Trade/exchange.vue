@@ -43,11 +43,12 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountA"  @blur="handleTokenChange(false)"/>
-          <button v-click @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
-            <div color="text" class="sc-gsTCUz UNrzd">
-             {{tokenA.name}}
-            </div>
+          <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountA"  @blur="handleAmountChange(1)"/>
+          <button @click="showToken(1)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
+              <img v-if="tokenA.pic" :src="tokenA.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+              <div color="text" class="sc-gsTCUz UNrzd">
+                {{tokenA.name?tokenA.name:'Select a currency'}}
+              </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
             </svg></span></button>
@@ -74,11 +75,12 @@
           </div>
          </div>
          <div class="sc-iWFSnp bHLdTZ">
-          <input class="sc-fybufo dHAxfv token-amount-input" placeholder="0.0" v-model="amountB"  @blur="handleTokenChange(false)" />
-           <button v-click @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy"><img :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
-            <div color="text" class="sc-gsTCUz UNrzd">
-             {{tokenB.name}}
-            </div>
+          <input class="sc-fybufo dHAxfv token-amount-input" disabled placeholder="0.0" v-model="amountB"/>
+           <button @click="showToken(2)" class="sc-jLiVlK ekurxD open-currency-select-button"><span class="sc-tkKAw iONwHy">
+              <img v-if="tokenB.pic" :src="tokenB.pic" class="sc-fWPcDo kUFaZj" style="margin-right: 8px;" />
+              <div color="text" class="sc-gsTCUz UNrzd">
+                {{tokenB.name?tokenB.name:'Select a currency'}}
+              </div>
             <svg viewbox="0 0 24 24" color="text" width="20px" xmlns="http://www.w3.org/2000/svg" class="sc-bdfBwQ lkvAzg  mt120">
              <path d="M8.11997 9.29006L12 13.1701L15.88 9.29006C16.27 8.90006 16.9 8.90006 17.29 9.29006C17.68 9.68006 17.68 10.3101 17.29 10.7001L12.7 15.2901C12.31 15.6801 11.68 15.6801 11.29 15.2901L6.69997 10.7001C6.30997 10.3101 6.30997 9.68006 6.69997 9.29006C7.08997 8.91006 7.72997 8.90006 8.11997 9.29006Z"></path>
             </svg></span></button>
@@ -94,9 +96,9 @@
         <button v-click type="button" v-else @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button> -->
         <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd  mt30">Unlock Wallet</button>
          <!-- v-else-if="needsApprove == true" -->
-        <button v-if="needsApprove" @click="approve()" class="sc-dlfnbm btoybd mr20 mt20">Approve {{tokenA.name}}</button>
+        <button :disabled="needsApprove == false" @click="approve()" :class="needsApprove ? 'sc-dlfnbm btoybd mr20 mt20' : 'sc-dlfnbm btoybd mr20 mt20 disableBtn'">Approve {{tokenA.symbol}}</button>
         <!-- v-else -->
-        <button v-else type="button" class="sc-dlfnbm btoybd mt30 mt20" @click="dialogVisibleConfirmSwap = true">Swap</button>
+        <button :disabled="swapReady == false" type="button" :class="swapReady == true ? 'sc-dlfnbm btoybd mt30 mt20' : 'sc-dlfnbm btoybd mt30 mt20 disableBtn'" @click="dialogVisibleConfirmSwap = true">Swap</button>
       </div>
       <div class="sc-edoZmE hyACfo" >
         <!-- <div>
@@ -186,37 +188,37 @@
     <div class="biItem">
       <div class="biPic">
         <img :src="tokenA.pic">
-        <span>{{tokenA.value}}</span>
+        <span>{{amountA}}</span>
       </div>
-      <span>{{tokenA.name}}</span>
+      <span>{{tokenA.symbol}}</span>
     </div>
-    <div @click="changeBi" class="el-icon-bottom changeBtn"></div>
+    <div class="el-icon-bottom changeBtn"></div>
     <div class="biItem">
       <div class="biPic">
-        <img :src="tokenA.pic">
-        <span>{{tokenA.value}}</span>
+        <img :src="tokenB.pic">
+        <span>{{amountB}}</span>
       </div>
-      <span>{{tokenA.name}}</span>
+      <span>{{tokenB.symbol}}</span>
     </div>
     <p class="swapTips">Output is estimated.You will receive at least{{tokenB.value}} {{tokenB.name}} or the transaction will revert.</p>
     <p class="swapTxt">
       <span>Price</span>
-      <span>{{tokenA.value}} {{tokenA.name}} / {{tokenB.name}}</span>
+      <span>{{(amountA / amountB).toFixed(4)}} {{tokenA.symbol}} / {{tokenB.symbol}}</span>
     </p>
     <p class="swapTxt">
       <span>Minimum received</span>
-      <span>{{tokenA.value}} {{tokenB.name}}</span>
+      <span>{{amountB * (1 - swapSlippage)}} {{tokenB.symbol}}</span>
     </p>
     <p class="swapTxt">
-      <span>Pricr Impact</span>
-      <span>0.29%</span>
+      <span>Price Impact</span>
+      <span>{{swapSlippage * 100.0}}%</span>
     </p>
-    <p class="swapTxt">
+    <!-- <p class="swapTxt">
       <span>Liquidity Provider Fee</span>
       <span>0.03996 {{tokenA.name}}</span>
-    </p>
+    </p> -->
     <span slot="footer" class="dialog-footer">
-      <el-button class="sc-dlfnbm btoybd center block" @click="cofirmSwap">Confirm Swap</el-button>
+      <el-button class="sc-dlfnbm btoybd center block" @click="confirmSwap">Confirm Swap</el-button>
     </span> 
   </el-dialog>
    <!-- Waiting for confirmation -->
@@ -253,7 +255,7 @@
       <p class="tokenName">Token name</p>
       <div class="tokenBox">
         <ul>
-          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleToken(item,index)">
+          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleTokenChange(item,index)">
             <img :src="item.pic">
              <span>{{item.name}}</span>
           </li>
@@ -268,6 +270,7 @@
 <script>
   import qs from 'qs';
   import myStorage from '../../../store/myStorage';
+  import {toFixed} from '../../../utils/math.js';
   import abiTokenDefender from '../../../assets/abi/DefenderToken.json';
   export default {
     data() {
@@ -297,24 +300,33 @@
           slippage:1,
           deadline:24
         },
-        tokenA: this.$store.state.web3.tokens[0],
-        tokenB: this.$store.state.web3.tokens[1],
+        tokenA: {},
+        tokenB: {},
         amountA: '',
         amountB: '',
-        tokenAIndex: 0,
-        tokenBIndex: 1,
+        tokenAIndex: -1,
+        tokenBIndex: 1000,
+        tokenABalance: 0,
+        tokenBBalance: 0,
+        tokenAAllowance: 0,
+        tokenBAllowance: 0,
         tokenPathSelected: [],
         tokenIndex:1,
+        rateAB: 0,
+        rateBA: 0,
+        pairAddr: '',
+        pairContract: '',
+        oppositeOrder: false,
         isToken1Approve: false,
         isToken2Approve: false,
         isTokenApproved: false,
-        needsApprove: true,
+        needsApprove: false,
         tokenListData: [],
-        currentContracts: {
-          tokenA: {},
-          tokenB: {},
-          pair: {},
-        }
+        // currentContracts: {
+        //   tokenA: {},
+        //   tokenB: {},
+        //   pair: {},
+        // }
       };
     },
     created() {
@@ -338,6 +350,9 @@
         minter() {
           return this.$store.state.web3.minter;
         },
+        walletConnected() {
+          return this.web3 !== null && this.web3 !== undefined;
+        },
         tokenList: {
           set: function(newVal) {
             this.tokenListData = newVal;
@@ -345,6 +360,9 @@
           get: function() {
             return (this.tokenListData.length == 0) ? this.$store.state.web3.tokens : this.tokenListData;
           }
+        },
+        swapReady() {
+          return this.amountA > 0 && this.amountB > 0 && this.tokenPathSelected.length > 0 && this.needsApprove === false;
         },
         swapPaths() {
           return this.$store.state.web3.swap.paths;
@@ -355,20 +373,25 @@
         deadline() {
           return this.$store.state.baseData.userConfig.deadline;
         },
+        displayDecimals() {
+          return this.$store.state.baseData.consts.display_decimals;
+        },
+        defaultContractDecimals() {
+          return this.$store.state.baseData.consts.contract_decimals;
+        },
     },
     watch: {
       'amountA': function(newVal) {
-        this.amountA = newVal.replace(/\D/g, '')
+        // this.amountA = newVal.replace(/\D/g, '')
       },
       'amountB': function(newVal) {
-        this.amountB = newVal.replace(/\D/g, '')
+        // this.amountB = newVal.replace(/\D/g, '')
       },
-      tokenAIndex: async function(val) {
-        await this.handleTokenChange(true);
+      tokenAIndex: function(val) {
         
       },
-      tokenBIndex: async function(val) {
-        await this.handleTokenChange(true);
+      tokenBIndex: function(val) {
+        
       },
       'formData.slippage': function(val) {
           if (val) {
@@ -412,18 +435,13 @@
         this.$store.commit('USER_CONFIG_DEADLINE', deadline);
       },
       showToken(index){
+        if (this.walletConnected === false) {
+          alert("Please unlock your wallet first.");
+          return;
+        }
+        console.log('web3', this.web3)
         this.tokenIndex = index;
         this.dialogVisibleToken = true;
-      },
-      handleToken(item,index){
-        if(this.tokenIndex == 1){
-          this.tokenA = item;
-          this.tokenAIndex = index;
-        }else{
-          this.tokenB = item;
-          this.tokenBIndex = index;
-        }
-        this.dialogVisibleToken = false;
       },
       // 获取授权
       getAuthorization(){
@@ -446,159 +464,212 @@
         }
       }, 
       changeBi(){
-        let tokenA = this.tokenA;
-        let tokenB = this.tokenB;
-        this.tokenA = tokenB;
-        this.tokenB = tokenA;
+        // let tokenA = this.tokenA;
+        // let tokenB = this.tokenB;
+        // this.tokenA = tokenB;
+        // this.tokenB = tokenA;
       },
-      async cofirmSwap(){
+      async confirmSwap(){
         this.dialogVisibleConfirmSwap = false;
-        const TIME_COUNT = 3;
-        if(!this.timer){
-          this.timer = setInterval(() => {
-            if(this.count > 0 && this.count <= TIME_COUNT){
-              this.dialogVisibleConfirmationWaiting = true;
-              this.count++;
-            }else{
-              this.dialogVisibleConfirmationWaiting = false;
-              this.dialogVisibleTransactionsSubmitted = true;
-              clearInterval(this.timer);
-              this.timer = null;
-            }
-          }, 1000)
-          }
-        await this.swap();
-        },
-        async prepareContracts() {
-          if (this.tokenPathSelected.length > 0) {
-              this.currentContracts.tokenA = new this.$store.state.web3.web3.eth.Contract(
-                abiTokenDefender,
-                this.tokenA.address,
-            );
-
-            this.currentContracts.tokenB = new this.$store.state.web3.web3.eth.Contract(
-                abiTokenDefender,
-                this.tokenB.address,
-            );
-
-            let addrPair = await this.contractFactory.methods.getPair(this.tokenA.address, this.tokenB.address).call();
-            console.log(`addrPair = ${addrPair}`);
-            this.$store.dispatch('getTokenUniswapPairContract', addrPair);
-
-            this.currentContracts.pair = this.$store.state.web3.contracts.token.pair;
-            console.log('this.currentContracts.pair', this.currentContracts.pair);
-          }
-        },
-      walletConnected() {
-        return this.web3 !== null && this.web3 !== undefined;
-      },
-      tokenSelectionChanged() {
-        this.tokenPathSelected = [];
-        if (this.swapPaths.length > 0) {
-          this.swapPaths.forEach((path) => {
-            if (path.includes(this.tokenAIndex) && path.includes(this.tokenBIndex)) {
-              path.forEach((item) => {
-                this.tokenPathSelected.push(this.tokenList[item].address);
-              })
-            }
-          });
-        }
-        console.log('this.tokenPathSelected', this.tokenPathSelected);
-      },
-      async computeTokenAmount() {
-        if (this.tokenPathSelected.length == 0) {
-          alert("Current token pair is not supported.");
-        } else {
-          let balanceTokenA = await this.currentContracts.tokenA.methods.balanceOf(this.currentContracts.pair.options.address).call();
-          let balanceTokenB = await this.currentContracts.tokenB.methods.balanceOf(this.currentContracts.pair.options.address).call();
-          let balancePair = await this.currentContracts.pair.methods.balanceOf(this.user).call();
-          console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balanceTokenPair = ${balancePair}`);
-
-          // console.log(`tokenA amount = ${this.amountA}`)
-
-          if (this.amountA > 0) {
-            let amountsOut = await this.contractRouter.methods.getAmountsOut(this.amountA, this.tokenPathSelected).call();
-            
-            console.log('tokenB amount', amountsOut)
-            this.amountB = amountsOut[this.tokenBIndex];
-          } else if (this.amountB > 0) {
-            let amountsIn = await this.contractRouter.methods.getAmountsIn(this.amountB, this.tokenPathSelected).call();
-            
-            console.log('tokenA amount', amountsIn)
-            this.amountA = amountsIn[this.tokenAIndex];
-          }
-        }
-      },
-      async handleTokenChange(selectionChanged) {
-        this.needsApprove = true;
-        if (this.amountA > 0 || this.amountB > 0) {
-          if (this.walletConnected() === false) {
-            alert('Please connect to your wallet first.');
-            return;
-          } else {
-            if (selectionChanged || this.tokenPathSelected.length === 0) {
-              this.tokenSelectionChanged();
-              await this.prepareContracts();
-            }
-            
-            await this.computeTokenAmount();
-          }
-        }
-      },
-      async approve() {
-        this.needsApprove = false;
-        if (this.web3 == null || this.web3 == undefined) {
-          alert('Please connect to your wallet first.');
-          return;
-        }
-
-        if (this.amountA <= 0) {
-          alert('Please specify the amount to swap.');
-          return;
-        }
-
-        if (this.amountB == 0) {
-            this.tokenSelectionChanged();
-            await this.prepareContracts();
-            await this.computeTokenAmount();
-        }
-
-        let amountA = parseInt(this.amountA);
-        if (this.contractRouter == null || this.contractRouter == undefined) {
-          alert("Invalid contract. Please contact the customer service.");
-          return;
-        }
-
-        await this.currentContracts.tokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
-        console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
-        let allowanceTokenA = await this.currentContracts.tokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
-        console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
-
-        this.needsApprove = false;
-      },
-      async swap() {
+        this.dialogVisibleConfirmationWaiting = true;
         if (this.amountA > 0 && this.amountB > 0) {
           let timeNow = Math.floor(Date.now() / 1000);
-          let expiry = 10 * 60;  // 10 mins
-          let deadline = timeNow + expiry;
+          // let expiry = 10 * 60;  // 10 mins
+          let deadline = timeNow + this.deadline;
 
-          let amountIn = this.amountA;
-          let amountOutMin = Math.floor(this.amountB * (1.0 - this.swapSliding));
-          let to = this.user;
+          if (this.oppositeOrder === false) {
+            let amountIn = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
+            let amountOutMin = parseFloat(this.amountB) * (1.0 - this.swapSlippage) * Math.pow(10, this.tokenB.decimals) + '';
+            let amountOutExpected = toFixed(parseFloat(this.amountB) * Math.pow(10, this.tokenB.decimals)) + '';
+            let to = this.user;
+            let slippage = Math.floor(this.swapSlippage * 1000);
+            console.log(`amountIn = ${amountIn}, amountOutMin = ${amountOutMin}, amountOutExpected = ${amountOutExpected}, this.tokenPathSelected = ${this.tokenPathSelected}, to = ${to}, slippage = ${slippage}, deadline = ${deadline}`);
+
+            let amountsOut = await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, amountOutExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+            console.log('amountsOut', amountsOut);
+          } else {
+            let amountOut = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
+            let amountInMax = parseFloat(this.amountB) * (1.0 + this.swapSlippage) * Math.pow(10, this.tokenB.decimals) + '';
+            let amountInExpected = toFixed(parseFloat(this.amountB) * Math.pow(10, this.tokenB.decimals)) + '';
+            let to = this.user;
+            let slippage = Math.floor(this.swapSlippage * 1000);
+            console.log(`amountOut = ${amountOut}, amountInMax = ${amountInMax}, amountInExpected = ${amountInExpected}, this.tokenPathSelected = ${this.tokenPathSelected}, to = ${to}, slippage = ${slippage}, deadline = ${deadline}`);
+
+            let amountIn = await this.contractRouter.methods.swapTokensForExactTokens(amountOut, amountInMax, amountInExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+            console.log('amountIn', amountIn);
+          }
           
-          await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, this.tokenPathSelected, to, deadline).send({ from: this.user });
-
-          let balanceTokenA = await this.currentContracts.tokenA.methods.balanceOf(this.currentContracts.pair.options.address).call();
-          let balanceTokenB = await this.currentContracts.tokenB.methods.balanceOf(this.currentContracts.pair.options.address).call();
+          // let testAmountIn = await this.contractRouter.methods.testAmountIn().call();
+          // let testAmountOut = await this.contractRouter.methods.testAmountOut().call();
+          // console.log(`testAmountIn = ${testAmountIn}, testAmountOut = ${testAmountOut}`);
+          // let testSlippage = await this.contractRouter.methods.testSlippage().call();
+          // let testCurrentSlippage = await this.contractRouter.methods.testCurrentSlippage().call();
+          // console.log(`testSlippage = ${testSlippage}, testCurrentSlippage = ${testCurrentSlippage}`);
+          // let currentSlippage = await this.contractRouter.methods.getSlippage(this.tokenPathSelected[0], this.tokenPathSelected[1]).call();
+          // console.log(`curren slippage = ${currentSlippage}`);
+          
+          this.dialogVisibleConfirmationWaiting = false;
+          let balanceTokenA = await this.tokenA.contract.methods.balanceOf(this.pairAddr).call();
+          let balanceTokenB = await this.tokenB.contract.methods.balanceOf(this.pairAddr).call();
           
           console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}`);
         } else {
           alert("Please specify the amounts to swap.");
         }
-      },
-      handleConfirm() {  // 处理设置
+        },
+      computeSwapPath() {
+        this.tokenPathSelected = [];
+        if (this.swapPaths.length > 0) {
+          this.swapPaths.forEach((path) => {
+            if (path[0] == this.tokenAIndex && path[path.length - 1] == this.tokenBIndex || 
+              path[0] == this.tokenBIndex && path[path.length -1] == this.tokenAIndex) {
+              path.forEach((item) => {
+                this.tokenPathSelected.push(this.tokenList[item].address);
+              })
 
-      }
+              this.oppositeOrder = path[0] == this.tokenBIndex && path[path.length -1] == this.tokenAIndex;
+              return;
+            }
+          });
+        }
+        console.log('this.tokenPathSelected', this.tokenPathSelected);
+      },
+      async checkPairAvailability() {
+        if (this.tokenPathSelected.length > 0) {
+            this.pairAddr = await this.contractFactory.methods.getPair(this.tokenA.address, this.tokenB.address).call();
+            if (this.pairAddr == '0x0000000000000000000000000000000000000000') {
+              alert('Current token pair is not supported.');
+              return false;
+            }
+            console.log(`pairAddr = ${this.pairAddr}`);
+            this.pairContract = new this.web3.eth.Contract(
+                abiTokenDefender,
+                this.pairAddr
+            );
+            return true;
+        }
+      },
+      async computeTokenAmount() {
+        if (this.tokenPathSelected.length > 0 && this.amountA > 0) {
+          let amountA = toFixed(parseFloat(this.amountA) * Math.pow(10, this.tokenA.decimals)) + '';
+          if (this.oppositeOrder === false) {
+            let amountsOut = await this.contractRouter.methods.getAmountsOut(amountA, this.tokenPathSelected).call();
+            this.amountB = (amountsOut[amountsOut.length - 1] * 1.0 / Math.pow(10, this.tokenB.decimals)).toFixed(this.displayDecimals);
+          } else {
+            let amountsIn = await this.contractRouter.methods.getAmountsIn(amountA, this.tokenPathSelected).call();
+            this.amountB = (amountsIn[0] * 1.0 / Math.pow(10, this.tokenB.decimals)).toFixed(this.displayDecimals);
+          }
+          
+          console.log('tokenB amount', this.amountB)
+        }
+      },
+      async handleTokenChange(item, index){
+        // console.log(`AAA this.tokenIndex = ${this.tokenIndex}, index = ${index}`);
+        if (this.tokenIndex== 1 && index === this.tokenBIndex || this.tokenIndex == 2 && index === this.tokenAIndex) {
+          alert("Tokens cannot be the same. Please try again.")
+          return;
+        }
+
+        if (this.tokenIndex == 1) {
+          await this.getTokenBalance(item);
+          await this.getTokenAllowance(item);
+        }
+
+        if(this.tokenIndex== 1){
+          this.tokenA = item;
+          this.tokenAIndex = index;
+          this.needsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+        }else{
+          this.tokenB = item;
+          this.tokenBIndex = index;
+        }
+
+        this.computeSwapPath();
+
+        if (this.tokenPathSelected.length > 0 && this.amountA > 0) {
+          this.needsApprove = await this.checkPairAvailability();
+          await this.computeTokenAmount();
+        }
+
+        this.dialogVisibleToken = false;
+      },
+      async getTokenBalance(item) {
+        if (item.address.length > 0) {
+          let contract = item.contract;
+          let balance = await contract.methods.balanceOf(this.user).call();
+          if (this.tokenIndex == 1) {
+            this.tokenABalance = Math.floor(balance / Math.pow(10, item.decimals));
+            console.log(`TokenA balance = ${this.tokenABalance}`);
+          } else {
+            this.tokenBBalance = Math.floor(balance / Math.pow(10, item.decimals));
+            console.log(`TokenB balance = ${this.tokenBBalance}`);
+          }
+          
+        } else {
+          alert("The currently selected token is not supported.");
+        }
+      },
+      async getTokenAllowance(item) {
+        if (item.address.length > 0) {
+          let contract = item.contract;
+          let allowance = await contract.methods.allowance(this.user, this.contractRouter.options.address).call();
+          allowance = allowance / Math.pow(10, item.decimals);
+          console.log(`Allowance = ${allowance}`);
+          if (this.tokenIndex == 1) {
+            this.tokenAAllowance = allowance;
+          } else {
+            this.tokenBAllowance = allowance;
+          }
+        } else {
+          alert("The currently selected token is not supported.");
+        }
+      },
+      async handleAmountChange(index) {
+        if (index == 1 && this.tokenPathSelected.length > 0 && this.amountA > 0) {
+            this.needsApprove = await this.checkPairAvailability();
+            this.needsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+            
+            await this.computeTokenAmount();
+        } 
+      },
+      async approve() {
+        if (this.contractRouter == null || this.contractRouter == undefined) {
+          alert("Invalid contracts. Please contact the customer service.");
+          return;
+        }
+
+        let amountA = toFixed(parseFloat(this.amountA) * Math.pow(10, this.tokenA.decimals)) + '';
+        console.log('amountA', amountA)
+        await this.tokenA.contract.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
+        console.log(`this.user = ${this.user}, router = ${this.contractRouter.options.address}`);
+        let allowanceTokenA = await this.tokenA.contract.methods.allowance(this.user, this.contractRouter.options.address).call();
+        console.log(`Allowance of tokenA = ${allowanceTokenA}, address = ${this.contractRouter.options.address}`);
+
+        this.needsApprove = false;
+      },
+      // async swap() {
+      //   if (this.amountA > 0 && this.amountB > 0) {
+      //     let timeNow = Math.floor(Date.now() / 1000);
+      //     let expiry = 10 * 60;  // 10 mins
+      //     let deadline = timeNow + expiry;
+
+      //     let amountIn = this.amountA;
+      //     let amountOutMin = Math.floor(this.amountB * (1.0 - this.swapSliding));
+      //     let to = this.user;
+          
+      //     await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, this.tokenPathSelected, to, deadline).send({ from: this.user });
+
+      //     let balanceTokenA = await this.currentContracts.tokenA.methods.balanceOf(this.pairAddr).call();
+      //     let balanceTokenB = await this.currentContracts.tokenB.methods.balanceOf(this.pairAddr).call();
+          
+      //     console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}`);
+      //   } else {
+      //     alert("Please specify the amounts to swap.");
+      //   }
+      // },
+      // handleConfirm() {  // 处理设置
+
+      // }
     }
   };
 </script>
@@ -620,6 +691,12 @@
     background-repeat: no-repeat;
     background-position: center top;
 }
+
+.disableBtn{
+    background: #E9EAEB !important;
+    color: #C0C4C6 !important;
+    margin-top: 20px;
+  }
 .changeBtn{
   font-size: 30px;
   color: #999;
