@@ -299,11 +299,11 @@
       title="Select a token"
       :visible.sync="dialogVisibleToken"
       width="40%" append-to-body>
-      <el-input class="tokenInput" @input="search" v-model="searchText" placeholder="Search name"></el-input>
+      <el-input class="tokenInput" @input="search()" v-model="searchText" placeholder="Search name"></el-input>
       <p class="tokenName">Token name</p>
       <div class="tokenBox">
         <ul>
-          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleTokenChange(item, index)">
+          <li class="tokenItem" v-for="(item,index) in tokenList" :key="index" @click="handleTokenChange(item, true)">
             <img :src="item.pic">
              <span>{{item.name}}</span>
           </li>
@@ -433,6 +433,9 @@
       },
       minter() {
         return this.$store.state.web3.minter;
+      },
+      tokenListOrig() {
+        return this.$store.state.web3.tokens;
       },
       tokenList: {
         set: function(newVal) {
@@ -676,21 +679,23 @@
       async handleAdd2(liquidity, index) {
         this.tokenA = liquidity.tokenA;
         this.tokenB = liquidity.tokenB;
-        for (let i = 0; i < this.tokenList.length; i++) {
-          if (this.tokenList[i].address == this.tokenA.address) {
-            this.tokenAIndex = i;
-          }
+        this.tokenAIndex = this.tokenA.index;
+        this.tokenBIndex = this.tokenB.index;
+        // for (let i = 0; i < this.tokenListOrig.length; i++) {
+        //   if (this.tokenListOrig[i].address == this.tokenA.address) {
+        //     this.tokenAIndex = i;
+        //   }
 
-          if (this.tokenList[i].address == this.tokenB.address) {
-            this.tokenBIndex = i;
-          }
-        }
+        //   if (this.tokenListOrig[i].address == this.tokenB.address) {
+        //     this.tokenBIndex = i;
+        //   }
+        // }
 
         this.tokenIndex = 1;
-        await this.handleTokenChange(this.tokenA, this.tokenAIndex);
+        await this.handleTokenChange(this.tokenA, false);
 
         this.tokenIndex = 2;
-        await this.handleTokenChange(this.tokenB, this.tokenBIndex);
+        await this.handleTokenChange(this.tokenB, false);
 
         this.liquiditySelected = liquidity;
         this.liquiditySelectedIndex = index;
@@ -735,7 +740,23 @@
           alert("Please unlock your wallet first.");
           return;
         }
+
         this.tokenIndex = index;
+        let tokensOrig = this.$store.state.web3.tokens;
+        let tokens = [];
+        tokensOrig.filter((item) => {
+          if (this.tokenIndex === 1) {
+            if (item.inA === true) {
+              tokens.push(item);
+            }
+          } else if (this.tokenIndex === 2) {
+            if (item.inB === true && (this.tokenA.symbol == undefined || this.tokenA.tokensB.includes(item.index))) {
+              tokens.push(item);
+            } 
+          }
+        });
+        this.tokenList = tokens;
+        
         this.dialogVisibleToken = true;
       },
       computeSwapPath() {
@@ -745,29 +766,28 @@
           this.swapPaths.forEach((path) => {
             if (path[0] == this.tokenAIndex && path[path.length - 1] == this.tokenBIndex || path[0] == this.tokenBIndex && path[path.length - 1] == this.tokenAIndex) {
               path.forEach((item) => {
-                this.tokenPathSelected.push(this.tokenList[item].address);
+                this.tokenPathSelected.push(this.tokenListOrig[item].address);
               })
             }
           });
         }
         console.log('this.tokenPathSelected', this.tokenPathSelected);
       },
-      async handleTokenChange(item, index){
-        console.log(`AAA this.tokenIndex = ${this.tokenIndex}, index = ${index}`);
-        if (this.tokenIndex== 1 && index === this.tokenBIndex || this.tokenIndex == 2 && index === this.tokenAIndex) {
-          alert("Tokens cannot be the same. Please try again.")
-          return;
-        }
+      async handleTokenChange(item, resetTokenB){
         await this.getTokenBalance(item);
         await this.getTokenAllowance(item);
 
         if(this.tokenIndex== 1){
           this.tokenA = item;
-          this.tokenAIndex = index;
+          this.tokenAIndex = item.index;
           this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+          if (resetTokenB) {
+            this.tokenB = {};
+            this.tokenBIndex = -1;
+          }
         }else{
           this.tokenB = item;
-          this.tokenBIndex = index;
+          this.tokenBIndex = item.index;
           this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
         }
 
@@ -797,6 +817,7 @@
         }
       },
       async getTokenBalance(item) {
+        console.log('item', item);
         if (item.address.length > 0) {
           let contract = item.contract;
           let balance = await contract.methods.balanceOf(this.user).call();
@@ -828,6 +849,7 @@
         }
       },
       search(){
+        
         if(this.searchText){
           let _search = this.searchText.toLowerCase();
           let newListData = []; // 用于存放搜索出来数据的新数组
@@ -839,8 +861,6 @@
             }) 
           }
           this.tokenList = newListData;
-        } else {
-          this.tokenList = this.$store.state.web3.token;
         }
       }, 
       async confirmSupply(){

@@ -439,8 +439,21 @@
           alert("Please unlock your wallet first.");
           return;
         }
-        console.log('web3', this.web3)
         this.tokenIndex = index;
+        let tokensOrig = this.$store.state.web3.tokens;
+        let tokens = [];
+        tokensOrig.filter((item) => {
+          if (this.tokenIndex === 1) {
+            if (item.inA === true) {
+              tokens.push(item);
+            } 
+          } else if (this.tokenIndex === 2) {
+            if (item.inB === true && (this.tokenA.symbol == undefined || this.tokenA.tokensB.includes(item.index))) {
+              tokens.push(item);
+            } 
+          }
+        });
+        this.tokenList = tokens;
         this.dialogVisibleToken = true;
       },
       // 获取授权
@@ -459,8 +472,6 @@
             }) 
           }
           this.tokenList = newListData;
-        }else{
-          this.tokenList = this.$store.state.web3.tokens;
         }
       }, 
       changeBi(){
@@ -564,12 +575,6 @@
         }
       },
       async handleTokenChange(item, index){
-        // console.log(`AAA this.tokenIndex = ${this.tokenIndex}, index = ${index}`);
-        if (this.tokenIndex== 1 && index === this.tokenBIndex || this.tokenIndex == 2 && index === this.tokenAIndex) {
-          alert("Tokens cannot be the same. Please try again.")
-          return;
-        }
-
         if (this.tokenIndex == 1) {
           await this.getTokenBalance(item);
           await this.getTokenAllowance(item);
@@ -577,11 +582,13 @@
 
         if(this.tokenIndex== 1){
           this.tokenA = item;
-          this.tokenAIndex = index;
+          this.tokenAIndex = item.index;
+          this.tokenB = {};
+          this.tokenBIndex = -1;
           this.needsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
         }else{
           this.tokenB = item;
-          this.tokenBIndex = index;
+          this.tokenBIndex = item.index;
         }
 
         this.computeSwapPath();
