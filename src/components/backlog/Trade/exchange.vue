@@ -353,6 +353,9 @@
         walletConnected() {
           return this.web3 !== null && this.web3 !== undefined;
         },
+        tokenListOrig() {
+          return this.$store.state.web3.tokens;
+        },
         tokenList: {
           set: function(newVal) {
             this.tokenListData = newVal;
@@ -379,6 +382,9 @@
         defaultContractDecimals() {
           return this.$store.state.baseData.consts.contract_decimals;
         },
+        weth() {
+          return this.$store.state.web3.tokens[7];
+        }
     },
     watch: {
       'amountA': function(newVal) {
@@ -496,8 +502,18 @@
             let slippage = Math.floor(this.swapSlippage * 1000);
             console.log(`amountIn = ${amountIn}, amountOutMin = ${amountOutMin}, amountOutExpected = ${amountOutExpected}, this.tokenPathSelected = ${this.tokenPathSelected}, to = ${to}, slippage = ${slippage}, deadline = ${deadline}`);
 
-            let amountsOut = await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, amountOutExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
-            console.log('amountsOut', amountsOut);
+            if (this.tokenPathSelected[0] === this.weth.address) {
+              let amountsOut = await this.contractRouter.methods.swapExactETHForTokens(amountOutMin, amountOutExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+              console.log('amountsOut', amountsOut);
+            } else if (this.tokenPathSelected[this.tokenPathSelected.length - 1] === this.weth.address) {
+              let amountsOut = await this.contractRouter.methods.swapExactTokensForETH(amountIn, amountOutMin, amountOutExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+              console.log('amountsOut', amountsOut);
+            } else {
+              let amountsOut = await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, amountOutExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+              console.log('amountsOut', amountsOut);
+            }
+
+            
           } else {
             let amountOut = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
             let amountInMax = parseFloat(this.amountB) * (1.0 + this.swapSlippage) * Math.pow(10, this.tokenB.decimals) + '';
@@ -506,8 +522,16 @@
             let slippage = Math.floor(this.swapSlippage * 1000);
             console.log(`amountOut = ${amountOut}, amountInMax = ${amountInMax}, amountInExpected = ${amountInExpected}, this.tokenPathSelected = ${this.tokenPathSelected}, to = ${to}, slippage = ${slippage}, deadline = ${deadline}`);
 
-            let amountIn = await this.contractRouter.methods.swapTokensForExactTokens(amountOut, amountInMax, amountInExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
-            console.log('amountIn', amountIn);
+            if (this.tokenPathSelected[0] === this.weth.address) {
+              let amountIn = await this.contractRouter.methods.swapETHForExactTokens(amountOut, amountInExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+              console.log('amountIn', amountIn);
+            } else if (this.tokenPathSelected[this.tokenPathSelected.length - 1] === this.weth.address) {
+              let amountIn = await this.contractRouter.methods.swapTokensForExactETH(amountOut, amountInMax, amountInExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+              console.log('amountIn', amountIn);
+            } else {
+              let amountIn = await this.contractRouter.methods.swapTokensForExactTokens(amountOut, amountInMax, amountInExpected, this.tokenPathSelected, to, slippage, deadline).send({ from: this.user });
+              console.log('amountIn', amountIn);
+            }
           }
           
           // let testAmountIn = await this.contractRouter.methods.testAmountIn().call();
@@ -520,6 +544,7 @@
           // console.log(`curren slippage = ${currentSlippage}`);
           
           this.dialogVisibleConfirmationWaiting = false;
+          this.needsApprove = true;
           let balanceTokenA = await this.tokenA.contract.methods.balanceOf(this.pairAddr).call();
           let balanceTokenB = await this.tokenB.contract.methods.balanceOf(this.pairAddr).call();
           
@@ -535,7 +560,7 @@
             if (path[0] == this.tokenAIndex && path[path.length - 1] == this.tokenBIndex || 
               path[0] == this.tokenBIndex && path[path.length -1] == this.tokenAIndex) {
               path.forEach((item) => {
-                this.tokenPathSelected.push(this.tokenList[item].address);
+                this.tokenPathSelected.push(this.tokenListOrig[item].address);
               })
 
               this.oppositeOrder = path[0] == this.tokenBIndex && path[path.length -1] == this.tokenAIndex;
@@ -590,7 +615,7 @@
           this.tokenB = item;
           this.tokenBIndex = item.index;
         }
-
+        console.log(`this.tokenAIndex = ${this.tokenAIndex}, this.tokenBIndex = ${this.tokenBIndex}`)
         this.computeSwapPath();
 
         if (this.tokenPathSelected.length > 0 && this.amountA > 0) {
@@ -654,29 +679,6 @@
 
         this.needsApprove = false;
       },
-      // async swap() {
-      //   if (this.amountA > 0 && this.amountB > 0) {
-      //     let timeNow = Math.floor(Date.now() / 1000);
-      //     let expiry = 10 * 60;  // 10 mins
-      //     let deadline = timeNow + expiry;
-
-      //     let amountIn = this.amountA;
-      //     let amountOutMin = Math.floor(this.amountB * (1.0 - this.swapSliding));
-      //     let to = this.user;
-          
-      //     await this.contractRouter.methods.swapExactTokensForTokens(amountIn, amountOutMin, this.tokenPathSelected, to, deadline).send({ from: this.user });
-
-      //     let balanceTokenA = await this.currentContracts.tokenA.methods.balanceOf(this.pairAddr).call();
-      //     let balanceTokenB = await this.currentContracts.tokenB.methods.balanceOf(this.pairAddr).call();
-          
-      //     console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}`);
-      //   } else {
-      //     alert("Please specify the amounts to swap.");
-      //   }
-      // },
-      // handleConfirm() {  // 处理设置
-
-      // }
     }
   };
 </script>
