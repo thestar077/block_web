@@ -29,11 +29,11 @@
       </div>
       <p class="swapTxt">
         <span>Price</span>
-        <span>1 {{liquiditySelected.tokenA.symbol}} = {{liquiditySelected.priceAB}} {{liquiditySelected.tokenB.symbol}}</span>
+        <span>1 {{liquiditySelected.tokenA.symbol}} = {{priceAB}} {{liquiditySelected.tokenB.symbol}}</span>
       </p>
       <p class="swapTxt">
         <span></span>
-        <span>1 {{liquiditySelected.tokenB.symbol}} = {{liquiditySelected.priceBA}} {{liquiditySelected.tokenA.symbol}}</span>
+        <span>1 {{liquiditySelected.tokenB.symbol}} = {{priceBA}} {{liquiditySelected.tokenA.symbol}}</span>
       </p>
       <div class="sc-edoZmE hyACfo handleBtn">
         <button type="button" :disabled="isApproved || percentage === 0" :class="isApproved || percentage === 0?'c-dlfnbm btoybd disableBtn':'c-dlfnbm btoybd bgActive'" @click="approve()">Approve</button>
@@ -77,11 +77,11 @@
     </p>
     <p class="swapTxt">
       <span>Price</span>
-      <span>1 {{liquiditySelected.tokenA.symbol}} = {{liquiditySelected.priceAB}} {{liquiditySelected.tokenB.symbol}}</span>
+      <span>1 {{liquiditySelected.tokenA.symbol}} = {{priceAB}} {{liquiditySelected.tokenB.symbol}}</span>
     </p>
     <p class="swapTxt">
       <span></span>
-      <span>1 {{liquiditySelected.tokenB.symbol}} = {{liquiditySelected.priceBA}} {{liquiditySelected.tokenA.symbol}}</span>
+      <span>1 {{liquiditySelected.tokenB.symbol}} = {{priceBA}} {{liquiditySelected.tokenA.symbol}}</span>
     </p>
     <span slot="footer" class="dialog-footer">
       <el-button class="sc-dlfnbm btoybd center block" @click="cofirmRemoveLiquidity()">Cofirm</el-button>
@@ -116,6 +116,7 @@
 
 <script>
   import qs from 'qs';
+  import {toFixed} from '../../../utils/math.js';
   import abiUniswapV2Pair from '../../../assets/abi/UniswapV2Pair.json';
   export default {
     data() {
@@ -130,6 +131,8 @@
         liquidityRemoving: 0,
         amountAReceiving: 0,
         amountBReceiving: 0,
+        priceAB: 0,
+        priceBA: 0,
         pairContract: '',
         sliderBoxArr:[
           {
@@ -199,6 +202,9 @@
       },
       deadline() {
         return this.$store.state.baseData.userConfig.deadline;
+      },
+      weth() {
+        return this.$store.state.web3.tokens[7];
       }
     },
     watch: {
@@ -215,7 +221,7 @@
     },
     methods: {
       handleChange(){},
-      selectPercentage(item,index){
+      async selectPercentage(item,index){
         this.activeNum = index;
         this.percentage = item.percentage;
         if (this.web3 == null || this.web3 == undefined) {
@@ -227,7 +233,13 @@
         this.liquidityRemoving = (parseFloat(this.liquiditySelected.liquidity) * item.percentage * 0.01).toFixed(this.displayDecimals);
         console.log('this.liquidityRemoving', this.liquidityRemoving);
         this.amountAReceiving = (parseFloat(this.liquiditySelected.amountA) * item.percentage * 0.01).toFixed(2);
-        this.amountBReceiving = (this.amountAReceiving * parseFloat(this.liquiditySelected.priceAB)).toFixed(2);
+        let amountAReceiving = toFixed(parseFloat(this.liquiditySelected.amountA) * item.percentage * 0.01 * Math.pow(10, this.liquiditySelected.tokenA.decimals)) + '';
+        let amountsOut = await this.contractRouter.methods.getAmountsOut(amountAReceiving, [this.liquiditySelected.tokenA.address, this.liquiditySelected.tokenB.address]).call();
+        console.log('amountsOut', amountsOut);
+        this.amountBReceiving = (amountsOut[amountsOut.length - 1] * 1.0 / Math.pow(10, this.liquiditySelected.tokenB.decimals)).toFixed(2);
+        console.log(`this.amountAReceiving = ${this.amountAReceiving}, this.amountBReceiving = ${this.amountBReceiving}`)
+        this.priceAB = (amountsOut[amountsOut.length - 1] * 1.0  / amountsOut[0]).toFixed(this.displayDecimals);
+        this.priceBA = (amountsOut[0] * 1.0 / amountsOut[amountsOut.length - 1]).toFixed(this.displayDecimals);
       },
       goBack(){
         this.$router.go(-1);
@@ -246,7 +258,8 @@
             addrPair,
         );
         console.log('this.pairContract', this.pairContract);
-        let liquidityRemoving = parseFloat(this.liquidityRemoving) * 10 ** this.displayDecimals + '00000000000000';
+        // let liquidityRemoving = parseFloat(this.liquidityRemoving) * 10 ** this.displayDecimals + '00000000000000';
+        let liquidityRemoving = toFixed(parseFloat(this.liquidityRemoving) * Math.pow(10, 18)) + '';
         console.log('liquidityRemoving', liquidityRemoving);
         await this.pairContract.methods.approve(this.contractRouter.options.address, liquidityRemoving).send({ from: this.user });
 
@@ -271,11 +284,17 @@
         // let expiry = 10 * 60;  // 10 mins
         let deadline = timeNow + this.deadline;
 
-        let liquidityRemoving = parseFloat(this.liquidityRemoving) * 10 ** this.displayDecimals + '00000000000000';
+        // let liquidityRemoving = parseFloat(this.liquidityRemoving) * 10 ** this.displayDecimals + '00000000000000';
+        let liquidityRemoving = toFixed(parseFloat(this.liquidityRemoving) * Math.pow(10, 18)) + '';
         console.log('liquidityRemoving', liquidityRemoving);
 
-
-        await this.contractRouter.methods.removeLiquidity(this.liquiditySelected.tokenA.address, this.liquiditySelected.tokenB.address, liquidityRemoving, 0, 0, this.user, deadline).send({from: this.user});
+        if (this.liquiditySelected.tokenA.address == this.weth.address) {
+          await this.contractRouter.methods.removeLiquidityETH(this.liquiditySelected.tokenB.address, liquidityRemoving, 0, 0, this.user, deadline).send({from: this.user});
+        } else if (this.liquiditySelected.tokenB.address == this.weth.address) {
+          await this.contractRouter.methods.removeLiquidityETH(this.liquiditySelected.tokenA.address, liquidityRemoving, 0, 0, this.user, deadline).send({from: this.user});
+        } else {
+          await this.contractRouter.methods.removeLiquidity(this.liquiditySelected.tokenA.address, this.liquiditySelected.tokenB.address, liquidityRemoving, 0, 0, this.user, deadline).send({from: this.user});
+        }
 
         console.log('removeLiquidity succeed.')
         setTimeout(() => {
@@ -284,82 +303,6 @@
         }, 3000);
       },
       monitorEvents(contract) {
-      //     if (this.web3 == null || this.web3 == undefined) {
-      //       return;
-      //     }
-      //     this.web3.eth.getBlock('latest').then((res) => {
-      //           let latestBlockNumber = res.number;
-      //           console.log('block', latestBlockNumber);
-
-      //           let options = {
-      //               fromBlock: latestBlockNumber,      //Number || "earliest" || "pending" || "latest"
-      //           };
-
-      //           contract.events.RemoveLiquidity(options)
-      //               .on('data', evt => {
-      //                   console.log('Liquidity data', evt)
-      //                   let data = evt.returnValues;
-      //                   if (data.sender == this.user) {
-      //                       let addrA = data.tokenA;
-      //                       let addrB = data.tokenB;
-      //                       let tokenA = '';
-      //                       let tokenB = '';
-      //                       this.tokenList.forEach((token) => {
-      //                         if (token.address == addrA) {
-      //                           tokenA = token.symbol;
-      //                         }
-
-      //                         if (token.address == addrB) {
-      //                           tokenB = token.symbol;
-      //                         }
-      //                       })
-      //                       let amountA = data.amountA;
-      //                       let amountB = data.amountB;
-      //                       let liquidity = data.liquidity;
-      //                       let transactionHash = evt.transactionHash;
-      //                       let blockHash = evt.blockHash;
-      //                       let blockNumber = evt.blockNumber;
-      //                       let url = this.$store.state.url.api.base + this.$store.state.url.api.transaction.addTransaction;
-      //                       let body = {
-      //                         tokenA: this.tokenA.symbol,
-      //                         tokenB: this.tokenB.symbol,
-      //                         amountA: amountA,
-      //                         amountB: amountB,
-      //                         amountPair: liquidity,
-      //                         rateAB: amountB / amountA,
-      //                         rateBA: amountA / amountB,
-      //                       };
-      //                       console.log('body', body);
-      
-      //                       axios({
-      //                           url: url,
-      //                           method: 'post',
-      //                           data: {
-      //                             owner: this.user,
-      //                             category: 1,   // Remove Liquidity
-      //                             transactionHash: transactionHash,
-      //                             blockHash: blockHash,
-      //                             blockNumber: blockNumber,
-      //                             value: JSON.stringify(body)
-      //                           }
-      //                       }).then((res) => {
-                                
-      //                           let result = JSON.parse(res.data);
-      //                           if (result.status == 'success') {
-      //                               this.$store.dispatch('getMyTransactions', this.user);
-      //                           }
-                                
-      //                           this.dialogVisibleConfirmationWaiting = false;
-      //                       }, (err) => {
-      //                           console.log('error', err);
-      //                           this.dialogVisibleConfirmationWaiting = false;
-      //                       })
-      //                   }
-      //                 })
-      //               .on('changed', changed => console.log('Liquidity changed', changed))
-      //               .on('error', err => {throw err})
-      //               .on('connected', str => console.log('Liquidity connected', str))
-      //       });
       },
     }
   };

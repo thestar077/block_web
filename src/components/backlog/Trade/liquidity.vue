@@ -171,7 +171,6 @@
           <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="handleWallet" class="sc-dlfnbm btoybd ">Unlock Wallet</button>
           <!-- unlock wallet之后就是supply，不要deposit，两个按钮变成一个 -->
           <button v-else type="button" @click="handleSupply" :class="tokenANeedsApprove === false && tokenBNeedsApprove === false && enoughToSupply === true ?'sc-dlfnbm btoybd':'sc-dlfnbm btoybd supplyDisable'">Supply</button>
-          <!-- <button v-else type="button" class="sc-dlfnbm btoybd" @click="addLiquidity()">Supply</button> -->
         </div>
       </div>
       <div>
@@ -203,7 +202,7 @@
         <img :src="tokenB.pic">
       </div>
     </div>
-    <p  class="swapTips">{{tokenA.symbol}}/{{tokenA.symbol}} Pool Tokens</p>
+    <p  class="swapTips">{{tokenA.symbol}}/{{tokenB.symbol}} Pool Tokens</p>
     <p class="swapTips2">Output is estimated.If the price changes by more than 0.8% your transaction will revert.</p>
     <p class="swapTxt">
       <span>{{tokenA.symbol}} Deposited</span>
@@ -215,11 +214,11 @@
     </p>
     <p class="swapTxt">
       <span>Rates</span>
-      <span>1{{tokenA.symbol}} = {{rateBA}} {{tokenB.symbol}}</span>
+      <span>1{{tokenA.symbol}} = {{rateAB}} {{tokenB.symbol}}</span>
     </p>
     <p class="swapTxt">
       <span> </span>
-      <span>1{{tokenB.symbol}} = {{rateAB}} {{tokenA.symbol}}</span>
+      <span>1{{tokenB.symbol}} = {{rateBA}} {{tokenA.symbol}}</span>
     </p>
     <p class="swapTxt">
       <span>Share of Pool:</span>
@@ -417,7 +416,7 @@
         return this.$store.state.web3.web3 !== null && this.$store.state.web3.web3 !== undefined;
       },
       enoughToSupply() {
-        return this.amountA > 0 && this.amountA <= this.tokenAAllowance && this.amountB > 0 && this.amountB <= this.tokenBAllowance;
+        return (this.amountA > 0 && this.amountA <= this.tokenAAllowance || this.tokenA.address === this.weth.address && this.amountA > 0) && (this.amountB > 0 && this.amountB <= this.tokenBAllowance || this.tokenB.address === this.weth.address && this.amountB > 0);
       },
       accounts () {
         return this.$store.state.web3.accounts;
@@ -469,6 +468,9 @@
       deadline() {
         return this.$store.state.baseData.userConfig.deadline;
       },
+      weth() {
+        return this.$store.state.web3.tokens[7];
+      }
     },
     watch: {
       contractRouter: function(newVal) {
@@ -501,44 +503,7 @@
         this.dialogVisibleWallet = true;
         this.isUnLock = false;
       },
-      async approve() {
-        if (this.web3 == null || this.web3 == undefined) {
-          alert('Please connect to your wallet first.');
-          return;
-        }
-
-        let amountA = parseInt(this.amountA);
-        let amountB = parseInt(this.amountB);
-        if (this.contractRouter == null || this.contractRouter == undefined) {
-          alert("Invalid contract. Please contact the customer service.");
-          return;
-        }
-
-        let contractTokenA = new this.$store.state.web3.web3.eth.Contract(
-            abiTokenDefender,
-            this.tokenA.address,
-        );
-
-        let contractTokenB = new this.$store.state.web3.web3.eth.Contract(
-            abiTokenDefender,
-            this.tokenB.address,
-        );
-
-        console.log('contractTokenA', contractTokenA);
-        console.log('contractTokenB', contractTokenB);
-
-        await contractTokenA.methods.approve(this.contractRouter.options.address, amountA).send({ from: this.user });
-        await contractTokenB.methods.approve(this.contractRouter.options.address, amountB).send({ from: this.user });
-
-        let allowanceTokenA = await contractTokenA.methods.allowance(this.user, this.contractRouter.options.address).call();
-        let allowanceTokenB = await contractTokenB.methods.allowance(this.user, this.contractRouter.options.address).call();
-        console.log(`Allowance of tokenA = ${allowanceTokenA}, Allowance of tokenB = ${allowanceTokenB}, address = ${this.contractRouter.options.address}`);
-
-        // await this.contractRouter.methods.addLiquidiy(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user).send({from: this.user});
-
-      },
       async approveTokenA() {
-        
         if (this.web3 == null || this.web3 == undefined) {
           alert('Please unlock your wallet first.');
           return;
@@ -590,88 +555,35 @@
 
         this.tokenBNeedsApprove = false;
       },
-      async addLiquidity() {
-          if (this.web3 == null || this.web3 == undefined) {
-            alert('Please connect to your wallet first.');
-            return;
-          }
-
-          if (this.tokenA.name == undefined || this.tokenB.name == undefined) {
-            alert('Please select the tokens to supply.');
-            return;
-          }
-
-          if (this.amountA <= 0 || this.amountB <= 0) {
-            alert('Please specify the amounts to supply.');
-            return;
-          }
-
-          if (this.contractRouter == null || this.contractRouter == undefined) {
-            alert("Invalid contract. Please contact the customer service.");
-            return;
-          }
-
-          if (this.contractFactory == null || this.contractFactory == undefined) {
-            alert("Invalid contract. Please contact the customer service.");
-            return;
-          }
-
-          let contractTokenA = this.tokenA.contract;
-          let contractTokenB = this.tokenB.contract;
-
-          let timeNow = Math.floor(Date.now() / 1000);
-          let deadline = timeNow + this.deadline;
-          let amountA = parseInt(this.amountA);
-          let amountB = parseInt(this.amountB);
-          await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
-
-          let _amountA = await this.contractRouter.methods.amountA().call();
-          let _amountB = await this.contractRouter.methods.amountB().call();
-          let _liquidity = await this.contractRouter.methods.liquidity().call();
-          console.log(`_amountA = ${_amountA}, _amountB = ${_amountB}, _liquidity = ${_liquidity}`);
-
-          let addrPair = await this.contractFactory.methods.getPair(this.tokenA.address, this.tokenB.address).call();
-          console.log(`addrPair = ${addrPair}`);
-          this.$store.dispatch('getTokenUniswapPairContract', addrPair);
-
-          let contractPair = this.$store.state.web3.contracts.token.pair;
-          console.log('contractPair', contractPair);
-            let balanceTokenA = await contractTokenA.methods.balanceOf(contractPair.options.address).call();
-            let balanceTokenB = await contractTokenB.methods.balanceOf(contractPair.options.address).call();
-            let balancePair = await contractPair.methods.balanceOf(this.user).call();
-            console.log(`balanceTokenA = ${balanceTokenA}, balanceTokenB = ${balanceTokenB}, balanceTokenPair = ${balancePair}`);
-      },
       async handleSupply(){
           // Step 1: Check current pair
-          let addrPair = await this.contractFactory.methods.getPair(this.tokenPathSelected[0], this.tokenPathSelected[1]).call();
-          console.log('addrPair', addrPair);
-          this.rateAB = this.amountB / this.amountA;
-          this.rateBA = this.amountA / this.amountB;
-          if (addrPair == '0x0000000000000000000000000000000000000000') {
-            // Pair not created.
-            this.totalLiquidity = 0;
-            this.poolShare = 100;
+          if (this.tokenPathSelected.length > 0) {
+              let addrPair = await this.contractFactory.methods.getPair(this.tokenPathSelected[0], this.tokenPathSelected[1]).call();
+            console.log('addrPair', addrPair);
+            this.rateAB = this.amountB / this.amountA;
+            this.rateBA = this.amountA / this.amountB;
+            if (addrPair == '0x0000000000000000000000000000000000000000') {
+              // Pair not created.
+              this.totalLiquidity = 0;
+              this.poolShare = 100;
+            } else {
+              // Pair already created
+              this.liquidities.forEach((liquidity) => {
+                if (liquidity.tokenA.address == this.tokenA.address && liquidity.tokenB.address == this.tokenB.address) {
+                  let newLiquidity = Math.sqrt(this.amountA * this.amountB);
+                  console.log('newLiquidity', newLiquidity);
+                  this.totalLiquidity = newLiquidity + parseFloat(liquidity.supplies);
+                  console.log('totalLiquidity', this.totalLiquidity);
+                  this.poolShare = ((newLiquidity / this.totalLiquidity) * 100).toFixed(2);
+                }
+              });
+            }
+            this.dialogVisibleConfirmSwap = true;
           } else {
-            // Pair already created
-            this.liquidities.forEach((liquidity) => {
-              if (liquidity.tokenA.address == this.tokenA.address && liquidity.tokenB.address == this.tokenB.address) {
-                let newLiquidity = Math.sqrt(this.amountA * this.amountB);
-                console.log('newLiquidity', newLiquidity);
-                this.totalLiquidity = newLiquidity + parseFloat(liquidity.supplies);
-                console.log('totalLiquidity', this.totalLiquidity);
-                this.poolShare = ((newLiquidity / this.totalLiquidity) * 100).toFixed(2);
-              }
-            });
+            alert('Liquidity pair is not found.');
+            return;
           }
-          // Step 1: Show price
-          // let amountAWei = this.web3.utils.toWei(this.amountA, 'ether');
-          // console.log('amountAWei', amountAWei);
-          // console.log('this.tokenPathSelected', this.tokenPathSelected);
-          // console.log('address', this.contractRouter.options.address);
-          // let amountsOut = await this.contractRouter.methods.getAmountsOut(amountAWei, this.tokenPathSelected).call();
-          // console.log('amountsOut', amountsOut);
-          // Step 2: Show total liquidity
-          this.dialogVisibleConfirmSwap = true;
+          
       },
       handleAdd(){
         this.currentPage = 1;
@@ -780,7 +692,12 @@
         if(this.tokenIndex== 1){
           this.tokenA = item;
           this.tokenAIndex = item.index;
-          this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+          if (this.tokenA.address !== this.weth.address) {
+            this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+          } else {
+            this.tokenANeedsApprove = false;
+          }
+          
           if (resetTokenB) {
             this.tokenB = {};
             this.tokenBIndex = -1;
@@ -788,7 +705,11 @@
         }else{
           this.tokenB = item;
           this.tokenBIndex = item.index;
-          this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
+          if (this.tokenB.address !== this.weth.address) {
+            this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
+          } else {
+            this.tokenBNeedsApprove = false;
+          }
         }
 
         this.computeSwapPath();
@@ -798,10 +719,19 @@
       handleAmountChange(index) {
         console.log(`AAAAAAA amountA = ${this.amountA}, allowanceA = ${this.tokenAAllowance}, amountB = ${this.amountB}, allowanceB = ${this.tokenBAllowance}`)
         if (index == 1) {
-          this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+          if (this.tokenA.address !== this.weth.address) {
+            this.tokenANeedsApprove = (this.amountA > this.tokenAAllowance) ? true : false;
+          } else {
+            this.tokenANeedsApprove = false;
+          }
         } else {
-          this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
+          if (this.tokenB.address !== this.weth.address) {
+            this.tokenBNeedsApprove = (this.amountB > this.tokenBAllowance) ? true : false;
+          } else {
+            this.tokenBNeedsApprove = false;
+          }
         }
+        console.log(`tokenANeedsApprove = ${this.tokenANeedsApprove}, tokenBNeedsApprove = ${this.tokenBNeedsApprove}`);
       },
       handleMax(index) {
         if (index == 1) {
@@ -875,7 +805,28 @@
           let amountA = toFixed(this.amountA * Math.pow(10, this.tokenA.decimals)) + '';
           let amountB = toFixed(this.amountB * Math.pow(10, this.tokenA.decimals)) + '';
           console.log(`amountA = ${amountA}, amountB = ${amountB}`);
-          await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
+
+          let balanceTokenAUser = await this.tokenA.contract.methods.balanceOf(this.user).call();
+          let balanceTokenBUser = await this.web3.eth.getBalance(this.user);
+          console.log(`******* Before adding liquidity: balanceTokenAUser = ${balanceTokenAUser}, balanceTokenBUser = ${balanceTokenBUser}`);
+          if (this.tokenA.address == this.weth.address) {
+            await this.contractRouter.methods.addLiquidityETH(this.tokenB.address, amountB, 0, 0, this.user, deadline).send({from: this.user, value: amountA});
+          } else if (this.tokenB.address == this.weth.address) {
+            await this.contractRouter.methods.addLiquidityETH(this.tokenA.address, amountA, 0, 0, this.user, deadline).send({from: this.user, value: amountB});
+          } else {
+            await this.contractRouter.methods.addLiquidity(this.tokenA.address, this.tokenB.address, amountA, amountB, 0, 0, this.user, deadline).send({from: this.user});
+          }
+
+          // Check balance
+          balanceTokenAUser = await this.tokenA.contract.methods.balanceOf(this.user).call();
+          balanceTokenBUser = await this.web3.eth.getBalance(this.user);
+          console.log(`******* After adding liquidity: balanceTokenAUser = ${balanceTokenAUser}, balanceTokenBUser = ${balanceTokenBUser}`);
+          let addrPair = await this.contractFactory.methods.getPair(this.tokenA.address, this.tokenB.address).call();
+          if (addrPair != '0x0000000000000000000000000000000000000000') {
+            let balanceTokenAPair = await this.tokenA.contract.methods.balanceOf(addrPair).call();
+            let balanceTokenBPair = await this.tokenB.contract.methods.balanceOf(addrPair).call();
+            console.log(`******* After adding liquidity: balanceTokenAPair = ${balanceTokenAPair}, balanceTokenBPair = ${balanceTokenBPair}`);
+          }
 
           console.log('addLiquidity succeed.')
           setTimeout(() => {
@@ -903,7 +854,7 @@
                             let addrB = data.tokenB;
                             let tokenA = '';
                             let tokenB = '';
-                            this.tokenList.forEach((token) => {
+                            this.tokenListOrig.forEach((token) => {
                               if (token.address == addrA) {
                                 tokenA = token.symbol;
                               }
@@ -962,13 +913,13 @@
                   contract.events.RemoveLiquidity(options)
                     .on('data', evt => {
                         let data = evt.returnValues;
-                        console.log('************* RemoveLiquidity data', data)
+                        console.log('************* RemoveLiquidity data', evt)
                         if (data.sender == this.user) {
                             let addrA = data.tokenA;
                             let addrB = data.tokenB;
                             let tokenA = '';
                             let tokenB = '';
-                            this.tokenList.forEach((token) => {
+                            this.tokenListOrig.forEach((token) => {
                               if (token.address == addrA) {
                                 tokenA = token.symbol;
                               }

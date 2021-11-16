@@ -11,6 +11,7 @@ import abiUniswapFactory from '../assets/abi/UniswapV2Factory.json';
 import abiRouter from '../assets/abi/DefenderRouterV1.json';
 import abiWeth from '../assets/abi/WETH.json';
 import abiPoolSingle from '../assets/abi/PoolSingle.json';
+import {toFixed} from '../utils/math.js';
 
 const WEB3 = 'WEB3';
 const WEB3_ACCOUNTS = 'WEB3_ACCOUNTS';
@@ -41,15 +42,15 @@ export default {
                 dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0x0E540D2CDfbdCE624d1c1c721dC851c6C6993B03',
+                weth: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
                 ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
                 ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
             pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0xd05c1214C637071D903BE0f6CadeD2be5e303784',
-            router_v1: '0xF73b582AEE0997d13180b25c4b03Cf8281Cc3BFb',
+            uniswap_factory: '0x9827F956ff8150cd7d1223a218AE8a7Ab48aa616',
+            router_v1: '0xa4F6b18956583ae1E11E49B13F7D536dAA8100f4',
         },
         contracts: {
             token: {
@@ -79,7 +80,7 @@ export default {
                 inA: true,
                 inB: false,
                 tokensA: [],
-                tokensB: [1],   // FTK1/FTK2
+                tokensB: [1,2,3,7],   // FTK1/FTK2
             },
             {
                 symbol: 'FTK2',
@@ -89,16 +90,16 @@ export default {
                 contract: {},
                 decimals: 18,
                 index: 1,
-                inA: false,
+                inA: true,
                 inB: true,
                 tokensA: [0],   // FTK1/FTK2
-                tokensB: [],
+                tokensB: [2,3,7],
             },
             {
                 symbol: 'USDT',
                 pic:require('@/assets/picture/bi/2.png'),
                 name:'Tether USD (USDT)',
-                address: '',
+                address: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 contract: {},
                 decimals: 18,
                 index: 2,
@@ -111,7 +112,7 @@ export default {
                 symbol: 'USDC',
                 pic:require('@/assets/picture/bi/3.png'),
                 name:'USD Coin (USDC)',
-                address: '',
+                address: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
                 contract: {},
                 decimals: 18,
                 index: 3,
@@ -163,14 +164,14 @@ export default {
                 symbol: 'WETH',
                 pic:require('@/assets/picture/bi/27.png'),
                 name:'Wrapped Ether (WETH)',
-                address: '0x0E540D2CDfbdCE624d1c1c721dC851c6C6993B03',
+                address: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
                 contract: {},
                 decimals: 18,
                 index: 7,
-                inA: true,
+                inA: false,
                 inB: true,
-                tokensA: [4,9], //  WBTC/WETH, SPELL/WETH
-                tokensB: [2,5,8,3,6], // WETH/USDT, WETH/LINK, WETH/MIM, WETH/USDC, WETH/SUSHI
+                tokensA: [0,1,2,3,4,5,6,8,9], //  WBTC/WETH, SPELL/WETH,// WETH/USDT, WETH/LINK, WETH/MIM, WETH/USDC, WETH/SUSHI
+                tokensB: [], 
             },
             {
                 symbol: 'MIM',
@@ -295,6 +296,8 @@ export default {
         swap: {
             paths: [
                 [0, 1], // FTK1 -> FTK2
+                [0, 7], // FTK1 -> WETH
+                [7, 1], // WETH -> FTK2
             ],
         },
         minter: '0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc',
@@ -583,7 +586,7 @@ export default {
                     }
                 }
 
-                console.log('AAAAAAAAAAAAAA liquidity', liquidities);
+                // console.log('AAAAAAAAAAAAAA liquidity', liquidities);
                 for (let i = 0; i < transactions.length; i++) {
                     let transaction = transactions[i];
                     if (transaction.category == 1) {   // Remove liquidity
@@ -602,6 +605,7 @@ export default {
                 for (let i = 0; i < liquidities.length; i++) {
                     
                     let supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenA.address, liquidities[i].tokenB.address).call();
+                    console.log('********** supplies', supplies);
                     if (supplies == 0) {
                     supplies = await contractRouter.methods.getSupplies(liquidities[i].tokenB.address, liquidities[i].tokenA.address).call();
                     }
@@ -611,12 +615,16 @@ export default {
 
                     let liquidity = liquidities[i];
                     // console.log('liquidity', liquidity);
-                    let amountA = Math.floor(liquidity.amountA);
-                    let amountsOut = await contractRouter.methods.getAmountsOut(amountA, [liquidity.tokenA.address, liquidity.tokenB.address]).call();
-                    let priceAB = (amountsOut[amountsOut.length - 1] * 1.0 / amountsOut[0]);
+                    // let amountA = toFixed(liquidity.amountA * Math.pow(10, liquidity.tokenA.decimals)) + '';
+                    // let amountsOut = await contractRouter.methods.getAmountsOut(amountA, [liquidity.tokenA.address, liquidity.tokenB.address]).call();
+                    // console.log('BBBBBBBB amountsOut', amountsOut)
+                    // let priceAB = (amountsOut[amountsOut.length - 1] * 1.0 / amountsOut[0]);
+                    // let priceBA = 1.0 / priceAB;
+                    let priceAB = liquidity.amountB / liquidity.amountA;
                     let priceBA = 1.0 / priceAB;
                     liquidities[i].priceAB = priceAB.toFixed(displayDecimals);
                     liquidities[i].priceBA = priceBA.toFixed(displayDecimals);
+                    
                 }
     
                 commit('GET_LIQUIDITIES', liquidities);
