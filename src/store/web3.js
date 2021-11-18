@@ -37,20 +37,31 @@ export default {
         web3: null,
         address: {
             token: {
-                egg: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
-                dfd: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
+                // hardhat
+                // egg: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
+                // dfd: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
+                // dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
+                // usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
+                // usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
+                // weth: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
+                // ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                // ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+
+                // ropsten
+                egg: '0xAbb8AB9aC56BF62f3F24606c4280a17de21c414e',
+                dfd: '0x1036962B5941430FBEb0Ae7B7a9689d33BBEf812',
                 dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
                 usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
                 usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
-                ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
-                ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                weth: '0x9d0a7ADdA80612132696e4b85D3e2b26fefb84Aa',
+                ftk1: '0x05E6C4bF1A86C3Cb3b175BF7D273473616ed12C0',
+                ftk2: '0x4FE3Ffb4b7c452777EC6e76b324C3643e6Ea83cD',
             },
             rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
             dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
             pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0x9827F956ff8150cd7d1223a218AE8a7Ab48aa616',
-            router_v1: '0xa4F6b18956583ae1E11E49B13F7D536dAA8100f4',
+            uniswap_factory: '0xbB4e19cc579781E2c4a80B733c2649DC3cbBA009',
+            router_v1: '0xfb841153be2a3A8A9922Ecb2903C86555c6ba9E0',
         },
         contracts: {
             token: {
@@ -73,7 +84,7 @@ export default {
                 symbol: 'FTK1',
                 pic:require('@/assets/picture/bi/32.png'),
                 name: 'Fake Token 1',
-                address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                address: '0x05E6C4bF1A86C3Cb3b175BF7D273473616ed12C0',
                 contract: {},
                 decimals: 18,
                 index: 0,
@@ -86,7 +97,7 @@ export default {
                 symbol: 'FTK2',
                 pic:require('@/assets/picture/bi/31.png'),
                 name: 'Fake Token 2',
-                address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                address: '0x4FE3Ffb4b7c452777EC6e76b324C3643e6Ea83cD',
                 contract: {},
                 decimals: 18,
                 index: 1,
@@ -99,7 +110,7 @@ export default {
                 symbol: 'USDT',
                 pic:require('@/assets/picture/bi/2.png'),
                 name:'Tether USD (USDT)',
-                address: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
+                address: '',
                 contract: {},
                 decimals: 18,
                 index: 2,
@@ -112,7 +123,7 @@ export default {
                 symbol: 'USDC',
                 pic:require('@/assets/picture/bi/3.png'),
                 name:'USD Coin (USDC)',
-                address: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
+                address: '',
                 contract: {},
                 decimals: 18,
                 index: 3,
@@ -164,7 +175,7 @@ export default {
                 symbol: 'WETH',
                 pic:require('@/assets/picture/bi/27.png'),
                 name:'Wrapped Ether (WETH)',
-                address: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
+                address: '0x9d0a7ADdA80612132696e4b85D3e2b26fefb84Aa',
                 contract: {},
                 decimals: 18,
                 index: 7,
@@ -379,23 +390,24 @@ export default {
                     dispatch('getTokenDggContract');
                     dispatch('getTokenDfdContract');
                     dispatch('getTokenContracts');
-                    dispatch('getTokenFTK1Contract');
-                    dispatch('getTokenFTK2Contract');
-                    dispatch('getRandContract');
-                    dispatch('getDggSaleContract');
-                    dispatch('getPoolSingleContract');
+                    // dispatch('getRandContract');
+                    // dispatch('getDggSaleContract');
+                    // dispatch('getPoolSingleContract');
                     dispatch('getUniswapFactoryContract');
                     dispatch('getDefenderRouterV1Contract');
-                    dispatch('getMyNftAssets', this.state.web3.accounts[0]);
+                    // dispatch('getMyNftAssets', this.state.web3.accounts[0]);
                     dispatch('getMyTransactions', this.state.web3.accounts[0]);
                     console.log('egg contract', this.state.web3.contracts.token.egg.options.address);
                     console.log('dgg contract', this.state.web3.contracts.token.dgg.options.address);
                     console.log('dfd contract', this.state.web3.contracts.token.dfd.options.address);
-                    console.log('ftk1 contract', this.state.web3.contracts.token.ftk1.options.address);
-                    console.log('ftk2 contract', this.state.web3.contracts.token.ftk2.options.address);
-                    console.log('rand contract', this.state.web3.contracts.rand.options.address);
-                    console.log('dgg-sale contract', this.state.web3.contracts.dgg_sale.options.address);
-                    console.log('pool-single contract', this.state.web3.contracts.pool_single.options.address);
+                    this.state.web3.tokens.forEach((token) => {
+                        if (token.address.length > 0) {
+                            console.log(`${token.symbol} contract: ${token.contract.options.address}`);
+                        }
+                    });
+                    // console.log('rand contract', this.state.web3.contracts.rand.options.address);
+                    // console.log('dgg-sale contract', this.state.web3.contracts.dgg_sale.options.address);
+                    // console.log('pool-single contract', this.state.web3.contracts.pool_single.options.address);
                     console.log('uniswap-factory contract', this.state.web3.contracts.uniswap_factory.options.address);
                     console.log('router-v1 contract', this.state.web3.contracts.router_v1.options.address);
                 }
@@ -431,28 +443,11 @@ export default {
                 commit('WEB3_CONTRACT_TOKEN_DFD', contractDfdToken);
             } 
         },
-        getTokenFTK1Contract({ commit }) {
-            if (this.state.web3.web3) {
-                let contractFtk1 = new this.state.web3.web3.eth.Contract(
-                    abiTokenDefender,
-                    this.state.web3.address.ftk1
-                );
-                commit('WEB3_CONTRACT_TOKEN_FTK1', contractFtk1);
-            } 
-        },
-        getTokenFTK2Contract({ commit }) {
-            if (this.state.web3.web3) {
-                let contractFtk2 = new this.state.web3.web3.eth.Contract(
-                    abiTokenDefender,
-                    this.state.web3.address.ftk2
-                );
-                commit('WEB3_CONTRACT_TOKEN_FTK2', contractFtk2);
-            } 
-        },
         async getTokenContracts({ commit }) {
             if (this.state.web3.web3) {
                 let tokens = this.state.web3.tokens;
                 tokens.forEach(async (token) => {
+                    
                     if (token.address.length > 0) {
                         token.contract = new this.state.web3.web3.eth.Contract(
                             abiTokenDefender,
