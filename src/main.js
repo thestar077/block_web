@@ -19,6 +19,7 @@ import { directives } from './directives';
 import Router from 'vue-router'
 import store from './store'
 import { storePlugin } from './store'
+export const bus = new Vue();
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
     return routerPush.call(this, location).catch(error => error)

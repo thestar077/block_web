@@ -2,8 +2,8 @@
 export default {
     state: {
         api: {
-            base: 'http://47.74.37.101:3001/',
-            // base: 'http://localhost:3001/',
+            // base: 'http://47.74.37.101:3001/',
+            base: 'http://localhost:3001/',
             nft: {
                 nft_all: 'allNfts',
                 nft_by_id: 'nftById',

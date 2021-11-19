@@ -343,7 +343,9 @@
   import qs from 'qs';
   import axios from 'axios';
   import myStorage from '../../../store/myStorage';
+  import { bus } from '../../../main';
   import {toFixed} from '../../../utils/math.js';
+  import { Message, MessageBox } from 'element-ui';
   import abiTokenDefender from '../../../assets/abi/DefenderToken.json'
   export default {
     data() {
@@ -404,9 +406,34 @@
     created() {
       this.tokenANeedsApprove = false;
       this.tokenBNeedsApprove = false;
-      if (this.contractRouter !== null && this.contractRouter !== undefined) {
-        this.monitorEvents(this.contractRouter);
-      } 
+      bus.$on('liquidityAddedSuccess', () => {
+          this.dialogVisibleConfirmationWaiting = false;
+          return Message({
+              message: 'Liquidity has been added successfully.',
+              type: 'success',
+          });
+      });
+      bus.$on('liquidityAddedFailure', () => {
+          this.dialogVisibleConfirmationWaiting = false;
+          return Message({
+              message: 'Liquidity has not been added.',
+              type: 'warning',
+          });
+      });
+      bus.$on('liquidityRemovalSuccess', () => {
+          this.dialogVisibleConfirmationWaiting = false;
+          return Message({
+              message: 'Liquidity has been removed successfully.',
+              type: 'success',
+          });
+      });
+      bus.$on('liquidityRemovalSuccess', () => {
+          this.dialogVisibleConfirmationWaiting = false;
+          return Message({
+              message: 'Liquidity has not been removed.',
+              type: 'warning',
+          });
+      });
     },
     computed: {
       web3() {
@@ -474,9 +501,6 @@
     },
     watch: {
       contractRouter: function(newVal) {
-        if (newVal) {
-            this.monitorEvents(newVal);
-        }
       },
       transactions: function(val) {
         if (val && val.length > 0) {
@@ -832,150 +856,6 @@
           setTimeout(() => {
             this.dialogVisibleConfirmationWaiting = false;
           }, 3000);
-      },
-      monitorEvents(contract) {
-          if (this.web3 == null || this.web3 == undefined) {
-            return;
-          }
-          this.web3.eth.getBlock('latest').then((res) => {
-                let latestBlockNumber = res.number;
-                console.log('block', latestBlockNumber);
-
-                let options = {
-                    fromBlock: latestBlockNumber,      //Number || "earliest" || "pending" || "latest"
-                };
-
-                contract.events.AddLiquidity(options)
-                    .on('data', evt => {
-                        console.log('Liquidity data', evt)
-                        let data = evt.returnValues;
-                        if (data.sender == this.user) {
-                            let addrA = data.tokenA;
-                            let addrB = data.tokenB;
-                            let tokenA = '';
-                            let tokenB = '';
-                            this.tokenListOrig.forEach((token) => {
-                              if (token.address == addrA) {
-                                tokenA = token.symbol;
-                              }
-
-                              if (token.address == addrB) {
-                                tokenB = token.symbol;
-                              }
-                            })
-                            let amountA = data.amountA;
-                            let amountB = data.amountB;
-                            let liquidity = data.liquidity;
-                            let transactionHash = evt.transactionHash;
-                            let blockHash = evt.blockHash;
-                            let blockNumber = evt.blockNumber;
-                            let url = this.$store.state.url.api.base + this.$store.state.url.api.transaction.addTransaction;
-                            let body = {
-                              tokenA: tokenA,
-                              tokenB: tokenB,
-                              amountA: amountA,
-                              amountB: amountB,
-                              amountPair: liquidity,
-                              rateAB: amountB / amountA,
-                              rateBA: amountA / amountB,
-                            };
-                            console.log('body', body);
-      
-                            axios({
-                                url: url,
-                                method: 'post',
-                                data: {
-                                  owner: this.user,
-                                  category: 0,   // Add Liquidity
-                                  transactionHash: transactionHash,
-                                  blockHash: blockHash,
-                                  blockNumber: blockNumber,
-                                  value: JSON.stringify(body)
-                                }
-                            }).then((res) => {
-                                let result = JSON.parse(res.data);
-                                if (result.status == 'success') {
-                                  
-                                    this.$store.dispatch('getMyTransactions', this.user);
-                                }
-                                
-                                this.dialogVisibleConfirmationWaiting = false;
-                            }, (err) => {
-                                console.log('error', err);
-                                this.dialogVisibleConfirmationWaiting = false;
-                            })
-                        }
-                      })
-                    .on('changed', changed => console.log('Liquidity changed', changed))
-                    .on('error', err => {throw err})
-                    .on('connected', str => console.log('Liquidity connected', str));
-
-                  contract.events.RemoveLiquidity(options)
-                    .on('data', evt => {
-                        let data = evt.returnValues;
-                        console.log('************* RemoveLiquidity data', evt)
-                        if (data.sender == this.user) {
-                            let addrA = data.tokenA;
-                            let addrB = data.tokenB;
-                            let tokenA = '';
-                            let tokenB = '';
-                            this.tokenListOrig.forEach((token) => {
-                              if (token.address == addrA) {
-                                tokenA = token.symbol;
-                              }
-
-                              if (token.address == addrB) {
-                                tokenB = token.symbol;
-                              }
-                            })
-                            let amountA = data.amountA;
-                            let amountB = data.amountB;
-                            let liquidity = data.liquidity;
-                            let transactionHash = evt.transactionHash;
-                            let blockHash = evt.blockHash;
-                            let blockNumber = evt.blockNumber;
-                            let url = this.$store.state.url.api.base + this.$store.state.url.api.transaction.addTransaction;
-                            let body = {
-                              tokenA: tokenA,
-                              tokenB: tokenB,
-                              amountA: amountA,
-                              amountB: amountB,
-                              amountPair: liquidity,
-                              rateAB: amountB / amountA,
-                              rateBA: amountA / amountB,
-                            };
-                            console.log('body', body);
-      
-                            axios({
-                                url: url,
-                                method: 'post',
-                                data: {
-                                  owner: this.user,
-                                  category: 1,   // Remove Liquidity
-                                  transactionHash: transactionHash,
-                                  blockHash: blockHash,
-                                  blockNumber: blockNumber,
-                                  value: JSON.stringify(body)
-                                }
-                            }).then((res) => {
-                                
-                                let result = JSON.parse(res.data);
-                                if (result.status == 'success') {
-                                    this.$store.dispatch('getMyTransactions', this.user);
-                                }
-                                
-                                this.dialogVisibleConfirmationWaiting = false;
-                            }, (err) => {
-                                console.log('error', err);
-                                this.dialogVisibleConfirmationWaiting = false;
-                            })
-                        }
-                      })
-                    .on('changed', changed => console.log('Liquidity changed', changed))
-                    .on('error', err => {throw err})
-                    .on('connected', str => console.log('Liquidity connected', str))
-            
-            });
       },
       changeBi(){
         let token1 = this.tokenA;
