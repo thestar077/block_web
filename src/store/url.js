@@ -28,6 +28,7 @@ export default {
         },
         static: {
             base: 'http://47.74.37.101:3001/static/nfts/',
+            // base: 'http://localhost:3001/static/nfts/',
             images: 'imgs/',
         },
         web3: {
