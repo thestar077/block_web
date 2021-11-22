@@ -50,12 +50,11 @@
           </div>
          </div></span>
        </div>
-       <div class="sc-XhUPp sc-ikPAkQ bUHUNe bWNYkD">
+       <!-- <div class="sc-XhUPp sc-ikPAkQ bUHUNe bWNYkD">
         <div color="#BDC2C4" class="sc-gsTCUz dcRinF">
-         <!-- Connect to a wallet to view your liquidity. -->
          In this collection,There are 5 Greek gods for you to unbox.Try your luck! 
         </div>
-       </div>
+       </div> -->
        <div class="historyBox">
          <el-collapse v-model="activeNames" v-if="liquidities.length > 0">
             <el-collapse-item v-for="(item, index) in liquidities" :key="item.tokenA.symbol + '-' + item.tokenB.symbol" :title="item.tokenA.symbol + '/' + item.tokenB.symbol" name="1">
@@ -186,7 +185,7 @@
       
 <!--       <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" class="sc-dlfnbm btoybd">Unlock Wallet</button>
       <button v-else type="button" class="sc-dlfnbm btoybd" @click="approve()">Deposit</button> -->
-     </div>
+      </div>
     </div>
    </div>
     </div>  
