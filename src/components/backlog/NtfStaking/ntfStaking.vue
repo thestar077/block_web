@@ -9,7 +9,7 @@
           <div  class="biArr">
             <img width="100%" :src="item.pic">
             <div class="biTitle">
-              $ {{item.num}}
+              {{item.num}}
               <span v-if="index == biArr.length-1">Claim</span>
             </div>
             <p class="biTxt">{{item.txt}}</p>
