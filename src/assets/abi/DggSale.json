@@ -3,6 +3,11 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "_router",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
         "name": "_nftContract",
         "type": "address"
       },
@@ -20,11 +25,6 @@
         "internalType": "uint256",
         "name": "_basePrice",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_randOracle",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -57,6 +57,18 @@
         "internalType": "address",
         "name": "buyer",
         "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "tokenSrc",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amountSrc",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -96,29 +108,6 @@
   {
     "stateMutability": "payable",
     "type": "fallback"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_index",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_lower",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_upper",
-        "type": "uint256"
-      }
-    ],
-    "name": "addLevelBound",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
   },
   {
     "inputs": [
@@ -189,13 +178,18 @@
         "internalType": "address",
         "name": "_tokenSrc",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_numToBuy",
+        "type": "uint256"
       }
     ],
-    "name": "getDiscount",
+    "name": "getApproxPrice",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "amountOut",
         "type": "uint256"
       }
     ],
@@ -206,97 +200,16 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "owner",
+        "name": "_user",
         "type": "address"
       }
     ],
-    "name": "getLatestBuy",
+    "name": "getUserTokens",
     "outputs": [
       {
         "internalType": "uint256[]",
         "name": "",
         "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_index",
-        "type": "uint256"
-      }
-    ],
-    "name": "getLevelBound",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "lower",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "upper",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct DggSale.LevelBound",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getLevelBoundsLength",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "latestBuy",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "maxTry",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -329,25 +242,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "nftTokenIds",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "_value",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "owner",
     "outputs": [
@@ -362,35 +256,22 @@
   },
   {
     "inputs": [],
-    "name": "randNonce",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "randOracle",
+    "name": "router",
     "outputs": [
       {
-        "internalType": "contract RandOracle",
+        "internalType": "address",
         "name": "",
         "type": "address"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -414,12 +295,12 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_maxTry",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "_nftAdmin",
+        "type": "address"
       }
     ],
-    "name": "setMaxTry",
+    "name": "setNftAdmin",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -428,22 +309,22 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "tokenSrc",
+        "name": "_tokenSrc",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "buyer",
+        "name": "_buyer",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "numberToBuy",
+        "name": "_numberToBuy",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "price",
+        "name": "_amountMax",
         "type": "uint256"
       }
     ],
@@ -463,6 +344,30 @@
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "userTokens",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

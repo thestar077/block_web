@@ -1,5 +1,16 @@
 [
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_randOracle",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -125,6 +136,55 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_lower",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_upper",
+        "type": "uint256"
+      }
+    ],
+    "name": "bulkMintForAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentTokenId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentUri",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -294,42 +354,19 @@
         "type": "address"
       },
       {
-        "internalType": "string",
-        "name": "_uri",
-        "type": "string"
+        "internalType": "bool",
+        "name": "isClient",
+        "type": "bool"
       }
     ],
     "name": "mint",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "tokenId",
         "type": "uint256"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_recipient",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_lower",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_upper",
-        "type": "uint256"
-      }
-    ],
-    "name": "mintBulk",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -371,6 +408,19 @@
     "outputs": [
       {
         "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "randOracle",
+    "outputs": [
+      {
+        "internalType": "contract RandOracle",
         "name": "",
         "type": "address"
       }
@@ -506,6 +556,19 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "_newMaxTry",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxTry",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "_levelId",
         "type": "uint256"
       },
@@ -516,6 +579,19 @@
       }
     ],
     "name": "setMetaData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_store",
+        "type": "address"
+      }
+    ],
+    "name": "setStore",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -536,6 +612,19 @@
     "name": "setTokenURI",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "store",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

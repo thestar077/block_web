@@ -114,6 +114,29 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_recipient",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_lower",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_upper",
+        "type": "uint256"
+      }
+    ],
+    "name": "bulkMintForAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
@@ -256,18 +279,19 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "_lower",
-        "type": "uint256"
-      },
+        "internalType": "bool",
+        "name": "isClient",
+        "type": "bool"
+      }
+    ],
+    "name": "mint",
+    "outputs": [
       {
         "internalType": "uint256",
-        "name": "_upper",
+        "name": "tokenId",
         "type": "uint256"
       }
     ],
-    "name": "mintBulk",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },

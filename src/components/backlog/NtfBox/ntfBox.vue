@@ -60,7 +60,7 @@
           <div class="col10">
             <div class="box">
               <img width="350vw" src="@/assets/picture/box.png">
-              <span v-if="buyToken == '2'">20% OFF</span>
+              <span v-if="buyTokenIndex == '2'">20% OFF</span>
             </div>
           </div>
           <div class="col12 txtBox">
@@ -68,24 +68,24 @@
             <p class="txtInfo">In this collection，There are 5 Greek gods for you to unbox. Try your luck!</p>
             <div class="priceBox">
               <p class="price">Price</p>
-              <p class="priceTxt" v-if="buyToken == '1'">
-                <span class="num">{{800}}</span>
-                <span> EGG ≈ 5690 USDC</span>
+              <p class="priceTxt" v-if="buyTokenIndex == '1'">
+                <span class="num">{{eggPrice}}</span>
+                <span> EGG ≈ {{usdcPrice}} USDC</span>
               </p>
               <div class="priceText" v-else>
-                <p class="originalPrice">{{dggPriceEgg}} EGG ≈ 5690 USDC <span>price</span></p>
-                <p class="presentPrice">4552 USDC <span>20% OFF</span></p>
+                <p class="originalPrice">{{eggPrice}} EGG ≈ {{usdcPrice}} USDC <span>price</span></p>
+                <p class="presentPrice">{{usdcPriceAfterDiscount}} USDC <span>20% OFF</span></p>
               </div>
             </div>
             <div class="totleNum">
               <span>Quantity</span>
-              <el-input-number v-model="num" :min="1" :max="10" label=""></el-input-number>
+              <el-input-number v-model="numberToBuy" :min="1" :max="10" label=""></el-input-number>
             </div>
             <div class="checkBox">
               <div class="flex">
                 <div class="flex">
                   <span>购买方式</span>
-                  <el-radio-group v-model="buyToken">
+                  <el-radio-group v-model="buyTokenIndex">
                     <el-radio label="1">EGG</el-radio>
                     <el-radio label="2">USDC</el-radio>
                   </el-radio-group>
@@ -93,10 +93,10 @@
               </div>
             </div>
             <div class="buyBtnBox">
-              <div :class="!isApprove?'buyBtn':'buyBtn disableBTn'" :disabled="!isApprove?false:true" v-click @click="handleApprove">
+              <div :class="!approved ? 'buyBtn':'buyBtn disableBTn'" :disabled="!approved ?false:true" v-click @click="handleApprove">
                   Approve
               </div>
-              <div  :class="isApprove?'buyBtn':'buyBtn disableBTn'" :disabled="isApprove?false:true" v-click @click="handleBuy">
+              <div  :class="approved?'buyBtn':'buyBtn disableBTn'" :disabled="approved?false:true" v-click @click="handleBuy">
                   Buy
               </div>
             </div>
@@ -173,20 +173,31 @@ of the gods". </p>
 
 <script>
   import qs from 'qs';
+  import axios from 'axios';
   import { mapState, mapGetters } from 'vuex';
   import { Message } from 'element-ui';
+import { toFixed } from '../../../utils/math';
   export default {
     data() {
       return {
-        isApprove:false,
         isHave:false,
         buyModelVisible:false,
         imgHeight:'350',
-        num:0,
-        buyToken:'1',
+        numberToBuy:0,
+        buyTokenIndex:'1',
+        buyTokenSelected: {},
+        priceCeiling: 1.01,
         nftBought: [],
         isShow:false,
         roleActive:0,
+        eggPrice: 0,
+        usdcPrice: 0,
+        usdcPriceAfterDiscount: 0,
+        usdcDiscount: 0,
+        eggAmountRequired: 0,
+        usdcAmountRequired: 0,
+        eggAllowance: 0,
+        usdcAllowance: 0,
         roleList:[
           {
             name:'Athena',
@@ -443,9 +454,9 @@ of the gods". </p>
       };
     },
     created() {
-      // setTimeout(() => {
-      //   console.log('AAA', this.nftsAll);
-      // }, 3000);
+      if (this.walletConnected) {
+         this.prepare();
+      }
     },
     mounted(){
       // 监听窗口变化，使得轮播图高度自适应图片高度
@@ -455,6 +466,17 @@ of the gods". </p>
       });
     },
     watch: {
+      numberToBuy: function(newVal) {
+        if (newVal > 0) {
+          this.eggAmountRequired = this.eggPrice * newVal;
+          this.usdcAmountRequired = this.usdcPriceAfterDiscount * newVal;
+        }
+      },
+      '$store.state.web3.contracts.dgg_sale': function(newVal) {
+        if (newVal) {
+           this.prepare();
+        }
+      },
       '$store.state.baseData.nfts': function(newVal) {
           if(newVal){
             // bosun todo
@@ -486,8 +508,20 @@ of the gods". </p>
       }
     },
     computed: {
-      eggTokenContract() {
-        return this.$store.state.web3.contracts.token.egg;
+      web3() {
+        return this.$store.state.web3.web3;
+      },
+      blockLatest() {
+        return this.$store.state.web3.block;
+      },
+      walletConnected() {
+        return this.$store.state.web3.web3 !== null && this.$store.state.web3.web3 !== undefined;
+      },
+      tokenEgg() {
+        return this.$store.state.web3.tokens[10];
+      },
+      tokenUsdc() {
+        return this.$store.state.web3.tokens[3];
       },
       dggTokenContract() {
         return this.$store.state.web3.contracts.token.dgg;
@@ -495,6 +529,9 @@ of the gods". </p>
       dggSaleContract() {
         return this.$store.state.web3.contracts.dgg_sale;
       },
+      // usdcTokenContract() {
+      //   return this.$store.state.web3.contracts.token.usdc;
+      // },
       randContract() {
         return this.$store.state.web3.contracts.rand;
       },
@@ -504,9 +541,9 @@ of the gods". </p>
       minter() {
         return this.$store.state.web3.minter;
       },
-      dggPriceEgg() {
-        return parseInt((this.$store.state.baseData.config.hasOwnProperty('dgg_price_egg')) ? this.$store.state.baseData.config.dgg_price_egg : this.$store.state.baseData.consts.dgg_price_egg_default);
-      }
+      approved() {
+        return this.walletConnected && ((this.buyTokenIndex == '1') ? this.eggAmountRequired > 0 && this.eggAllowance > 0 && this.eggAmountRequired <= this.eggAllowance : this.usdcAmountRequired > 0 && this.usdcAllowance > 0 && this.usdcAmountRequired <= this.usdcAllowance);
+      },
     },
     methods: {
       changeTag(index){
@@ -521,52 +558,103 @@ of the gods". </p>
           this.imgHeight = this.$refs.imgBox[0].offsetHeight;
         })
       },
-      handleApprove(){
-        this.isApprove = true;
+      async prepare() {
+        if (this.walletConnected === false) {
+          alert("Please unlock your wallet first.");
+          return;
+        }
+
+        // let myDggs = await this.dggTokenContract.methods.getUserTokens(this.user, 0).call();
+        // console.log('myDggs', myDggs);
+
+        let eggPrice = await this.dggSaleContract.methods.basePrice().call();
+        this.eggPrice = eggPrice / Math.pow(10, this.tokenEgg.decimals);
+        this.eggAmountRequired = this.eggPrice;
+
+        let usdcPrice = await this.dggSaleContract.methods.getApproxPrice(this.tokenUsdc.contract.options.address, '1').call();
+        let usdcDiscount = await this.dggSaleContract.methods.discounts(this.tokenUsdc.contract.options.address).call();
+        console.log(`usdcPrice = ${usdcPrice}, usdcDiscount = ${usdcDiscount}`)
+        this.usdcPrice = (usdcPrice * this.priceCeiling / Math.pow(10, this.tokenUsdc.decimals)).toFixed(2);
+        this.usdcPriceAfterDiscount = (usdcPrice * this.priceCeiling * usdcDiscount / Math.pow(10, this.tokenUsdc.decimals + 2)).toFixed(2);
+        this.usdcDiscount = usdcDiscount / 100.0;
+        this.usdcAmountRequired = (usdcPrice * this.priceCeiling * usdcDiscount / Math.pow(10, this.tokenUsdc.decimals + 2));
+        let allowanceEgg = await this.tokenEgg.contract.methods.allowance(this.user, this.dggSaleContract.options.address).call();
+        let allowanceUsdc = await this.tokenUsdc.contract.methods.allowance(this.user, this.dggSaleContract.options.address).call();
+        this.eggAllowance = allowanceEgg / Math.pow(10, this.tokenEgg.decimals);
+        this.usdcAllowance = allowanceUsdc / Math.pow(10, this.tokenUsdc.decimals);
+        console.log(`eggAmountRequired = ${this.eggAmountRequired}, eggAllowance = ${this.eggAllowance}, this.usdcAmountRequired = ${this.usdcAmountRequired}, usdcAllowance = ${this.usdcAllowance}`)
+      },
+      async handleApprove(){
+        if (this.walletConnected === false) {
+          alert("Please unlock your wallet first.");
+          return;
+        }
+
+        let amountSrc = 0;
+        let amountSrcWei = 0;
+        if (this.buyTokenIndex == '1') {
+          this.buyTokenSelected = this.tokenEgg;
+          amountSrc = this.eggPrice * this.numberToBuy;
+          amountSrcWei = toFixed(amountSrc * Math.pow(10, this.buyTokenSelected.decimals)) + '';
+          this.eggAmountRequired = amountSrc;
+        } else if (this.buyTokenIndex == '2') {
+          this.buyTokenSelected = this.tokenUsdc;
+          amountSrc = await this.dggSaleContract.methods.getApproxPrice(this.tokenUsdc.contract.options.address, this.numberToBuy + '').call();
+          amountSrcWei = toFixed(amountSrc * this.priceCeiling * this.usdcDiscount) + '';
+          this.usdcAmountRequired = amountSrcWei / Math.pow(10, this.buyTokenSelected.decimals);
+        }
+
+        console.log(`this.eggAmountRequired = ${this.eggAmountRequired}, this.usdcAmountRequired = ${this.usdcAmountRequired}, amountSrcWei = ${amountSrcWei}`);
+
+        let balance = await this.buyTokenSelected.contract.methods.balanceOf(this.user).call();
+        console.log(`Token = ${this.buyTokenSelected.symbol}, amountSrc = ${amountSrc}, Balance is ${balance}`);
+
+        await this.buyTokenSelected.contract.methods.approve(this.dggSaleContract.options.address, amountSrcWei).send({ from: this.user, gasLimit: this.blockLatest.gasLimit});
+
+        let allowance = await this.buyTokenSelected.contract.methods.allowance(this.user, this.dggSaleContract.options.address).call();
+
+        if (this.buyTokenIndex == '1') {
+          this.eggAllowance = allowance / Math.pow(10, this.tokenEgg.decimals);
+        } else {
+          this.usdcAllowance = allowance / Math.pow(10, this.tokenUsdc.decimals);
+        }
+
+        console.log(`Token = ${this.buyTokenSelected.symbol}, allowance = ${allowance}`);
       },
       // buy btn
       async handleBuy(){
-        this.buyModelVisible = true;
-        // this.$router.push({path: "/authorization"});//跳转授权
-        // Step 1: Check balances
-        let buyer = this.user;
-        let minter = this.minter;
-        if (buyer === '') {
-          alert('Please connect to your wallet first.');
+        if (this.walletConnected === false) {
+          alert("Please unlock your wallet first.");
           return;
-        } 
-        console.log('buyer', buyer);
-        let balanceDgg = await this.dggTokenContract.methods.balanceOf(minter).call();
-        console.log(`Before purchase: balanceDgg of seller = ${balanceDgg}`);
-        let buyerTokenAddress = '';
-        let numberToBuy = this.num;
-        let price = this.dggPriceEgg;
-        let total = numberToBuy * price;
-        if (this.buyToken === '1') {
-          let balanceEgg = await this.eggTokenContract.methods.balanceOf(buyer).call();
-          console.log(`Before purchase: balanceEgg of buyer = ${balanceEgg}`);
-          buyerTokenAddress = this.eggTokenContract.options.address;
-
-          console.log('this.dggSaleContract.options.address', this.dggSaleContract.options.address);
-          console.log('total', total);
-          console.log('buyer', buyer);
-          await this.eggTokenContract.methods.approve(this.dggSaleContract.options.address, total).send({from: buyer});
-          let allowance = await this.eggTokenContract.methods.allowance(buyer, this.dggSaleContract.options.address).call();
-          console.log(`EGG allowance to dgg-sale contract = ${allowance}`);
-        } else if (this.buyToken === '2') {
-          // Add later.
         }
 
-        console.log(`buyer = ${buyer}, buyerToken = ${buyerTokenAddress}, number = ${numberToBuy}, price = ${price}`);
-
-        let data = {
-          buyer: buyer,
-          buyerToken: buyerTokenAddress,
-          number: numberToBuy,
-          price: price,
-        };
+        this.buyTokenSelected = (this.buyTokenIndex === '1') ? this.tokenEgg : this.tokenUsdc;
+        let tokenSrc = this.buyTokenSelected.address;
+        let amountRequired = (this.buyTokenIndex === '1') ? this.eggAmountRequired : this.usdcAmountRequired;
+        let amountMax = amountMax = toFixed(amountRequired * Math.pow(10, this.buyTokenSelected.decimals)) + '';
         
-        this.$store.dispatch('tradeNftToken', data);
+        let url = this.$store.state.url.api.base + this.$store.state.url.api.nft.generate_rand;
+        console.log(`url = ${url}`)
+        axios({
+            url: url,
+            method: 'post'
+        }).then(async (data) => {
+            if (data.status === 200) {
+                console.log('data', data.data);
+                await this.dggSaleContract.methods.tradeToken(tokenSrc, this.user, this.numberToBuy, amountMax).send({from: this.user, gasLimit: this.blockLatest.gasLimit});
+                let currentTokenId = await this.dggTokenContract.methods.currentTokenId().call();
+                let currentUri = await this.dggTokenContract.methods.currentUri().call();
+                console.log(`currentTokenId = ${currentTokenId}, currentUri = ${currentUri}`)
+                let tokensBought = await this.dggSaleContract.methods.getUserTokens(this.user).call();
+                console.log('tokensBought', tokensBought);
+
+                this.eggAmountRequired = 0;
+                this.usdcAmountRequired = 0;
+                this.buyModelVisible = true;   
+            }
+        })
+        
+        
       },
       handleNFT(){
         this.$router.push({path: '/myNFT'});
