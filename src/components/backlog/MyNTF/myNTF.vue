@@ -7,8 +7,8 @@
     </div>
     <el-carousel height="48vh" class="phoneShow">
       <!-- bosun todo -->
-      <!-- <el-carousel-item  v-for="(item,index) in infoArr[roleActive]" :key="'info1'+index"> -->
-      <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index">
+      <el-carousel-item  v-for="(item,index) in infoArr[roleActive]" :key="'info1'+index">
+      <!-- <el-carousel-item  v-for="(item,index) in infoArr[roleActive].info" :key="'info1'+index"> -->
         <div ref="imgBox">
           <!-- bosun todo -->
           <!-- <img class="cursorPointer" width="80%" :src="item.img" @touchstart="gotouchstart(index)"> -->
@@ -27,11 +27,11 @@
     </el-carousel>
     <el-row class="pcShow">
       <!-- bosun todo -->
-      <!-- <el-col v-for="(item,index) in infoArr[roleActive]" class="box" :key="'info2'+index"> -->
-      <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="'info2'+index">
+      <el-col v-for="(item,index) in infoArr[roleActive]" class="box" :key="'info2'+index">
+      <!-- <el-col v-for="(item,index) in infoArr[roleActive].info" class="box" :key="'info2'+index"> -->
         <!-- bosun todo -->
-        <!-- <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.img"> -->
-        <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.pic">
+        <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.img">
+        <!-- <img class="cursorPointer" @mouseover="mouseOver(index)" width="100%" :src="item.pic"> -->
         <div class="shadow" v-if="shadowIndex == index" @mouseleave="mouseLeave(index)">
           <div class="btn">
             <img width="33px" src="@/assets/picture/staking.png">
@@ -53,6 +53,7 @@
 
 <script>
   import qs from 'qs';
+  import axios from 'axios';
   export default {
     data() {
       return {
@@ -88,211 +89,213 @@
 
         ],
         // bosun todo
-        // infoArr:[
-        //   [],[],[],[],[]
-        // ],
         infoArr:[
-          {
-            info:[
-              {
-                pic:require('@/assets/picture/SSR.png'),
-                leval:'SSR',
-                name:'Big Whale Athena',
-                features:'goddess of war, face the evil',
-                skill:'Show-hand mainstream, stable profit',
-              },
-              {
-                pic:require('@/assets/picture/SR.png'),
-                leval:'SR',
-                name:'Freedom of wealth Athena',
-                features:'goddess of war, face the evil',
-                skill:'Show-hand mainstream, stable profit',
-              },
-              {
-                pic:require('@/assets/picture/S.png'),
-                leval:'S',
-                name:'Rich and noble Athena',
-                features:'goddess of war, face the evil',
-                skill:'Show-hand mainstream, stable profit',
-              },
-              {
-                pic:require('@/assets/picture/A+.png'),
-                leval:'A+',
-                name:'Small profit Athena',
-                features:'goddess of war, face the evil',
-                skill:'Show-hand mainstream, stable profit',
-              },
-              {
-                pic:require('@/assets/picture/A.png'),
-                leval:'A',
-                name:'Show-hand Fan Athena',
-                features:'goddess of war, face the evil',
-                skill:'Show-hand mainstream, stable profit',
-              }
-            ],
-          },
-          {
-            info:[
-              {
-                pic:require('@/assets/picture/SSR.png'),
-                leval:'SSR',
-                name:'Big Whale Poseidon',
-                features:'The god of the sea who shakes the earth.',
-                skill:' Show-hand copycat, get rich overnight.',
-              },
-              {
-                pic:require('@/assets/picture/SR.png'),
-                leval:'SR',
-                name:'Freedom of wealth Poseidon',
-                features:'The god of the sea who shakes the earth.',
-                skill:' Show-hand copycat, get rich overnight.',
-              },
-              {
-                pic:require('@/assets/picture/S.png'),
-                leval:'S',
-                name:'Rich and noble Poseidon',
-                features:'The god of the sea who shakes the earth.',
-                skill:' Show-hand copycat, get rich overnight.',
-              },
-              {
-                pic:require('@/assets/picture/A+.png'),
-                leval:'A+',
-                name:'Small profit Poseidon',
-                features:'The god of the sea who shakes the earth.',
-                skill:' Show-hand copycat, get rich overnight.',
-              },
-              {
-                pic:require('@/assets/picture/A.png'),
-                leval:'A',
-                name:'Show-hand Fan Poseidon',
-                features:'The god of the sea who shakes the earth.',
-                skill:' Show-hand copycat, get rich overnight.',
-              }
-            ],
-          },
-          {
-            info:[
-              {
-                pic:require('@/assets/picture/SSR.png'),
-                leval:'SSR',
-                name:'Big Whale Venus',
-                features:'arouse love and beauty in hearts of all things in the universe',
-                skill:'Show-hand DFD, reach the peak of life',
-              },
-              {
-                pic:require('@/assets/picture/SR.png'),
-                leval:'SR',
-                name:'Freedom of wealth Venus',
-                features:'arouse love and beauty in hearts of all things in the universe',
-                skill:'Show-hand DFD, reach the peak of life',
-              },
-              {
-                pic:require('@/assets/picture/S.png'),
-                leval:'S',
-                name:'Rich and noble Venus',
-                features:'arouse love and beauty in hearts of all things in the universe',
-                skill:'Show-hand DFD, reach the peak of life',
-              },
-              {
-                pic:require('@/assets/picture/A+.png'),
-                leval:'A+',
-                name:'Small profit Venus',
-                features:'arouse love and beauty in hearts of all things in the universe',
-                skill:'Show-hand DFD, reach the peak of life',
-              },
-              {
-                pic:require('@/assets/picture/A.png'),
-                leval:'A',
-                name:'Show-hand Fan Venus',
-                features:'arouse love and beauty in hearts of all things in the universe',
-                skill:'Show-hand DFD, reach the peak of life',
-              }
-            ],
-          },
-          {
-            info:[
-               {
-                pic:require('@/assets/picture/SSR.png'),
-                leval:'SSR',
-                name:'Big Whale Apollo',
-                features:'God of the sun and protector of human civilization',
-                skill:'EGG full position, get nice lover',
-              },
-              {
-                pic:require('@/assets/picture/SR.png'),
-                leval:'SR',
-                name:'Freedom of wealth Apollo',
-                features:'God of the sun and protector of human civilization',
-                skill:'EGG full position, get nice lover',
-              },
-              {
-                pic:require('@/assets/picture/S.png'),
-                leval:'S',
-                name:'Rich and noble Apollo',
-                features:'God of the sun and protector of human civilization',
-                skill:'EGG full position, get nice lover',
-              },
-              {
-                pic:require('@/assets/picture/A+.png'),
-                leval:'A+',
-                name:'Small profit Apollo',
-                features:'God of the sun and protector of human civilization',
-                skill:'EGG full position, get nice lover',
-              },
-              {
-                pic:require('@/assets/picture/A.png'),
-                leval:'A',
-                name:'Show-hand Fan Apollo',
-                features:'God of the sun and protector of human civilization',
-                skill:'EGG full position, get nice lover',
-              }
-            ],
-          },
-          {
-            info:[
-                                          {
-                pic:require('@/assets/picture/SSR.png'),
-                leval:'SSR',
-                name:'Big Whale Cupid',
-                features:'My arrow has been aimed at people bathed in love',
-                skill:'Band master, K-line divine hand',
-              },
-              {
-                pic:require('@/assets/picture/SR.png'),
-                leval:'SR',
-                name:'Freedom of wealth Cupid',
-                features:'My arrow has been aimed at people bathed in love',
-                skill:'Band master, K-line divine hand',
-              },
-              {
-                pic:require('@/assets/picture/S.png'),
-                leval:'S',
-                name:'Rich and noble Cupid',
-                features:'My arrow has been aimed at people bathed in love',
-                skill:'Band master, K-line divine hand',
-              },
-              {
-                pic:require('@/assets/picture/A+.png'),
-                leval:'A+',
-                name:'Small profit Cupid',
-                features:'My arrow has been aimed at people bathed in love',
-                skill:'Band master, K-line divine hand',
-              },
-              {
-                pic:require('@/assets/picture/A.png'),
-                leval:'A',
-                name:'Show-hand Fan Cupid',
-                features:'My arrow has been aimed at people bathed in love',
-                skill:'Band master, K-line divine hand',
-              }
-            ],
-          }
+          [],[],[],[],[],[]
         ],
+        // infoArr:[
+        //   {
+        //     info:[
+        //       {
+        //         pic:require('@/assets/picture/SSR.png'),
+        //         leval:'SSR',
+        //         name:'Big Whale Athena',
+        //         features:'goddess of war, face the evil',
+        //         skill:'Show-hand mainstream, stable profit',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/SR.png'),
+        //         leval:'SR',
+        //         name:'Freedom of wealth Athena',
+        //         features:'goddess of war, face the evil',
+        //         skill:'Show-hand mainstream, stable profit',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/S.png'),
+        //         leval:'S',
+        //         name:'Rich and noble Athena',
+        //         features:'goddess of war, face the evil',
+        //         skill:'Show-hand mainstream, stable profit',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A+.png'),
+        //         leval:'A+',
+        //         name:'Small profit Athena',
+        //         features:'goddess of war, face the evil',
+        //         skill:'Show-hand mainstream, stable profit',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A.png'),
+        //         leval:'A',
+        //         name:'Show-hand Fan Athena',
+        //         features:'goddess of war, face the evil',
+        //         skill:'Show-hand mainstream, stable profit',
+        //       }
+        //     ],
+        //   },
+        //   {
+        //     info:[
+        //       {
+        //         pic:require('@/assets/picture/SSR.png'),
+        //         leval:'SSR',
+        //         name:'Big Whale Poseidon',
+        //         features:'The god of the sea who shakes the earth.',
+        //         skill:' Show-hand copycat, get rich overnight.',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/SR.png'),
+        //         leval:'SR',
+        //         name:'Freedom of wealth Poseidon',
+        //         features:'The god of the sea who shakes the earth.',
+        //         skill:' Show-hand copycat, get rich overnight.',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/S.png'),
+        //         leval:'S',
+        //         name:'Rich and noble Poseidon',
+        //         features:'The god of the sea who shakes the earth.',
+        //         skill:' Show-hand copycat, get rich overnight.',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A+.png'),
+        //         leval:'A+',
+        //         name:'Small profit Poseidon',
+        //         features:'The god of the sea who shakes the earth.',
+        //         skill:' Show-hand copycat, get rich overnight.',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A.png'),
+        //         leval:'A',
+        //         name:'Show-hand Fan Poseidon',
+        //         features:'The god of the sea who shakes the earth.',
+        //         skill:' Show-hand copycat, get rich overnight.',
+        //       }
+        //     ],
+        //   },
+        //   {
+        //     info:[
+        //       {
+        //         pic:require('@/assets/picture/SSR.png'),
+        //         leval:'SSR',
+        //         name:'Big Whale Venus',
+        //         features:'arouse love and beauty in hearts of all things in the universe',
+        //         skill:'Show-hand DFD, reach the peak of life',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/SR.png'),
+        //         leval:'SR',
+        //         name:'Freedom of wealth Venus',
+        //         features:'arouse love and beauty in hearts of all things in the universe',
+        //         skill:'Show-hand DFD, reach the peak of life',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/S.png'),
+        //         leval:'S',
+        //         name:'Rich and noble Venus',
+        //         features:'arouse love and beauty in hearts of all things in the universe',
+        //         skill:'Show-hand DFD, reach the peak of life',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A+.png'),
+        //         leval:'A+',
+        //         name:'Small profit Venus',
+        //         features:'arouse love and beauty in hearts of all things in the universe',
+        //         skill:'Show-hand DFD, reach the peak of life',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A.png'),
+        //         leval:'A',
+        //         name:'Show-hand Fan Venus',
+        //         features:'arouse love and beauty in hearts of all things in the universe',
+        //         skill:'Show-hand DFD, reach the peak of life',
+        //       }
+        //     ],
+        //   },
+        //   {
+        //     info:[
+        //        {
+        //         pic:require('@/assets/picture/SSR.png'),
+        //         leval:'SSR',
+        //         name:'Big Whale Apollo',
+        //         features:'God of the sun and protector of human civilization',
+        //         skill:'EGG full position, get nice lover',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/SR.png'),
+        //         leval:'SR',
+        //         name:'Freedom of wealth Apollo',
+        //         features:'God of the sun and protector of human civilization',
+        //         skill:'EGG full position, get nice lover',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/S.png'),
+        //         leval:'S',
+        //         name:'Rich and noble Apollo',
+        //         features:'God of the sun and protector of human civilization',
+        //         skill:'EGG full position, get nice lover',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A+.png'),
+        //         leval:'A+',
+        //         name:'Small profit Apollo',
+        //         features:'God of the sun and protector of human civilization',
+        //         skill:'EGG full position, get nice lover',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A.png'),
+        //         leval:'A',
+        //         name:'Show-hand Fan Apollo',
+        //         features:'God of the sun and protector of human civilization',
+        //         skill:'EGG full position, get nice lover',
+        //       }
+        //     ],
+        //   },
+        //   {
+        //     info:[
+        //                                   {
+        //         pic:require('@/assets/picture/SSR.png'),
+        //         leval:'SSR',
+        //         name:'Big Whale Cupid',
+        //         features:'My arrow has been aimed at people bathed in love',
+        //         skill:'Band master, K-line divine hand',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/SR.png'),
+        //         leval:'SR',
+        //         name:'Freedom of wealth Cupid',
+        //         features:'My arrow has been aimed at people bathed in love',
+        //         skill:'Band master, K-line divine hand',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/S.png'),
+        //         leval:'S',
+        //         name:'Rich and noble Cupid',
+        //         features:'My arrow has been aimed at people bathed in love',
+        //         skill:'Band master, K-line divine hand',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A+.png'),
+        //         leval:'A+',
+        //         name:'Small profit Cupid',
+        //         features:'My arrow has been aimed at people bathed in love',
+        //         skill:'Band master, K-line divine hand',
+        //       },
+        //       {
+        //         pic:require('@/assets/picture/A.png'),
+        //         leval:'A',
+        //         name:'Show-hand Fan Cupid',
+        //         features:'My arrow has been aimed at people bathed in love',
+        //         skill:'Band master, K-line divine hand',
+        //       }
+        //     ],
+        //   }
+        // ],
         activeName: 'GameFi',
       };
     },
     created() {
-      
+      if (this.walletConnected) {
+        this.prepare();
+      }
     },
      mounted(){
       // 监听窗口变化，使得轮播图高度自适应图片高度
@@ -300,9 +303,42 @@
       //   this.imgHeight = this.$refs.imgBox[0].offsetHeight;
       // });
     },
+    computed: {
+      web3() {
+        return this.$store.state.web3.web3;
+      },
+      blockLatest() {
+        return this.$store.state.web3.block;
+      },
+      walletConnected() {
+        return this.$store.state.web3.web3 !== null && this.$store.state.web3.web3 !== undefined;
+      },
+      tokenEgg() {
+        return this.$store.state.web3.tokens[10];
+      },
+      tokenUsdc() {
+        return this.$store.state.web3.tokens[3];
+      },
+      dggTokenContract() {
+        return this.$store.state.web3.contracts.token.dgg;
+      },
+      dggSaleContract() {
+        return this.$store.state.web3.contracts.dgg_sale;
+      },
+      user() {
+        return (this.$store.state.web3.accounts.length > 0) ? this.$store.state.web3.accounts[0] : '';
+      },
+      minter() {
+        return this.$store.state.web3.minter;
+      },
+    },
     watch: {
+      '$store.state.web3.contracts.dgg_sale': function(newVal) {
+        if (newVal) {
+           this.prepare();
+        }
+      },
       '$store.state.baseData.assets': function(newVal) {
-
           if(newVal){
               console.log('newVal', newVal);
               newVal.forEach((item) => {
@@ -327,7 +363,7 @@
     },
     methods: {
       changeTag(index){
-        console.log(indexll)
+        console.log(index)
         this.roleActive = index;
       },
       handleClick(tab, event) {
@@ -363,6 +399,53 @@
               this.isLongPress = false;
            }
       },
+      async prepare() {
+        if (this.walletConnected === false) {
+          alert("Please unlock your wallet first.");
+          return;
+        }
+
+        let tokensBought = await this.dggSaleContract.methods.getUserTokens(this.user).call();
+        console.log('tokensBought', tokensBought);
+
+        this.infoArr = [[],[],[],[],[],[]];
+        if (tokensBought.length > 0) {
+          tokensBought.forEach(async (token) => {
+            let meta = await this.dggTokenContract.methods.tokenURI(token).call();
+            
+            let url = this.$store.state.url.static.base + meta;
+            console.log(`url = ${url}`);
+            axios({
+                url: url,
+                method: 'get'
+            }).then(async (data) => {
+                
+                if (data.status == 200) {
+                  let jsonData = JSON.parse(data.data);
+                  let info = {
+                    img: this.$store.state.url.static.base + this.$store.state.url.static.images + jsonData.hash,
+                    leval: jsonData.level,
+                    name: jsonData.name,
+                    feature: jsonData.desc,
+                  }
+                  console.log('info',info);
+                  this.infoArr[0].push(info);
+                  if (info.name == 'Athena') {
+                    this.infoArr[1].push(info);
+                  } else if (info.name == 'Posiedon') {
+                    this.infoArr[2].push(info);
+                  } else if (info.name == 'Venus') {
+                    this.infoArr[3].push(info);
+                  } else if (info.name == 'Apollo') {
+                    this.infoArr[4].push(info);
+                  } else if (info.name == 'Cupid') {
+                    this.infoArr[5].push(info);
+                  }
+                }
+            })
+          })
+        }
+      }
       //如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按 
       // gotouchmove(){
       //      clearTimeout(this.timeOutEvent);//清除定时器
