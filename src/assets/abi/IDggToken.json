@@ -120,6 +120,11 @@
       },
       {
         "internalType": "uint256",
+        "name": "_seed",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
         "name": "_lower",
         "type": "uint256"
       },
@@ -277,6 +282,11 @@
         "internalType": "address",
         "name": "_recipient",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_seed",
+        "type": "uint256"
       },
       {
         "internalType": "bool",

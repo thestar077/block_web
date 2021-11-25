@@ -326,6 +326,11 @@
         "internalType": "uint256",
         "name": "_amountMax",
         "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_seed",
+        "type": "uint256"
       }
     ],
     "name": "tradeToken",

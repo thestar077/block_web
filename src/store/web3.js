@@ -42,38 +42,38 @@ export default {
         address: {
             token: {
                 // hardhat
-                egg: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
-                dfd: '0x9bAaB117304f7D6517048e371025dB8f89a8DbE5',
-                dgg: '0x996DC3C07B8A4baEFcEfC48960F418c7f0640dBc',
-                usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
-                usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                weth: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
-                ftk1: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
-                ftk2: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                // egg: '0x7DA94E64EC71c62C6B1cF1965b4D8612DEBb4302',
+                // dfd: '0xe7442F7cBbcec4265f0BbfF44089b2A9f8790EAE',
+                // dgg: '0x0f79bB3457B69c27A75d14df9B16981bc5Df6f89',
+                // usdt: '0x25f8c8dA03832Cbb33dd3ec46844ff3461e80aA2',
+                // usdc: '0x780EE399b0F92ac4a576eeEF7eF55C69274a6E21',
+                // weth: '0x516D6aB08d0E0c9A9F4FE3aF145F4b2Aa6864E04',
+                // ftk1: '0x2aEecC8D4348F5b97F78E4C9F475686e3796375b',
+                // ftk2: '0x8D2E189563b72Fb4ca635FB4A9d7BC99D8dE30a8',
 
                 // ropsten
-                // egg: '0xAbb8AB9aC56BF62f3F24606c4280a17de21c414e',
-                // dfd: '0x1036962B5941430FBEb0Ae7B7a9689d33BBEf812',
-                // dgg: '0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a',
-                // usdt: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
-                // usdc: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
-                // weth: '0x9d0a7ADdA80612132696e4b85D3e2b26fefb84Aa',
-                // ftk1: '0x05E6C4bF1A86C3Cb3b175BF7D273473616ed12C0',
-                // ftk2: '0x4FE3Ffb4b7c452777EC6e76b324C3643e6Ea83cD',
+                egg: '0xf23e92af556CD1B0b230E8A84f387eb176B963B0',
+                dfd: '0xd965D775566af9525d203e7ce282aD8db1fF4d1E',
+                dgg: '0xCfeC85b12CbED5c41A25D60a202180a840bc52E1',
+                usdt: '0x41d1FAA3d8907630becfBa1FD3E1C9C05501dC6d',
+                usdc: '0x0057D32490cD1Edd1A5ad9c3b8Faa0c8ee844D68',
+                weth: '0x3027902858A27cAE1Fbe351226ce72120df8497B',
+                ftk1: '0xC7A0E701E7103A0DABCd37fc38EE689aEb16ea5d',
+                ftk2: '0xbf538478a2b44803c4dF534b5CdA663B228749Aa',
             },
             // hardhat
-            rand: '0xec5C1155a3CD6fC8Cc2eae9E374D05882B859782',
-            dgg_sale: '0xd5FA0C16C49131527374e1a86cbB1429c21f971B',
-            pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            uniswap_factory: '0xE96A4C13834A13Dd08071c7a15Cd70f9c342ace6',
-            router_v1: '0x9085E0b5b53AE53535E62efc0e91F9A96333225B',
+            // rand: '0xa1Ef3B40EdcaA908159040058c3aE4302939830a',
+            // dgg_sale: '0x2ff67F2688CA2E905b36fBf12084827B3dac5775',
+            // pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
+            // uniswap_factory: '0x6B5de326A47c4D62A86e94d073F5b1EA5987bA2E',
+            // router_v1: '0xdfE223DA9b7B97F490d0905a72F907E73C4B89a1',
 
             // ropsten
-            // rand: '0x8aBb8E62Bd73f4c73b2CE7a02631B2dC911Ab720',
-            // dgg_sale: '0xBDF9001c5d3fFc03AB6564CA28E530665594dfF7',
-            // pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
-            // uniswap_factory: '0xbB4e19cc579781E2c4a80B733c2649DC3cbBA009',
-            // router_v1: '0xfb841153be2a3A8A9922Ecb2903C86555c6ba9E0',
+            rand: '0x8376113643805F4F8f7b92670c95F97D48195A9d',
+            dgg_sale: '0x592ac6877626E6085aC7EaA6a38Ff7D43e9e61d4',
+            pool_single: '0x80F43505d8d1A739504eB4237Eb15b2e0048Da8d',
+            uniswap_factory: '0xd7D50e6615ccc154d153723c7973ffD23bd09880',
+            router_v1: '0xD35E5D07c8d972b433c86dFFE4428761bB79fC40',
         },
         contracts: {
             token: {
@@ -96,7 +96,8 @@ export default {
                 symbol: 'FTK1',
                 pic:require('@/assets/picture/bi/32.png'),
                 name: 'Fake Token 1',
-                address: '0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd',
+                // address: '0x2aEecC8D4348F5b97F78E4C9F475686e3796375b',  // Hardhat
+                address: '0xC7A0E701E7103A0DABCd37fc38EE689aEb16ea5d',  // Ropsten
                 contract: {},
                 decimals: 18,
                 index: 0,
@@ -109,7 +110,8 @@ export default {
                 symbol: 'FTK2',
                 pic:require('@/assets/picture/bi/31.png'),
                 name: 'Fake Token 2',
-                address: '0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead',
+                // address: '0x8D2E189563b72Fb4ca635FB4A9d7BC99D8dE30a8',  // Hardhat
+                address: '0xbf538478a2b44803c4dF534b5CdA663B228749Aa',  // Ropsten
                 contract: {},
                 decimals: 18,
                 index: 1,
@@ -122,7 +124,8 @@ export default {
                 symbol: 'USDT',
                 pic:require('@/assets/picture/bi/2.png'),
                 name:'Tether USD (USDT)',
-                address: '0x2706A171ECb68E0038378D40Dd1d136361d0cB7d',
+                // address: '0x25f8c8dA03832Cbb33dd3ec46844ff3461e80aA2',  // Hardhat
+                address: '0x41d1FAA3d8907630becfBa1FD3E1C9C05501dC6d',  // Ropsten
                 contract: {},
                 decimals: 18,
                 index: 2,
@@ -135,7 +138,8 @@ export default {
                 symbol: 'USDC',
                 pic:require('@/assets/picture/bi/3.png'),
                 name:'USD Coin (USDC)',
-                address: '0x993F00eb9C73e3E4eAe3d6Afb4Ba65A6b8B5E597',
+                // address: '0x780EE399b0F92ac4a576eeEF7eF55C69274a6E21',  // Hardhat
+                address: '0x0057D32490cD1Edd1A5ad9c3b8Faa0c8ee844D68',  // Ropsten
                 contract: {},
                 decimals: 18,
                 index: 3,
@@ -187,7 +191,8 @@ export default {
                 symbol: 'WETH',
                 pic:require('@/assets/picture/bi/27.png'),
                 name:'Wrapped Ether (WETH)',
-                address: '0xb198606906ED0a8fC59C46F7dE6442FBc05D1016',
+                // address: '0x516D6aB08d0E0c9A9F4FE3aF145F4b2Aa6864E04',  // hardhat
+                address: '0x3027902858A27cAE1Fbe351226ce72120df8497B',  // ropsten
                 contract: {},
                 decimals: 18,
                 index: 7,
@@ -226,7 +231,8 @@ export default {
                 symbol: 'EGG',
                 pic:require('@/assets/picture/bi/31.png'),
                 name:'Dragon Egg Token (EGG)',
-                address: '0x0116686E2291dbd5e317F47faDBFb43B599786Ef',
+                // address: '0x7DA94E64EC71c62C6B1cF1965b4D8612DEBb4302',  // hardhat
+                address: '0xf23e92af556CD1B0b230E8A84f387eb176B963B0',  // ropsten
                 contract: {},
                 decimals: 18,
                 index: 10,

@@ -174,6 +174,7 @@ of the gods". </p>
 <script>
   import qs from 'qs';
   import axios from 'axios';
+  import { bus } from '../../../main';
   import { mapState, mapGetters } from 'vuex';
   import { Message } from 'element-ui';
 import { toFixed } from '../../../utils/math';
@@ -217,203 +218,6 @@ import { toFixed } from '../../../utils/math';
         ],
         // bosun todo
         nftArr:[],
-        // nftArr:[
-        //   {
-        //     info:[
-        //       {
-        //         pic:require('@/assets/picture/role/Athena/SSR.png'),
-        //         leval:'SSR',
-        //         name:'Big Whale Athena',
-        //         features:'goddess of war, face the evil',
-        //         skill:'Show-hand mainstream, stable profit',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Athena/SR.png'),
-        //         leval:'SR',
-        //         name:'Freedom of wealth Athena',
-        //         features:'goddess of war, face the evil',
-        //         skill:'Show-hand mainstream, stable profit',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Athena/S.png'),
-        //         leval:'S',
-        //         name:'Rich and noble Athena',
-        //         features:'goddess of war, face the evil',
-        //         skill:'Show-hand mainstream, stable profit',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Athena/A+.png'),
-        //         leval:'A+',
-        //         name:'Small profit Athena',
-        //         features:'goddess of war, face the evil',
-        //         skill:'Show-hand mainstream, stable profit',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Athena/A.png'),
-        //         leval:'A',
-        //         name:'Show-hand Fan Athena',
-        //         features:'goddess of war, face the evil',
-        //         skill:'Show-hand mainstream, stable profit',
-        //       }
-        //     ],
-        //   },
-        //   {
-        //     info:[
-        //       {
-        //         pic:require('@/assets/picture/role/Poseidon/SSR.png'),
-        //         leval:'SSR',
-        //         name:'Big Whale Poseidon',
-        //         features:'The god of the sea who shakes the earth.',
-        //         skill:' Show-hand copycat, get rich overnight.',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Poseidon/SR.png'),
-        //         leval:'SR',
-        //         name:'Freedom of wealth Poseidon',
-        //         features:'The god of the sea who shakes the earth.',
-        //         skill:' Show-hand copycat, get rich overnight.',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Poseidon/S.png'),
-        //         leval:'S',
-        //         name:'Rich and noble Poseidon',
-        //         features:'The god of the sea who shakes the earth.',
-        //         skill:' Show-hand copycat, get rich overnight.',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Poseidon/A+.png'),
-        //         leval:'A+',
-        //         name:'Small profit Poseidon',
-        //         features:'The god of the sea who shakes the earth.',
-        //         skill:' Show-hand copycat, get rich overnight.',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Poseidon/A.png'),
-        //         leval:'A',
-        //         name:'Show-hand Fan Poseidon',
-        //         features:'The god of the sea who shakes the earth.',
-        //         skill:' Show-hand copycat, get rich overnight.',
-        //       }
-        //     ],
-        //   },
-        //   {
-        //     info:[
-        //       {
-        //         pic:require('@/assets/picture/role/Venus/SSR.png'),
-        //         leval:'SSR',
-        //         name:'Big Whale Venus',
-        //         features:'arouse love and beauty in hearts of all things in the universe',
-        //         skill:'Show-hand DFD, reach the peak of life',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Venus/SR.png'),
-        //         leval:'SR',
-        //         name:'Freedom of wealth Venus',
-        //         features:'arouse love and beauty in hearts of all things in the universe',
-        //         skill:'Show-hand DFD, reach the peak of life',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Venus/S.png'),
-        //         leval:'S',
-        //         name:'Rich and noble Venus',
-        //         features:'arouse love and beauty in hearts of all things in the universe',
-        //         skill:'Show-hand DFD, reach the peak of life',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Venus/A+.png'),
-        //         leval:'A+',
-        //         name:'Small profit Venus',
-        //         features:'arouse love and beauty in hearts of all things in the universe',
-        //         skill:'Show-hand DFD, reach the peak of life',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Venus/A.png'),
-        //         leval:'A',
-        //         name:'Show-hand Fan Venus',
-        //         features:'arouse love and beauty in hearts of all things in the universe',
-        //         skill:'Show-hand DFD, reach the peak of life',
-        //       }
-        //     ],
-        //   },
-        //   {
-        //     info:[
-        //                     {
-        //         pic:require('@/assets/picture/role/Apollo/SSR.png'),
-        //         leval:'SSR',
-        //         name:'Big Whale Apollo',
-        //         features:'God of the sun and protector of human civilization',
-        //         skill:'EGG full position, get nice lover',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Apollo/SR.png'),
-        //         leval:'SR',
-        //         name:'Freedom of wealth Apollo',
-        //         features:'God of the sun and protector of human civilization',
-        //         skill:'EGG full position, get nice lover',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Apollo/S.png'),
-        //         leval:'S',
-        //         name:'Rich and noble Apollo',
-        //         features:'God of the sun and protector of human civilization',
-        //         skill:'EGG full position, get nice lover',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Apollo/A+.png'),
-        //         leval:'A+',
-        //         name:'Small profit Apollo',
-        //         features:'God of the sun and protector of human civilization',
-        //         skill:'EGG full position, get nice lover',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Apollo/A.png'),
-        //         leval:'A',
-        //         name:'Show-hand Fan Apollo',
-        //         features:'God of the sun and protector of human civilization',
-        //         skill:'EGG full position, get nice lover',
-        //       }
-        //     ],
-        //   },
-        //   {
-        //     info:[
-        //       {
-        //         pic:require('@/assets/picture/role/Cupid/SSR.png'),
-        //         leval:'SSR',
-        //         name:'Big Whale Cupid',
-        //         features:'My arrow has been aimed at people bathed in love',
-        //         skill:'Band master, K-line divine hand',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Cupid/SR.png'),
-        //         leval:'SR',
-        //         name:'Freedom of wealth Cupid',
-        //         features:'My arrow has been aimed at people bathed in love',
-        //         skill:'Band master, K-line divine hand',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Cupid/S.png'),
-        //         leval:'S',
-        //         name:'Rich and noble Cupid',
-        //         features:'My arrow has been aimed at people bathed in love',
-        //         skill:'Band master, K-line divine hand',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Cupid/A+.png'),
-        //         leval:'A+',
-        //         name:'Small profit Cupid',
-        //         features:'My arrow has been aimed at people bathed in love',
-        //         skill:'Band master, K-line divine hand',
-        //       },
-        //       {
-        //         pic:require('@/assets/picture/role/Cupid/A.png'),
-        //         leval:'A',
-        //         name:'Show-hand Fan Cupid',
-        //         features:'My arrow has been aimed at people bathed in love',
-        //         skill:'Band master, K-line divine hand',
-        //       }
-        //     ],
-        //   }
-        // ],
         activeName: 'GameFi',
         tableData: [{
           god:'Show-hand Fan Gods',
@@ -455,8 +259,17 @@ import { toFixed } from '../../../utils/math';
     },
     created() {
       if (this.walletConnected) {
-         this.prepare();
+        this.nftArr = this.$store.state.baseData.nfts;
+        this.prepare();
       }
+
+      bus.$on('dggTokenTraded', () => {
+          this.buyModelVisible = true;   
+          return Message({
+              message: 'NFT tokens have been successfully traded.',
+              type: 'success',
+          });
+      });
     },
     mounted(){
       // 监听窗口变化，使得轮播图高度自适应图片高度
@@ -635,24 +448,36 @@ import { toFixed } from '../../../utils/math';
         
         let url = this.$store.state.url.api.base + this.$store.state.url.api.nft.generate_rand;
         console.log(`url = ${url}`)
-        axios({
-            url: url,
-            method: 'post'
-        }).then(async (data) => {
-            if (data.status === 200) {
-                console.log('data', data.data);
-                await this.dggSaleContract.methods.tradeToken(tokenSrc, this.user, this.numberToBuy, amountMax).send({from: this.user, gasLimit: this.blockLatest.gasLimit});
-                let currentTokenId = await this.dggTokenContract.methods.currentTokenId().call();
-                let currentUri = await this.dggTokenContract.methods.currentUri().call();
-                console.log(`currentTokenId = ${currentTokenId}, currentUri = ${currentUri}`)
-                let tokensBought = await this.dggSaleContract.methods.getUserTokens(this.user).call();
-                console.log('tokensBought', tokensBought);
+        let randomSeed = parseInt(Math.random() * 10000);
+        await this.dggSaleContract.methods.tradeToken(tokenSrc, this.user, this.numberToBuy, amountMax, randomSeed).send({from: this.user, gasLimit: this.blockLatest.gasLimit});
+        let currentTokenId = await this.dggTokenContract.methods.currentTokenId().call();
+        let currentUri = await this.dggTokenContract.methods.currentUri().call();
+        console.log(`currentTokenId = ${currentTokenId}, currentUri = ${currentUri}`)
+        let tokensBought = await this.dggSaleContract.methods.getUserTokens(this.user).call();
+        console.log('tokensBought', tokensBought);
 
-                this.eggAmountRequired = 0;
-                this.usdcAmountRequired = 0;
-                this.buyModelVisible = true;   
-            }
-        })
+        this.eggAmountRequired = 0;
+        this.usdcAmountRequired = 0;
+        
+
+        // axios({
+        //     url: url,
+        //     method: 'post'
+        // }).then(async (data) => {
+        //     if (data.status === 200) {
+        //         console.log('data', data.data);
+        //         await this.dggSaleContract.methods.tradeToken(tokenSrc, this.user, this.numberToBuy, amountMax).send({from: this.user, gasLimit: this.blockLatest.gasLimit});
+        //         let currentTokenId = await this.dggTokenContract.methods.currentTokenId().call();
+        //         let currentUri = await this.dggTokenContract.methods.currentUri().call();
+        //         console.log(`currentTokenId = ${currentTokenId}, currentUri = ${currentUri}`)
+        //         let tokensBought = await this.dggSaleContract.methods.getUserTokens(this.user).call();
+        //         console.log('tokensBought', tokensBought);
+
+        //         this.eggAmountRequired = 0;
+        //         this.usdcAmountRequired = 0;
+        //         this.buyModelVisible = true;   
+        //     }
+        // })
         
         
       },

@@ -20,7 +20,11 @@ export default {
   },
   created() {
       if (this.contractRouter !== null && this.contractRouter !== undefined) {
-        this.monitorEvents(this.contractRouter);
+        this.monitorRouterEvents(this.contractRouter);
+      }
+
+      if (this.contractDggSale !== null && this.contractDggSale !== undefined) {
+        this.monitorDggEvents(this.contractDggSale);
       }
   },
   components: {
@@ -69,7 +73,7 @@ export default {
     loadAnnouncements() {
 
     },
-    monitorEvents(contract) {
+    monitorRouterEvents(contract) {
         if (this.web3 == null || this.web3 == undefined) {
           return;
         }
@@ -148,7 +152,7 @@ export default {
                   .on('error', err => {throw err})
                   .on('connected', str => console.log('Liquidity connected', str));
 
-                contract.events.RemoveLiquidity(options)
+                contractRouter.events.RemoveLiquidity(options)
                   .on('data', evt => {
                       let data = evt.returnValues;
                       console.log('************* RemoveLiquidity data', evt)
@@ -216,6 +220,34 @@ export default {
                   .on('error', err => {throw err})
                   .on('connected', str => console.log('Liquidity connected', str))
           
+                contractDggSale.events.TokenTraded(options)
+                  .on('data', evt => {
+                      bus.$emit('dggTokenTraded');
+                  })
+                  .on('changed', changed => console.log('TokenTraded changed', changed))
+                  .on('error', err => {throw err})
+                  .on('connected', str => console.log('TokenTraded connected', str))
+          });
+      },
+      monitorDggEvents(contract) {
+        if (this.web3 == null || this.web3 == undefined) {
+          return;
+        }
+        this.web3.eth.getBlock('latest').then((res) => {
+              let latestBlockNumber = res.number;
+              console.log('block', latestBlockNumber);
+
+              let options = {
+                  fromBlock: latestBlockNumber,      //Number || "earliest" || "pending" || "latest"
+              };
+              
+              contract.events.TokenTraded(options)
+                .on('data', evt => {
+                    bus.$emit('dggTokenTraded');
+                })
+                .on('changed', changed => console.log('TokenTraded changed', changed))
+                .on('error', err => {throw err})
+                .on('connected', str => console.log('TokenTraded connected', str))
           });
       },
   },
@@ -232,6 +264,9 @@ export default {
       contractRouter() {
         return this.$store.state.web3.contracts.router_v1;
       },
+      contractDggSale() {
+        return this.$store.state.web3.contracts.dgg_sale;
+      },
       user() {
         return (this.$store.state.web3.accounts.length > 0) ? this.$store.state.web3.accounts[0] : '';
       },
@@ -245,9 +280,14 @@ export default {
   watch: {
       contractRouter: function(newVal) {
         if (newVal) {
-            this.monitorEvents(newVal);
+            this.monitorRouterEvents(newVal);
         }
       },
+      contractDggSale: function(newVal) {
+        if (newVal) {
+            this.monitorDggEvents(newVal);
+        }
+      }
   },
 };
 </script>

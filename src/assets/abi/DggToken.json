@@ -1,12 +1,6 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_randOracle",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -147,6 +141,11 @@
         "internalType": "address",
         "name": "_recipient",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_seed",
+        "type": "uint256"
       },
       {
         "internalType": "uint256",
@@ -354,6 +353,11 @@
         "type": "address"
       },
       {
+        "internalType": "uint256",
+        "name": "_seed",
+        "type": "uint256"
+      },
+      {
         "internalType": "bool",
         "name": "isClient",
         "type": "bool"
@@ -408,19 +412,6 @@
     "outputs": [
       {
         "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "randOracle",
-    "outputs": [
-      {
-        "internalType": "contract RandOracle",
         "name": "",
         "type": "address"
       }
