@@ -149,7 +149,7 @@
         biArr:[
           {
             pic:require('@/assets/picture/bi1.png'),
-            num:'1234',
+            num:'$ 1234',
             txt:'Total Value Locked',
           },
           {

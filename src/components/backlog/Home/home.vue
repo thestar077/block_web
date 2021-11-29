@@ -21,7 +21,7 @@
           </div>
           <div class="sc-dtwoBo inCwUZ">
             <button v-if="accounts == null || accounts == undefined || accounts.length == 0" type="button" @click="dialogVisibleWallet = true" class="sc-dlfnbm btoybd">Unlock Wallet</button>
-            <button v-else type="button" class="sc-dlfnbm btoybd">Deposit</button>
+            <button v-else type="button" class="sc-dlfnbm btoybd">Harvest all</button>
           </div>
         </div>
       </div>
